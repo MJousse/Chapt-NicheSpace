@@ -1,3 +1,5 @@
+rm(list = ls())
+
 library(rgbif)
 library(purrr)
 library(dplyr)
@@ -20,6 +22,12 @@ EuroMW <- data.frame(Predator = gbif_names$species[match(EuroMW$sourceTaxonName,
   filter(!is.na(Predator), !is.na(Prey))
 
 write.csv(EuroMW, "data/cleaned/EuroFW.csv")
+
+# Save clean species name with taxonomy
+EuroMw_species <- gbif_names %>%
+  select(Species = species, Class = class, Order = order, Family = family, Genus = genus)
+
+write.csv(EuroMw_species, "data/cleaned/EuroMWTaxo.csv")
 
 ### Serengeti Food Web
 SerengetiNodes<- read.csv("data/raw/FW/Serengeti_nodes.csv")
@@ -71,10 +79,16 @@ for (i in c(1:nrow(SerengetiInteractions))){
     Resource <- SerengetiNodes_clean[SerengetiNodes_clean$Node == SerengetiInteractions$Resource[i], c("Class", "Order", "Family", "Genus", "Species")] %>% 
       rename_all(function(x) paste0("Resource_",x))
     SerengetiInteractions_clean <- rbind(SerengetiInteractions_clean,
-                                crossing(Consumer, Resource))
+                                tidyr::crossing(Consumer, Resource))
   }
 }
 write.csv(SerengetiInteractions_clean, "data/cleaned/SerengetiFW.csv")
+
+# Save clean species name with taxonomy
+SerengetiFW_species <- SerengetiNodes_clean %>%
+  select(Species, Class, Order, Family, Genus)
+
+write.csv(SerengetiFW_species, "data/cleaned/SerengetiFWTaxo.csv")
 
 ### Pyrenees Food Web
 pyrenneesFW <- read.graph("data/raw/FW/pyrenees-network.graphml", format = "graphml")
@@ -91,6 +105,13 @@ pyrenneesFW <- data.frame(Predator = gbif_names$species[match(pyrenneesFW$Predat
   filter(!is.na(Predator), !is.na(Prey))
 
 write.csv(pyrenneesFW, "data/cleaned/pyrenneesFW.csv")
+
+# Save clean species name with taxonomy
+PyrenneesFW_species <- gbif_names %>%
+  select(Species = species, Class = class, Order = order, Family = family, Genus = genus) %>%
+  filter(!is.na(Class))
+
+write.csv(PyrenneesFW_species, "data/cleaned/pyrenneesFWTaxo.csv")
 
 ### High Arctic Food Web
 arcticFW_peak <- read.csv("data/raw/FW/HighArctic_peakyear.csv")
@@ -115,3 +136,10 @@ arcticFW_clean <- left_join(arcticFW, arctic_nodes, by = c("Consumer" = "Functio
   select(Predator = SpeciesConsumer, Prey = SpeciesResource)
 
 write.csv(arcticFW_clean, "data/cleaned/HighArcticFW.csv")
+
+# Save clean species name with taxonomy
+arcticFW_species <- gbif_names %>%
+  select(Species = species, Class = class, Order = order, Family = family, Genus = genus) %>%
+  filter(!is.na(Class))
+
+write.csv(arcticFW_species, "data/cleaned/HighArcticFWTaxo.csv")
