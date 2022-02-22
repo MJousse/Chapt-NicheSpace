@@ -1,0 +1,1152 @@
+"","Species.ID","ITIS.code","Catalogue.of.Life","Class","Order","Family","Species","Author","synonym1","synonym2","synonym3"
+"1","A1",662323,"v1.9 rev 2126ab0","Amphibia","Anura","Alytidae","Alytes cisternasii","Bosc, 1879Ê","Ammoryctis cisternasii",NA,NA
+"2","A2",662324,"v1.9 rev 2126ab0","Amphibia","Anura","Alytidae","Alytes dickhilleni","Arntzen and Garca-Pars, 1995Ê",NA,NA,NA
+"3","A3",662326,"v1.9 rev 2126ab0","Amphibia","Anura","Alytidae","Alytes muletensis","(Sanchz and Adrover, 1979)Ê","Baleaphryne muletensis","Baleaphryne talaioticus",NA
+"4","A4",662327,"v1.9 rev 2126ab0","Amphibia","Anura","Alytidae","Alytes obstetricans","(Laurenti, 1768)Ê","Bufo obstetricans","Bombinator obstetricans","Rana obstetricans"
+"5","A5",661625,"v1.9 rev 2126ab0","Amphibia","Anura","Bombinatoridae","Bombina bombina","(Linnaeus, 1761)Ê","Rana bombina","Bufo igneus","Buffo ignicolor"
+"6","A6",661631,"v1.9 rev 2126ab0","Amphibia","Anura","Bombinatoridae","Bombina pachypus","(Bonaparte, 1838)Ê",NA,NA,NA
+"7","A7",661632,"v1.9 rev 2126ab0","Amphibia","Anura","Bombinatoridae","Bombina variegata","(Linnaeus, 1758)Ê","Rana variegata","Bufo salsus","Rana sonans"
+"8","A8",173480,"v1.9 rev 2126ab0","Amphibia","Anura","Bufonidae","Bufo bufo","(Linnaeus, 1758)Ê","Rana bufo","Rana rubeta","Rana ventricosa"
+"9","A9",773560,"v1.9 rev 2126ab0","Amphibia","Anura","Bufonidae","Epidalea calamita","(Laurenti, 1768)Ê","Bufo calamita","Rana foetidissima","Rana portentosa"
+"10","A10",585630,"v1.9 rev 2126ab0","Amphibia","Anura","Bufonidae","Bufo verrucosissimus","(Pallas, 1814)Ê","Rana verrucosissimus","Bufo colchicus","Bufo cinereus colchica"
+"11","A11",1103405,"v1.9 rev 2126ab0","Amphibia","Anura","Bufonidae","Bufotes viridis","(Laurenti, 1768)Ê","Bufo viridis","Pseudepidalea viridis","Bufo schreberianus"
+"12","A12",668361,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Chioglossa lusitanica","Bocage, 1864Ê","Chioglossa lusitanica brevidigitata","Chioglossa lusitanica lusitanica","Chioglossa lusitanica longipes"
+"13","A13",662328,"v1.9 rev 2126ab0","Amphibia","Anura","Alytidae","Discoglossus galganoi","Capula, Nascetti, Lanza, Bullini and Crespo, 1985Ê","Discoglossus hispanicus","Discoglossus galganoi galganoi",NA
+"14","A14",662329,"v1.9 rev 2126ab0","Amphibia","Anura","Alytidae","Discoglossus jeanneae","Busack, 1986Ê","Discoglossus galganoi jeanneae",NA,NA
+"15","A15",773324,"v1.9 rev 2126ab0","Amphibia","Anura","Alytidae","Discoglossus montalentii","Lanza, Nascetti, Capula and Bullini, 1984Ê","Discoglossus montalenti",NA,NA
+"16","A16",662330,"v1.9 rev 2126ab0","Amphibia","Anura","Alytidae","Discoglossus pictus","Otth, 1837Ê","Pseudis picta","Pseudes pictus","Colodactylus coerulescens"
+"17","A17",662331,"v1.9 rev 2126ab0","Amphibia","Anura","Alytidae","Discoglossus sardus","Tschudi in Otth, 1837Ê","Pseudis sardoa","Rana sardus","Rana sardoa"
+"18","A18",775916,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Calotriton asper","(Dugs, 1852)Ê","Euproctus asper","Hemitriton asper","Triton glacialis"
+"19","A19",668372,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Euproctus montanus","(Savi, 1838)Ê","Megapterna montana","Triturus montanus","Molge montana"
+"20","A20",668373,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Euproctus platycephalus","(Gravenhorst, 1829)Ê","Molge platycephala","Euproctus rusconii","Phatnomatorhina platycephalus"
+"21","A21",662424,"v1.9 rev 2126ab0","Amphibia","Anura","Hylidae","Hyla arborea","(Linnaeus, 1758)Ê","Rana arborea","Rana viridis","Hyla viridis"
+"22","A22",662524,"v1.9 rev 2126ab0","Amphibia","Anura","Hylidae","Hyla intermedia","Boulenger, 1882Ê","Hylaria variegata","Hyla italica","Hyla arborea intermedia"
+"23","A23",662563,"v1.9 rev 2126ab0","Amphibia","Anura","Hylidae","Hyla meridionalis","Boettger, 1874Ê","Hyla perezii","Hyla barytonus","Hyla africana"
+"24","A24",662633,"v1.9 rev 2126ab0","Amphibia","Anura","Hylidae","Hyla sarda","(De Betta, 1853)Ê","Dendrohyas sarda","Hyla arborea sarda",NA
+"25","A25",662634,"v1.9 rev 2126ab0","Amphibia","Anura","Hylidae","Hyla savignyi","Audouin, 1827Ê","Hyla arborea savignyi",NA,NA
+"26","A26",775923,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lyciasalamandra antalyana","(Basoglu and Baran, 1976)Ê","Mertensiella luschani antalyana","Lyciasalamandra antalyana antalyana","Lyciasalamandra antalyana gocmeni"
+"27","A27",775924,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lyciasalamandra atifi","(Basoglu, 1967)Ê","Mertensiella luschani atifi","Lyciasalamandra atifi atifi","Lyciasalamandra atifi bayrami"
+"28","A28",775925,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lyciasalamandra billae","(Franzen and Klewen, 1987)Ê","Lyciasalamandra irfani","Lyciasalamandra yehudahi","Lyciasalamandra arikani"
+"29","A29",775926,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lyciasalamandra fazilae","(Basoglu and Atatr, 1975)Ê","Mertensiella luschani fazilae","Lyciasalamandra fazilae fazilae","Lyciasalamandra fazilae ulfetae"
+"30","A30",775927,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lyciasalamandra flavimembris","(Mutz and Steinfartz, 1995)Ê","Mertensiella luschani flavimembris","Lyciasalamandra flavimembris flavimembris","Lyciasalamandra flavimembris ilgazi"
+"31","A31",775928,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lyciasalamandra helverseni","(Pieper, 1963)Ê","Mertensiella luschani helverseni",NA,NA
+"32","A32",775929,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lyciasalamandra luschani","(Steindachner, 1891)Ê","Salamandra luschani","Molge luschani","Mertensiella luschani luschani"
+"33","A33",668374,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Mertensiella caucasica","(Waga, 1876)Ê","Exaeretus caucasicus","Salamandra caucasica","Salamandra caucasia"
+"34","A34",668375,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Neurergus crocatus","Cope, 1862Ê","Molge crocata","Triton crocatus","Triturus crocatus crocatus"
+"35","A35",668378,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Neurergus strauchii","(Steindachner, 1887)Ê","Molge strauchii","Neurergus crocatus strauchii","Triturus crocatus strauchii"
+"36","A36",664729,"v1.9 rev 2126ab0","Amphibia","Anura","Pelobatidae","Pelobates cultripes","(Cuvier, 1829)Ê","Rana cultripes","Rana calcarata","Cultripes provincialis"
+"37","A37",664730,"v1.9 rev 2126ab0","Amphibia","Anura","Pelobatidae","Pelobates fuscus","(Laurenti, 1768)Ê","Bufo fuscus","Rana alliacea","Bombinator fuscus"
+"38","A38",664731,"v1.9 rev 2126ab0","Amphibia","Anura","Pelobatidae","Pelobates syriacus","Boettger, 1889Ê","Pelobates transcaucasicus","Pseudopelobates transcaucasicus","Pelobates syriacus boettgeri"
+"39","A39",664733,"v1.9 rev 2126ab0","Amphibia","Anura","Pelodytidae","Pelodytes caucasicus","Boulenger, 1896Ê","Pelodytopsis caucasica","Pelodytes punctatus caucasicus",NA
+"40","A40",664734,"v1.9 rev 2126ab0","Amphibia","Anura","Pelodytidae","Pelodytes ibericus","Snchez-Herraz, Barbadillo-Escriv, Machordom and Sanchz, 2000Ê",NA,NA,NA
+"41","A41",664735,"v1.9 rev 2126ab0","Amphibia","Anura","Pelodytidae","Pelodytes punctatus","(Daudin, 1802)Ê","Rana punctata","Rana plicata","Rana daudini"
+"42","A42",668389,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Pleurodeles waltl","Michahelles, 1830Ê","Salamandra funebris","Triton costatus","Salamandra major"
+"43","A43",208253,"v1.9 rev 2126ab0","Amphibia","Caudata","Proteidae","Proteus anguinus","Laurenti, 1768Ê","Siren anguina","Caledon anguinus","Apneumona anguina"
+"44","A44",665263,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana arvalis","Nilsson, 1842Ê","Rana oxyrrhinus","Rana angustifrongs","Rana oxyrhina"
+"45","A45",775178,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax bedriagae","(Camerano, 1882)Ê","Rana bedriagae","Rana levantina","Hylarana bedriagae"
+"46","A46",775179,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax bergeri","(Gnther in Engelmann, Fritzsche, Gnther and Obst, 1986)Ê","Rana bergeri","Rana hispanica","Hylarana bergeri"
+"47","A47",775181,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax cerigensis","(Beerli, Hotz, Tunner, Heppich and Uzzell, 1994)Ê","Rana cerigensis","Hylarana cerigensis",NA
+"48","A48",775183,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax cretensis","(Beerli, Hotz, Tunner, Heppich and Uzzell, 1994)Ê","Rana cretensis","Hylarana cretensis",NA
+"49","A49",665296,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana dalmatina","Fitzinger in Bonaparte, 1838Ê","Rana agilis",NA,NA
+"50","A50",775185,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax epeiroticus","(Schneider, Sofianidou and Kyriakopoulou-Sklavounou, 1984)Ê","Rana epeirotica","Hylarana epeirotica",NA
+"51","A51",775188,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax esculentus","(Gayda, 1940)Ê",NA,NA,NA
+"52","A52",665317,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana graeca","Boulenger, 1891Ê","Rana temporaria bosniensis",NA,NA
+"53","A53",NA,NA,"Amphibia","Anura","Ranidae","Pelophylax kl. grafi","(Crochet, Dubois, Ohler & Tunner, 1995)",NA,NA,NA
+"54","A54",NA,NA,"Amphibia","Anura","Ranidae","Pelophylax kl. hispanicus","(Bonaparte, 1839)",NA,NA,NA
+"55","A55",665335,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana iberica","Boulenger, 1879Ê","Rana temporaria iberica",NA,NA
+"56","A56",665338,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana italica","Dubois, 1987Ê","Rana graeca italica",NA,NA
+"57","A57",775188,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax kurtmuelleri","(Gayda, 1940)","Rana kurtmuelleri","Rana balcanica","Hylarana kurtmuelleri"
+"58","A58",665351,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana latastei","Boulenger, 1879Ê",NA,NA,NA
+"59","A59",775190,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax lessonae","(Camerano, 1882)Ê","Rana esculenta","Rana lessonae","Rana lessonae pannonica"
+"60","A60",665365,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana macrocnemis","Boulenger, 1885Ê","Rana camerani","Rana holtzi","Rana macrocnemis camerani"
+"61","A61",775192,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax perezi","(Lpez-Seoane, 1885)Ê","Rana grafi","Rana perezi","Hylarana perezi"
+"62","A62",665405,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana pyrenaica","Serra-Cobo, 1993Ê",NA,NA,NA
+"63","A63",775195,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax ridibundus","(Pallas, 1771)Ê","Rana ridibunda","Bufo ridibundus","Rana cachinnans"
+"64","A64",775197,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax shqipericus","(Hotz, Uzzell, Gnther, Tunner and Heppich, 1987)Ê","Rana shqiperica","Hylarana shqiperica",NA
+"65","A65",775212,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana tavasensis","Baran and Atatr, 1986Ê","Rana macrocnemis tavasensis",NA,NA
+"66","A66",173444,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana temporaria","Linnaeus, 1758Ê","Rana honnorati","Rana hyla","Rana muta"
+"67","A67",668391,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Salamandra atra","Laurenti, 1768Ê","Salamandra fusca","Lacerta atra","Geotriton fuscus"
+"68","A68",668392,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Salamandra corsica","Savi, 1838Ê","Salamandra moncherina","Salamandra moncheriana","Salamandra maculosa corsica"
+"69","A69",668393,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Salamandra infraimmaculata","Martens, 1885Ê","Salamandra semenovi","Salamandra maculosa infraimmaculata","Salamandra maculosa orientalis"
+"70","A70",668394,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Salamandra lanzai","Nascetti, Andreone, Capula and Bullini, 1988Ê",NA,NA,NA
+"71","A71",668396,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Salamandra salamandra","(Linnaeus, 1758)Ê","Lacerta salamandra","Salamandra candida","Salamandra maculosa"
+"72","A72",668238,"v1.9 rev 2126ab0","Amphibia","Caudata","Hynobiidae","Salamandrella keyserlingii","Dybowski, 1870Ê","Isodactylium wosnessenskyi","Salamandrella wosnessenskyi","Hynobius keyserlingii"
+"73","A73",775937,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Salamandrina perspicillata","(Savi, 1821)Ê","Salamandra perspicillata","Seiranota condylura","Salamandra savi"
+"74","A74",775938,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Salamandrina terdigitata","(Bonnaterre, 1789)Ê","Salamandrina terdigitata","Salamandra tridactyla","Molge tridactyla"
+"75","A75",668339,"v1.9 rev 2126ab0","Amphibia","Caudata","Plethodontidae","Speleomantes ambrosii","(Lanza, 1955)Ê","Hydromantes ambrosii","Hydromantoides ambrosii","Hydromantes italicus ambrosii"
+"76","A76",668340,"v1.9 rev 2126ab0","Amphibia","Caudata","Plethodontidae","Speleomantes flavus","(Stefani, 1969)Ê","Hydromantes flavus","Hydromantoides flavus","Hydromantes genei flavus"
+"77","A77",668341,"v1.9 rev 2126ab0","Amphibia","Caudata","Plethodontidae","Speleomantes genei","(Temminck and Schlegel, 1838)Ê","Atylodes genei","Salamandra genei","Geotriton genei"
+"78","A78",668342,"v1.9 rev 2126ab0","Amphibia","Caudata","Plethodontidae","Speleomantes imperialis","(Stefani, 1969)Ê","Hydromantes imperialis","Hydromantoides imperialis","Hydromantes genei imperialis"
+"79","A79",668343,"v1.9 rev 2126ab0","Amphibia","Caudata","Plethodontidae","Speleomantes italicus","(Dunn, 1923)Ê","Hydromantes italicus","Hydromantoides italicus","Hydromantes genei italicus"
+"80","A80",775912,"v1.9 rev 2126ab0","Amphibia","Caudata","Plethodontidae","Speleomantes sarrabusensis","Lanza, Leo, Forti, Cimmaruta, Caputo and Nascetti, 2001Ê","Hydromantes sarrabusensis","Speleomantes imperialis sarrabusensis",NA
+"81","A81",668344,"v1.9 rev 2126ab0","Amphibia","Caudata","Plethodontidae","Speleomantes strinatii","(Aellen, 1958)Ê","Hydromantes strinatii","Hydromantes italicus strinatii","Hydromantes genei strinatii"
+"82","A82",668345,"v1.9 rev 2126ab0","Amphibia","Caudata","Plethodontidae","Speleomantes supramontis","(Lanza, Nascetti and Bullini, 1986)Ê","Hydromantes supramontis",NA,NA
+"83","A83",775917,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Ichthyosaura alpestris","(Laurenti, 1768)Ê","Triturus alpestris","Triton alpestris","Proteus tritonius"
+"84","A84",775918,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lissotriton boscai","(Lataste in Tourneville, 1879)Ê","Triturus boscai","Pelonectes boscai","Molge boscae"
+"85","A85",668400,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Triturus carnifex","(Laurenti, 1768)Ê","Triton carnifex","Gecko carnifex","Salamandra carnifex"
+"86","A86",668401,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Triturus cristatus","(Laurenti, 1768)Ê","Lacertus aquatilis","Triton cristatus","Triton americanus"
+"87","A87",668402,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Triturus dobrogicus","(Kiritzescu, 1903)Ê","Molge macrosoma","Triton cristatus dobrogicus","Triton cristatus danubialis"
+"88","A88",775919,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lissotriton helveticus","(Razoumovsky, 1789)Ê","Triturus helveticus","Lacerta helvetica","Lacerta paradoxa"
+"89","A89",775920,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lissotriton italicus","(Peracca, 1898)Ê","Triturus italicus","Molge italica","Triton italicus"
+"90","A90",668405,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Triturus karelinii","(Strauch, 1870)Ê","Triton karelinii","Triton longipes","Turanomolge mensbieri"
+"91","A91",668406,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Triturus marmoratus","(Latreille, 1800)Ê","Salamandra marmorata","Triton marmoratus","Salamandra variegata"
+"92","A92",775921,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lissotriton montandoni","(Boulenger, 1880)Ê","Triturus montandoni","Triton montandoni","Diemictylus montandoni"
+"93","A93",668408,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Triturus pygmaeus","(Wolterstorff, 1905)Ê","Triturus marmoratus pygmaeus",NA,NA
+"94","A94",775931,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Ommatotriton vittatus","(Gray in Jenyns, 1835)Ê","Triturus vittatus","Triton vittatus","Salamandra vittatus"
+"95","A95",775922,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Lissotriton vulgaris","(Linnaeus, 1758)Ê","Triturus vulgaris","Lacerta vulgaris","Lophinus vulgaris"
+"96","A96",775180,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Pelophylax caralitanus","(Arikan, 1988)Ê","Rana caralitana","Hylarana caralitana","Rana ridibunda caralitana"
+"97","A97",775930,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Ommatotriton ophryticus","(Berthold, 1846)Ê","Triton ophryticus","Molge vittata ophrytica","Molge vittatus ophryticus"
+"98","A98",665365,"v1.9 rev 2126ab0","Amphibia","Anura","Ranidae","Rana macrocnemis holtzi","Werner, 1898Ê","Rana camerani","Rana holtzi","Rana macrocnemis camerani"
+"99","A99",775915,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Calotriton arnoldi","Carranza and Amat, 2005Ê",NA,NA,NA
+"100","A100",1103437,"v1.9 rev 2126ab0","Amphibia","Anura","Bufonidae","Bufotes balearica","(Boettger, 1880)Ê",NA,NA,NA
+"101","A101",1103484,"v1.9 rev 2126ab0","Amphibia","Anura","Bufonidae","Bufotes boulengeri","(Lataste, 1879)Ê","Pseudepidalea boulengeri","Bufo hemprichi","Bufo boulengeri"
+"102","A102",1103430,"v1.9 rev 2126ab0","Amphibia","Anura","Bufonidae","Bufotes sicula","(Stck, Sicilia, Belfiore, Buckley, Lo-Brutto, Lo-Valvo and Arculeo, 2008)Ê",NA,NA,NA
+"103","A103",1103415,"v1.9 rev 2126ab0","Amphibia","Anura","Bufonidae","Bufotes variabilis","(Pallas, 1769)Ê","Pseudepidalea variabilis","Rana variabilis","Rana bufina"
+"104","A104",775940,"v1.9 rev 2126ab0","Amphibia","Caudata","Salamandridae","Triturus macedonicus","(Karaman, 1922)Ê","Molge karelinii macedonica","Triturus carnifex macedonicus",NA
+"105","B1",174474,"v1.9 rev 2126ab0","Aves","Gaviiformes","Gaviidae","Gavia stellata","(Pontoppidan, 1763)Ê",NA,NA,NA
+"106","B2",174471,"v1.9 rev 2126ab0","Aves","Gaviiformes","Gaviidae","Gavia arctica","(Linnaeus, 1758)Ê",NA,NA,NA
+"107","B3",174469,"v1.9 rev 2126ab0","Aves","Gaviiformes","Gaviidae","Gavia immer","(Brunnich, 1764)Ê",NA,NA,NA
+"108","B4",174470,"v1.9 rev 2126ab0","Aves","Gaviiformes","Gaviidae","Gavia adamsii","(G. R. Gray, 1859)Ê",NA,NA,NA
+"109","B5",563259,"v1.9 rev 2126ab0","Aves","Podicipediformes","Podicipedidae","Tachybaptus ruficollis","(Pallas, 1764)Ê","Podiceps ruficollis","Colymbus ruficollis",NA
+"110","B6",174491,"v1.9 rev 2126ab0","Aves","Podicipediformes","Podicipedidae","Podiceps cristatus","(Linnaeus, 1758)Ê",NA,NA,NA
+"111","B7",174479,"v1.9 rev 2126ab0","Aves","Podicipediformes","Podicipedidae","Podiceps grisegena","(Boddaert, 1783)Ê",NA,NA,NA
+"112","B8",174482,"v1.9 rev 2126ab0","Aves","Podicipediformes","Podicipedidae","Podiceps auritus","(Linnaeus, 1758)Ê",NA,NA,NA
+"113","B9",174485,"v1.9 rev 2126ab0","Aves","Podicipediformes","Podicipedidae","Podiceps nigricollis","C. L. Brehm, 1831Ê",NA,NA,NA
+"114","B10",174536,"v1.9 rev 2126ab0","Aves","Procellariiformes","Procellariidae","Fulmarus glacialis","(Linnaeus, 1761)Ê",NA,NA,NA
+"115","B11",562557,"v1.9 rev 2126ab0","Aves","Procellariiformes","Procellariidae","Pterodroma feae","(Salvadori, 1900)Ê",NA,NA,NA
+"116","B12",562558,"v1.9 rev 2126ab0","Aves","Procellariiformes","Procellariidae","Pterodroma madeira","Mathews, 1934Ê",NA,NA,NA
+"117","B13",554144,"v1.9 rev 2126ab0","Aves","Procellariiformes","Procellariidae","Bulweria bulwerii","(Jardine & Selby, 1828)Ê","Bulweria bulweria",NA,NA
+"118","B14",203446,"v1.9 rev 2126ab0","Aves","Procellariiformes","Procellariidae","Calonectris diomedea","(Scopoli, 1769)Ê","Puffinus diomedea",NA,NA
+"119","B15",174555,"v1.9 rev 2126ab0","Aves","Procellariiformes","Procellariidae","Puffinus puffinus","(Brunnich, 1764)Ê","Puffinus puffinus puffinus",NA,NA
+"120","B16",562599,"v1.9 rev 2126ab0","Aves","Procellariiformes","Procellariidae","Puffinus yelkouan","(Acerbi, 1827)Ê",NA,NA,NA
+"121","B17",723254,"v1.9 rev 2126ab0","Aves","Procellariiformes","Procellariidae","Puffinus mauretanicus","Lowe, 1921Ê",NA,NA,NA
+"122","B18",174559,"v1.9 rev 2126ab0","Aves","Procellariiformes","Procellariidae","Puffinus assimilis","Gould, 1838Ê",NA,NA,NA
+"123","B19",174621,"v1.9 rev 2126ab0","Aves","Procellariiformes","Hydrobatidae","Pelagodroma marina","(Latham, 1790)Ê",NA,NA,NA
+"124","B20",174663,"v1.9 rev 2126ab0","Aves","Procellariiformes","Hydrobatidae","Hydrobates pelagicus","(Linnaeus, 1758)Ê",NA,NA,NA
+"125","B21",174628,"v1.9 rev 2126ab0","Aves","Procellariiformes","Hydrobatidae","Oceanodroma leucorhoa","(Vieillot, 1818)Ê",NA,NA,NA
+"126","B22",174636,"v1.9 rev 2126ab0","Aves","Procellariiformes","Hydrobatidae","Oceanodroma castro","(Harcourt, 1851)Ê","Oceanodroma castro castro",NA,NA
+"127","B23",174673,"v1.9 rev 2126ab0","Aves","Pelecaniformes","Phaethontidae","Phaethon aethereus","Linnaeus, 1758Ê",NA,NA,NA
+"128","B24",174712,"v1.9 rev 2126ab0","Aves","Pelecaniformes","Sulidae","Morus bassanus","(Linnaeus, 1758)Ê","Sula bassanus","Pelecanus bassanus","Sula bassana"
+"129","B25",174715,"v1.9 rev 2126ab0","Aves","Pelecaniformes","Phalacrocoracidae","Phalacrocorax carbo","(Linnaeus, 1761)",NA,NA,NA
+"130","B26",174733,"v1.9 rev 2126ab0","Aves","Pelecaniformes","Phalacrocoracidae","Phalacrocorax aristotelis","(Linnaeus, 1761)",NA,NA,NA
+"131","B27",561972,"v1.9 rev 2126ab0","Aves","Pelecaniformes","Phalacrocoracidae","Phalacrocorax pygmeus","(Pallas, 1773)","Phalacrocorax pygmeus",NA,NA
+"132","B28",174693,"v1.9 rev 2126ab0","Aves","Pelecaniformes","Pelecanidae","Pelecanus onocrotalus","Linnaeus, 1758Ê",NA,NA,NA
+"133","B29",174692,"v1.9 rev 2126ab0","Aves","Pelecaniformes","Pelecanidae","Pelecanus crispus","Bruch, 1832Ê",NA,NA,NA
+"134","B30",174781,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ardeidae","Ardea cinerea","Linnaeus, 1758Ê",NA,NA,NA
+"135","B31",174791,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ardeidae","Ardea purpurea","Linnaeus, 1766Ê",NA,NA,NA
+"136","B32",554135,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ardeidae","Ardea alba","(Linnaeus, 1758)Ê","Casmerodius albus","Egretta alba",NA
+"137","B33",174816,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ardeidae","Egretta garzetta","(Linnaeus, 1766)Ê",NA,NA,NA
+"138","B34",174864,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ardeidae","Ardeola ralloides","(Scopoli, 1769)Ê",NA,NA,NA
+"139","B35",174803,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ardeidae","Bubulcus ibis","(Linnaeus, 1758)Ê","Bubulcus ibis ibis",NA,NA
+"140","B36",174832,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ardeidae","Nycticorax nycticorax","(Linnaeus, 1758)Ê",NA,NA,NA
+"141","B37",174850,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ardeidae","Ixobrychus minutus","(Linnaeus, 1766)Ê",NA,NA,NA
+"142","B38",174859,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ardeidae","Botaurus stellaris","(Linnaeus, 1758)Ê",NA,NA,NA
+"143","B39",174909,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ciconiidae","Ciconia nigra","(Linnaeus, 1758)Ê",NA,NA,NA
+"144","B40",174907,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Ciconiidae","Ciconia ciconia","(Linnaeus, 1758)Ê",NA,NA,NA
+"145","B41",174924,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Threskiornithidae","Plegadis falcinellus","(Linnaeus, 1766)Ê","Plegadis falcinellus falcinellus",NA,NA
+"146","B42",174933,"v1.9 rev 2126ab0","Aves","Ciconiiformes","Threskiornithidae","Platalea leucorodia","Linnaeus, 1758Ê",NA,NA,NA
+"147","B43",824111,"v1.9 rev 2126ab0","Aves","Phoenicopteriformes","Phoenicopteridae","Phoenicopterus roseus","Pallas, 1811Ê",NA,NA,NA
+"148","B44",174985,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Cygnus olor","(Gmelin, 1789)Ê",NA,NA,NA
+"149","B45",174990,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Cygnus cygnus","(Linnaeus, 1758)Ê","Olor cygnus",NA,NA
+"150","B46",174987,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Cygnus columbianus","(Ord, 1815)Ê","Olor columbianus",NA,NA
+"151","B47",175024,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anser fabalis","(Latham, 1787)Ê",NA,NA,NA
+"152","B48",175036,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anser brachyrhynchus","Baillon, 1834Ê","Anser fabalis brachyrhynchus",NA,NA
+"153","B49",175020,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anser albifrons","(Scopoli, 1769)Ê",NA,NA,NA
+"154","B50",175033,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anser erythropus","(Linnaeus, 1758)Ê",NA,NA,NA
+"155","B51",175028,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anser anser","(Linnaeus, 1758)Ê",NA,NA,NA
+"156","B53",175014,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Branta leucopsis","(Bechstein, 1803)Ê",NA,NA,NA
+"157","B54",175011,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Branta bernicla","(Linnaeus, 1758)Ê","Anas bernicla",NA,NA
+"158","B56",175056,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Tadorna ferruginea","(Pallas, 1764)Ê",NA,NA,NA
+"159","B57",175055,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Tadorna tadorna","(Linnaeus, 1758)Ê",NA,NA,NA
+"160","B58",175092,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anas penelope","Linnaeus, 1758Ê",NA,NA,NA
+"161","B59",175073,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anas strepera","Linnaeus, 1758Ê",NA,NA,NA
+"162","B60",175081,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anas crecca","Linnaeus, 1758Ê",NA,NA,NA
+"163","B61",175063,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anas platyrhynchos","Linnaeus, 1758Ê","Anas oustaleti",NA,NA
+"164","B62",175074,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anas acuta","Linnaeus, 1758Ê","Anas acuta acuta",NA,NA
+"165","B63",175093,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anas querquedula","Linnaeus, 1758Ê",NA,NA,NA
+"166","B64",175096,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Anas clypeata","Linnaeus, 1758Ê",NA,NA,NA
+"167","B65",553925,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Marmaronetta angustirostris","(Mntries, 1832)Ê","Anas angustirostris",NA,NA
+"168","B66",175234,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Netta rufina","(Pallas, 1773)Ê",NA,NA,NA
+"169","B67",175126,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Aythya ferina","(Linnaeus, 1758)Ê",NA,NA,NA
+"170","B68",175139,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Aythya nyroca","(Guldenstadt, 1770)Ê",NA,NA,NA
+"171","B69",175135,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Aythya fuligula","(Linnaeus, 1758)Ê",NA,NA,NA
+"172","B70",175130,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Aythya marila","(Linnaeus, 1761)Ê",NA,NA,NA
+"173","B71",175155,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Somateria mollissima","(Linnaeus, 1758)Ê","Anas mollissima","Eider mollissimus",NA
+"174","B72",175160,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Somateria spectabilis","(Linnaeus, 1758)Ê","Anas spectabilis",NA,NA
+"175","B73",175153,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Polysticta stelleri","(Pallas, 1769)Ê",NA,NA,NA
+"176","B74",175149,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Histrionicus histrionicus","(Linnaeus, 1758)Ê",NA,NA,NA
+"177","B75",175147,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Clangula hyemalis","(Linnaeus, 1758)Ê",NA,NA,NA
+"178","B76",175171,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Melanitta nigra","(Linnaeus, 1758)Ê",NA,NA,NA
+"179","B77",175163,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Melanitta fusca","(Linnaeus, 1758)Ê",NA,NA,NA
+"180","B78",175141,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Bucephala clangula","(Linnaeus, 1758)Ê",NA,NA,NA
+"181","B79",175144,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Bucephala islandica","(Gmelin, 1789)Ê",NA,NA,NA
+"182","B80",175196,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Mergellus albellus","Linnaeus, 1758Ê","Mergus albellus",NA,NA
+"183","B81",175187,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Mergus serrator","Linnaeus, 1758Ê","Mergus serrator serrator","Mergus serrator schioleri",NA
+"184","B82",175185,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Mergus merganser","Linnaeus, 1758Ê",NA,NA,NA
+"185","B84",175179,"v1.9 rev 2126ab0","Aves","Anseriformes","Anatidae","Oxyura leucocephala","(Scopoli, 1769)Ê",NA,NA,NA
+"186","B85",175590,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Pandion haliaetus","(Linnaeus, 1758)Ê",NA,NA,NA
+"187","B86",175454,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Pernis apivorus","(Linnaeus, 1758)Ê",NA,NA,NA
+"188","B87",175284,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Elanus caeruleus","(Desfontaines, 1789)Ê",NA,NA,NA
+"189","B88",175470,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Milvus milvus","(Linnaeus, 1758)Ê",NA,NA,NA
+"190","B89",175469,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Milvus migrans","(Boddaert, 1783)Ê",NA,NA,NA
+"191","B90",175419,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Haliaeetus albicilla","(Linnaeus, 1758)Ê",NA,NA,NA
+"192","B91",175483,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Gypaetus barbatus","(Linnaeus, 1758)Ê",NA,NA,NA
+"193","B92",175481,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Neophron percnopterus","(Linnaeus, 1758)Ê",NA,NA,NA
+"194","B93",175487,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Gyps fulvus","(Hablizl, 1783)Ê",NA,NA,NA
+"195","B94",175494,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Aegypius monachus","(Linnaeus, 1766)Ê",NA,NA,NA
+"196","B95",175502,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Circaetus gallicus","(Gmelin, 1788)Ê",NA,NA,NA
+"197","B96",559297,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Circus aeruginosus","(Linnaeus, 1758)Ê",NA,NA,NA
+"198","B97",175430,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Circus cyaneus","(Linnaeus, 1766)Ê",NA,NA,NA
+"199","B98",175436,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Circus macrourus","(S. G. Gmelin, 1770)Ê",NA,NA,NA
+"200","B99",175439,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Circus pygargus","(Linnaeus, 1758)Ê",NA,NA,NA
+"201","B100",175312,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Accipiter brevipes","(Severtzov, 1850)Ê",NA,NA,NA
+"202","B101",175333,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Accipiter nisus","(Linnaeus, 1758)Ê",NA,NA,NA
+"203","B102",175300,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Accipiter gentilis","(Linnaeus, 1758)Ê",NA,NA,NA
+"204","B103",175383,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Buteo buteo","(Linnaeus, 1758)Ê",NA,NA,NA
+"205","B104",175392,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Buteo rufinus","(Cretzschmar, 1829)Ê",NA,NA,NA
+"206","B105",175373,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Buteo lagopus","(Pontoppidan, 1763)Ê",NA,NA,NA
+"207","B106",175414,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Aquila pomarina","C. L. Brehm, 1831Ê",NA,NA,NA
+"208","B107",175411,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Aquila clanga","Pallas, 1811Ê",NA,NA,NA
+"209","B108",558729,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Aquila nipalensis","Hodgson, 1833Ê",NA,NA,NA
+"210","B109",558728,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Aquila adalberti","C. L. Brehm, 1861Ê","Aquila heliaca adalberti",NA,NA
+"211","B110",175413,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Aquila heliaca","Savigny, 1809Ê","Aquila heliaca heliaca",NA,NA
+"212","B111",175407,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Aquila chrysaetos","(Linnaeus, 1758)Ê",NA,NA,NA
+"213","B112",824019,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Aquila fasciata","(Vieillot, 1822)Ê","Hieraaetus fasciatus",NA,NA
+"214","B113",175568,"v1.9 rev 2126ab0","Aves","Falconiformes","Accipitridae","Hieraaetus pennatus","(Gmelin, 1788)Ê","Hieraaetus dubius",NA,NA
+"215","B114",175646,"v1.9 rev 2126ab0","Aves","Falconiformes","Falconidae","Falco naumanni","Fleischer, 1818Ê",NA,NA,NA
+"216","B115",175620,"v1.9 rev 2126ab0","Aves","Falconiformes","Falconidae","Falco tinnunculus","Linnaeus, 1758Ê",NA,NA,NA
+"217","B116",175656,"v1.9 rev 2126ab0","Aves","Falconiformes","Falconidae","Falco vespertinus","Linnaeus, 1766Ê",NA,NA,NA
+"218","B117",175639,"v1.9 rev 2126ab0","Aves","Falconiformes","Falconidae","Falco eleonorae","Gene, 1839Ê",NA,NA,NA
+"219","B118",175613,"v1.9 rev 2126ab0","Aves","Falconiformes","Falconidae","Falco columbarius","Linnaeus, 1758Ê",NA,NA,NA
+"220","B119",175654,"v1.9 rev 2126ab0","Aves","Falconiformes","Falconidae","Falco subbuteo","Linnaeus, 1758Ê",NA,NA,NA
+"221","B120",175631,"v1.9 rev 2126ab0","Aves","Falconiformes","Falconidae","Falco biarmicus","Temminck, 1825Ê",NA,NA,NA
+"222","B121",175633,"v1.9 rev 2126ab0","Aves","Falconiformes","Falconidae","Falco cherrug","J. E. Gray, 1834Ê",NA,NA,NA
+"223","B122",175599,"v1.9 rev 2126ab0","Aves","Falconiformes","Falconidae","Falco rusticolus","Linnaeus, 1758Ê","Falco rusticolus obsoletus","Falco rusticolus uralensis","Falco rusticolus rusticolus"
+"224","B123",175604,"v1.9 rev 2126ab0","Aves","Falconiformes","Falconidae","Falco peregrinus","Tunstall, 1771Ê",NA,NA,NA
+"225","B124",175804,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Lagopus lagopus","(Linnaeus, 1758)Ê",NA,NA,NA
+"226","B125",677542,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Lagopus muta","(Montin, 1781)Ê","Lagopus mutus",NA,NA
+"227","B126",553893,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Tetrao urogallus","Linnaeus, 1758Ê",NA,NA,NA
+"228","B127",677538,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Lyrurus tetrix","Linnaeus, 1758Ê","Tetrao tetrix",NA,NA
+"229","B128",677539,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Lyrurus mlokosiewiczi","Taczanowski, 1875Ê","Tetrao mlokosiewiczi",NA,NA
+"230","B129",677536,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Tetrastes bonasia","(Linnaeus, 1758)Ê","Bonasa bonasia",NA,NA
+"231","B130",553829,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Tetraogallus caucasicus","(Pallas, 1811)Ê","Tetraogallus caucasius",NA,NA
+"232","B131",175951,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Tetraogallus caspius","(S. G. Gmelin, 1784)Ê",NA,NA,NA
+"233","B132",175910,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Alectoris graeca","(Meisner, 1804)Ê",NA,NA,NA
+"234","B133",175908,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Alectoris chukar","(J. E. Gray, 1830)Ê",NA,NA,NA
+"235","B134",175909,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Alectoris barbara","(Bonnaterre, 1792)Ê",NA,NA,NA
+"236","B135",175913,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Alectoris rufa","(Linnaeus, 1758)Ê",NA,NA,NA
+"237","B136",175947,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Ammoperdix griseogularis","(Brandt, 1843)Ê",NA,NA,NA
+"238","B137",175974,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Francolinus francolinus","(Linnaeus, 1766)Ê",NA,NA,NA
+"239","B138",175915,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Perdix perdix","(Linnaeus, 1758)Ê",NA,NA,NA
+"240","B139",553871,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Coturnix coturnix","(Linnaeus, 1758)Ê","Coturnix corturnix",NA,NA
+"241","B140",175905,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Phasianus colchicus","Linnaeus, 1758Ê",NA,NA,NA
+"242","B141",678962,"v1.9 rev 2126ab0","Aves","Gruiformes","Turnicidae","Turnix sylvaticus","(Desfontaines, 1789)Ê","Turnix sylvatica",NA,NA
+"243","B142",176192,"v1.9 rev 2126ab0","Aves","Gruiformes","Gruidae","Anthropoides virgo","(Linnaeus, 1758)Ê",NA,NA,NA
+"244","B143",176183,"v1.9 rev 2126ab0","Aves","Gruiformes","Gruidae","Grus grus","(Linnaeus, 1758)Ê",NA,NA,NA
+"245","B144",176223,"v1.9 rev 2126ab0","Aves","Gruiformes","Rallidae","Rallus aquaticus","Linnaeus, 1758Ê",NA,NA,NA
+"246","B145",176277,"v1.9 rev 2126ab0","Aves","Gruiformes","Rallidae","Crex crex","(Linnaeus, 1758)Ê",NA,NA,NA
+"247","B146",176249,"v1.9 rev 2126ab0","Aves","Gruiformes","Rallidae","Porzana parva","(Scopoli, 1769)Ê",NA,NA,NA
+"248","B147",176251,"v1.9 rev 2126ab0","Aves","Gruiformes","Rallidae","Porzana pusilla","(Pallas, 1776)Ê",NA,NA,NA
+"249","B148",176241,"v1.9 rev 2126ab0","Aves","Gruiformes","Rallidae","Porzana porzana","(Linnaeus, 1766)Ê",NA,NA,NA
+"250","B149",176390,"v1.9 rev 2126ab0","Aves","Gruiformes","Rallidae","Porphyrio porphyrio","(Linnaeus, 1758)Ê",NA,NA,NA
+"251","B150",176284,"v1.9 rev 2126ab0","Aves","Gruiformes","Rallidae","Gallinula chloropus","(Linnaeus, 1758)Ê",NA,NA,NA
+"252","B151",176297,"v1.9 rev 2126ab0","Aves","Gruiformes","Rallidae","Fulica cristata","Gmelin, 1789Ê",NA,NA,NA
+"253","B152",176290,"v1.9 rev 2126ab0","Aves","Gruiformes","Rallidae","Fulica atra","Linnaeus, 1758Ê",NA,NA,NA
+"254","B153",176419,"v1.9 rev 2126ab0","Aves","Gruiformes","Otididae","Otis tarda","Linnaeus, 1758Ê",NA,NA,NA
+"255","B154",563379,"v1.9 rev 2126ab0","Aves","Galliformes","Phasianidae","Tetrax tetrax","(Linnaeus, 1758)Ê","Otis tetrax",NA,NA
+"256","B155",176469,"v1.9 rev 2126ab0","Aves","Charadriiformes","Haematopodidae","Haematopus ostralegus","Linnaeus, 1758Ê",NA,NA,NA
+"257","B156",176727,"v1.9 rev 2126ab0","Aves","Charadriiformes","Recurvirostridae","Himantopus himantopus","(Linnaeus, 1758)Ê",NA,NA,NA
+"258","B157",176723,"v1.9 rev 2126ab0","Aves","Charadriiformes","Recurvirostridae","Recurvirostra avosetta","Linnaeus, 1758Ê",NA,NA,NA
+"259","B158",176749,"v1.9 rev 2126ab0","Aves","Charadriiformes","Burhinidae","Burhinus oedicnemus","(Linnaeus, 1758)Ê",NA,NA,NA
+"260","B159",176777,"v1.9 rev 2126ab0","Aves","Charadriiformes","Glareolidae","Glareola pratincola","(Linnaeus, 1766)Ê",NA,NA,NA
+"261","B160",176774,"v1.9 rev 2126ab0","Aves","Charadriiformes","Glareolidae","Glareola nordmanni","Fischer von Waldheim, 1842Ê",NA,NA,NA
+"262","B161",176481,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Vanellus vanellus","(Linnaeus, 1758)Ê",NA,NA,NA
+"263","B162",176499,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Vanellus spinosus","(Linnaeus, 1758)",NA,NA,NA
+"264","B163",176489,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Vanellus indicus","(Boddaert, 1783)",NA,NA,NA
+"265","B165",176490,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Vanellus leucurus","(Lichtenstein, 1823)",NA,NA,NA
+"266","B166",176561,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Pluvialis apricaria","(Linnaeus, 1758)Ê","Pluvialis apricaria altifrons","Pluvialis apricaria apricaria",NA
+"267","B167",176567,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Pluvialis squatarola","(Linnaeus, 1758)Ê",NA,NA,NA
+"268","B168",176504,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Charadrius hiaticula","Linnaeus, 1758Ê",NA,NA,NA
+"269","B169",176529,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Charadrius dubius","Scopoli, 1786Ê",NA,NA,NA
+"270","B170",176510,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Charadrius alexandrinus","Linnaeus, 1758Ê",NA,NA,NA
+"271","B171",176532,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Charadrius leschenaultii","Lesson, 1826Ê",NA,NA,NA
+"272","B172",176524,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Charadrius asiaticus","Pallas, 1773Ê",NA,NA,NA
+"273","B173",176545,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Charadrius morinellus","Linnaeus, 1758Ê","Eudromias morinellus",NA,NA
+"274","B174",176578,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Scolopax rusticola","Linnaeus, 1758Ê","Scolopax rusticola rusticola",NA,NA
+"275","B175",176591,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Lymnocryptes minimus","(Brunnich, 1764)Ê",NA,NA,NA
+"276","B176",176710,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Gallinago stenura","(Bonaparte, 1831)Ê",NA,NA,NA
+"277","B177",176704,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Gallinago media","(Latham, 1787)Ê",NA,NA,NA
+"278","B178",176700,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Gallinago gallinago","(Linnaeus, 1758)Ê","Capella gallinago gallinago",NA,NA
+"279","B179",176691,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Limosa limosa","(Linnaeus, 1758)Ê",NA,NA,NA
+"280","B180",176687,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Limosa lapponica","(Linnaeus, 1758)Ê",NA,NA,NA
+"281","B181",176599,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Numenius phaeopus","(Linnaeus, 1758)Ê",NA,NA,NA
+"282","B182",176596,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Numenius arquata","(Linnaeus, 1758)Ê",NA,NA,NA
+"283","B183",176621,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Tringa erythropus","(Pallas, 1764)Ê",NA,NA,NA
+"284","B184",176622,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Tringa totanus","(Linnaeus, 1758)Ê",NA,NA,NA
+"285","B185",176633,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Tringa stagnatilis","(Bechstein, 1803)Ê",NA,NA,NA
+"286","B186",176624,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Tringa nebularia","(Gunnerus, 1767)Ê",NA,NA,NA
+"287","B187",176632,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Tringa ochropus","Linnaeus, 1758Ê",NA,NA,NA
+"288","B188",176618,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Tringa glareola","Linnaeus, 1758Ê",NA,NA,NA
+"289","B189",176718,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Xenus cinereus","(Guldenstadt, 1775)Ê","Tringa cinereus","Tringa cinerea",NA
+"290","B190",176613,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Actitis hypoleucos","(Linnaeus, 1758)Ê","Tringa hypoleucos",NA,NA
+"291","B191",176571,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Arenaria interpres","(Linnaeus, 1758)Ê",NA,NA,NA
+"292","B192",176642,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Calidris canutus","(Linnaeus, 1758)Ê","Tringa canutus",NA,NA
+"293","B193",176669,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Calidris alba","(Pallas, 1764)Ê",NA,NA,NA
+"294","B194",176670,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Calidris minuta","(Leisler, 1812)Ê",NA,NA,NA
+"295","B195",176658,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Calidris temminckii","(Leisler, 1812)Ê",NA,NA,NA
+"296","B196",176653,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Calidris melanotos","(Vieillot, 1819)Ê",NA,NA,NA
+"297","B197",176661,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Calidris alpina","(Linnaeus, 1758)Ê",NA,NA,NA
+"298","B198",176646,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Calidris maritima","(Brunnich, 1764)Ê",NA,NA,NA
+"299","B199",176716,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Limicola falcinellus","(Pontoppidan, 1763)Ê",NA,NA,NA
+"300","B200",176695,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Philomachus pugnax","(Linnaeus, 1758)Ê",NA,NA,NA
+"301","B201",176735,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Phalaropus lobatus","(Linnaeus, 1758)Ê","Lobipes lobatus",NA,NA
+"302","B202",176734,"v1.9 rev 2126ab0","Aves","Charadriiformes","Scolopacidae","Phalaropus fulicarius","(Linnaeus, 1758)Ê","Phalaropus fulicaria",NA,NA
+"303","B203",660059,"v1.9 rev 2126ab0","Aves","Charadriiformes","Stercorariidae","Stercorarius skua","(Brunnich, 1764)Ê","Catharacta skua","Catharacta skua skua",NA
+"304","B204",176792,"v1.9 rev 2126ab0","Aves","Charadriiformes","Stercorariidae","Stercorarius pomarinus","(Temminck, 1815)Ê",NA,NA,NA
+"305","B205",176793,"v1.9 rev 2126ab0","Aves","Charadriiformes","Stercorariidae","Stercorarius parasiticus","(Linnaeus, 1758)Ê",NA,NA,NA
+"306","B206",176794,"v1.9 rev 2126ab0","Aves","Charadriiformes","Stercorariidae","Stercorarius longicaudus","Vieillot, 1819Ê",NA,NA,NA
+"307","B207",176832,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Larus canus","Linnaeus, 1758Ê",NA,NA,NA
+"308","B208",824066,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Ichthyaetus audouinii","Payraudeau, 1826Ê","Larus audouinii",NA,NA
+"309","B209",176815,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Larus marinus","Linnaeus, 1758Ê",NA,NA,NA
+"310","B210",176808,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Larus hyperboreus","Gunnerus, 1767Ê",NA,NA,NA
+"311","B211",176811,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Larus glaucoides","B. Meyer, 1822Ê",NA,NA,NA
+"312","B212",176824,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Larus argentatus","Pontoppidan, 1763Ê",NA,NA,NA
+"313","B213",176821,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Larus fuscus","Linnaeus, 1758Ê",NA,NA,NA
+"314","B214",554270,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Larus cachinnans","Pallas, 1811Ê",NA,NA,NA
+"315","B215",560740,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Larus armenicus","Buturlin, 1934Ê",NA,NA,NA
+"316","B216",824068,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Ichthyaetus ichthyaetus","Pallas, 1773Ê","Larus ichthyaetus",NA,NA
+"317","B217",824041,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Chroicocephalus ridibundus","Linnaeus, 1766Ê","Larus ridibundus","Larus ridibundus ridibundus",NA
+"318","B218",824036,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Chroicocephalus genei","Breme, 1839Ê","Larus genei",NA,NA
+"319","B219",824070,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Ichthyaetus melanocephalus","Temminck, 1820Ê","Larus melanocephalus",NA,NA
+"320","B220",824065,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Hydrocoloeus minutus","Pallas, 1776Ê","Larus minutus",NA,NA
+"321","B221",176851,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Pagophila eburnea","(Phipps, 1774)Ê","Larus eburnea","Larus eburneus",NA
+"322","B222",176866,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Xema sabini","Sabine, 1819Ê","Larus sabini","Larus sabini sabina","Xema sabini sabini"
+"323","B223",176875,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Rissa tridactyla","(Linnaeus, 1758)Ê","Larus tridactyla","Larus tridactyla tridactyla","Rissa tridactyla tridactyla"
+"324","B224",176882,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Gelochelidon nilotica","(Gmelin, 1789)Ê","Sterna nilotica",NA,NA
+"325","B225",176935,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Hydroprogne caspia","Pallas, 1770Ê","Sterna caspia",NA,NA
+"326","B226",824139,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Thalasseus bengalensis","Lesson, 1831Ê","Sterna bengalensis",NA,NA
+"327","B227",176932,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Thalasseus sandvicensis","Latham, 1787Ê","Sterna sandvicensis","Sterna sandvicensis sandvicensis",NA
+"328","B228",176891,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Sterna dougallii","Montagu, 1813Ê",NA,NA,NA
+"329","B229",176888,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Sterna hirundo","Linnaeus, 1758Ê",NA,NA,NA
+"330","B230",176890,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Sterna paradisaea","Pontoppidan, 1763Ê",NA,NA,NA
+"331","B231",824126,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Sternula albifrons","Pallas, 1764Ê","Sterna albifrons",NA,NA
+"332","B232",824105,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Onychoprion fuscatus","Linnaeus, 1766Ê","Sterna fuscata",NA,NA
+"333","B233",726051,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Chlidonias hybrida","(Pallas, 1811)Ê","Chlidonias hybridus",NA,NA
+"334","B234",176958,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Chlidonias leucopterus","(Temminck, 1815)Ê","Chilidonias leucopterus",NA,NA
+"335","B235",176959,"v1.9 rev 2126ab0","Aves","Charadriiformes","Laridae","Chlidonias niger","(Linnaeus, 1758)Ê","Chilidonias niger",NA,NA
+"336","B236",176982,"v1.9 rev 2126ab0","Aves","Charadriiformes","Alcidae","Alle alle","(Linnaeus, 1758)Ê",NA,NA,NA
+"337","B237",176974,"v1.9 rev 2126ab0","Aves","Charadriiformes","Alcidae","Uria aalge","(Pontoppidan, 1763)Ê",NA,NA,NA
+"338","B238",176978,"v1.9 rev 2126ab0","Aves","Charadriiformes","Alcidae","Uria lomvia","(Linnaeus, 1758)Ê",NA,NA,NA
+"339","B239",176971,"v1.9 rev 2126ab0","Aves","Charadriiformes","Alcidae","Alca torda","Linnaeus, 1758Ê",NA,NA,NA
+"340","B240",176985,"v1.9 rev 2126ab0","Aves","Charadriiformes","Alcidae","Cepphus grylle","(Linnaeus, 1758)Ê",NA,NA,NA
+"341","B241",177025,"v1.9 rev 2126ab0","Aves","Charadriiformes","Alcidae","Fratercula arctica","(Linnaeus, 1758)Ê",NA,NA,NA
+"342","B242",177045,"v1.9 rev 2126ab0","Aves","Columbiformes","Pteroclididae","Pterocles alchata","(Linnaeus, 1766)Ê",NA,NA,NA
+"343","B243",177055,"v1.9 rev 2126ab0","Aves","Columbiformes","Pteroclididae","Pterocles orientalis","(Linnaeus, 1758)Ê",NA,NA,NA
+"344","B244",177071,"v1.9 rev 2126ab0","Aves","Columbiformes","Columbidae","Columba livia","Gmelin, 1789Ê",NA,NA,NA
+"345","B245",177098,"v1.9 rev 2126ab0","Aves","Columbiformes","Columbidae","Columba oenas","Linnaeus, 1758Ê",NA,NA,NA
+"346","B246",177103,"v1.9 rev 2126ab0","Aves","Columbiformes","Columbidae","Columba palumbus","Linnaeus, 1758Ê",NA,NA,NA
+"347","B247",177113,"v1.9 rev 2126ab0","Aves","Columbiformes","Columbidae","Columba trocaz","Heineken, 1829Ê",NA,NA,NA
+"348","B248",177149,"v1.9 rev 2126ab0","Aves","Columbiformes","Columbidae","Streptopelia turtur","(Linnaeus, 1758)Ê",NA,NA,NA
+"349","B249",177139,"v1.9 rev 2126ab0","Aves","Columbiformes","Columbidae","Streptopelia decaocto","(Frivaldszky, 1838)Ê",NA,NA,NA
+"350","B250",177147,"v1.9 rev 2126ab0","Aves","Columbiformes","Columbidae","Streptopelia senegalensis","(Linnaeus, 1766)Ê","Streptopelia senegalensis","Stigmatopelia senegalensis","Columba senegalensis"
+"351","B251",554674,"v1.9 rev 2126ab0","Aves","Cuculiformes","Cuculidae","Clamator glandarius","(Linnaeus, 1758)Ê",NA,NA,NA
+"352","B252",177822,"v1.9 rev 2126ab0","Aves","Cuculiformes","Cuculidae","Cuculus canorus","Linnaeus, 1758Ê",NA,NA,NA
+"353","B253",177823,"v1.9 rev 2126ab0","Aves","Cuculiformes","Cuculidae","Cuculus saturatus","Blyth, 1843Ê","Cuculus saturatus saturatus",NA,NA
+"354","B254",177851,"v1.9 rev 2126ab0","Aves","Strigiformes","Tytonidae","Tyto alba","(Scopoli, 1769)Ê","Strix alba",NA,NA
+"355","B255",555375,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Otus brucei","(Hume, 1872)Ê","Ephialtes brucei",NA,NA
+"356","B256",555376,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Otus scops","(Linnaeus, 1758)Ê","Strix scops",NA,NA
+"357","B257",555404,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Bubo bubo","(Linnaeus, 1758)Ê","Strix bubo",NA,NA
+"358","B258",686683,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Bubo scandiacus","(Linnaeus, 1758)Ê","Bubo virginianus wapacuthu","Nyctea scandiaca","Bubo scandiaca"
+"359","B259",555428,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Strix aluco","Linnaeus, 1758Ê",NA,NA,NA
+"360","B260",555433,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Strix uralensis","Pallas, 1771Ê",NA,NA,NA
+"361","B261",177929,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Strix nebulosa","J. R. Forster, 1772Ê",NA,NA,NA
+"362","B262",177898,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Surnia ulula","(Linnaeus, 1758)Ê","Strix ulula",NA,NA
+"363","B263",555445,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Glaucidium passerinum","(Linnaeus, 1758)Ê","Strix passerina",NA,NA
+"364","B264",555471,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Athene noctua","(Scopoli, 1769)Ê","Strix noctua",NA,NA
+"365","B265",177938,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Aegolius funereus","(Linnaeus, 1758)Ê","Strix funerea",NA,NA
+"366","B266",177932,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Asio otus","(Linnaeus, 1758)Ê","Strix otus",NA,NA
+"367","B267",177935,"v1.9 rev 2126ab0","Aves","Strigiformes","Strigidae","Asio flammeus","(Pontoppidan, 1763)Ê","Strix flammea",NA,NA
+"368","B268",555568,"v1.9 rev 2126ab0","Aves","Caprimulgiformes","Caprimulgidae","Caprimulgus ruficollis","Temminck, 1820Ê",NA,NA,NA
+"369","B269",555569,"v1.9 rev 2126ab0","Aves","Caprimulgiformes","Caprimulgidae","Caprimulgus europaeus","Linnaeus, 1758Ê",NA,NA,NA
+"370","B270",555003,"v1.9 rev 2126ab0","Aves","Apodiformes","Apodidae","Apus melba","(Linnaeus, 1758)Ê","Tachymarptis melba",NA,NA
+"371","B271",178010,"v1.9 rev 2126ab0","Aves","Apodiformes","Apodidae","Apus apus","(Linnaeus, 1758)Ê",NA,NA,NA
+"372","B272",555006,"v1.9 rev 2126ab0","Aves","Apodiformes","Apodidae","Apus unicolor","(Jardine, 1830)Ê",NA,NA,NA
+"373","B273",555008,"v1.9 rev 2126ab0","Aves","Apodiformes","Apodidae","Apus pallidus","(Shelley, 1870)Ê",NA,NA,NA
+"374","B274",555014,"v1.9 rev 2126ab0","Aves","Apodiformes","Apodidae","Apus affinis","(J. E. Gray, 1830)",NA,NA,NA
+"375","B275",555018,"v1.9 rev 2126ab0","Aves","Apodiformes","Apodidae","Apus caffer","(Lichtenstein, 1823)Ê",NA,NA,NA
+"376","B276",554549,"v1.9 rev 2126ab0","Aves","Coraciiformes","Alcedinidae","Alcedo atthis","(Linnaeus, 1758)Ê",NA,NA,NA
+"377","B277",554585,"v1.9 rev 2126ab0","Aves","Coraciiformes","Alcedinidae","Halcyon smyrnensis","(Linnaeus, 1758)Ê",NA,NA,NA
+"378","B278",554636,"v1.9 rev 2126ab0","Aves","Coraciiformes","Alcedinidae","Ceryle rudis","(Linnaeus, 1758)Ê",NA,NA,NA
+"379","B279",554658,"v1.9 rev 2126ab0","Aves","Coraciiformes","Meropidae","Merops superciliosus","Linnaeus, 1766Ê",NA,NA,NA
+"380","B280",554661,"v1.9 rev 2126ab0","Aves","Coraciiformes","Meropidae","Merops apiaster","Linnaeus, 1758Ê",NA,NA,NA
+"381","B281",554518,"v1.9 rev 2126ab0","Aves","Coraciiformes","Coraciidae","Coracias garrulus","Linnaeus, 1758Ê",NA,NA,NA
+"382","B282",178117,"v1.9 rev 2126ab0","Aves","Coraciiformes","Upupidae","Upupa epops","Linnaeus, 1758Ê",NA,NA,NA
+"383","B283",178150,"v1.9 rev 2126ab0","Aves","Piciformes","Picidae","Jynx torquilla","Linnaeus, 1758Ê",NA,NA,NA
+"384","B284",554037,"v1.9 rev 2126ab0","Aves","Piciformes","Picidae","Dendrocopos minor","(Linnaeus, 1758)Ê",NA,NA,NA
+"385","B285",554046,"v1.9 rev 2126ab0","Aves","Piciformes","Picidae","Dendrocopos medius","(Linnaeus, 1758)Ê",NA,NA,NA
+"386","B287",554048,"v1.9 rev 2126ab0","Aves","Piciformes","Picidae","Dendrocopos major","(Linnaeus, 1758)Ê",NA,NA,NA
+"387","B288",554049,"v1.9 rev 2126ab0","Aves","Piciformes","Picidae","Dendrocopos syriacus","(Hemprich & Ehrenberg, 1833)Ê",NA,NA,NA
+"388","B289",178251,"v1.9 rev 2126ab0","Aves","Piciformes","Picidae","Picoides tridactylus","(Linnaeus, 1758)Ê",NA,NA,NA
+"389","B290",554101,"v1.9 rev 2126ab0","Aves","Piciformes","Picidae","Dryocopus martius","(Linnaeus, 1758)Ê",NA,NA,NA
+"390","B291",554121,"v1.9 rev 2126ab0","Aves","Piciformes","Picidae","Picus viridis","Linnaeus, 1758Ê",NA,NA,NA
+"391","B292",554125,"v1.9 rev 2126ab0","Aves","Piciformes","Picidae","Picus canus","Gmelin, 1788Ê",NA,NA,NA
+"392","B293",558553,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Ammomanes deserti","(Lichtenstein, 1823)Ê",NA,NA,NA
+"393","B294",561038,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Melanocorypha calandra","(Linnaeus, 1766)Ê",NA,NA,NA
+"394","B295",561037,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Melanocorypha bimaculata","(Mntris, 1832)Ê",NA,NA,NA
+"395","B296",561039,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Melanocorypha leucoptera","(Pallas, 1811)Ê",NA,NA,NA
+"396","B297",558980,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Calandrella brachydactyla","(Leisler, 1814)Ê",NA,NA,NA
+"397","B298",558985,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Calandrella rufescens","(Vieillot, 1819)Ê",NA,NA,NA
+"398","B299",558981,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Calandrella cheleensis","(Swinhoe, 1871)Ê",NA,NA,NA
+"399","B300",559186,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Chersophilus duponti","(Vieillot, 1824)Ê",NA,NA,NA
+"400","B301",560129,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Galerida cristata","(Linnaeus, 1758)Ê",NA,NA,NA
+"401","B302",560894,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Lullula arborea","(Linnaeus, 1758)Ê",NA,NA,NA
+"402","B303",178398,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Alauda arvensis","Linnaeus, 1758Ê",NA,NA,NA
+"403","B304",554256,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Eremophila alpestris","(Linnaeus, 1758)Ê",NA,NA,NA
+"404","B305",178436,"v1.9 rev 2126ab0","Aves","Passeriformes","Hirundinidae","Riparia riparia","(Linnaeus, 1758)Ê",NA,NA,NA
+"405","B306",916667,"v1.9 rev 2126ab0","Aves","Passeriformes","Hirundinidae","Ptyonoprogne rupestris","(Scopoli, 1769)Ê","Hirundo rupestris",NA,NA
+"406","B307",178448,"v1.9 rev 2126ab0","Aves","Passeriformes","Hirundinidae","Hirundo rustica","Linnaeus, 1758Ê",NA,NA,NA
+"407","B308",916675,"v1.9 rev 2126ab0","Aves","Passeriformes","Hirundinidae","Cecropis daurica","Laxmann, 1769Ê","Hirundo daurica",NA,NA
+"408","B309",726115,"v1.9 rev 2126ab0","Aves","Passeriformes","Hirundinidae","Delichon urbicum","(Linnaeus, 1758)Ê","Delichon urbica","Delichon urbica urbica",NA
+"409","B310",178476,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Motacilla alba","Linnaeus, 1758Ê",NA,NA,NA
+"410","B311",554345,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Motacilla citreola","Pallas, 1776Ê",NA,NA,NA
+"411","B312",178483,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Motacilla flava","Linnaeus, 1758Ê",NA,NA,NA
+"412","B313",178480,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Motacilla cinerea","Tunstall, 1771Ê",NA,NA,NA
+"413","B314",558640,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Anthus campestris","(Linnaeus, 1758)Ê",NA,NA,NA
+"414","B315",558635,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Anthus berthelotii","Bolle, 1862Ê",NA,NA,NA
+"415","B316",178500,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Anthus trivialis","(Linnaeus, 1758)Ê",NA,NA,NA
+"416","B317",178495,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Anthus hodgsoni","Richmond, 1907Ê",NA,NA,NA
+"417","B318",178497,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Anthus pratensis","(Linnaeus, 1758)Ê",NA,NA,NA
+"418","B319",178498,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Anthus cervinus","(Pallas, 1811)Ê","Anthus cervinus cervinus","Anthus cervinus rufogularis",NA
+"419","B320",558662,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Anthus petrosus","(Montagu, 1798)Ê",NA,NA,NA
+"420","B321",178489,"v1.9 rev 2126ab0","Aves","Passeriformes","Motacillidae","Anthus spinoletta","(Linnaeus, 1758)Ê",NA,NA,NA
+"421","B322",562635,"v1.9 rev 2126ab0","Aves","Passeriformes","Pycnonotidae","Pycnonotus xanthopygos","(Hemprich & Ehrenberg, 1833)Ê",NA,NA,NA
+"422","B323",562698,"v1.9 rev 2126ab0","Aves","Passeriformes","Reguliidae","Regulus regulus","(Linnaeus, 1758)Ê",NA,NA,NA
+"423","B324",916249,"v1.9 rev 2126ab0","Aves","Passeriformes","Reguliidae","Regulus ignicapilla","(Temminck, 1820)Ê","Regulus ignicapillus",NA,NA
+"424","B325",178529,"v1.9 rev 2126ab0","Aves","Passeriformes","Bombycillidae","Bombycilla garrulus","(Linnaeus, 1758)Ê",NA,NA,NA
+"425","B326",559287,"v1.9 rev 2126ab0","Aves","Passeriformes","Cinclidae","Cinclus cinclus","(Linnaeus, 1758)Ê",NA,NA,NA
+"426","B327",178547,"v1.9 rev 2126ab0","Aves","Passeriformes","Troglodytidae","Troglodytes troglodytes","(Linnaeus, 1758)Ê","Nannus troglodytes",NA,NA
+"427","B328",562483,"v1.9 rev 2126ab0","Aves","Passeriformes","Prunellidae","Prunella collaris","(Scopoli, 1769)Ê",NA,NA,NA
+"428","B329",178660,"v1.9 rev 2126ab0","Aves","Passeriformes","Prunellidae","Prunella montanella","(Pallas, 1776)Ê",NA,NA,NA
+"429","B330",562490,"v1.9 rev 2126ab0","Aves","Passeriformes","Prunellidae","Prunella ocularis","(Radde, 1884)Ê",NA,NA,NA
+"430","B331",562482,"v1.9 rev 2126ab0","Aves","Passeriformes","Prunellidae","Prunella atrogularis","(Brandt, 1843)Ê",NA,NA,NA
+"431","B332",562489,"v1.9 rev 2126ab0","Aves","Passeriformes","Prunellidae","Prunella modularis","(Linnaeus, 1758)Ê",NA,NA,NA
+"432","B333",561216,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Monticola saxatilis","(Linnaeus, 1766)Ê",NA,NA,NA
+"433","B334",179834,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Monticola solitarius","(Linnaeus, 1758)Ê",NA,NA,NA
+"434","B335",563785,"v1.9 rev 2126ab0","Aves","Passeriformes","Turdidae","Zoothera dauma","(Latham, 1790)Ê",NA,NA,NA
+"435","B336",563617,"v1.9 rev 2126ab0","Aves","Passeriformes","Turdidae","Turdus torquatus","Linnaeus, 1758Ê",NA,NA,NA
+"436","B337",179757,"v1.9 rev 2126ab0","Aves","Passeriformes","Turdidae","Turdus merula","Linnaeus, 1758Ê",NA,NA,NA
+"437","B338",563610,"v1.9 rev 2126ab0","Aves","Passeriformes","Turdidae","Turdus ruficollis","Pallas, 1776Ê",NA,NA,NA
+"438","B339",179766,"v1.9 rev 2126ab0","Aves","Passeriformes","Turdidae","Turdus pilaris","Linnaeus, 1758Ê",NA,NA,NA
+"439","B340",179769,"v1.9 rev 2126ab0","Aves","Passeriformes","Turdidae","Turdus iliacus","Linnaeus, 1758Ê","Turdus musicus",NA,NA
+"440","B341",563604,"v1.9 rev 2126ab0","Aves","Passeriformes","Turdidae","Turdus philomelos","C. L. Brehm, 1831Ê",NA,NA,NA
+"441","B342",563619,"v1.9 rev 2126ab0","Aves","Passeriformes","Turdidae","Turdus viscivorus","Linnaeus, 1758Ê",NA,NA,NA
+"442","B343",559335,"v1.9 rev 2126ab0","Aves","Passeriformes","Cisticolidae","Cisticola juncidis","(Rafinesque, 1810)Ê",NA,NA,NA
+"443","B344",562441,"v1.9 rev 2126ab0","Aves","Passeriformes","Cisticolidae","Prinia gracilis","(Lichtenstein, 1823)Ê",NA,NA,NA
+"444","B345",559157,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Cettia cetti","(Temminck, 1820)Ê",NA,NA,NA
+"445","B346",179851,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Locustella lanceolata","(Temminck, 1840)Ê",NA,NA,NA
+"446","B347",560839,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Locustella naevia","(Boddaert, 1783)Ê",NA,NA,NA
+"447","B348",560837,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Locustella fluviatilis","(Wolf, 1810)Ê",NA,NA,NA
+"448","B349",560838,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Locustella luscinioides","(Savi, 1824)Ê",NA,NA,NA
+"449","B350",558420,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Acrocephalus melanopogon","(Temminck, 1823)Ê",NA,NA,NA
+"450","B351",558423,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Acrocephalus paludicola","(Vieillot, 1817)Ê",NA,NA,NA
+"451","B352",558428,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Acrocephalus schoenobaenus","(Linnaeus, 1758)Ê",NA,NA,NA
+"452","B353",558407,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Acrocephalus agricola","(Jerdon, 1845)Ê",NA,NA,NA
+"453","B354",558429,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Acrocephalus scirpaceus","(Hermann, 1804)Ê",NA,NA,NA
+"454","B355",558416,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Acrocephalus dumetorum","Blyth, 1849Ê",NA,NA,NA
+"455","B356",558424,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Acrocephalus palustris","(Bechstein, 1798)Ê",NA,NA,NA
+"456","B357",558408,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Acrocephalus arundinaceus","(Linnaeus, 1758)Ê",NA,NA,NA
+"457","B358",916788,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Iduna caligata","(Lichtenstein, 1823)Ê","Hippolais caligata",NA,NA
+"458","B359",916790,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Iduna pallida","(Hemprich & Ehrenberg, 1833)Ê","Hippolais pallida",NA,NA
+"459","B360",560448,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Hippolais languida","(Hemprich & Ehrenberg, 1833)Ê",NA,NA,NA
+"460","B361",560449,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Hippolais olivetorum","(Strickland, 1837)Ê",NA,NA,NA
+"461","B362",560451,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Hippolais polyglotta","(Vieillot, 1817)Ê",NA,NA,NA
+"462","B363",560447,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Hippolais icterina","(Vieillot, 1817)Ê",NA,NA,NA
+"463","B364",179841,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Phylloscopus trochilus","(Linnaeus, 1758)Ê",NA,NA,NA
+"464","B365",562129,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Phylloscopus collybita","(Vieillot, 1817)Ê",NA,NA,NA
+"465","B366",925126,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Phylloscopus sindianus lorenzii","(T. Lorenz, 1887)","Phylloscopus lorenzii",NA,NA
+"466","B367",562123,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Phylloscopus bonelli","(Vieillot, 1819)Ê",NA,NA,NA
+"467","B368",916708,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Phylloscopus sibillatrix","(Bechstein, 1793)Ê","Phylloscopus sibilatrix",NA,NA
+"468","B369",562136,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Phylloscopus inornatus","(Blyth, 1842)Ê",NA,NA,NA
+"469","B370",179843,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Phylloscopus borealis","(J. H. Blasius, 1858)Ê",NA,NA,NA
+"470","B371",562159,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Phylloscopus trochiloides","(Sundevall, 1837)Ê",NA,NA,NA
+"471","B372",563183,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia atricapilla","(Linnaeus, 1758)Ê",NA,NA,NA
+"472","B373",563185,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia borin","(Boddaert, 1783)Ê",NA,NA,NA
+"473","B374",563188,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia communis","Latham, 1787Ê",NA,NA,NA
+"474","B375",563190,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia curruca","(Linnaeus, 1758)Ê",NA,NA,NA
+"475","B376",563201,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia nisoria","(Bechstein, 1792)Ê",NA,NA,NA
+"476","B377",563192,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia hortensis","(Gmelin, 1789)Ê",NA,NA,NA
+"477","B378",915909,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia ruppeli","Temminck, 1823Ê","Sylvia rueppelli",NA,NA
+"478","B379",563187,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia cantillans","(Pallas, 1764)Ê",NA,NA,NA
+"479","B380",563196,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia melanocephala","(Gmelin, 1789)Ê",NA,NA,NA
+"480","B381",563197,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia melanothorax","Tristram, 1872Ê",NA,NA,NA
+"481","B382",563199,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia mystacea","Mntris, 1832Ê",NA,NA,NA
+"482","B383",563189,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia conspicillata","Temminck, 1820Ê",NA,NA,NA
+"483","B384",563205,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia undata","(Boddaert, 1783)Ê",NA,NA,NA
+"484","B385",563203,"v1.9 rev 2126ab0","Aves","Passeriformes","Sylviidae","Sylvia sarda","Temminck, 1820Ê",NA,NA,NA
+"485","B386",561250,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Muscicapa striata","(Pallas, 1764)Ê",NA,NA,NA
+"486","B387",560081,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Ficedula hypoleuca","(Pallas, 1764)Ê",NA,NA,NA
+"487","B388",560071,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Ficedula albicollis","(Temminck, 1815)Ê",NA,NA,NA
+"488","B389",560087,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Ficedula semitorquata","(Homeyer, 1885)Ê",NA,NA,NA
+"489","B390",178675,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Ficedula parva","(Bechstein, 1792)Ê",NA,NA,NA
+"490","B391",559964,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Erithacus rubecula","(Linnaeus, 1758)Ê",NA,NA,NA
+"491","B392",560896,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Luscinia luscinia","(Linnaeus, 1758)Ê",NA,NA,NA
+"492","B393",560897,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Luscinia megarhynchos","C. L. Brehm, 1831Ê",NA,NA,NA
+"493","B394",179820,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Luscinia calliope","(Pallas, 1776)Ê",NA,NA,NA
+"494","B395",179818,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Luscinia svecica","(Linnaeus, 1758)Ê",NA,NA,NA
+"495","B396",179838,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Tarsiger cyanurus","(Pallas, 1773)Ê",NA,NA,NA
+"496","B397",560607,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Irania gutturalis","(Guerin-Meneville, 1843)Ê",NA,NA,NA
+"497","B398",916328,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Erythropygia galactotes","(Temminck, 1820)","Cercotrichas galactotes",NA,NA
+"498","B399",562036,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Phoenicurus ochruros","(S. G. Gmelin, 1774)Ê",NA,NA,NA
+"499","B400",562037,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Phoenicurus phoenicurus","(Linnaeus, 1758)Ê",NA,NA,NA
+"500","B401",562837,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Saxicola rubetra","(Linnaeus, 1758)Ê",NA,NA,NA
+"501","B402",726114,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Saxicola torquatus","(Linnaeus, 1766)Ê","Saxicola torquata",NA,NA
+"502","B403",561653,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Oenanthe leucura","(Gmelin, 1789)Ê",NA,NA,NA
+"503","B404",179814,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Oenanthe oenanthe","(Linnaeus, 1758)Ê",NA,NA,NA
+"504","B405",561648,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Oenanthe finschii","(Heuglin, 1869)Ê",NA,NA,NA
+"505","B406",561663,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Oenanthe pleschanka","(Lepechin, 1770)Ê",NA,NA,NA
+"506","B407",561650,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Oenanthe hispanica","(Linnaeus, 1758)Ê",NA,NA,NA
+"507","B408",916352,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Oenanthe chrysopygia","(Filippi, 1863)Ê",NA,NA,NA
+"508","B409",561647,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Oenanthe deserti","(Temminck, 1825)Ê",NA,NA,NA
+"509","B410",561646,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Oenanthe cypriaca","(Homeyer, 1884)Ê",NA,NA,NA
+"510","B411",561651,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Oenanthe isabellina","(Temminck, 1829)Ê",NA,NA,NA
+"511","B412",561803,"v1.9 rev 2126ab0","Aves","Passeriformes","Timaliidae","Panurus biarmicus","(Linnaeus, 1758)Ê",NA,NA,NA
+"512","B413",558441,"v1.9 rev 2126ab0","Aves","Passeriformes","Aegithalidae","Aegithalos caudatus","(Linnaeus, 1758)Ê",NA,NA,NA
+"513","B414",562352,"v1.9 rev 2126ab0","Aves","Passeriformes","Paridae","Poecile lugubris","(Temminck, 1820)",NA,NA,NA
+"514","B415",562354,"v1.9 rev 2126ab0","Aves","Passeriformes","Paridae","Poecile palustris","(Linnaeus, 1758)Ê",NA,NA,NA
+"515","B416",562353,"v1.9 rev 2126ab0","Aves","Passeriformes","Paridae","Poecile montanus","(Conrad von Baldenstein, 1827)","Poecile montana",NA,NA
+"516","B417",554384,"v1.9 rev 2126ab0","Aves","Passeriformes","Paridae","Poecile cinctus","Boddaert, 1783Ê","Parus cinctus","Poecile cincta",NA
+"517","B418",561927,"v1.9 rev 2126ab0","Aves","Passeriformes","Paridae","Periparus ater","(Linnaeus, 1758)","Periparus melanolophus",NA,NA
+"518","B419",560873,"v1.9 rev 2126ab0","Aves","Passeriformes","Paridae","Lophophanes cristatus","(Linnaeus, 1758)",NA,NA,NA
+"519","B420",561864,"v1.9 rev 2126ab0","Aves","Passeriformes","Paridae","Parus major","Linnaeus, 1758Ê",NA,NA,NA
+"520","B421",559612,"v1.9 rev 2126ab0","Aves","Passeriformes","Paridae","Cyanistes caeruleus","(Linnaeus, 1758)",NA,NA,NA
+"521","B422",559613,"v1.9 rev 2126ab0","Aves","Passeriformes","Paridae","Cyanistes cyanus","(Pallas, 1770)",NA,NA,NA
+"522","B423",563018,"v1.9 rev 2126ab0","Aves","Passeriformes","Sittidae","Sitta europaea","Linnaeus, 1758Ê",NA,NA,NA
+"523","B424",563033,"v1.9 rev 2126ab0","Aves","Passeriformes","Sittidae","Sitta whiteheadi","Sharpe, 1884Ê",NA,NA,NA
+"524","B425",563022,"v1.9 rev 2126ab0","Aves","Passeriformes","Sittidae","Sitta krueperi","Pelzeln, 1863Ê",NA,NA,NA
+"525","B426",563027,"v1.9 rev 2126ab0","Aves","Passeriformes","Sittidae","Sitta neumayer","Michahelles, 1830Ê",NA,NA,NA
+"526","B427",563030,"v1.9 rev 2126ab0","Aves","Passeriformes","Sittidae","Sitta tephronota","Sharpe, 1872Ê",NA,NA,NA
+"527","B428",563471,"v1.9 rev 2126ab0","Aves","Passeriformes","Sittidae","Tichodroma muraria","(Linnaeus, 1766)Ê",NA,NA,NA
+"528","B429",178795,"v1.9 rev 2126ab0","Aves","Passeriformes","Certhiidae","Certhia familiaris","Linnaeus, 1758Ê",NA,NA,NA
+"529","B430",559138,"v1.9 rev 2126ab0","Aves","Passeriformes","Certhiidae","Certhia brachydactyla","C. L. Brehm, 1820Ê",NA,NA,NA
+"530","B431",562702,"v1.9 rev 2126ab0","Aves","Passeriformes","Remizidae","Remiz pendulinus","(Linnaeus, 1758)Ê",NA,NA,NA
+"531","B432",561707,"v1.9 rev 2126ab0","Aves","Passeriformes","Oriolidae","Oriolus oriolus","(Linnaeus, 1758)Ê",NA,NA,NA
+"532","B433",560720,"v1.9 rev 2126ab0","Aves","Passeriformes","Laniidae","Lanius collurio","Linnaeus, 1758Ê",NA,NA,NA
+"533","B434",178511,"v1.9 rev 2126ab0","Aves","Passeriformes","Laniidae","Lanius excubitor","Linnaeus, 1758Ê",NA,NA,NA
+"534","B435",916255,"v1.9 rev 2126ab0","Aves","Passeriformes","Laniidae","Lanius meridionalis","Temminck, 1820Ê",NA,NA,NA
+"535","B436",560728,"v1.9 rev 2126ab0","Aves","Passeriformes","Laniidae","Lanius minor","Gmelin, 1788Ê",NA,NA,NA
+"536","B437",560730,"v1.9 rev 2126ab0","Aves","Passeriformes","Laniidae","Lanius nubicus","Lichtenstein, 1823Ê",NA,NA,NA
+"537","B438",560732,"v1.9 rev 2126ab0","Aves","Passeriformes","Laniidae","Lanius senator","Linnaeus, 1758Ê",NA,NA,NA
+"538","B439",561934,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Perisoreus infaustus","(Linnaeus, 1758)Ê",NA,NA,NA
+"539","B440",560214,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Garrulus glandarius","(Linnaeus, 1758)Ê",NA,NA,NA
+"540","B441",916623,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Cyanopica cyanus","(Pallas, 1776)","Cyanopica cyana",NA,NA
+"541","B442",179720,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Pica pica","(Linnaeus, 1758)Ê",NA,NA,NA
+"542","B443",561630,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Nucifraga caryocatactes","(Linnaeus, 1758)Ê",NA,NA,NA
+"543","B444",562653,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Pyrrhocorax pyrrhocorax","(Linnaeus, 1758)Ê",NA,NA,NA
+"544","B445",562652,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Pyrrhocorax graculus","(Linnaeus, 1766)Ê",NA,NA,NA
+"545","B446",916629,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Coloeus monedula","Linnaeus, 1758Ê","Corvus monedula",NA,NA
+"546","B447",179738,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Corvus frugilegus","Linnaeus, 1758Ê",NA,NA,NA
+"547","B448",559494,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Corvus corone","Linnaeus, 1758Ê",NA,NA,NA
+"548","B449",179725,"v1.9 rev 2126ab0","Aves","Passeriformes","Corvidae","Corvus corax","Linnaeus, 1758Ê",NA,NA,NA
+"549","B450",915888,"v1.9 rev 2126ab0","Aves","Passeriformes","Sturnidae","Pastor roseus","(Linnaeus, 1758)Ê","Sturnus roseus",NA,NA
+"550","B451",179637,"v1.9 rev 2126ab0","Aves","Passeriformes","Sturnidae","Sturnus vulgaris","Linnaeus, 1758Ê",NA,NA,NA
+"551","B452",563175,"v1.9 rev 2126ab0","Aves","Passeriformes","Sturnidae","Sturnus unicolor","Temminck, 1820Ê",NA,NA,NA
+"552","B453",179537,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza citrinella","Linnaeus, 1758Ê",NA,NA,NA
+"553","B454",554226,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza leucocephalos","S. G. Gmelin, 1771Ê",NA,NA,NA
+"554","B455",559878,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza cirlus","Linnaeus, 1766Ê",NA,NA,NA
+"555","B456",559875,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza cia","Linnaeus, 1766Ê",NA,NA,NA
+"556","B457",559870,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza buchanani","Blyth, 1845Ê",NA,NA,NA
+"557","B458",559876,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza cineracea","C. L. Brehm, 1855Ê",NA,NA,NA
+"558","B459",559883,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza hortulana","Linnaeus, 1758Ê",NA,NA,NA
+"559","B460",559872,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza caesia","Cretzschmar, 1827Ê",NA,NA,NA
+"560","B461",179542,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza pusilla","Pallas, 1776Ê",NA,NA,NA
+"561","B462",179538,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza rustica","Pallas, 1776Ê","Emberiza rustica latifascia","Emberiza rustica rustica",NA
+"562","B463",554225,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza aureola","Pallas, 1773Ê",NA,NA,NA
+"563","B464",554227,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza melanocephala","Scopoli, 1769Ê",NA,NA,NA
+"564","B465",559869,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza bruniceps","von J. F. Brandt, 1841Ê",NA,NA,NA
+"565","B466",179541,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza pallasi","(Cabanis, 1851)Ê",NA,NA,NA
+"566","B467",179543,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza schoeniclus","(Linnaeus, 1758)Ê",NA,NA,NA
+"567","B468",729218,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Emberiza calandra","(Linnaeus, 1758)Ê","Miliaria calandra",NA,NA
+"568","B469",179526,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Calcarius lapponicus","(Linnaeus, 1758)Ê",NA,NA,NA
+"569","B470",179532,"v1.9 rev 2126ab0","Aves","Passeriformes","Emberizidae","Plectrophenax nivalis","(Linnaeus, 1758)Ê",NA,NA,NA
+"570","B471",179168,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Fringilla coelebs","Linnaeus, 1758Ê",NA,NA,NA
+"571","B472",179167,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Fringilla montifringilla","Linnaeus, 1758Ê",NA,NA,NA
+"572","B473",179205,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Pinicola enucleator","(Linnaeus, 1758)Ê",NA,NA,NA
+"573","B474",179199,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Carpodacus erythrinus","(Pallas, 1770)Ê","Erythrina erythrina",NA,NA
+"574","B475",559071,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Carpodacus rubicilla","(Gldenstdt, 1775)Ê",NA,NA,NA
+"575","B476",560889,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Loxia pytyopsittacus","von Borkhausen, 1793Ê",NA,NA,NA
+"576","B477",560890,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Loxia scotica","Hartert, 1904Ê",NA,NA,NA
+"577","B478",179259,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Loxia curvirostra","Linnaeus, 1758Ê","Loxia curvirostra reai","Loxia curvirostra vividior",NA
+"578","B479",179268,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Loxia leucoptera","J. F. Gmelin, 1789Ê",NA,NA,NA
+"579","B480",997806,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Chloris chloris","(Linnaeus, 1758)Ê",NA,NA,NA
+"580","B481",179241,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Acanthis flammea","(Linnaeus, 1758)Ê","Carduelis flammea",NA,NA
+"581","B482",179238,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Acanthis hornemanni","(Holbll, 1843)Ê","Carduelis hornemanni",NA,NA
+"582","B483",997858,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Spinus spinus","(Linnaeus, 1758)Ê","Carduelis spinus",NA,NA
+"583","B484",179226,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Carduelis carduelis","(Linnaeus, 1758)Ê",NA,NA,NA
+"584","B485",997850,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Linaria flavirostris","(Linnaeus, 1758)Ê","Carduelis flavirostris",NA,NA
+"585","B486",997851,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Linaria cannabina","(Linnaeus, 1758)Ê","Carduelis cannabina","Acanthis cannabina","Fringilla cannabina"
+"586","B487",562961,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Serinus pusillus","(Pallas, 1811)Ê",NA,NA,NA
+"587","B488",562967,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Serinus serinus","(Linnaeus, 1766)Ê",NA,NA,NA
+"588","B489",179558,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Serinus canaria","(Linnaeus, 1758)Ê",NA,NA,NA
+"589","B490",729200,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Carduelis citrinella","(Pallas, 1764)Ê","Serinus citrinella",NA,NA
+"590","B491",179180,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Pyrrhula pyrrhula","(Linnaeus, 1758)Ê",NA,NA,NA
+"591","B492",997779,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Pyrrhula murina","Godman, 1866Ê","Pyrrhula pyrrhula murina",NA,NA
+"592","B493",179170,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Coccothraustes coccothraustes","(Linnaeus, 1758)Ê",NA,NA,NA
+"593","B494",729201,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Rhodopechys sanguineus","(Gould, 1838)Ê","Rhodopechys sanguinea","Rhodopechys sanguineus sanguineus",NA
+"594","B495",729202,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Bucanetes githagineus","(M. H. K. Lichtenstein, 1823)Ê","Rhodopechys githaginea",NA,NA
+"595","B496",997781,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Bucanetes mongolicus","(Swinhoe, 1870)Ê","Rhodopechys mongolica","Eremopsaltria mongolica",NA
+"596","B497",729203,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Rhodospiza obsoleta","(M. H. K. Lichtenstein, 1823)Ê","Rhodopechys obsoleta",NA,NA
+"597","B498",916930,"v1.9 rev 2126ab0","Aves","Passeriformes","Passeridae","Passer italiae","(Vieillot, 1817)Ê",NA,NA,NA
+"598","B499",179628,"v1.9 rev 2126ab0","Aves","Passeriformes","Passeridae","Passer domesticus","(Linnaeus, 1758)Ê",NA,NA,NA
+"599","B500",561880,"v1.9 rev 2126ab0","Aves","Passeriformes","Passeridae","Passer hispaniolensis","(Temminck, 1820)Ê",NA,NA,NA
+"600","B501",561885,"v1.9 rev 2126ab0","Aves","Passeriformes","Passeridae","Passer moabiticus","Tristram, 1864Ê",NA,NA,NA
+"601","B502",179630,"v1.9 rev 2126ab0","Aves","Passeriformes","Passeridae","Passer montanus","(Linnaeus, 1758)Ê",NA,NA,NA
+"602","B503",916525,"v1.9 rev 2126ab0","Aves","Passeriformes","Passeridae","Gymnoris xanthocollis","(Burton, 1838)Ê","Petronia xanthocollis",NA,NA
+"603","B504",561948,"v1.9 rev 2126ab0","Aves","Passeriformes","Passeridae","Petronia petronia","(Linnaeus, 1766)Ê",NA,NA,NA
+"604","B505",559082,"v1.9 rev 2126ab0","Aves","Passeriformes","Passeridae","Carpospiza brachydactyla","(Bonaparte, 1850)",NA,NA,NA
+"605","B506",561220,"v1.9 rev 2126ab0","Aves","Passeriformes","Passeridae","Montifringilla nivalis","(Linnaeus, 1766)Ê",NA,NA,NA
+"606","B507",560134,"v1.9 rev 2126ab0","Aves","Passeriformes","Alaudidae","Galerida theklae","A. E. Brehm, 1857Ê",NA,NA,NA
+"607","B508",177077,"v1.9 rev 2126ab0","Aves","Columbiformes","Columbidae","Columba bollii","Godman, 1872Ê",NA,NA,NA
+"608","B509",177091,"v1.9 rev 2126ab0","Aves","Columbiformes","Columbidae","Columba junoniae","Hartert, 1916Ê",NA,NA,NA
+"609","B510",560121,"v1.9 rev 2126ab0","Aves","Passeriformes","Fringillidae","Fringilla teydea","Webb, Berthelot & Moquin-Tandon, 1836Ê",NA,NA,NA
+"610","B513",562830,"v1.9 rev 2126ab0","Aves","Passeriformes","Muscicapidae","Saxicola dacotiae","(Meade-Waldo, 1889)Ê",NA,NA,NA
+"611","B514",176488,"v1.9 rev 2126ab0","Aves","Charadriiformes","Charadriidae","Vanellus gregarius","(Pallas, 1771)Ê",NA,NA,NA
+"612","B515",176432,"v1.9 rev 2126ab0","Aves","Gruiformes","Otididae","Chlamydotis undulata","(Jacquin, 1784)Ê",NA,NA,NA
+"613","B516",176765,"v1.9 rev 2126ab0","Aves","Charadriiformes","Glareolidae","Cursorius cursor","(Latham, 1787)Ê",NA,NA,NA
+"614","M1",585100,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Acomys cilicicus","Spitzenberger, 1978",NA,NA,NA
+"615","M2",585105,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Acomys minous","Bate, 1906Ê",NA,NA,NA
+"616","M3",585107,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Acomys nesiotes","Bate, 1903Ê",NA,NA,NA
+"617","M4",180703,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Cervidae","Alces alces","(Linnaeus, 1758)Ê","Cervus alces",NA,NA
+"618","M5",609735,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Allactaga elater","(Lichtenstein, 1828)Ê","Allactaga aralychensis","Allactaga bactriana","Allactaga indica"
+"619","M6",609736,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Allactaga euphratica","Thomas, 1881Ê","Allactaga euphratica kivanci",NA,NA
+"620","M7",609739,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Allactaga major","(Kerr, 1792)Ê","Dipus aulacotis","Dipus decumanus","Mus jaculus"
+"621","M8",609741,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Allactaga sibirica","(Forster, 1778)Ê","Dipus alactaga","Dipus annulatus","Dipus brachyurus"
+"622","M9",952076,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Allactaga williamsi","Thomas, 1897Ê","Allactaga williamsi schmidti","Allactaga williamsi laticeps","Allactaga williamsi caprimulga"
+"623","M10",632726,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Allocricetulus eversmanni","(Brandt, 1859)Ê","Cricetulus beljawi","Mesocricetus microdon","Cricetulus eversmanni belajevi"
+"624","M11",622025,"v1.9 rev 2126ab0","Mammalia","Carnivora","Canidae","Alopex lagopus","(Linnaeus, 1758)Ê","Alopex lagopus","Canis lagopus",NA
+"625","M12",585125,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Apodemus agrarius","(Pallas, 1771)Ê","Mus harti","Mus ningpoensis","Mus rubens"
+"626","M13",585126,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Apodemus alpicola","Heinrich, 1952Ê",NA,NA,NA
+"627","M14",970802,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Apodemus epimelas","(Nehring, 1902)Ê",NA,NA,NA
+"628","M15",585132,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Apodemus flavicollis","(Melchior, 1834)Ê","Apodemus arianus","Mus arianus","Mus cellarius"
+"629","M16",585135,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Apodemus hyrcanicus","Vorontsov, Boyeskorov and Mezhzherin, 1992Ê",NA,NA,NA
+"630","M17",585137,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Apodemus mystacinus","(Danford and Alston, 1877)Ê","Apodemus mystacinus euxinus","Apodemus flavicollis pohlei","Apodemus mystacinus rhodius"
+"631","M18",585139,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Apodemus ponticus","(Sviridenko, 1936)Ê","Apodemus flavicollis argyropuloi","Apodemus flavicollis parvus",NA
+"632","M19",585143,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Apodemus sylvaticus","(Linnaeus, 1758)Ê","Mus algirus","Mus chamaeropsis","Musculus dichrurus"
+"633","M20",585145,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Apodemus uralensis","(Pallas, 1811)Ê","Mus major","Apodemus microtis","Mus tokmak"
+"634","M21",970804,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Apodemus witherbyi","(Thomas, 1902)Ê","Apodemus fulvipectus","Apodemus hermonensis","Mus sylvaticus chorassanicus"
+"635","M22",970588,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Arvicola amphibius","(Linnaeus, 1758)Ê","Arvicola terrestris","Arvicola americana","Lemmus aquaticus"
+"636","M23",632818,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Arvicola sapidus","Miller, 1908Ê","Microtus musiniani","Arvicola tenebricus",NA
+"637","M24",970589,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Arvicola scherman","(Shaw, 1801)Ê","Arvicola argentoratensis","Arvicola monticola","Spalax minor"
+"638","M25",633535,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Erinaceidae","Atelerix algirus","(Lereboullet, 1842)Ê",NA,NA,NA
+"639","M26",631926,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Barbastella barbastellus","(Schreber, 1774)Ê",NA,NA,NA
+"640","M27",631927,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Barbastella leucomelas","(Cretzschmar, 1826)Ê",NA,NA,NA
+"641","M28",183836,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Bison bonasus","(Linnaeus, 1758)Ê","Bos bonasus",NA,NA
+"642","M29",632755,"v1.9 rev 2126ab0","Mammalia","Rodentia","Calomyscidae","Calomyscus urartensis","Vorontsov and Kartavseva, 1979Ê",NA,NA,NA
+"643","M30",183817,"v1.9 rev 2126ab0","Mammalia","Carnivora","Canidae","Canis aureus","Linnaeus, 1758Ê",NA,NA,NA
+"644","M31",180596,"v1.9 rev 2126ab0","Mammalia","Carnivora","Canidae","Canis lupus","Linnaeus, 1758Ê",NA,NA,NA
+"645","M32",898774,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Capra hircus aegagrus","Erxleben, 1777Ê","Capra aegagrus",NA,NA
+"646","M33",625136,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Capra caucasica","Gldenstaedt and Pallas, 1783Ê",NA,NA,NA
+"647","M34",898768,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Capra caucasica cylindricornis","(Blyth, 1841)Ê","Capra cylindricornis",NA,NA
+"648","M36",625139,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Capra ibex","Linnaeus, 1758Ê",NA,NA,NA
+"649","M37",625141,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Capra pyrenaica","Schinz, 1838Ê","Capra pyrenaica pyrenaica","Capra pyrenaica cabrerae","Capra pyrenaica hispanica"
+"650","M38",625063,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Cervidae","Capreolus capreolus","(Linnaeus, 1758)Ê",NA,NA,NA
+"651","M39",625064,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Cervidae","Capreolus pygargus","(Pallas, 1771)Ê",NA,NA,NA
+"652","M40",573165,"v1.9 rev 2126ab0","Mammalia","Rodentia","Castoridae","Castor fiber","Linnaeus, 1758Ê","Castor fiber fiber","Castor fiber galliae","Castor fiber albicus"
+"653","M41",180695,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Cervidae","Cervus elaphus","Linnaeus, 1758Ê",NA,NA,NA
+"654","M42",632822,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Chionomys gud","(Satunin, 1909)Ê","Microtus gus lasistanius","Microtus nivalis ighesicus","Chionomys nivalis nenjukovi"
+"655","M43",632823,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Chionomys nivalis","(Martins, 1842)Ê","Hypudaeus alpinus","Microtus hermonis","Arvicola lebrunii"
+"656","M44",632824,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Chionomys roberti","(Thomas, 1906)Ê","Chionomys personatus","Microtus pshavus","Microtus roberti occidentalis"
+"657","M45",632732,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Cricetulus migratorius","(Pallas, 1773)Ê","Mus accedula","Mus arenarius","Cricetulus atticus"
+"658","M46",632734,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Cricetus cricetus","(Linnaeus, 1758)Ê","Cricetus frumentarius","Heliomys jeudii","Cricetus nehringi"
+"659","M47",709747,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura arispa","Spitzenberger, 1971Ê",NA,NA,NA
+"660","M48",633558,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura armenica","Gureev, 1963Ê",NA,NA,NA
+"661","M49",633569,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura canariensis","Hutterer, Lopez-Jurado and Vogel, 1987Ê",NA,NA,NA
+"662","M50",709750,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura caspica","Thomas, 1907Ê",NA,NA,NA
+"663","M52",633616,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura leucodon","(Hermann, 1780)Ê",NA,NA,NA
+"664","M53",709755,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura ichnusae","Festa, 1912","Crocidura cossyrensis",NA,NA
+"665","M54",633672,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura russula","(Hermann, 1780)Ê",NA,NA,NA
+"666","M55",633674,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura serezkyensis","Laptev, 1929",NA,NA,NA
+"667","M56",633676,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura sicula","Miller, 1900Ê",NA,NA,NA
+"668","M57",633681,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura suaveolens","(Pallas, 1811)Ê","Crocidura gueldenstaedtii",NA,NA
+"669","M58",633703,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Crocidura zimmermanni","Wettstein, 1953Ê",NA,NA,NA
+"670","M59",552472,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Cervidae","Dama dama","(Linnaeus, 1758)Ê",NA,NA,NA
+"671","M60",633829,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Talpidae","Desmana moschata","(Linnaeus, 1758)Ê",NA,NA,NA
+"672","M61",180326,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Dicrostonyx torquatus","(Pallas, 1778)Ê","Dicrostonyx chionopaes","Mus lenae","Mus lenensis"
+"673","M62",632830,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Dinaromys bogdanovi","(Martino, 1922)Ê","Dolomys grebenscikovi","Microtus marakovici","Dolomys grebenscikovi korabensis"
+"674","M63",633704,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Diplomesodon pulchellum","(Lichtenstein, 1823)Ê",NA,NA,NA
+"675","M64",609755,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Dipus sagitta","(Pallas, 1773)Ê","Dipus deasyi","Dipus halli","Dipus lagopus"
+"676","M65",584966,"v1.9 rev 2126ab0","Mammalia","Rodentia","Gliridae","Dryomys laniger","Felten and Storch, 1968Ê",NA,NA,NA
+"677","M66",584967,"v1.9 rev 2126ab0","Mammalia","Rodentia","Gliridae","Dryomys nitedula","(Pallas, 1778)Ê","Eliomys angelus","Myoxus dryas","Myoxus intermedius"
+"678","M67",584969,"v1.9 rev 2126ab0","Mammalia","Rodentia","Gliridae","Eliomys melanurus","(Wagner, 1840)Ê","Eliomys cyrenaicus",NA,NA
+"679","M68",584970,"v1.9 rev 2126ab0","Mammalia","Rodentia","Gliridae","Eliomys quercinus","(Linnaeus, 1766)Ê","Eliomys cincticauda","Eliomys gymnesicus","Eliomys hamiltoni"
+"680","M69",632833,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Ellobius lutescens","Thomas, 1897Ê","Ellobius woosnami","Ellobius fuscocapillus legendrei",NA
+"681","M70",632834,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Ellobius talpinus","(Pallas, 1770)Ê","Spalax murinus","Georychus rufescens","Ellobius talpinus ciscaucasica"
+"682","M71",948891,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Eptesicus gobiensis bobrinskoi","Kuzyakin, 1935Ê","Eptesicus bobrinskoi","Eptesicus bobrinskii",NA
+"683","M72",631945,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Eptesicus bottae","(Peters, 1869)Ê",NA,NA,NA
+"684","M73",946126,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Eptesicus nilssonii","(Keyserling and Blasius, 1839)","Eptesicus nilssoni",NA,NA
+"685","M74",631969,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Eptesicus serotinus","(Schreber, 1774)Ê",NA,NA,NA
+"686","M75",633539,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Erinaceidae","Erinaceus concolor","Martin, 1838Ê",NA,NA,NA
+"687","M76",633540,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Erinaceidae","Erinaceus europaeus","Linnaeus, 1758Ê",NA,NA,NA
+"688","M77",709723,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Erinaceidae","Erinaceus roumanicus","Barrett-Hamilton, 1900Ê",NA,NA,NA
+"689","M78",183802,"v1.9 rev 2126ab0","Mammalia","Carnivora","Felidae","Felis chaus","Schreber, 1777Ê",NA,NA,NA
+"690","M79",183801,"v1.9 rev 2126ab0","Mammalia","Carnivora","Felidae","Felis margarita","Loche, 1858Ê",NA,NA,NA
+"691","M80",180589,"v1.9 rev 2126ab0","Mammalia","Carnivora","Felidae","Felis silvestris","Schreber, 1777Ê",NA,NA,NA
+"692","M81",633830,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Talpidae","Galemys pyrenaicus","(. Geoffroy Saint-Hilaire, 1811)Ê",NA,NA,NA
+"693","M82",625101,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Gazella subgutturosa","(Gldenstaedt, 1780)Ê",NA,NA,NA
+"694","M83",621991,"v1.9 rev 2126ab0","Mammalia","Carnivora","Viverridae","Genetta genetta","(Linnaeus, 1758)Ê",NA,NA,NA
+"695","M84",970775,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Dipodillus dasyurus","(Wagner, 1842)Ê","Gerbillus dasyurus","Dipodillus dasyroides",NA
+"696","M85",951305,"v1.9 rev 2126ab0","Mammalia","Rodentia","Gliridae","Glis glis","(Linnaeus, 1766)Ê","Myoxus glis","Myoxus avellanus","Glis esculentus"
+"697","M86",180551,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Gulo gulo","(Linnaeus, 1758)Ê",NA,NA,NA
+"698","M87",633542,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Erinaceidae","Hemiechinus auritus","(Gmelin, 1770)Ê",NA,NA,NA
+"699","M88",621893,"v1.9 rev 2126ab0","Mammalia","Carnivora","Herpestidae","Herpestes ichneumon","(Linnaeus, 1758)Ê",NA,NA,NA
+"700","M89",621908,"v1.9 rev 2126ab0","Mammalia","Carnivora","Hyaenidae","Hyaena hyaena","(Linnaeus, 1758)Ê","Hyaena hyaena barbara","Hyaena hyaena hyaena",NA
+"701","M90",947685,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Hypsugo savii","(Bonaparte, 1837)Ê",NA,NA,NA
+"702","M91",584681,"v1.9 rev 2126ab0","Mammalia","Rodentia","Hystricidae","Hystrix cristata","Linnaeus, 1758Ê",NA,NA,NA
+"703","M92",584682,"v1.9 rev 2126ab0","Mammalia","Rodentia","Hystricidae","Hystrix indica","Kerr, 1792Ê","Hystrix hirsutirostris",NA,NA
+"704","M93",632849,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Lagurus lagurus","(Pallas, 1773)Ê","Lagurus migratorius","Lagurus lagurus abacanicus","Lagurus lagurus altorum"
+"705","M94",632854,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Lemmus lemmus","(Linnaeus, 1758)Ê","Lemmus borealis","Cuniculus iterator","Lemmus norvegicus"
+"706","M95",180320,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Lemmus sibiricus","(Kerr, 1792)","Myodes kittlitzi","Hypudaeus migratorius","Lemmus novosibiricus"
+"707","M96",180117,"v1.9 rev 2126ab0","Mammalia","Lagomorpha","Leporidae","Lepus capensis","Linnaeus, 1758Ê",NA,NA,NA
+"708","M97",625339,"v1.9 rev 2126ab0","Mammalia","Lagomorpha","Leporidae","Lepus castroviejoi","Palacios, 1977Ê",NA,NA,NA
+"709","M98",625342,"v1.9 rev 2126ab0","Mammalia","Lagomorpha","Leporidae","Lepus corsicanus","de Winton, 1898Ê",NA,NA,NA
+"710","M99",552501,"v1.9 rev 2126ab0","Mammalia","Lagomorpha","Leporidae","Lepus europaeus","Pallas, 1778Ê",NA,NA,NA
+"711","M100",625345,"v1.9 rev 2126ab0","Mammalia","Lagomorpha","Leporidae","Lepus granatensis","Rosenhauer, 1856Ê",NA,NA,NA
+"712","M101",180113,"v1.9 rev 2126ab0","Mammalia","Lagomorpha","Leporidae","Lepus timidus","Linnaeus, 1758Ê","Lepus othus tschuktschorum","Lepus timidus tschuktschorum",NA
+"713","M102",625355,"v1.9 rev 2126ab0","Mammalia","Lagomorpha","Leporidae","Lepus tolai","Pallas, 1778Ê",NA,NA,NA
+"714","M103",621916,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Lutra lutra","(Linnaeus, 1758)Ê",NA,NA,NA
+"715","M104",180584,"v1.9 rev 2126ab0","Mammalia","Carnivora","Felidae","Lynx lynx","(Linnaeus, 1758)Ê",NA,NA,NA
+"716","M105",621869,"v1.9 rev 2126ab0","Mammalia","Carnivora","Felidae","Lynx pardinus","(Temminck, 1827)Ê","Felis pardina",NA,NA
+"717","M107",632378,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Marmota baibacina","Kastschenko, 1899Ê",NA,NA,NA
+"718","M108",632379,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Marmota bobak","(Mller, 1776)",NA,NA,NA
+"719","M109",632383,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Marmota marmota","(Linnaeus, 1758)Ê",NA,NA,NA
+"720","M110",621941,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Martes foina","(Erxleben, 1777)Ê",NA,NA,NA
+"721","M111",621943,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Martes martes","(Linnaeus, 1758)Ê",NA,NA,NA
+"722","M112",621945,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Martes zibellina","(Linnaeus, 1758)Ê",NA,NA,NA
+"723","M113",726279,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Meles leucurus","(Hodgson, 1847)Ê","Taxidea leucurus",NA,NA
+"724","M114",621922,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Meles meles","(Linnaeus, 1758)Ê","Ursus meles",NA,NA
+"725","M115",632978,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Meriones crassus","Sundevall, 1842Ê","Meriones charon","Meriones ismahelis","Meriones longifrons"
+"726","M116",632977,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Meriones dahli","Shidlovsky, 1962Ê",NA,NA,NA
+"727","M117",632980,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Meriones libycus","Lichtenstein, 1823Ê","Gerbillus caucasicus","Meriones caucasius","Meriones collium"
+"728","M118",632981,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Meriones meridianus","(Pallas, 1773)Ê","Meriones auceps","Gerbillus brevicaudatus","Meriones buechneri"
+"729","M119",632982,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Meriones persicus","(Blanford, 1875)Ê","Meriones ambrosius","Meriones rossicus","Tatera suschkini"
+"730","M120",632986,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Meriones tamariscinus","(Pallas, 1773)Ê","Gerbillus ciscaucasicus","Gerbillus tamaricinus jaxartensis","Meriones tamaricinus kokandicus"
+"731","M121",632987,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Meriones tristrami","Thomas, 1892","Meriones blackleri","Meriones bogdanovi","Meriones tamaricinus bodenheimeri"
+"732","M122",632989,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Meriones vinogradovi","Heptner, 1931Ê",NA,NA,NA
+"733","M123",632735,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Mesocricetus auratus","(Waterhouse, 1839)Ê",NA,NA,NA
+"734","M124",632736,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Mesocricetus brandti","(Nehring, 1898)Ê","Mesocricetus koenigi",NA,NA
+"735","M125",632737,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Mesocricetus newtoni","(Nehring, 1898)Ê",NA,NA,NA
+"736","M126",632738,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Mesocricetus raddei","(Nehring, 1894)Ê","Cricetus nigricans","Mesocricetus nigriculus","Mesocricetus raddei avaricus"
+"737","M127",585369,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Micromys minutus","(Pallas, 1771)Ê","Micromys agilis","Mus arundinaceus","Mus arvensis"
+"738","M128",632855,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus agrestis","(Linnaeus, 1761)Ê","Microtus arcturus","Arvicola bailloni","Arvicola britannicus"
+"739","M129",970597,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus anatolicus","Krystufek and Kefelioglu, 2002Ê",NA,NA,NA
+"740","M130",632856,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus arvalis","(Pallas, 1779)Ê","Microtus obscurus","Arvicola arvensis","Microtus angularis"
+"741","M131",632857,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus bavaricus","Konig, 1962Ê",NA,NA,NA
+"742","M132",970598,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus brachycercus","Lehmann, 1961Ê",NA,NA,NA
+"743","M133",632858,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus cabrerae","Thomas, 1906Ê","Microtus dentatus",NA,NA
+"744","M134",632859,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus daghestanicus","(Shidlovsky, 1919)Ê","Microtus nasarovi","Microtus rubelianus intermedius","Pitymys daghestanicus nasarovi"
+"745","M135",970600,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus dogramacii","Kefelioglu and Krystufek, 1999Ê",NA,NA,NA
+"746","M136",632860,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus duodecimcostatus","(Selys-Longchamps, 1839)Ê","Pitymys flavescens","Arvicola ibericus","Pitymys provincialis"
+"747","M137",632862,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus felteni","Malec and Storch, 1963Ê",NA,NA,NA
+"748","M138",632864,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus gerbei","(Gerbe, 1879)Ê","Pitymys planiceps","Arvicola pyrenaicus","Pitymys pyrenaicus brunneus"
+"749","M139",180302,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus gregalis","(Pallas, 1779)Ê","Microtus angustus","Stenocranius buturlini","Microtus castaneus"
+"750","M140",632866,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus guentheri","(Danford and Alston, 1880)Ê","Microtus hartingi","Microtus lydius","Microtus mustersi"
+"751","M141",970603,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus levis","Miller, 1908Ê","Microtus rossiaemeridionalis","Microtus arvalis muhlisi","Microtus arvalis relictus"
+"752","M142",970604,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus liechtensteini","(Wettstein, 1927)",NA,NA,NA
+"753","M143",632875,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus lusitanicus","(Gerbe, 1879)Ê","Pitymys depressus","Microtus mariae","Pitymys pelandonius"
+"754","M144",632876,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus majori","Thomas, 1906Ê","Microtus dinniki","Microtus rubelianus","Microtus vinogradovi"
+"755","M145",632878,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus middendorffi","(Poliakov, 1881)Ê","Microtus hyperboreus","Microtus middendorffii","Arvicola obscurus"
+"756","M146",632882,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus multiplex","(Fatio, 1905)Ê","Pitymys druentius","Microtus leponticus","Pitymys multiplex fatioi"
+"757","M147",632883,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus daghestanicus nasarovi","(Shidlovsky, 1938)Ê",NA,NA,NA
+"758","M148",180298,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus oeconomus","(Pallas, 1776)Ê","Microtus ratticeps","Microtus amakensis","Arvicola arenicola"
+"759","M149",632888,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus savii","(Selys-Longchamps, 1838)Ê","Arvicola nebrodensis","Arvicola selysii",NA
+"760","M150",970608,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus schidlovskii","Argyropulo, 1933Ê","Microtus colchicus","Microtus socialis goriensis",NA
+"761","M151",632892,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus socialis","(Pallas, 1773)Ê","Mus astrachanensis","Microtus gravesi","Microtus parvus"
+"762","M152",632893,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus subterraneus","(Selys-Longchamps, 1836)Ê","Pitymys dacius","Pitymys ehiki","Pitymys incertoides"
+"763","M153",632894,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus tatricus","Kratochvl, 1952Ê",NA,NA,NA
+"764","M154",632895,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Microtus thomasi","(Barrett-Hamilton, 1903)Ê","Pitymys atticus","Pitymys byroni",NA
+"765","M155",948651,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Miniopterus schreibersii fuliginosus","(Hodgson, 1835)","Vespertilio fuliginosa",NA,NA
+"766","M156",946266,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Miniopterus schreibersii","(Kuhl, 1817)Ê","Miniopterus schreibersi",NA,NA
+"767","M157",NA,NA,"Mammalia","Rodentia","Muridae","Mus cypriacus","(Bonhomme, et al., 2004)",NA,NA,NA
+"768","M158",585389,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Mus macedonicus","Petrov and Ruzic, 1983Ê",NA,NA,NA
+"769","M159",180366,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Mus musculus","Linnaeus, 1758Ê","Mus molossinus","Mus nordmanni","Mus musculus cinereomaculatus"
+"770","M160",585406,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Mus spicilegus","Petnyi, 1882Ê","Mus sergii",NA,NA
+"771","M161",585407,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Mus spretus","Lataste, 1883Ê","Carpelimus spretus",NA,NA
+"772","M162",584974,"v1.9 rev 2126ab0","Mammalia","Rodentia","Gliridae","Muscardinus avellanarius","(Linnaeus, 1758)Ê","Mus corilinum","Myoxus muscardinus","Muscardinus pulcher"
+"773","M163",180555,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Mustela erminea","Linnaeus, 1758Ê",NA,NA,NA
+"774","M164",726280,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Mustela eversmanii","Lesson, 1827Ê","Mustela eversmannii",NA,NA
+"775","M165",621951,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Mustela lutreola","(Linnaeus, 1761)Ê",NA,NA,NA
+"776","M166",180554,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Mustela nivalis","Linnaeus, 1766Ê",NA,NA,NA
+"777","M167",621954,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Mustela putorius","Linnaeus, 1758Ê",NA,NA,NA
+"778","M168",621955,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Mustela sibirica","Pallas, 1773Ê",NA,NA,NA
+"779","M169",970613,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Myodes glareolus","(Schreber, 1780)Ê","Clethrionomys glareolus","Evotomys alstoni","Lemmus arvalis"
+"780","M170",970617,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Myodes rufocanus","(Sundevall, 1846)Ê","Clethrionomys rufocanus","Clethrionomys sikotanensis","Evotomys arsenjevi"
+"781","M171",970618,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Myodes rutilus","(Pallas, 1779)Ê","Clethrionomys rutilus","Evotomys alascensis","Clethrionomys albiventer"
+"782","M172",584972,"v1.9 rev 2126ab0","Mammalia","Rodentia","Gliridae","Myomimus roachi","(Bate, 1937)Ê","Myomimus bulgaricus",NA,NA
+"783","M173",584973,"v1.9 rev 2126ab0","Mammalia","Rodentia","Gliridae","Myomimus setzeri","Rossolimo, 1976Ê",NA,NA,NA
+"784","M174",632898,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Myopus schisticolor","(Lilljeborg, 1844)Ê","Myopus middendorfii","Myopus morulus","Myopus saianicus"
+"785","M175",946234,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis alcathoe","von Helversen and Heller, 2001Ê",NA,NA,NA
+"786","M176",946244,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis aurascens","(Peters, 1869)",NA,NA,NA
+"787","M177",946238,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis bechsteinii","(Kuhl, 1817)Ê","Myotis bechsteini","Vespertilio bechsteinii",NA
+"788","M178",632003,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis blythii","(Tomes, 1857)Ê",NA,NA,NA
+"789","M179",946240,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis brandtii","(Eversmann, 1845)Ê","Myotis brandti","Vespertilio brandtii","Myotis brandtii brandtii"
+"790","M180",632007,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis capaccinii","(Bonaparte, 1837)Ê","Vespertilio capaccinii",NA,NA
+"791","M181",632011,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis dasycneme","(Boie, 1825)Ê","Vespertilio dasycneme",NA,NA
+"792","M182",946243,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis daubentonii","(Kuhl, 1817)Ê","Myotis daubentoni",NA,NA
+"793","M183",632015,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis emarginatus","(E. Geoffroy, 1806)Ê",NA,NA,NA
+"794","M184",946247,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis hajastanicus","Argyropulo, 1939Ê","Myotis mystacinus hajastanicus",NA,NA
+"795","M185",632035,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis myotis","(Borkhausen, 1797)Ê",NA,NA,NA
+"796","M186",632036,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis mystacinus","(Kuhl, 1817)Ê",NA,NA,NA
+"797","M187",632037,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis nattereri","(Kuhl, 1817)Ê",NA,NA,NA
+"798","M188",946253,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis nipalensis","Dobson, 1871Ê",NA,NA,NA
+"799","M189",946256,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis punicus","Felten, Spitzenberger and Storch, 1977Ê","Myotis blythi punicus",NA,NA
+"800","M190",632052,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Myotis schaubi","Kormos, 1934Ê",NA,NA,NA
+"801","M191",633775,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Neomys anomalus","Cabrera, 1907Ê",NA,NA,NA
+"802","M192",633776,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Neomys fodiens","(Pennant, 1771)Ê",NA,NA,NA
+"803","M193",709799,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Neomys teres","Miller, 1908Ê","Neomys schelkovnikovi",NA,NA
+"804","M195",632064,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Nyctalus azoreum","(Thomas, 1901)Ê","Pterygistes azoreum",NA,NA
+"805","M196",632066,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Nyctalus lasiopterus","(Schreber, 1780)Ê","Vespertilio lasiopterus",NA,NA
+"806","M197",632067,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Nyctalus leisleri","(Kuhl, 1817)Ê",NA,NA,NA
+"807","M198",632069,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Nyctalus noctula","(Schreber, 1774)Ê",NA,NA,NA
+"808","M199",625321,"v1.9 rev 2126ab0","Mammalia","Lagomorpha","Ochotonidae","Ochotona hyperborea","(Pallas, 1811)Ê",NA,NA,NA
+"809","M200",625329,"v1.9 rev 2126ab0","Mammalia","Lagomorpha","Ochotonidae","Ochotona pusilla","(Pallas, 1769)Ê",NA,NA,NA
+"810","M201",180129,"v1.9 rev 2126ab0","Mammalia","Lagomorpha","Leporidae","Oryctolagus cuniculus","(Linnaeus, 1758)Ê",NA,NA,NA
+"811","M202",183791,"v1.9 rev 2126ab0","Mammalia","Carnivora","Felidae","Felis manul","(Pallas, 1776)Ê","Otocolobus manul",NA,NA
+"812","M203",552475,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Ovis aries","Linnaeus, 1758Ê",NA,NA,NA
+"813","M204",898799,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Ovis aries orientalis","Gmelin, 1774Ê","Ovis orientalis","Ovis orientalis typica",NA
+"814","M205",183804,"v1.9 rev 2126ab0","Mammalia","Carnivora","Felidae","Panthera pardus","(Linnaeus, 1758)Ê",NA,NA,NA
+"815","M206",632108,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Pipistrellus kuhlii","(Kuhl, 1817)Ê",NA,NA,NA
+"816","M207",632111,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Pipistrellus maderensis","(Dobson, 1878)Ê","Vesperugo maderensis",NA,NA
+"817","M208",632118,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Pipistrellus nathusii","(Keyserling and Blasius, 1839)Ê","Vespertilio nathusii",NA,NA
+"818","M209",632123,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Pipistrellus pipistrellus","(Schreber, 1774)Ê",NA,NA,NA
+"819","M210",946162,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Pipistrellus pygmaeus","(Leach, 1825)Ê","Vespertilio pygmaeus",NA,NA
+"820","M211",632133,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Plecotus auritus","(Linnaeus, 1758)Ê",NA,NA,NA
+"821","M212",632134,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Plecotus austriacus","(J. Fischer, 1829)Ê","Plecotus austriacus austriacus","Vespertilio auritus austriacus",NA
+"822","M213",946169,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Plecotus kolombatovici","Dulic, 1980Ê","Plecotus austriacus kolombatovici",NA,NA
+"823","M214",947292,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Plecotus macrobullaris","Kuzyakin, 1965Ê","Plecotus austriacus macrobullaris",NA,NA
+"824","M215",946170,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Plecotus sardus","Mucedda, Kiefer, Pidinchedda and Veith, 2002Ê",NA,NA,NA
+"825","M216",632264,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Plecotus teneriffae","Barrett-Hamilton, 1907Ê",NA,NA,NA
+"826","M217",632902,"v1.9 rev 2126ab0","Mammalia","Rodentia","Cricetidae","Prometheomys schaposchnikowi","Satunin, 1901Ê",NA,NA,NA
+"827","M218",632525,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Pteromys volans","(Linnaeus, 1758)Ê",NA,NA,NA
+"828","M219",609745,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Pygeretmus platyurus","(Lichtenstein, 1823)Ê","Dipus platurus","Pygeretmus vinogradovi",NA
+"829","M220",609746,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Pygeretmus pumilio","(Kerr, 1792)Ê","Dipus acontion","Dipus minutus","Alactagulus acontion dinniki"
+"830","M221",180701,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Cervidae","Rangifer tarandus","(Linnaeus, 1758)Ê",NA,NA,NA
+"831","M224",631414,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Rhinolophidae","Rhinolophus blasii","Peters, 1867Ê",NA,NA,NA
+"832","M225",631428,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Rhinolophidae","Rhinolophus euryale","Blasius, 1853Ê",NA,NA,NA
+"833","M226",631430,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Rhinolophidae","Rhinolophus ferrumequinum","(Schreber, 1774)Ê",NA,NA,NA
+"834","M227",631434,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Rhinolophidae","Rhinolophus hipposideros","(Bechstein, 1800)Ê",NA,NA,NA
+"835","M228",631446,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Rhinolophidae","Rhinolophus mehelyi","Matschie, 1901Ê",NA,NA,NA
+"836","M229",632995,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Rhombomys opimus","(Lichtenstein, 1823)Ê","Gerbillus giganteus","Rhombomys pallidus","Rhombomys opimus alaschanicus"
+"837","M230",632267,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Pteropodidae","Rousettus aegyptiacus","(E. Geoffroy, 1810)Ê","Rousettus egyptiacus",NA,NA
+"838","M231",625158,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Rupicapra pyrenaica","Bonaparte, 1845Ê",NA,NA,NA
+"839","M232",625159,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Rupicapra rupicapra","(Linnaeus, 1758)Ê",NA,NA,NA
+"840","M233",625120,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Bovidae","Saiga tatarica","(Linnaeus, 1766)Ê",NA,NA,NA
+"841","M234",632422,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Sciurus anomalus","Gmelin, 1778Ê",NA,NA,NA
+"842","M235",632439,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Sciurus vulgaris","Linnaeus, 1758Ê",NA,NA,NA
+"843","M236",609766,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Sicista armenica","Sokolov and Baskevich, 1988Ê",NA,NA,NA
+"844","M237",609767,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Sicista betulina","(Pallas, 1779)Ê","Sicista montana","Sicista norvegica","Sminthus tatricus"
+"845","M238",609768,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Sicista caucasica","Vinogradov, 1925Ê",NA,NA,NA
+"846","M239",609771,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Sicista kazbegica","Sokolov, Baskevich and Kovalskaya, 1986Ê",NA,NA,NA
+"847","M240",609772,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Sicista kluchorica","Sokolov, Kovalskaya and Baskevich, 1980Ê",NA,NA,NA
+"848","M241",609775,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Sicista severtzovi","Ognev, 1935Ê",NA,NA,NA
+"849","M242",609776,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Sicista strandi","Formozov, 1931Ê",NA,NA,NA
+"850","M243",609777,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Sicista subtilis","(Pallas, 1773)Ê","Mus interstriatus","Mus interzonus","Mus lineatus"
+"851","M244",633778,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex alpinus","Schinz, 1837Ê",NA,NA,NA
+"852","M245",709807,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex antinorii","Bonaparte, 1840Ê",NA,NA,NA
+"853","M246",633779,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex araneus","Linnaeus, 1758Ê",NA,NA,NA
+"854","M248",633783,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex caecutiens","Laxmann, 1788Ê",NA,NA,NA
+"855","M249",633786,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex coronatus","Millet, 1828Ê",NA,NA,NA
+"856","M250",633792,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex granarius","Miller, 1910Ê",NA,NA,NA
+"857","M251",633794,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex isodon","Turov, 1924Ê",NA,NA,NA
+"858","M252",552507,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex minutissimus","Zimmermann, 1780Ê",NA,NA,NA
+"859","M253",633799,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex minutus","Linnaeus, 1766Ê",NA,NA,NA
+"860","M254",633804,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex raddei","Satunin, 1895Ê",NA,NA,NA
+"861","M255",633807,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex samniticus","Altobello, 1926Ê",NA,NA,NA
+"862","M256",633808,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex satunini","Ognev, 1922Ê",NA,NA,NA
+"863","M257",179957,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex tundrensis","Merriam, 1900Ê",NA,NA,NA
+"864","M258",633818,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Sorex volnuchini","Ognev, 1922Ê",NA,NA,NA
+"865","M259",633020,"v1.9 rev 2126ab0","Mammalia","Rodentia","Spalacidae","Spalax arenarius","Reshetnik, 1939Ê",NA,NA,NA
+"866","M260",970560,"v1.9 rev 2126ab0","Mammalia","Rodentia","Spalacidae","Spalax ehrenbergi","Nehring, 1898Ê","Nannospalax ehrenbergi","Spalax aegyptiacus","Spalax berytensis"
+"867","M261",633021,"v1.9 rev 2126ab0","Mammalia","Rodentia","Spalacidae","Spalax giganteus","Nehring, 1898Ê",NA,NA,NA
+"868","M262",633022,"v1.9 rev 2126ab0","Mammalia","Rodentia","Spalacidae","Spalax graecus","Nehring, 1898Ê","Spalax istricus","Spalax mezöségiensis","Spalax graecus antiquus"
+"869","M263",970564,"v1.9 rev 2126ab0","Mammalia","Rodentia","Spalacidae","Spalax leucodon","Nordmann, 1840Ê","Nannospalax leucodon","Spalax dolbrogeae","Spalax monticola"
+"870","M264",633023,"v1.9 rev 2126ab0","Mammalia","Rodentia","Spalacidae","Spalax microphthalmus","Guldenstaedt, 1770","Spalax pallasii","Mus typhlus",NA
+"871","M265",970565,"v1.9 rev 2126ab0","Mammalia","Rodentia","Spalacidae","Spalax nehringi","(Satunin, 1898)Ê","Nannospalax nehringi","Spalax labaumei","Spalax monticola anatolicus"
+"872","M266",970566,"v1.9 rev 2126ab0","Mammalia","Rodentia","Spalacidae","Spalax uralensis","Tiflov and Usov, 1939Ê",NA,NA,NA
+"873","M267",633024,"v1.9 rev 2126ab0","Mammalia","Rodentia","Spalacidae","Spalax zemni","(Erxleben, 1777)Ê","Spalax polonicus","Spalax microphtalmus podolicus",NA
+"874","M268",632446,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Spermophilus citellus","(Linnaeus, 1766)Ê",NA,NA,NA
+"875","M269",632449,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Spermophilus fulvus","(Lichtenstein, 1823)Ê",NA,NA,NA
+"876","M270",632451,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Spermophilus major","(Pallas, 1778)Ê",NA,NA,NA
+"877","M271",632452,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Spermophilus musicus","Mntries, 1832Ê","Spermophilus boehmii","Spermophilus magisteri","Spermophilus saturatus"
+"878","M272",632454,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Spermophilus pygmaeus","(Pallas, 1778)Ê",NA,NA,NA
+"879","M273",632456,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Spermophilus suslicus","(Gldenstaedt, 1770)Ê",NA,NA,NA
+"880","M274",930306,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Spermophilus taurensis","Gndz, Jaarola, Tez, Yeniyurt, Polly, and Searle, 2007Ê",NA,NA,NA
+"881","M275",632458,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Spermophilus xanthoprymnus","(Bennett, 1835)Ê","Citillus xanthoprymna",NA,NA
+"882","M276",609763,"v1.9 rev 2126ab0","Mammalia","Rodentia","Dipodidae","Stylodipus telum","(Lichtenstein, 1823)Ê","Dipus halticus","Dipus proximus","Scirtopoda telum turovi"
+"883","M277",633726,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Soricidae","Suncus etruscus","(Savi, 1822)Ê",NA,NA,NA
+"884","M278",180722,"v1.9 rev 2126ab0","Mammalia","Cetartiodactyla","Suidae","Sus scrofa","Linnaeus, 1758Ê","Sus domesticus",NA,NA
+"885","M279",632261,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Molossidae","Tadarida teniotis","(Rafinesque, 1814)Ê","Cephalotes teniotis",NA,NA
+"886","M280",633850,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Talpidae","Talpa caeca","Savi, 1822Ê",NA,NA,NA
+"887","M281",633851,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Talpidae","Talpa caucasica","Satunin, 1908Ê",NA,NA,NA
+"888","M282",709819,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Talpidae","Talpa davidiana","(Milne-Edwards, 1884)Ê","Talpa streeti",NA,NA
+"889","M283",633852,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Talpidae","Talpa europaea","Linnaeus, 1758Ê",NA,NA,NA
+"890","M284",633853,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Talpidae","Talpa levantis","Thomas, 1906Ê",NA,NA,NA
+"891","M285",633854,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Talpidae","Talpa occidentalis","Cabrera, 1907Ê",NA,NA,NA
+"892","M286",633855,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Talpidae","Talpa romana","Thomas, 1902Ê",NA,NA,NA
+"893","M287",633856,"v1.9 rev 2126ab0","Mammalia","Eulipotyphla","Talpidae","Talpa stankovici","V. Martino and E. Martino, 1931Ê",NA,NA,NA
+"894","M288",632477,"v1.9 rev 2126ab0","Mammalia","Rodentia","Sciuridae","Tamias sibiricus","(Laxmann, 1769)Ê",NA,NA,NA
+"895","M289",633002,"v1.9 rev 2126ab0","Mammalia","Rodentia","Muridae","Tatera indica","(Hardwicke, 1807)Ê","Tatera bailwardi","Tatera ceylonica","Gerbillus cuvieri"
+"896","M290",180543,"v1.9 rev 2126ab0","Mammalia","Carnivora","Ursidae","Ursus arctos","Linnaeus, 1758Ê",NA,NA,NA
+"897","M291",180542,"v1.9 rev 2126ab0","Mammalia","Carnivora","Ursidae","Ursus maritimus","Phipps, 1774Ê","Ursus maritimus maritimus","Ursus maritimus marinus",NA
+"898","M292",632159,"v1.9 rev 2126ab0","Mammalia","Chiroptera","Vespertilionidae","Vespertilio murinus","Linnaeus, 1758Ê",NA,NA,NA
+"899","M293",621958,"v1.9 rev 2126ab0","Mammalia","Carnivora","Mustelidae","Vormela peregusna","(Gldenstdt, 1770)Ê",NA,NA,NA
+"900","M294",621861,"v1.9 rev 2126ab0","Mammalia","Carnivora","Canidae","Vulpes corsac","(Linnaeus, 1768)Ê","Canis corsac",NA,NA
+"901","M295",180604,"v1.9 rev 2126ab0","Mammalia","Carnivora","Canidae","Vulpes vulpes","(Linnaeus, 1758)Ê","Canis vulpes",NA,NA
+"902","R1",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Ablepharus bivittatus","(Menetries, 1832)",NA,NA,NA
+"903","R2",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Ablepharus budaki","Gcmen, Kumlutas & Tosunoglu, 1996",NA,NA,NA
+"904","R3",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Ablepharus chernovi","Darevsky, 1953",NA,NA,NA
+"905","R4",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Ablepharus kitaibelii","(Bibron & Bory St-vincent, 1833)",NA,NA,NA
+"906","R5",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Ablepharus pannonicus","(Fitzinger, 1824)",NA,NA,NA
+"907","R6",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Acanthodactylus erythrurus","(Schinz, 1833)",NA,NA,NA
+"908","R7",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Acanthodactylus schreiberi","Boulenger, 1878",NA,NA,NA
+"909","R8",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Algyroides fitzingeri","(Wiegmann, 1834)",NA,NA,NA
+"910","R9",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Algyroides marchi","Valverde, 1958",NA,NA,NA
+"911","R10",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Algyroides moreoticus","Bibron & Bory",NA,NA,NA
+"912","R11",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Algyroides nigropunctatus","(Dumril & Bibron, 1839)",NA,NA,NA
+"913","R12",818121,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Alsophylax pipiens","(Pallas, 1827)Ê",NA,NA,NA
+"914","R13",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Anguidae","Anguis cephallonica","Werner, 1894",NA,NA,NA
+"915","R14",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Anguidae","Anguis fragilis","Linnaeus, 1758",NA,NA,NA
+"916","R15",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Archaeolacerta bedriagae","(Camerano, 1885)",NA,NA,NA
+"917","R16",818144,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Asaccus elisae","(F. Werner, 1895)Ê",NA,NA,NA
+"918","R17",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Amphisbaenidae","Blanus cinereus","(Vandelli, 1797)","Blanus mariae","Amphisbaena rufa","Amphisbaena cinerea"
+"919","R18",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Amphisbaenidae","Blanus strauchi","(Bedriaga, 1884)","Amphisbaena strauchi",NA,NA
+"920","R19",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Chalcides bedriagai","(Bosca, 1880)",NA,NA,NA
+"921","R20",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Chalcides sexlineatus bistriatus","Steindachner, 1891",NA,NA,NA
+"922","R21",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Chalcides chalcides","(Linnaeus, 1758)",NA,NA,NA
+"923","R22",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Chalcides ocellatus","(Forskal, 1775)",NA,NA,NA
+"924","R23",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Chalcides sexlineatus","Steindachner, 1891",NA,NA,NA
+"925","R24",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Chalcides simonyi","(Gravenhorst, 1851)",NA,NA,NA
+"926","R25",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Chalcides striatus","(Cuvier, 1829)",NA,NA,NA
+"927","R26",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Chalcides viridanus","(Gravenhorst, 1851)",NA,NA,NA
+"928","R27",715154,"v1.9 rev 2126ab0","Reptilia","Squamata","Chamaeleonidae","Chamaeleo chamaeleon","(Linnaeus, 1758)Ê",NA,NA,NA
+"929","R28",1081704,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Coronella austriaca","Laurenti, 1768Ê",NA,NA,NA
+"930","R29",1081706,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Coronella girondica","(Daudin, 1803)Ê","Coluber girondicus",NA,NA
+"931","R30",818419,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Cyrtopodion caspium","(Eichwald, 1831)Ê",NA,NA,NA
+"932","R31",818911,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Mediodactylus heterocercus","(Blanford, 1874)",NA,NA,NA
+"933","R32",818913,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Mediodactylus kotschyi","(Steindachner, 1870)",NA,NA,NA
+"934","R33",818915,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Mediodactylus russowii","(Strauch, 1887)",NA,NA,NA
+"935","R34",208988,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Cyrtopodion scabrum","(Heyden in Rppell, 1827)Ê","Cyrtodactylus scaber",NA,NA
+"936","R35",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia alpina","(Darevsky, 1967)",NA,NA,NA
+"937","R36",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia armeniaca","(Mhely, 1909)",NA,NA,NA
+"938","R37",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia bendimahiensis","(Schmidtler, Eiselt & Darevsky, 1994)",NA,NA,NA
+"939","R38",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia brauneri","(Mhely, 1909)",NA,NA,NA
+"940","R39",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia caucasica","(Mhely, 1909)",NA,NA,NA
+"941","R40",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia clarkorum","(Darevsky & Vedmederja, 1977)",NA,NA,NA
+"942","R41",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia daghestanica","(Darevsky, 1967)",NA,NA,NA
+"943","R42",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia dahli","(Darevsky, 1957)",NA,NA,NA
+"944","R43",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia derjugini","(Nikolsky, 1898)",NA,NA,NA
+"945","R44",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia dryada","(Darevsky & Tuniyev, 1997)",NA,NA,NA
+"946","R45",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia lindholmi","(Lantz & Cyrn, 1936)",NA,NA,NA
+"947","R46",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia mixta","(Mhely, 1909)",NA,NA,NA
+"948","R47",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia raddei nairensis","(Darewskij, 1967)",NA,NA,NA
+"949","R48",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia parvula","(Lantz & Cyrn, 1913)",NA,NA,NA
+"950","R49",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia portschinskii","(Kessler, 1878)",NA,NA,NA
+"951","R50",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia praticola","(Eversmann, 1834)",NA,NA,NA
+"952","R51",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia raddei","(Boettger, 1892)",NA,NA,NA
+"953","R52",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia rostombekovi","(Darevsky, 1957)",NA,NA,NA
+"954","R53",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia rudis","(Bedriaga, 1886)",NA,NA,NA
+"955","R54",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia sapphirina","(Schmidtler, Eiselt & Darevsky, 1994)",NA,NA,NA
+"956","R55",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia saxicola","(Eversmann, 1834)",NA,NA,NA
+"957","R56",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia unisexualis","(Darevsky, 1966)Ê",NA,NA,NA
+"958","R57",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia uzzelli","(Darevsky & Danielyan, 1977)",NA,NA,NA
+"959","R58",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia valentini","(Boettger, 1892)",NA,NA,NA
+"960","R59",1081802,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis aurolineatus","(Venzmer, 1919)Ê","Contia collaris aurolineata",NA,NA
+"961","R60",1081803,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis barani","Schmidtler, 1988Ê",NA,NA,NA
+"962","R61",1081691,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Platyceps collaris","(Mller, 1878)Ê","Zamenis dahlii collaris",NA,NA
+"963","R62",1081804,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis coronella","(Schlegel, 1837)Ê","Calamaria coronella",NA,NA
+"964","R63",1081805,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis decemlineatus","(A. M. C. Dumril, Bibron and A. H. A. Dumril, 1854)Ê","Ablabes decemlineatus",NA,NA
+"965","R64",1081806,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis eiselti","Schmidtler, 1978Ê",NA,NA,NA
+"966","R65",1081807,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis hakkariensis","Schmidtler and Eiselt, 1991Ê",NA,NA,NA
+"967","R66",1081498,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis levantinus","Schmidtler, 1993Ê",NA,NA,NA
+"968","R67",1081499,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis lineomaculatus","Schmidt, 1939Ê",NA,NA,NA
+"969","R68",1081501,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis modestus","(Martin, 1838)Ê","Coronella modesta",NA,NA
+"970","R69",1081502,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis punctatolineatus","(Boettger, 1892)Ê","Cyclophis modestus punctatolineata",NA,NA
+"971","R70",1081504,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis rothii","Jan, 1863",NA,NA,NA
+"972","R71",1081505,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis thospitis","Schmidtler and Lanza, 1990Ê",NA,NA,NA
+"973","R72",1081814,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Elaphe dione","(Pallas, 1773)Ê","Coluber dione",NA,NA
+"974","R73",1081500,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis medus","(Chernov, 1940)Ê","Contia meda",NA,NA
+"975","R74",1081821,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Zamenis hohenackeri","(Strauch, 1873)Ê","Coluber hohenackeri",NA,NA
+"976","R75",1081822,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Zamenis lineatus","(Camerano, 1891)Ê","Callopeltis longissimus lineata",NA,NA
+"977","R76",1081823,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Zamenis longissimus","(Laurenti, 1768)Ê","Natrix longissima",NA,NA
+"978","R77",1081831,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Elaphe quatuorlineata","(Bonnaterre, 1790)Ê","Coluber quatuorlineatus",NA,NA
+"979","R78",1082914,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Zamenis scalaris","(Schinz, 1822)Ê","Rhinechis scalaris","Coluber scalaris",NA
+"980","R79",1081836,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Zamenis situla","(Linnaeus, 1758)Ê","Coluber situla",NA,NA
+"981","R80",551943,"v1.9 rev 2126ab0","Reptilia","Testudines","Emydidae","Emys orbicularis","(Linnaeus, 1758)Ê",NA,NA,NA
+"982","R81",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Eremias arguta","(Pallas, 1773)",NA,NA,NA
+"983","R82",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Eremias intermedia","Bischoff, 1978",NA,NA,NA
+"984","R83",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Eremias pleskei","Nikolsky, 1905",NA,NA,NA
+"985","R84",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Eremias scripta","(Strauch, 1867)",NA,NA,NA
+"986","R85",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Eremias strauchi","Kessler, 1878",NA,NA,NA
+"987","R86",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Eremias suphani","Basoglu & Hellmich, 1968",NA,NA,NA
+"988","R87",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Eremias velox","(Pallas, 1771)",NA,NA,NA
+"989","R88",634806,"v1.9 rev 2126ab0","Reptilia","Squamata","Boidae","Eryx jaculus","(Linnaeus, 1758)Ê",NA,NA,NA
+"990","R89",634809,"v1.9 rev 2126ab0","Reptilia","Squamata","Boidae","Eryx miliaris","(Pallas, 1773)Ê",NA,NA,NA
+"991","R90",818508,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Euleptes europaea","(Gene, 1839)Ê",NA,NA,NA
+"992","R91",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Eumeces schneideri","(Daudin, 1802)",NA,NA,NA
+"993","R92",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Gallotia atlantica","(Peters & Doria, 1882)",NA,NA,NA
+"994","R93",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Gallotia auaritae","Mateo, Garcia-marquez, Lpez-jurado & Barahona, 2001",NA,NA,NA
+"995","R94",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Gallotia bravoana","Hutterer, 1985",NA,NA,NA
+"996","R95",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Gallotia caesaris","Lehrs, 1914",NA,NA,NA
+"997","R96",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Gallotia galloti","(Oudart, 1839)",NA,NA,NA
+"998","R97",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Gallotia intermedia","Barrbadillo, Lacoba, Prez-mellado, Sancho & Lpez-jurado, 1999",NA,NA,NA
+"999","R98",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Gallotia simonyi","(Steindachner, 1889)",NA,NA,NA
+"1000","R99",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Gallotia stehlini","(Schenkel, 1901)",NA,NA,NA
+"1001","R100",634887,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Gloydius intermedius","(Strauch, 1868)Ê","Gloydius intermedius intermedius","Trigonocephalus intermedius",NA
+"1002","R101",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Hellenolacerta graeca","(Bedriaga, 1886)",NA,NA,NA
+"1003","R102",174059,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Hemidactylus turcicus","(Linnaeus, 1758)Ê",NA,NA,NA
+"1004","R103",1081681,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Hemorrhois hippocrepis","(Linnaeus, 1758)Ê","Coluber hippocrepis",NA,NA
+"1005","R104",1082842,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Dolichophis cypriensis","(Schtti, 1985)Ê","Hierophis cypriensis","Coluber cypriensis",NA
+"1006","R105",1081680,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Hierophis gemonensis","(Laurenti, 1768)Ê","Natrix gemonensis",NA,NA
+"1007","R106",1081699,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Hierophis viridiflavus","(Lacpde, 1789)Ê","Coluber viridiflavus",NA,NA
+"1008","R107",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Iberolacerta aranica","(Arribas, 1993)",NA,NA,NA
+"1009","R108",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Iberolacerta aurelioi","(Arribas, 1994)",NA,NA,NA
+"1010","R109",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Iberolacerta bonnali","(Lantz, 1927)",NA,NA,NA
+"1011","R110",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Iberolacerta cyreni","(Mller & Hellmich, 1937)",NA,NA,NA
+"1012","R111",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Iberolacerta galani","Arribas, Carranza & Odierna, 2006",NA,NA,NA
+"1013","R112",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Iberolacerta horvathi","(Mhely, 1904)",NA,NA,NA
+"1014","R113",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Iberolacerta martinezricai","(Arribas, 1996)",NA,NA,NA
+"1015","R114",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Iberolacerta monticola","(Boulenger, 1905)",NA,NA,NA
+"1016","R115",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Lacerta agilis","Linnaeus, 1758",NA,NA,NA
+"1017","R116",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Anatololacerta anatolica","(Werner, 1900)",NA,NA,NA
+"1018","R117",683036,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Lacerta bilineata","Daudin, 1802Ê",NA,NA,NA
+"1019","R118",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Apathya cappadocica","(Werner, 1902)",NA,NA,NA
+"1020","R119",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Phoenicolacerta cyanisparsa","(Schmidtler & Bischoff, 1999)",NA,NA,NA
+"1021","R120",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Anatololacerta danfordi","(Gnther, 1876)",NA,NA,NA
+"1022","R121",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Teira dugesii","(Milne-edwards, 1829)",NA,NA,NA
+"1023","R122",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Phoenicolacerta laevis","(Gray, 1838)",NA,NA,NA
+"1024","R123",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Timon lepidus","(Daudin, 1802)",NA,NA,NA
+"1025","R124",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Lacerta media","Lantz & Cyrn, 1920",NA,NA,NA
+"1026","R125",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Dinarolacerta mosorensis","(Kolombatovic, 1886)",NA,NA,NA
+"1027","R126",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Dinarolacerta montenegrina","Ljubisavljevi, Arribas, Duki & Carranza, 2007",NA,NA,NA
+"1028","R127",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Anatololacerta oertzeni","Arnold et al. 2007",NA,NA,NA
+"1029","R128",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Dalmatolacerta oxycephala","(Schlegel, 1839)",NA,NA,NA
+"1030","R129",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Lacerta pamphylica","Schmidtler, 1975",NA,NA,NA
+"1031","R130",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Parvilacerta parva","(Boulenger, 1887)",NA,NA,NA
+"1032","R131",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Timon princeps","(Blanford, 1874)",NA,NA,NA
+"1033","R132",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Lacerta schreiberi","Bedriaga, 1878",NA,NA,NA
+"1034","R133",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Lacerta strigata","Eichwald, 1831",NA,NA,NA
+"1035","R134",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Lacerta trilineata","Bedriaga, 1886",NA,NA,NA
+"1036","R135",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Phoenicolacerta troodica","(Werner, 1936)",NA,NA,NA
+"1037","R136",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Lacerta viridis","(Laurenti, 1768)",NA,NA,NA
+"1038","R137",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Zootoca vivipara","(Lichtenstein, 1823)",NA,NA,NA
+"1039","R138",1056822,"v1.9 rev 2126ab0","Reptilia","Squamata","Agamidae","Paralaudakia caucasia","(Eichwald, 1831)",NA,NA,NA
+"1040","R139",1056675,"v1.9 rev 2126ab0","Reptilia","Squamata","Agamidae","Stellagama stellio","(Linnaeus, 1758)",NA,NA,NA
+"1041","R140",1107545,"v1.9 rev 2126ab0","Reptilia","Squamata","Leptotyphlopidae","Myriopholis macrorhyncha","(Jan, 1860)Ê","Leptotyphlops hamulirostris","Leptotyphlops macrorhynchus","Stenostoma macrorhynchum"
+"1042","R141",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Trachylepis aurata","(Linnaeus, 1758)",NA,NA,NA
+"1043","R142",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Trachylepis vittata","(Olivier, 1804)",NA,NA,NA
+"1044","R143",1082660,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Macroprotodon brevis","(Gnther, 1862)Ê","Coronella brevis",NA,NA
+"1045","R144",1082065,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Macroprotodon cucullatus","(Geoffroy de St-Hilaire, 1827)Ê","Coluber cucullatus",NA,NA
+"1046","R145",634977,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Macrovipera lebetina","(Linnaeus, 1758)Ê","Coluber lebetinus",NA,NA
+"1047","R146",634979,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Macrovipera schweizeri","(Werner, 1935)Ê","Vipera lebetina schweizeri",NA,NA
+"1048","R147",1082070,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Malpolon monspessulanus","(Hermann, 1804)Ê","Coluber monspessulanus",NA,NA
+"1049","R148",551928,"v1.9 rev 2126ab0","Reptilia","Testudines","Geoemydidae","Mauremys caspica","(Gmelin, 1774)Ê","Testudo caspica","Emys grayi","Mauremys caspica siebenrocki"
+"1050","R149",551931,"v1.9 rev 2126ab0","Reptilia","Testudines","Geoemydidae","Mauremys leprosa","(Schweigger, 1812)Ê",NA,NA,NA
+"1051","R150",949164,"v1.9 rev 2126ab0","Reptilia","Testudines","Geoemydidae","Mauremys rivulata","(Valenciennes in Bory de Saint-Vincent, 1833)Ê","Emys tristrami","Emys pannonica","Emys caspica arabica"
+"1052","R151",1058458,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Montivipera raddei","(Boettger, 1890)Ê","Vipera albicornuta","Vipera raddei",NA
+"1053","R152",1058461,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Montivipera wagneri","(Nilson and Andrn, 1984)Ê","Vipera wagneri",NA,NA
+"1054","R153",1058462,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Montivipera xanthina","(Gray, 1849)Ê","Vipera xanthina","Vipera xanthina xanthina","Daboia xanthina"
+"1055","R154",700797,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Natrix maura","(Linnaeus, 1758)Ê","Coluber maurus",NA,NA
+"1056","R155",700799,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Natrix natrix","(Linnaeus, 1758)Ê","Coluber natrix",NA,NA
+"1057","R156",700800,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Natrix tessellata","(Laurenti, 1768)","Coronella tessellata",NA,NA
+"1058","R157",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Ophiomorus punctatissimus","(Bibron & Bory De St. Vincent, 1833)",NA,NA,NA
+"1059","R158",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Ophisops elegans","Mntries, 1832",NA,NA,NA
+"1060","R159",1055606,"v1.9 rev 2126ab0","Reptilia","Squamata","Agamidae","Phrynocephalus guttatus","(J. F. Gmelin, 1789)Ê",NA,NA,NA
+"1061","R160",1055607,"v1.9 rev 2126ab0","Reptilia","Squamata","Agamidae","Phrynocephalus helioscopus","(Pallas, 1771)Ê",NA,NA,NA
+"1062","R161",1055612,"v1.9 rev 2126ab0","Reptilia","Squamata","Agamidae","Phrynocephalus mystaceus","(Pallas, 1776)Ê",NA,NA,NA
+"1063","R162",1055614,"v1.9 rev 2126ab0","Reptilia","Squamata","Agamidae","Phrynocephalus persicus","de Filippi, 1863Ê",NA,NA,NA
+"1064","R163",1081687,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Platyceps najadum","(Eichwald, 1831)Ê","Tyria najadum",NA,NA
+"1065","R164",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Iranolacerta brandtii","(De Filippi, 1863)",NA,NA,NA
+"1066","R165",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis liolepis","(Boulenger, 1905)",NA,NA,NA
+"1067","R166",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis bocagei","(Seoane, 1885)",NA,NA,NA
+"1068","R167",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis carbonelli","Perez Mellado, 1981",NA,NA,NA
+"1069","R168",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis erhardii","(Bedriaga, 1882)",NA,NA,NA
+"1070","R169",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis filfolensis","(Bedriaga, 1876)",NA,NA,NA
+"1071","R170",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis gaigeae","(Werner, 1930)",NA,NA,NA
+"1072","R171",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis hispanicus","(Steindachner, 1870)",NA,NA,NA
+"1073","R172",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis lilfordi","(Gnther, 1874)",NA,NA,NA
+"1074","R173",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis melisellensis","(Braun, 1877)",NA,NA,NA
+"1075","R174",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis milensis","(Bedriaga, 1882)",NA,NA,NA
+"1076","R175",564582,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis muralis","(Laurenti, 1768)Ê",NA,NA,NA
+"1077","R176",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis peloponnesiacus","(Bibron & Bory, 1833)",NA,NA,NA
+"1078","R177",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis pityusensis","(Bosc, 1883)",NA,NA,NA
+"1079","R178",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis raffoneae","(Mertens, 1952)",NA,NA,NA
+"1080","R179",564588,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis sicula","(Rafinesque, 1810)Ê",NA,NA,NA
+"1081","R180",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis tauricus","(Pallas, 1814)",NA,NA,NA
+"1082","R181",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis tiliguerta","(Gmelin, 1789)",NA,NA,NA
+"1083","R182",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis vaucheri","(Boulenger, 1905)",NA,NA,NA
+"1084","R183",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Podarcis waglerianus","Gistel, 1868",NA,NA,NA
+"1085","R184",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Psammodromus manuelae","Busack, Salvador & Lawson, 2006",NA,NA,NA
+"1086","R185",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Psammodromus hispanicus","Fitzinger, 1826",NA,NA,NA
+"1087","R186",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Anguidae","Pseudopus apodus","(Pallas, 1775)",NA,NA,NA
+"1088","R187",551874,"v1.9 rev 2126ab0","Reptilia","Testudines","Trionychidae","Rafetus euphraticus","(Daudin, 1801)Ê","Testudo rafcht",NA,NA
+"1089","R188",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Darevskia chlorogaster","(Boulenger, 1908)",NA,NA,NA
+"1090","R189",819330,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Tarentola angustimentalis","Steindachner, 1891Ê",NA,NA,NA
+"1091","R190",819331,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Tarentola bischoffi","Joger, 1984Ê",NA,NA,NA
+"1092","R191",819333,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Tarentola boettgeri","Steindachner, 1891Ê",NA,NA,NA
+"1093","R192",819338,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Tarentola delalandii","(Dumril and Bibron, 1836)Ê",NA,NA,NA
+"1094","R193",819342,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Tarentola gomerensis","Joger and Bischoff, 1983Ê",NA,NA,NA
+"1095","R194",683045,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Tarentola mauritanica","(Linnaeus, 1758)Ê",NA,NA,NA
+"1096","R195",1082410,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Telescopus fallax","(Fleischmann, 1831)Ê","Tarbophis fallax",NA,NA
+"1097","R196",551865,"v1.9 rev 2126ab0","Reptilia","Testudines","Testudinidae","Testudo graeca","Linnaeus, 1758Ê",NA,NA,NA
+"1098","R197",551866,"v1.9 rev 2126ab0","Reptilia","Testudines","Testudinidae","Testudo hermanni","Gmelin, 1789Ê",NA,NA,NA
+"1099","R198",949337,"v1.9 rev 2126ab0","Reptilia","Testudines","Emydidae","Emys trinacris","Fritz, Fattizzo, Guicking, Tripepi, Pennisi, Lenk, Joger and Wink, 2005Ê",NA,NA,NA
+"1100","R199",551869,"v1.9 rev 2126ab0","Reptilia","Testudines","Testudinidae","Testudo marginata","Schoepff, 1793Ê","Testudo campanulata","Testudo nemoralis","Testudo weissingeri"
+"1101","R200",1056885,"v1.9 rev 2126ab0","Reptilia","Squamata","Agamidae","Trapelus agilis","(Oliver, 1807)Ê",NA,NA,NA
+"1102","R201",1056893,"v1.9 rev 2126ab0","Reptilia","Squamata","Agamidae","Trapelus lessonae","(Oliver, 1804)",NA,NA,NA
+"1103","R202",551876,"v1.9 rev 2126ab0","Reptilia","Testudines","Trionychidae","Trionyx triunguis","(Forskl, 1775)Ê","Trionyx egyptiacus","Trionyx niloticus","Trionyx mortoni"
+"1104","R203",1116234,"v1.9 rev 2126ab0","Reptilia","Squamata","Typhlopidae","Xerotyphlops vermicularis","Merrem, 1820Ê","Typhlops vermicularis",NA,NA
+"1105","R204",202167,"v1.9 rev 2126ab0","Reptilia","Squamata","Varanidae","Varanus griseus","(Daudin, 1803)Ê",NA,NA,NA
+"1106","R205",1058453,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Montivipera albizona","(Nilson, Andrn and Flrdh, 1990)Ê","Vipera albizona",NA,NA
+"1107","R206",634985,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera ammodytes","(Linnaeus, 1758)Ê","Coluber ammodytes",NA,NA
+"1108","R207",634986,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera aspis","(Linnaeus, 1758)Ê","Coluber aspis",NA,NA
+"1109","R208",634988,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera berus","(Linnaeus, 1758)Ê","Coluber berus",NA,NA
+"1110","R209",1058554,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Montivipera bulgardaghica","(Nilson and Andrn, 1985)Ê","Vipera bulgardaghica",NA,NA
+"1111","R210",634991,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera darevskii","Vedmederya, Orlov and Tuniyev, 1986Ê",NA,NA,NA
+"1112","R211",634992,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera dinniki","Nikolsky, 1913Ê",NA,NA,NA
+"1113","R212",634993,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera kaznakovi","Nikolsky, 1909Ê",NA,NA,NA
+"1114","R213",634994,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera latastei","Bosca, 1878Ê",NA,NA,NA
+"1115","R214",1058754,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera berus nikolskii","Vedmederya, Grubant and Rudayewa, 1986Ê","Vipera nikolskii",NA,NA
+"1116","R215",634999,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera pontica","Billing, Nilson and Sattler, 1990Ê",NA,NA,NA
+"1117","R216",1058460,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera transcaucasiana","Boulenger, 1913Ê","Vipera ammodytes transcaucasiana",NA,NA
+"1118","R217",635001,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera seoanei","Lataste, 1879Ê","Vipera berus seoanei",NA,NA
+"1119","R218",635002,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera ursinii","(Bonaparte, 1835)Ê","Pelias ursinii",NA,NA
+"1120","R219",1081675,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Dolichophis caspius","(Gmelin, 1789)Ê","Coluber caspius",NA,NA
+"1121","R220",715147,"v1.9 rev 2126ab0","Reptilia","Squamata","Chamaeleonidae","Chamaeleo africanus","Laurenti, 1768Ê",NA,NA,NA
+"1122","R221",1081683,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Dolichophis jugularis","(Linnaeus, 1758)Ê","Coluber jugularis",NA,NA
+"1123","R222",1081688,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Hemorrhois nummifer","(Reuss, 1834)Ê","Coluber nummifer",NA,NA
+"1124","R223",1081672,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Hemorrhois algirus","(Jan, 1863)Ê","Periops algira",NA,NA
+"1125","R224",1084222,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Hierophis viridiflavus carbonarius","(Bonaparte, 1833)","Coluber viridiflavus carbonarius",NA,NA
+"1126","R225",1081692,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Dolichophis schmidti","(Nikolsky, 1909)Ê","Coluber schmidti",NA,NA
+"1127","R226",1082516,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Elaphe sauromates","(Pallas, 1811)Ê","Coluber sauromates",NA,NA
+"1128","R227",1058459,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera renardi","(Christoph, 1861)Ê","Pelias renardi",NA,NA
+"1129","R228",819301,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Stenodactylus grandiceps","Haas, 1952Ê",NA,NA,NA
+"1130","R229",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Acanthodactylus boskianus","(Daudin, 1802)",NA,NA,NA
+"1131","R230",1081689,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Hemorrhois ravergieri","(Mntries, 1832)Ê","Coluber ravergieri",NA,NA
+"1132","R231",1081698,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Platyceps ventromaculatus","(Gray, 1834)Ê","Coluber ventromaculatus",NA,NA
+"1133","R232",1082262,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis persicus","(Anderson, 1872)","Cyclophis persicus",NA,NA
+"1134","R233",1082325,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Rhynchocalamus melanocephalus","(Jan, 1862)Ê","Homalosoma melanocephalum",NA,NA
+"1135","R234",1082361,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Spalerosophis diadema","(Schlegel, 1837)Ê","Coluber diadema",NA,NA
+"1136","R235",818503,"v1.9 rev 2126ab0","Reptilia","Squamata","Gekkonidae","Eublepharis angramainyu","S.C. Anderson and Leviton, 1966Ê",NA,NA,NA
+"1137","R236",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Trachylepis septemtaeniata","(Reuss, 1834)",NA,NA,NA
+"1138","R237",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Acanthodactylus harranensis","Baran, Kumlutas, Lanza, Sindaco, Avci & Crucitti, 2005",NA,NA,NA
+"1139","R238",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Scincidae","Acanthodactylus grandis","Boulenger, 1909Ê",NA,NA,NA
+"1140","R239",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Eremias persica","Sindaco & Jeremcenko, 2008",NA,NA,NA
+"1141","R240",1058455,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera eriwanensis","(Reuss, 1933)Ê","Acridophaga renardi eriwanensis",NA,NA
+"1142","R241",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Zamenis persicus","(Werner, 1913)","Coluber longissimus persica",NA,NA
+"1143","R242",634995,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Vipera lotievi","Nilson, Tuniyev, Orlov, Hoggren and Andrn, 1995Ê",NA,NA,NA
+"1144","R245",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Mesalina brevirostris","Blanford, 1874",NA,NA,NA
+"1145","R246",1082413,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Telescopus nigriceps","(Ahl, 1924)Ê","Tarbophis nigriceps",NA,NA
+"1146","R247",634982,"v1.9 rev 2126ab0","Reptilia","Squamata","Viperidae","Pseudocerastes persicus","(A. M. C. Dumril, Bibron and A. H. A. Dumril, 1854)Ê","Pseudocerastes persicus persicus","Cerastes persicus",NA
+"1147","R248",1116130,"v1.9 rev 2126ab0","Reptilia","Squamata","Typhlopoidea","Letheobia episcopus","Franzen and Wallach, 2002Ê","Rhinotyphlops episcopus",NA,NA
+"1148","R249",1082868,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Muhtarophis barani","Olgun, Avci, Ilgaz, zm and Yilmaz, 2007Ê","Rhynchocalamus barani",NA,NA
+"1149","R251",1082750,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Macroprotodon mauritanicus","Guichenot, 1850Ê",NA,NA,NA
+"1150","R252",1082496,"v1.9 rev 2126ab0","Reptilia","Squamata","Colubridae","Eirenis coronelloides","(Jan, 1862)Ê","Homalosoma coronelloides",NA,NA
+"1151","R253",NA,"v1.9 rev 2126ab0","Reptilia","Squamata","Lacertidae","Psammodromus jeanneae","Busack, Salvador & Lawson, 2006",NA,NA,NA
