@@ -30,3 +30,12 @@ match_diet <- function(Small_Mam, Large_Mam, Herptile, Bird_eggs, Small_bird, La
                                 ifelse(Class_prey == "Reptilia" & Herptile %in% c(1,2), 1, 0))))
   return(match)
 }
+
+#' Get the mode of a vector
+#' 
+#' @param v a vector
+#' @return the value with the most occurrence
+getmode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
