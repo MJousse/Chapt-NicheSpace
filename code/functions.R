@@ -39,3 +39,39 @@ getmode <- function(v) {
   uniqv <- unique(v)
   uniqv[which.max(tabulate(match(v, uniqv)))]
 }
+
+#' Transform traits into predictors
+#' 
+#' TODO
+traits2predictors <- function(FW, prey_suffix = ".x", predator_suffix = ".y"){
+  FW <- FW %>%
+    rename_with(~ gsub(paste0("\\", predator_suffix, "$"), ".predator", .x)) %>%
+    rename_with(~ gsub(paste0("\\", prey_suffix, "$"), ".prey", .x))
+  foraging_predictor <- FW %>%
+    select(Trophic_level.predator, Habitat_breadth.predator = Habitat_breadth_IUCN.predator, 
+           Order.predator, BM.predator = logBM.predator, Longevity.predator = Max_longevity_d.predator,
+           ClutchSize.predator = Litter_clutch_size.predator)
+  
+  vulnerability_predictor <- FW %>%
+    select(Trophic_level.prey, Habitat_breadth.prey = Habitat_breadth_IUCN.prey, 
+           Order.prey, BM.prey = logBM.prey, Longevity.prey = Max_longevity_d.prey, 
+           ClutchSize.prey = Litter_clutch_size.prey)
+  
+  match_predictor <- data.frame(
+    ActivityTime.match = FW$Diel_activity.prey == FW$Diel_activity.predator,
+    Habitat.match = Jaccard(
+      select_at(FW, vars(Forest.predator:Introduced.vegetation.predator)), 
+      select_at(FW, vars(Forest.prey:Introduced.vegetation.prey))),
+    BM.match = (FW$logBM.predator - FW$logBM.prey)^2
+  )
+  predictors <- data.frame(Predator = FW$Predator,
+                           Prey = FW$Prey) %>%
+    cbind(foraging_predictor) %>%
+    cbind(vulnerability_predictor) %>%
+    cbind(match_predictor) %>%
+    mutate_at(vars(Trophic_level.predator, Trophic_level.prey, ActivityTime.match), as.factor)
+  return(predictors)
+}
+
+scale2 <- function(x){(x - mean(x)) / (2*sd(x))}
+

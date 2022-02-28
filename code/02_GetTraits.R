@@ -147,7 +147,7 @@ Amphi_traits_full <- data.frame(Species=sp, Amphi_traits_full$ximp) %>%
 Bird_traits <- filter(Tetrapods_traits, Class == "Aves") %>%
   droplevels()
 sp <- Bird_traits$Species
-traits <- Bird_traits %>% select(-Species, -Genus, -Family,- Habitat_breadth_IUCN)
+traits <- Bird_traits %>% select(-Species, -Genus, -Family)
 
 Bird_traits_full <- missForest(traits)
 Bird_traits_full <- data.frame(Species=sp, Bird_traits_full$ximp) %>%
@@ -175,6 +175,8 @@ Rept_traits_full <- data.frame(Species=sp, Rept_traits_full$ximp) %>%
 
 # put everything together
 Tetrapods_traits <- bind_rows(Amphi_traits_full, Bird_traits_full, Mam_traits_full, Rept_traits_full) %>%
-  select(-Adult_svl_cm, -Longevity_d, -Generation_length_d, -Body_length_mm)
+  mutate(Habitat_breadth_IUCN = round(Habitat_breadth_IUCN),
+         logBM = log(Body_mass_g)) %>%
+  select(-Adult_svl_cm, -Longevity_d, -Generation_length_d, -Body_length_mm, -Maturity_d, -Artificial_habitat_use, -Other.Unknown, -Body_mass_g)
 
 write.csv(Tetrapods_traits, "data/cleaned/SpeciesTraitsFull.csv")
