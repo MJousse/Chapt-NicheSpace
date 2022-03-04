@@ -127,7 +127,6 @@ Serengeti_traits <- read.csv("data/checkpoints/SerengetiTraits.csv", row.names =
 Pyrennees_traits <- read.csv("data/checkpoints/PyrenneesTraits.csv", row.names = 1)
 HighArctic_traits <- read.csv("data/checkpoints/HighArcticTraits.csv", row.names = 1)
 
-
 ### Impute missing data for each class separated
 Tetrapods_traits <- bind_rows(Euro_traits, Serengeti_traits, Pyrennees_traits, HighArctic_traits) %>%
   distinct() %>%
@@ -175,8 +174,14 @@ Rept_traits_full <- data.frame(Species=sp, Rept_traits_full$ximp) %>%
 
 # put everything together
 Tetrapods_traits <- bind_rows(Amphi_traits_full, Bird_traits_full, Mam_traits_full, Rept_traits_full) %>%
-  mutate(Habitat_breadth_IUCN = round(Habitat_breadth_IUCN),
-         logBM = log(Body_mass_g)) %>%
-  select(-Adult_svl_cm, -Longevity_d, -Generation_length_d, -Body_length_mm, -Maturity_d, -Artificial_habitat_use, -Other.Unknown, -Body_mass_g)
+  mutate(Habitat_breadth_IUCN = log(Habitat_breadth_IUCN),
+         logBM = log(Body_mass_g),
+         logLongevity = log(Max_longevity_d),
+         logClutchSize = log(Litter_clutch_size),
+         Herbivore = ifelse(Trophic_level == "Herbivore", 1,0),
+         Omnivore = ifelse(Trophic_level == "Omnivore", 1,0),
+         Carnivore = ifelse(Trophic_level == "Carnivore", 1, 0)) %>%
+  select(-Adult_svl_cm, -Longevity_d, -Generation_length_d, -Body_length_mm, -Maturity_d, -Artificial_habitat_use, -Other.Unknown, -Body_mass_g,
+         -Trophic_level, -Max_longevity_d, -Litter_clutch_size)
 
 write.csv(Tetrapods_traits, "data/cleaned/SpeciesTraitsFull.csv")
