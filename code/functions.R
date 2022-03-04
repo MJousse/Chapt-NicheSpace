@@ -48,14 +48,16 @@ traits2predictors <- function(FW, prey_suffix = ".x", predator_suffix = ".y"){
     rename_with(~ gsub(paste0("\\", predator_suffix, "$"), ".predator", .x)) %>%
     rename_with(~ gsub(paste0("\\", prey_suffix, "$"), ".prey", .x))
   foraging_predictor <- FW %>%
-    select(Trophic_level.predator, Habitat_breadth.predator = Habitat_breadth_IUCN.predator, 
-           Order.predator, BM.predator = logBM.predator, Longevity.predator = Max_longevity_d.predator,
-           ClutchSize.predator = Litter_clutch_size.predator)
+    select(Herbivore.predator, Omnivore.predator, Carnivore.predator,
+           Habitat_breadth.predator = Habitat_breadth_IUCN.predator, 
+           Order.predator, BM.predator = logBM.predator, Longevity.predator = logLongevity.predator,
+           ClutchSize.predator = logClutchSize.predator)
   
   vulnerability_predictor <- FW %>%
-    select(Trophic_level.prey, Habitat_breadth.prey = Habitat_breadth_IUCN.prey, 
-           Order.prey, BM.prey = logBM.prey, Longevity.prey = Max_longevity_d.prey, 
-           ClutchSize.prey = Litter_clutch_size.prey)
+    select(Herbivore.prey, Omnivore.prey, Carnivore.prey,
+           Habitat_breadth.prey = Habitat_breadth_IUCN.prey, 
+           Order.prey, BM.prey = logBM.prey, Longevity.prey = logLongevity.prey, 
+           ClutchSize.prey = logClutchSize.prey)
   
   match_predictor <- data.frame(
     ActivityTime.match = FW$Diel_activity.prey == FW$Diel_activity.predator,
@@ -69,7 +71,7 @@ traits2predictors <- function(FW, prey_suffix = ".x", predator_suffix = ".y"){
     cbind(foraging_predictor) %>%
     cbind(vulnerability_predictor) %>%
     cbind(match_predictor) %>%
-    mutate_at(vars(Trophic_level.predator, Trophic_level.prey, ActivityTime.match), as.factor)
+    mutate(ActivityTime.match = as.integer(ActivityTime.match))
   return(predictors)
 }
 
