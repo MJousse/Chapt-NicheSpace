@@ -66,7 +66,7 @@ distribution(y) <- bernoulli(p)
 
 m <- model(global_coef_mean, global_coef_sd)
 
-GLMM <- mcmc(m, n_samples = 10000, warmup = 5000, chains = 4)
+GLMM <- mcmc(m, n_samples = 5000, warmup = 2500, chains = 4)
 
 save(GLMM, global_coef_mean, global_coef_sd, train_ind, training, coef,  
      file =  paste0("data/models/GLMM_", format(Sys.Date(), "%d%m%Y"), ".RData"))
