@@ -52,9 +52,9 @@ global_coef_mean <- data.frame(mean = summary(GLMM)$statistics[c(1:16),1])
 global_coef_mean$sd <- summary(GLMM)$statistics[c(17:32),1]
 global_coef_mean$predictor <- factor(predictor_names, 
                                      levels = rev(predictor_names))
-coef <- calculate(coef, values = GLMM)
-coef <- coef$`11`
-coef_order <- data.frame(t(matrix(apply(coef, MARGIN = 2, mean), ncol = 48, nrow = 16)))
+model_coef <- calculate(coef, values = GLMM)
+model_coef <- model_coef$`11`
+coef_order <- data.frame(t(matrix(apply(model_coef, MARGIN = 2, mean), ncol = 48, nrow = 16)))
 colnames(coef_order) <- predictor_names
 coef_order <- pivot_longer(coef_order, cols = everything(), names_to = "predictor", values_to = "mean")
 coef_order$predictor <- factor(coef_order$predictor, 
@@ -69,7 +69,7 @@ predictors <- select(validation,
                      -Predator, -Prey, -Order.predator, -Order.prey,
                      -Herbivore.predator, -Herbivore.prey, -interaction)
 
-predictors <- cbind(rep(1, nrow(validation)), predictors)
+predictors <- cbind(rep(1, nrow(validation)), predictors) %>% as_data()
 predator_order <- as.numeric(factor(validation$Order.pred, levels = unique(FuncTraits$Order)))
 
 linear_predictor <- rowSums(predictors * t(coef[,predator_order]))
