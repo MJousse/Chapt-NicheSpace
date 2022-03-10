@@ -5,9 +5,10 @@ library(bayesplot)
 library(ROCR)
 library(greta)
 library(dplyr)
+library(ggplot2)
 library(tidyr)
 source("code/functions.R")
-load("data/models/GLMM_07032022test.RData")
+load("data/models/GLMM_10032022.RData")
 
 # Load data and standardize -----------------------------------------------
 EuroInteractions <- read.csv("data/cleaned/EuroFW.csv", row.names = 1)
@@ -52,7 +53,7 @@ global_coef_mean$sd <- summary(GLMM)$statistics[c(17:32),1]
 global_coef_mean$predictor <- factor(predictor_names, 
                                      levels = rev(predictor_names))
 coef <- calculate(coef, values = GLMM)
-coef <- c
+coef <- coef$`11`
 coef_order <- data.frame(t(matrix(apply(coef, MARGIN = 2, mean), ncol = 48, nrow = 16)))
 colnames(coef_order) <- predictor_names
 coef_order <- pivot_longer(coef_order, cols = everything(), names_to = "predictor", values_to = "mean")
