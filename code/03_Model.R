@@ -49,7 +49,7 @@ ntraits <- ncol(predictors)
 
 # common effect
 global_coef_mean <- normal(0,1, ntraits)
-global_coef_sd <- uniform(0.001, 10, dim = ntraits)
+global_coef_sd <- cauchy(0, 5, truncation = c(0.001, Inf), dim = ntraits)
 coef <- normal(global_coef_mean, global_coef_sd, dim = c(ntraits))
 for (i in c(2:norder)){
   coef <- cbind(coef, normal(global_coef_mean, global_coef_sd, dim = c(ntraits)))
@@ -66,8 +66,9 @@ distribution(y) <- bernoulli(p)
 
 m <- model(global_coef_mean, global_coef_sd)
 
-GLMM <- mcmc(m, n_samples = 10000, warmup = 5000, chains = 4)
+GLMM <- mcmc(m, n_samples = 25000, warmup = 10000, chains = 4)
 
 save(GLMM, global_coef_mean, global_coef_sd, train_ind, training, coef,  
      file =  paste0("data/models/GLMM_", format(Sys.Date(), "%d%m%Y"), ".RData"))
 
+GLMMextra <- extra_samples(GLMM, n_samples = 2000)
