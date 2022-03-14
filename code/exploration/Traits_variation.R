@@ -36,7 +36,7 @@ df %>% pivot_longer(-Trait, names_to = "Level", values_to = "ICC") %>%
   ggplot()+
   geom_col(aes(fill = Level, x = Trait, y = ICC)) +
   scale_fill_brewer(type = "qual", palette = 6) +
-  theme_default() +
+  theme_classic() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.title = element_blank())
 
 # How is the food web structured?
@@ -97,7 +97,20 @@ df2 %>%
   ggplot() +
   geom_tile(aes(x = Predator_grouping, y = Prey_grouping, fill = AIC)) +
   geom_text(aes(x = Predator_grouping, y = Prey_grouping, label = round(AIC))) +
-  scale_fill_distiller(trans = "log", breaks = c(200000, 400000, 800000, 1600000))
+  labs(x = "Predator groups", y = "Prey groups") + 
+  scale_fill_distiller(trans = "log", palette = "BuPu", breaks = c(200000, 400000, 800000, 1600000), direction = 1) +
+  theme_minimal()
+
+df2 %>%
+  mutate(Prey_grouping = factor(Prey_grouping, levels = c("class", "order", "family", "genus", "species")),
+         Predator_grouping = factor(Predator_grouping, levels = c("class", "order", "family", "genus", "species"))) %>%
+  ggplot() +
+  geom_tile(aes(x = Predator_grouping, y = Prey_grouping, fill = LogLikelihood)) +
+  geom_text(aes(x = Predator_grouping, y = Prey_grouping, label = round(LogLikelihood))) +
+  labs(x = "Predator groups", y = "Prey groups") + 
+  scale_fill_distiller(palette = "BuPu") +
+  theme_minimal()
+
 
 write.csv(df, file = "code/exploration/trait_variation.csv")
 write.csv(df2, file = "code/exploration/FWtaxostructure.csv")
