@@ -45,7 +45,7 @@ predictor_names <- c("Intercept",
 # Check convergence -------------------------------------------------------
 mcmc_trace(GLMM, regex_pars = "global_coef_mean")
 mcmc_trace(GLMM, regex_pars = "global_coef_sd")
-coda::gelman.diag(GLMM)$psrf
+rhat <- coda::gelman.diag(GLMM)$psrf
 
 # Plot coefficients -------------------------------------------------------
 global_coef_mean <- data.frame(mean = summary(GLMM)$statistics[c(1:16),1])
