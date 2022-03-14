@@ -35,7 +35,7 @@ df %>% pivot_longer(-Trait, names_to = "Level", values_to = "ICC") %>%
          Level = factor(Level, levels = c("Residuals", "Genus", "Family", "Order", "Class"))) %>%
   ggplot()+
   geom_col(aes(fill = Level, x = Trait, y = ICC)) +
-  scale_fill_brewer(type = "qual", palette = 6) +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")) +
   theme_classic() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.title = element_blank())
 
