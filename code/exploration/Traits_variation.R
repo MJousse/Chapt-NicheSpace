@@ -54,22 +54,23 @@ as_adjancy <- function(interaction_list){
   return(A)
 }
 
-AICgroup <- function(adjancy_matrix, group){
+AICgroup <- function(adjancy_matrix, group_pred, group_prey = group_pred){
   S <- nrow(adjancy_matrix)
-  k <- length(unique(group))
+  kpred <- length(unique(group_pred))
+  kprey <- length(unique(group_prey))
   logLik <- 0
-  for (i in unique(group)){
-    Si <- sum(group == i)
-    for (j in unique(group)){
-      Sj <- sum(group == j)
-      Lij <- sum(adjancy_matrix[which(group == i), which(group == j)])
+  for (i in unique(group_prey)){
+    Si <- sum(group_prey == i)
+    for (j in unique(group_pred)){
+      Sj <- sum(group_pred == j)
+      Lij <- sum(adjancy_matrix[which(group_prey == i), which(group_pred == j)])
       pij <- Lij / (Si*Sj)
       if (pij < 1 & pij >0){
         logLik <- logLik + (Lij * log10(pij) + (Si*Sj-Lij) * log10(1-pij))
       }
     }
   }
-  AIC <- 2 * k^2 + 2*S -2 * logLik
+  AIC <- 2 * kpred * kprey  + 2*S -2 * logLik
   return(c(logLik,AIC))
 }
 
@@ -77,3 +78,26 @@ class <- as.numeric(as.factor(EuroTaxo$Class[match(rownames(A), EuroTaxo$Species
 order <- as.numeric(as.factor(EuroTaxo$Order[match(rownames(A), EuroTaxo$Species)]))
 family <- as.numeric(as.factor(EuroTaxo$Family[match(rownames(A), EuroTaxo$Species)]))
 genus <- as.numeric(as.factor(EuroTaxo$Genus[match(rownames(A), EuroTaxo$Species)]))
+species <- as.numeric(as.factor(EuroTaxo$Species[match(rownames(A), EuroTaxo$Species)]))
+group_level <- data.frame(class, order, family, genus, species)
+
+df2 <- data.frame()
+for (i in c(1:ncol(group_level))){
+  for (j in c(1:ncol(group_level))){
+    AIC <- AICgroup(A, group_level[,j], group_level[,i])
+    df2 <- rbind(df2,
+                 data.frame(colnames(group_level)[i], colnames(group_level)[j], AIC[1], AIC[2]))
+  }
+}
+colnames(df2) <- c("Prey_grouping", "Predator_grouping", "LogLikelihood", "AIC")
+
+df2 %>%
+  mutate(Prey_grouping = factor(Prey_grouping, levels = c("class", "order", "family", "genus", "species")),
+         Predator_grouping = factor(Predator_grouping, levels = c("class", "order", "family", "genus", "species"))) %>%
+  ggplot() +
+  geom_tile(aes(x = Predator_grouping, y = Prey_grouping, fill = AIC)) +
+  geom_text(aes(x = Predator_grouping, y = Prey_grouping, label = round(AIC))) +
+  scale_fill_distiller(trans = "log", breaks = c(200000, 400000, 800000, 1600000))
+
+write.csv(df, file = "code/exploration/trait_variation.csv")
+write.csv(df2, file = "code/exploration/FWtaxostructure.csv")
