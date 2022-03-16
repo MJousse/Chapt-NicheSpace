@@ -8,7 +8,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 source("code/functions.R")
-load("data/models/GLMM_10032022.RData")
+load("data/models/GLMM_16032022.RData")
 
 # Load data and standardize -----------------------------------------------
 EuroInteractions <- read.csv("data/cleaned/EuroFW.csv", row.names = 1)
