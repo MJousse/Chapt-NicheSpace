@@ -19,7 +19,6 @@ EuroMW <- left_join(EuroMW, FuncTraits, by = c("Prey" = "Species")) %>%
   left_join(FuncTraits, by = c("Predator" = "Species"))
 
 EuroMW <- traits2predictors(EuroMW)
-
 EuroMW <- mutate_at(EuroMW, vars(Habitat_breadth.predator, BM.predator:ClutchSize.predator,
                                  Habitat_breadth.prey, BM.prey:ClutchSize.prey, 
                                  Habitat.match:BM.match), scale2)
