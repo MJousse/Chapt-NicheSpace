@@ -59,12 +59,18 @@ colnames(coef_order) <- predictor_names
 coef_order <- pivot_longer(coef_order, cols = everything(), names_to = "predictor", values_to = "mean")
 coef_order$predictor <- factor(coef_order$predictor, 
                                levels = rev(predictor_names))
+coef_order_sd <- data.frame(t(matrix(apply(model_coef, MARGIN = 2, sd), ncol = 48, nrow = 16)))
+colnames(coef_order_sd) <- predictor_names
+coef_order_sd <- pivot_longer(coef_order_sd, cols = everything(), names_to = "predictor", values_to = "sd")
+coef_order_sd$predictor <- factor(coef_order_sd$predictor, 
+                               levels = rev(predictor_names))
 
 ggplot()+
   geom_point(data = coef_order, aes(x = mean, y = predictor), alpha = 0.5, position = position_jitter(height = 0.4)) +
   geom_pointrange(data = global_coef_mean, aes(xmin = mean-1.96*sd, x = mean, xmax = mean+1.96*sd, y = predictor), colour = "red")
 
 # Predict Validation data -------------------------------------------------
+validation <- sample_frac(validation, 0.5)
 predictors <- select(validation, 
                      -Predator, -Prey, -Order.predator, -Order.prey,
                      -Herbivore.predator, -Herbivore.prey, -interaction)

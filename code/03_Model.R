@@ -30,10 +30,15 @@ EuroMW <- left_join(EuroMW, EuroInteractions)
 EuroMW$interaction[is.na(EuroMW$interaction)] <- 0
 
 # Divide into training and testing data -----------------------------------
-training_size = 0.7 * nrow(EuroMW)
-train_ind <- sample(seq_len(nrow(EuroMW)), size = training_size)
-training <- EuroMW[train_ind, ]
-validation <- EuroMW[-train_ind, ]
+# Let's take 70% of positives and as many negatives for training
+N = round(0.7 * sum(EuroMW$interaction))
+training_positives <- sample(seq_len(sum(EuroMW$interaction)), size = N)
+training_negatives <- sample(seq_len(sum(EuroMW$interaction==0)), size = N)
+training_id <- as.numeric(c(
+  rownames(EuroMW[EuroMW$interaction ==1,][training_positives,]),
+  rownames(EuroMW[EuroMW$interaction ==0,][training_negatives,])
+))
+training <- EuroMW[training_id, ]
 
 # GLMM --------------------------------------------------------------------
 predictors <- select(training, 
@@ -66,9 +71,9 @@ distribution(y) <- bernoulli(p)
 
 m <- model(global_coef_mean, global_coef_sd)
 
-GLMM <- mcmc(m, n_samples = 25000, warmup = 10000, chains = 4)
+GLMM <- mcmc(m, n_samples = 10000, warmup = 5000, chains = 4)
 
-save(GLMM, global_coef_mean, global_coef_sd, train_ind, training, coef,  
+save(GLMM, global_coef_mean, global_coef_sd, training_id, training, coef,  
      file =  paste0("data/models/GLMM_", format(Sys.Date(), "%d%m%Y"), ".RData"))
 
 GLMMextra <- extra_samples(GLMM, n_samples = 2000)
