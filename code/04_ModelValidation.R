@@ -35,8 +35,6 @@ EuroInteractions$interaction <- 1
 EuroMW <- left_join(EuroMW, EuroInteractions)
 EuroMW$interaction[is.na(EuroMW$interaction)] <- 0
 
-training <- EuroMW[train_ind, ]
-validation <- EuroMW[-train_ind, ]
 predictor_names <- c("Intercept", 
                      colnames(select(validation, 
                                      -Predator, -Prey, -Order.predator, -Order.prey,
@@ -70,7 +68,14 @@ ggplot()+
   geom_pointrange(data = global_coef_mean, aes(xmin = mean-1.96*sd, x = mean, xmax = mean+1.96*sd, y = predictor), colour = "red")
 
 # Predict Validation data -------------------------------------------------
-validation <- sample_frac(validation, 0.5)
+# Get a validation dataset with the same prevalence than the MW
+prev <- mean(EuroMW$interaction)
+validation <- EuroMW[-training_id, ]
+validation_interactions <- validation[validation$interaction == 1,]
+N_noninteractions <- round((sum(validation$interaction) * (1-prev))/prev) # how many non-interactions
+validation_noninteractions <- slice_sample(validation[validation$interaction == 0,],
+                                           n = N_noninteractions)
+validation <- rbind(validation_interactions, validation_noninteractions)
 predictors <- select(validation, 
                      -Predator, -Prey, -Order.predator, -Order.prey,
                      -Herbivore.predator, -Herbivore.prey, -interaction)
