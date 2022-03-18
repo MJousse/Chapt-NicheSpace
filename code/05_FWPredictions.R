@@ -54,7 +54,8 @@ ggplot(predictions) +
   theme(axis.text.x = element_text(angle = 90))
 
 # Predict the Serengeti FW ----------------------------------------------
-SerengetiInteractions <- read.csv("data/cleaned/SerengetiFW.csv", row.names = 1)
+SerengetiInteractions <- read.csv("data/cleaned/SerengetiFW.csv", row.names = 1) %>%
+  select(Predator = Consumer_Species, Prey = Resource_Species)
 SerengetiInteractions$interaction <- 1
 SerengetiSpecies <- read.csv("data/cleaned/SerengetiFWTaxo.csv", row.names = 1) %>%
   distinct() %>%
@@ -73,7 +74,7 @@ aucpr <- performance(prediction(predictions$predictions, predictions$interaction
 
 ggplot(predictions) +
   geom_tile(aes(Predator, Prey, fill = predictions)) +
-  geom_point(data = filter(predictions, interaction == 1), aes(Predator, Prey), size = 5) +
+  geom_point(data = filter(predictions, interaction == 1), aes(Predator, Prey), size = 1) +
   scale_fill_distiller(palette = "YlGn") +
   theme(axis.text.x = element_text(angle = 90))
 
@@ -84,7 +85,8 @@ PyreneesSpecies <- read.csv("data/cleaned/pyrenneesFWTaxo.csv", row.names = 1) %
   distinct() %>%
   filter(!is.na(Species))
 
-PyreneesFW <- get_predictors(PyreneesSpecies$Species, FuncTraits)
+PyreneesFW <- get_predictors(PyreneesSpecies$Species, FuncTraits) %>%
+  na.omit()
 
 PyreneesFW[, columns_to_scale] <- sweep(PyreneesFW[, columns_to_scale], MARGIN = 2, Predictor_means)
 PyreneesFW[, columns_to_scale] <- sweep(PyreneesFW[, columns_to_scale], MARGIN = 2, 2*Predictor_sd, FUN = "/")
@@ -97,6 +99,6 @@ aucpr <- performance(prediction(predictions$predictions, predictions$interaction
 
 ggplot(predictions) +
   geom_tile(aes(Predator, Prey, fill = predictions)) +
-  geom_point(data = filter(predictions, interaction == 1), aes(Predator, Prey), size = 5) +
+  geom_point(data = filter(predictions, interaction == 1), aes(Predator, Prey), size = 2) +
   scale_fill_distiller(palette = "YlGn") +
   theme(axis.text.x = element_text(angle = 90))
