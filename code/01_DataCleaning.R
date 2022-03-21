@@ -1,5 +1,10 @@
-rm(list = ls())
+# Step 01: Clean the food web data
+# For each of the three food webs: 
+# 1. extract the raw data
+# 2. get gbif name of each species
+# 3. standardize format into a dataframe with a column for predator and prey
 
+rm(list = ls())
 library(rgbif)
 library(purrr)
 library(dplyr)
@@ -7,15 +12,16 @@ library(tidyr)
 library(igraph)
 source("code/functions.R")
 
-# Standardize Food Web ----------------------------------------------------
-
-### European Metaweb
+# European metaweb --------------------------------------------------------
+# raw data
 EuroMW <- read.csv("data/raw/FW/TetraEU_pairwise_interactions.csv", sep = ";")
 
+# get gbif names
 gbif_names <- map_df(
   unique(c(EuroMW$sourceTaxonName, EuroMW$targetTaxonName)),
   name_backbone, phylum = "Chordata") # Clean species names
 
+# create different version of the fw
 EuroMWadults <- filter(EuroMW, targetLifestageName == "adults")
 EuroMWjuveniles <- filter(EuroMW, targetLifestageName == "larvae or young")
 EuroMWeggs <- filter(EuroMW, targetLifestageName == "eggs")
@@ -35,22 +41,24 @@ EuroMWeggs <- data.frame(Predator = gbif_names$species[match(EuroMWeggs$sourceTa
   distinct() %>%
   filter(!is.na(Predator), !is.na(Prey))
 
+# save cleaned fw
 write.csv(EuroMWadults, "data/cleaned/EuroFWadults.csv")
 write.csv(EuroMWjuveniles, "data/cleaned/EuroFWjuveniles.csv")
 write.csv(EuroMWeggs, "data/cleaned/EuroFWeggs.csv")
 
-# Save clean species name with taxonomy
+# save species name with taxonomy
 EuroMw_species <- gbif_names %>%
   select(Species = species, Class = class, Order = order, Family = family, Genus = genus)
-
 write.csv(EuroMw_species, "data/cleaned/EuroMWTaxo.csv")
 
-### Serengeti Food Web
+
+# Serengeti food web ------------------------------------------------------
+# raw data
 SerengetiNodes<- read.csv("data/raw/FW/Serengeti_nodes.csv")
 # Remove useless columns
 SerengetiNodes <- SerengetiNodes %>% select(Taxa = Taxa..species..family.or.order., Node = Node.no.)
 SerengetiNodes_clean <- data.frame()
-
+# get gbif and node id for each species
 for (i in c(1:nrow(SerengetiNodes))){
   if (SerengetiNodes$Taxa[i] != "-"){
     taxa <- name_backbone(SerengetiNodes$Taxa[i])
@@ -81,7 +89,7 @@ SerengetiNodes_clean[SerengetiNodes_clean$Original == "Mabuya striata", c("Genus
 SerengetiNodes_clean[SerengetiNodes_clean$Original == "Ma buya maculilabris", c("Genus", "Species")] <- c("Trachylepis", "Trachylepis maculilabris")
 SerengetiNodes_clean[SerengetiNodes_clean$Original == "Procavia johnstoni", c("Genus", "Species")] <- c("Procavia", "Procavia capensis")
 
-# Remove duplicates
+# remove duplicates
 SerengetiNodes_clean <- SerengetiNodes_clean[!duplicated(SerengetiNodes_clean$Species),]
 
 # clean food web
@@ -98,38 +106,43 @@ for (i in c(1:nrow(SerengetiInteractions))){
                                 tidyr::crossing(Consumer, Resource))
   }
 }
+
+# save cleaned food web
 write.csv(SerengetiInteractions_clean, "data/cleaned/SerengetiFW.csv")
 
-# Save clean species name with taxonomy
+# save species name with taxonomy
 SerengetiFW_species <- SerengetiNodes_clean %>%
   select(Species, Class, Order, Family, Genus)
-
 write.csv(SerengetiFW_species, "data/cleaned/SerengetiFWTaxo.csv")
 
-### Pyrenees Food Web
+# Pyrenees food web -------------------------------------------------------
+# raw data
 pyrenneesFW <- read.graph("data/raw/FW/pyrenees-network.graphml", format = "graphml")
 pyrenneesFW <- as.data.frame(as_edgelist(pyrenneesFW))
 colnames(pyrenneesFW) <- c("Prey", "Predator")
 
+# get gbif species name
 gbif_names <- map_df(
   unique(c(pyrenneesFW$Prey, pyrenneesFW$Predator)),
   name_backbone, phylum = "Chordata") # Clean species names
 
+# standardize food web
 pyrenneesFW <- data.frame(Predator = gbif_names$species[match(pyrenneesFW$Predator, gbif_names$canonicalName)], 
                      Prey = gbif_names$species[match(pyrenneesFW$Prey, gbif_names$canonicalName)]) %>%
   distinct() %>%
   filter(!is.na(Predator), !is.na(Prey))
 
+# save cleaned food web
 write.csv(pyrenneesFW, "data/cleaned/pyrenneesFW.csv")
 
-# Save clean species name with taxonomy
+# save species name with taxonomy
 PyrenneesFW_species <- gbif_names %>%
   select(Species = species, Class = class, Order = order, Family = family, Genus = genus) %>%
   filter(!is.na(Class))
-
 write.csv(PyrenneesFW_species, "data/cleaned/pyrenneesFWTaxo.csv")
 
-### High Arctic Food Web
+# High Arctic food web ----------------------------------------------------
+# raw data
 arcticFW_peak <- read.csv("data/raw/FW/HighArctic_peakyear.csv")
 arcticFW_crash <- read.csv("data/raw/FW/HighArctic_crashyear.csv")
 threshold <- 0
@@ -141,21 +154,22 @@ arcticFW <- rbind(arcticFW_crash, arcticFW_peak) %>%
   filter(Diet > threshold) %>%
   select(-Diet) %>% ungroup()
 
-# Clean nodes
+# clean nodes
 arctic_nodes <- read.csv("data/raw/FW/HighArctic_nodes.csv")
 gbif_names <- map_df(arctic_nodes$Species,
   name_backbone, phylum = "Chordata") # Clean species names
 arctic_nodes$Species <- gbif_names$species
 
+# standardize food web format
 arcticFW_clean <- left_join(arcticFW, arctic_nodes, by = c("Consumer" = "Functiongroup")) %>%
   left_join(arctic_nodes, by = c("Resource" = "Functiongroup"), suffix = c("Consumer", "Resource")) %>%
   select(Predator = SpeciesConsumer, Prey = SpeciesResource)
 
+# save cleaned food web
 write.csv(arcticFW_clean, "data/cleaned/HighArcticFW.csv")
 
-# Save clean species name with taxonomy
+# save clean species name with taxonomy
 arcticFW_species <- gbif_names %>%
   select(Species = species, Class = class, Order = order, Family = family, Genus = genus) %>%
   filter(!is.na(Class))
-
 write.csv(arcticFW_species, "data/cleaned/HighArcticFWTaxo.csv")
