@@ -8,7 +8,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 source("code/functions.R")
-load("data/models/GLMM_16032022.RData")
+load("data/models/GLMMadults_21032022.RData")
 
 # get the mean and sd to scale predictors
 FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
@@ -80,6 +80,7 @@ ggplot(predictions) +
 
 # Predict the Pyrennees FW ----------------------------------------------
 PyreneesInteractions <- read.csv("data/cleaned/pyrenneesFW.csv", row.names = 1)
+
 PyreneesInteractions$interaction <- 1
 PyreneesSpecies <- read.csv("data/cleaned/pyrenneesFWTaxo.csv", row.names = 1) %>%
   distinct() %>%

@@ -5,7 +5,7 @@ library(greta)
 source("code/functions.R")
 
 # Load data and standardize -----------------------------------------------
-EuroInteractions <- read.csv("data/cleaned/EuroFW.csv", row.names = 1)
+EuroInteractions <- read.csv("data/cleaned/EuroFWadults.csv", row.names = 1)
 FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
 EuroSpecies <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1) %>%
   distinct() %>%
