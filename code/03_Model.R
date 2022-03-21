@@ -42,7 +42,8 @@ training <- EuroMW[training_id, ]
 # GLMM --------------------------------------------------------------------
 predictors <- select(training, 
                      -Predator, -Prey, -Order.predator, -Order.prey,
-                     -Herbivore.predator, -Herbivore.prey, -interaction)
+                     -Herbivore.predator, -Herbivore.prey, -interaction,
+                     -ClutchSize.prey, -ClutchSize.predator)
 
 predictors <- cbind(rep(1, nrow(training)), predictors) %>% as_data()
 y <- as_data(training$interaction)
@@ -71,7 +72,6 @@ distribution(y) <- bernoulli(p)
 m <- model(global_coef_mean, global_coef_sd)
 
 GLMM <- mcmc(m, n_samples = 15000, warmup = 10000, chains = 4)
-GLMM <- extra_samples(GLMM, n_samples = 5000)
 
 save(GLMM, global_coef_mean, global_coef_sd, training_id, training, coef,  
      file =  paste0("data/models/GLMM_", format(Sys.Date(), "%d%m%Y"), ".RData"))

@@ -8,7 +8,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 source("code/functions.R")
-load("data/models/GLMM_16032022.RData")
+load("data/models/GLMM_21032022.RData")
 
 # Load data and standardize -----------------------------------------------
 EuroInteractions <- read.csv("data/cleaned/EuroFW.csv", row.names = 1)
@@ -36,14 +36,14 @@ EuroMW <- left_join(EuroMW, EuroInteractions)
 EuroMW$interaction[is.na(EuroMW$interaction)] <- 0
 
 predictor_names <- c("Intercept", 
-                     colnames(select(validation, 
+                     colnames(select(training, 
                                      -Predator, -Prey, -Order.predator, -Order.prey,
                                      -Herbivore.predator, -Herbivore.prey, -interaction)))
 
 # Check convergence -------------------------------------------------------
 mcmc_trace(GLMM, regex_pars = "global_coef_mean")
 mcmc_trace(GLMM, regex_pars = "global_coef_sd")
-rhat <- coda::gelman.diag(GLMM)$psrf
+coda::gelman.diag(GLMM)$psrf
 
 # Plot coefficients -------------------------------------------------------
 global_coef_mean <- data.frame(mean = summary(GLMM)$statistics[c(1:16),1])
