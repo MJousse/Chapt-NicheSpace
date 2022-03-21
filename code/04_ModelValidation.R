@@ -81,22 +81,9 @@ ggplot()+
   geom_pointrange(data = global_coef_mean, aes(xmin = mean-1.96*sd, x = mean, xmax = mean+1.96*sd, y = predictor), colour = "red")
 
 # Predict validation dataset ----------------------------------------------
-# extract predictors
-predictors <- select(validation, 
-                     -Predator, -Prey, -Order.predator, -Order.prey,
-                     -Herbivore.predator, -Herbivore.prey, -interaction,
-                     -ClutchSize.prey, -ClutchSize.predator)
-predictors <- cbind(rep(1, nrow(validation)), predictors) %>% as_data()
-
-# predator order
-predator_order <- as.numeric(factor(validation$Order.pred, levels = unique(FuncTraits$Order)))
-
 # make predictions
-linear_predictor <- rowSums(predictors * t(coef[,predator_order]))
-p <- ilogit(linear_predictor)
-predictions <- calculate(p, values = GLMM, nsim = 100)
-predictions <- colMeans(predictions[[1]])
+predictions <- make_predictions(validation, unique(FuncTraits$Order), coef, GLMM)
 
 # calculate roc-auc and pr-auc
-auc <- performance(prediction(predictions, validation$interaction), "auc")@y.values[[1]]
-aucpr <- performance(prediction(predictions, validation$interaction), "aucpr")@y.values[[1]]
+auc <- performance(prediction(predictions$prediction, validation$interaction), "auc")@y.values[[1]]
+aucpr <- performance(prediction(predictions$prediction, validation$interaction), "aucpr")@y.values[[1]]

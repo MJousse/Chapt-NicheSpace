@@ -1,3 +1,5 @@
+# Functions used throughout the different scripts
+
 #' Jaccard similarity
 #' 
 #' @param pred_df dataframe. Traits of the predator.
@@ -13,24 +15,6 @@ Jaccard <- function(pred_df, prey_df){
   return(jaccard_s)
 }
 
-#' Match of Predator's Diet with the Prey
-#' 
-#' @param Small_Mam logical vector. Predators eats small Mammals?
-#' @param Large_Mam logical vector. Predators eats large Mammals?
-#' @param Herptile logical vector. Predators eats herptiles?
-#' @param Bird_eggs logical vector. Predators eats bird's eggs?
-#' @param Small_bird logical vector. Predators eats small birds?
-#' @param Large_Bird logical vector. Predators eats large birds?
-#' @param Class_prey character vector. Class of the prey.
-#' @return A Logical vector. Does the diet of the predator match the class of the prey?
-match_diet <- function(Small_Mam, Large_Mam, Herptile, Bird_eggs, Small_bird, Large_Bird, Class_prey){
-  match <- ifelse(Class_prey == "Amphibia" & Herptile %in% c(1,2), 1,
-                  ifelse(Class_prey == "Aves" & (Bird_eggs %in% c(1,2) | Small_bird %in% c(1,2) | Large_Bird %in% c(1,2)), 1,
-                         ifelse(Class_prey == "Mammalia" & (Small_Mam %in% c(1,2) | Large_Mam %in% c(1,2)), 1,
-                                ifelse(Class_prey == "Reptilia" & Herptile %in% c(1,2), 1, 0))))
-  return(match)
-}
-
 #' Get the mode of a vector
 #' 
 #' @param v a vector
@@ -42,7 +26,10 @@ getmode <- function(v) {
 
 #' Transform traits into predictors
 #' 
-#' TODO
+#' @param FW dataframe. Traits of the the predators and the prey.
+#' @param prey_suffix character. Suffix after all column names for the traits of the prey.
+#' @param predator_suffix character. Suffix after all column names for the traits of the predator.
+#' @return a dataframe with the predictors of species interactions.
 traits2predictors <- function(FW, prey_suffix = ".x", predator_suffix = ".y"){
   FW <- FW %>%
     rename_with(~ gsub(paste0("\\", predator_suffix, "$"), ".predator", .x)) %>%
