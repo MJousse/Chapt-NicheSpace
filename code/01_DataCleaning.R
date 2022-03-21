@@ -16,12 +16,28 @@ gbif_names <- map_df(
   unique(c(EuroMW$sourceTaxonName, EuroMW$targetTaxonName)),
   name_backbone, phylum = "Chordata") # Clean species names
 
-EuroMW <- data.frame(Predator = gbif_names$species[match(EuroMW$sourceTaxonName, gbif_names$canonicalName)], 
-                           Prey = gbif_names$species[match(EuroMW$targetTaxonName, gbif_names$canonicalName)]) %>%
+EuroMWadults <- filter(EuroMW, targetLifestageName == "adults")
+EuroMWjuveniles <- filter(EuroMW, targetLifestageName == "larvae or young")
+EuroMWeggs <- filter(EuroMW, targetLifestageName == "eggs")
+
+EuroMWadults <- data.frame(Predator = gbif_names$species[match(EuroMWadults$sourceTaxonName, gbif_names$canonicalName)], 
+                           Prey = gbif_names$species[match(EuroMWadults$targetTaxonName, gbif_names$canonicalName)]) %>%
   distinct() %>%
   filter(!is.na(Predator), !is.na(Prey))
 
-write.csv(EuroMW, "data/cleaned/EuroFW.csv")
+EuroMWjuveniles <- data.frame(Predator = gbif_names$species[match(EuroMWjuveniles$sourceTaxonName, gbif_names$canonicalName)], 
+                           Prey = gbif_names$species[match(EuroMWjuveniles$targetTaxonName, gbif_names$canonicalName)]) %>%
+  distinct() %>%
+  filter(!is.na(Predator), !is.na(Prey))
+
+EuroMWeggs <- data.frame(Predator = gbif_names$species[match(EuroMWeggs$sourceTaxonName, gbif_names$canonicalName)], 
+                           Prey = gbif_names$species[match(EuroMWeggs$targetTaxonName, gbif_names$canonicalName)]) %>%
+  distinct() %>%
+  filter(!is.na(Predator), !is.na(Prey))
+
+write.csv(EuroMWadults, "data/cleaned/EuroFWadults.csv")
+write.csv(EuroMWjuveniles, "data/cleaned/EuroFWjuveniles.csv")
+write.csv(EuroMWeggs, "data/cleaned/EuroFWeggs.csv")
 
 # Save clean species name with taxonomy
 EuroMw_species <- gbif_names %>%

@@ -8,7 +8,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 source("code/functions.R")
-load("data/models/GLMM_21032022.RData")
+load("data/models/GLMMadults_21032022.RData")
 
 # Load data and standardize -----------------------------------------------
 EuroInteractions <- read.csv("data/cleaned/EuroFW.csv", row.names = 1)
@@ -38,7 +38,8 @@ EuroMW$interaction[is.na(EuroMW$interaction)] <- 0
 predictor_names <- c("Intercept", 
                      colnames(select(training, 
                                      -Predator, -Prey, -Order.predator, -Order.prey,
-                                     -Herbivore.predator, -Herbivore.prey, -interaction)))
+                                     -Herbivore.predator, -Herbivore.prey, -interaction,
+                                     -ClutchSize.prey, -ClutchSize.predator)))
 
 # Check convergence -------------------------------------------------------
 mcmc_trace(GLMM, regex_pars = "global_coef_mean")
@@ -46,18 +47,18 @@ mcmc_trace(GLMM, regex_pars = "global_coef_sd")
 coda::gelman.diag(GLMM)$psrf
 
 # Plot coefficients -------------------------------------------------------
-global_coef_mean <- data.frame(mean = summary(GLMM)$statistics[c(1:16),1])
-global_coef_mean$sd <- summary(GLMM)$statistics[c(17:32),1]
+global_coef_mean <- data.frame(mean = summary(GLMM)$statistics[c(1:14),1])
+global_coef_mean$sd <- summary(GLMM)$statistics[c(15:28),1]
 global_coef_mean$predictor <- factor(predictor_names, 
                                      levels = rev(predictor_names))
 model_coef <- calculate(coef, values = GLMM)
 model_coef <- model_coef$`11`
-coef_order <- data.frame(t(matrix(apply(model_coef, MARGIN = 2, mean), ncol = 48, nrow = 16)))
+coef_order <- data.frame(t(matrix(apply(model_coef, MARGIN = 2, mean), ncol = 48, nrow = 14)))
 colnames(coef_order) <- predictor_names
 coef_order <- pivot_longer(coef_order, cols = everything(), names_to = "predictor", values_to = "mean")
 coef_order$predictor <- factor(coef_order$predictor, 
                                levels = rev(predictor_names))
-coef_order_sd <- data.frame(t(matrix(apply(model_coef, MARGIN = 2, sd), ncol = 48, nrow = 16)))
+coef_order_sd <- data.frame(t(matrix(apply(model_coef, MARGIN = 2, sd), ncol = 48, nrow = 14)))
 colnames(coef_order_sd) <- predictor_names
 coef_order_sd <- pivot_longer(coef_order_sd, cols = everything(), names_to = "predictor", values_to = "sd")
 coef_order_sd$predictor <- factor(coef_order_sd$predictor, 
@@ -78,7 +79,8 @@ validation_noninteractions <- slice_sample(validation[validation$interaction == 
 validation <- rbind(validation_interactions, validation_noninteractions)
 predictors <- select(validation, 
                      -Predator, -Prey, -Order.predator, -Order.prey,
-                     -Herbivore.predator, -Herbivore.prey, -interaction)
+                     -Herbivore.predator, -Herbivore.prey, -interaction,
+                     -ClutchSize.prey, -ClutchSize.predator)
 
 predictors <- cbind(rep(1, nrow(validation)), predictors) %>% as_data()
 predator_order <- as.numeric(factor(validation$Order.pred, levels = unique(FuncTraits$Order)))
