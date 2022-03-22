@@ -14,7 +14,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 source("code/functions.R")
-load("data/models/GLMMadults_21032022.RData")
+load("data/models/GLMM_22032022.RData")
 
 # Get the mean and sd of predictors in Europe for scaling -----------------
 # load data
@@ -56,15 +56,37 @@ predictions <- make_predictions(HighArcticFW, unique(FuncTraits$Order), coef, GL
   left_join(HighArcticInteractions) %>% replace_na(list(interaction = 0))
 
 # calculate performance
-auc <- performance(prediction(predictions$predictions, predictions$interaction), "auc")@y.values[[1]]
-aucpr <- performance(prediction(predictions$predictions, predictions$interaction), "aucpr")@y.values[[1]]
+auc <- performance(prediction(predictions$prediction, predictions$interaction), "auc")@y.values[[1]]
+aucpr <- performance(prediction(predictions$prediction, predictions$interaction), "aucpr")@y.values[[1]]
 
 # plot predictions
 ggplot(predictions) +
-  geom_tile(aes(Predator, Prey, fill = predictions)) +
+  geom_tile(aes(Predator, Prey, fill = prediction)) +
   geom_point(data = filter(predictions, interaction == 1), aes(Predator, Prey), size = 5) +
   scale_fill_distiller(palette = "YlGn") +
   theme(axis.text.x = element_text(angle = 90))
+
+# compare predicted prey diversity and true prey diversity
+d <- predictions %>% group_by(Predator) %>% summarise(alpha = sum(interaction), predicted_alpha = sum(prediction))
+ggplot(d) +
+  geom_point(aes(x = alpha, y = predicted_alpha)) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
+  labs(x = "Prey diversity", y = "Predicted prey diversity") +
+  lims(x = c(0, max(d[,c("alpha", "predicted_alpha")])), y = c(0, max(d[,c("alpha", "predicted_alpha")]))) + 
+  geom_text(data=subset(d, abs(predicted_alpha - alpha) > 3),
+            aes(alpha, predicted_alpha, label = Predator),  
+            position = position_nudge(x = 0.5, y = 0.5))
+
+# compare predicted predator diversity and true prey diversity
+d <- predictions %>% group_by(Prey) %>% summarise(alpha = sum(interaction), predicted_alpha = sum(prediction))
+ggplot(d) +
+  geom_point(aes(x = alpha, y = predicted_alpha)) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
+  labs(x = "Predator diversity", y = "Predicted predator diversity") +
+  lims(x = c(0, max(d[,c("alpha", "predicted_alpha")])), y = c(0, max(d[,c("alpha", "predicted_alpha")]))) + 
+  geom_text(data=subset(d, abs(predicted_alpha - alpha) > 3),
+            aes(alpha, predicted_alpha, label = Prey),  
+            position = position_nudge(x = 0.25, y = 0.2))
 
 # Serengeti food web ------------------------------------------------------
 # load data
@@ -87,15 +109,37 @@ predictions <- make_predictions(SerengetiFW, unique(FuncTraits$Order), coef, GLM
   left_join(SerengetiInteractions) %>% replace_na(list(interaction = 0))
 
 # calculate performance
-auc <- performance(prediction(predictions$predictions, predictions$interaction), "auc")@y.values[[1]]
-aucpr <- performance(prediction(predictions$predictions, predictions$interaction), "aucpr")@y.values[[1]]
+auc <- performance(prediction(predictions$prediction, predictions$interaction), "auc")@y.values[[1]]
+aucpr <- performance(prediction(predictions$prediction, predictions$interaction), "aucpr")@y.values[[1]]
 
 # plot predictions
 ggplot(predictions) +
-  geom_tile(aes(Predator, Prey, fill = predictions)) +
+  geom_tile(aes(Predator, Prey, fill = prediction)) +
   geom_point(data = filter(predictions, interaction == 1), aes(Predator, Prey), size = 1) +
   scale_fill_distiller(palette = "YlGn") +
   theme(axis.text.x = element_text(angle = 90))
+
+# compare predicted prey diversity and true prey diversity
+d <- predictions %>% group_by(Predator) %>% summarise(alpha = sum(interaction), predicted_alpha = sum(prediction))
+ggplot(d) +
+  geom_point(aes(x = alpha, y = predicted_alpha)) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
+  labs(x = "Prey diversity", y = "Predicted prey diversity") +
+  lims(x = c(0, max(d[,c("alpha", "predicted_alpha")])), y = c(0, max(d[,c("alpha", "predicted_alpha")]))) + 
+  geom_text(data=subset(d, abs(predicted_alpha - alpha) > 100),
+            aes(alpha, predicted_alpha, label = Predator),  
+            position = position_nudge(x = 5, y = -5))
+
+# compare predicted predator diversity and true prey diversity
+d <- predictions %>% group_by(Prey) %>% summarise(alpha = sum(interaction), predicted_alpha = sum(prediction))
+ggplot(d) +
+  geom_point(aes(x = alpha, y = predicted_alpha)) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
+  labs(x = "Predator diversity", y = "Predicted predator diversity") +
+  lims(x = c(0, max(d[,c("alpha", "predicted_alpha")])), y = c(0, max(d[,c("alpha", "predicted_alpha")]))) + 
+  geom_text(data=subset(d, abs(predicted_alpha - alpha) > 80),
+            aes(alpha, predicted_alpha, label = Prey),  
+            position = position_nudge(x = 1, y = -2))
 
 # Pyrenees food web -------------------------------------------------------
 # load data
@@ -118,12 +162,34 @@ predictions <- make_predictions(PyreneesFW, unique(FuncTraits$Order), coef, GLMM
   left_join(PyreneesInteractions) %>% replace_na(list(interaction = 0))
 
 # measure performance
-auc <- performance(prediction(predictions$predictions, predictions$interaction), "auc")@y.values[[1]]
-aucpr <- performance(prediction(predictions$predictions, predictions$interaction), "aucpr")@y.values[[1]]
+auc <- performance(prediction(predictions$prediction, predictions$interaction), "auc")@y.values[[1]]
+aucpr <- performance(prediction(predictions$prediction, predictions$interaction), "aucpr")@y.values[[1]]
 
 # plot predictions
 ggplot(predictions) +
-  geom_tile(aes(Predator, Prey, fill = predictions)) +
+  geom_tile(aes(Predator, Prey, fill = prediction)) +
   geom_point(data = filter(predictions, interaction == 1), aes(Predator, Prey), size = 2) +
   scale_fill_distiller(palette = "YlGn") +
   theme(axis.text.x = element_text(angle = 90))
+
+# compare predicted prey diversity and true prey diversity
+d <- predictions %>% group_by(Predator) %>% summarise(alpha = sum(interaction), predicted_alpha = sum(prediction))
+ggplot(d) +
+  geom_point(aes(x = alpha, y = predicted_alpha)) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
+  labs(x = "Prey diversity", y = "Predicted prey diversity") +
+  lims(x = c(0, max(d[,c("alpha", "predicted_alpha")])), y = c(0, max(d[,c("alpha", "predicted_alpha")]))) + 
+  geom_text(data=subset(d, abs(predicted_alpha - alpha) > 150),
+            aes(alpha, predicted_alpha, label = Predator),  
+            position = position_nudge(x = 5, y = -5))
+
+# compare predicted predator diversity and true prey diversity
+d <- predictions %>% group_by(Prey) %>% summarise(alpha = sum(interaction), predicted_alpha = sum(prediction))
+ggplot(d) +
+  geom_point(aes(x = alpha, y = predicted_alpha)) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
+  labs(x = "Predator diversity", y = "Predicted predator diversity") +
+  lims(x = c(0, max(d[,c("alpha", "predicted_alpha")])), y = c(0, max(d[,c("alpha", "predicted_alpha")]))) + 
+  geom_text(data=subset(d, abs(predicted_alpha - alpha) > 75),
+            aes(alpha, predicted_alpha, label = Prey),  
+            position = position_nudge(x = 1, y = -2))

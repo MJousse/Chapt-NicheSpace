@@ -12,7 +12,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 source("code/functions.R")
-load("data/models/GLMMadults_21032022.RData")
+load("data/models/GLMM_22032022.RData")
 
 # Check model convergence -------------------------------------------------
 mcmc_trace(GLMM, regex_pars = "global_coef_mean")
@@ -21,7 +21,7 @@ coda::gelman.diag(GLMM)$psrf
 
 # Prepare validation dataset ----------------------------------------------
 # load data
-EuroInteractions <- read.csv("data/cleaned/EuroFW.csv", row.names = 1)
+EuroInteractions <- read.csv("data/cleaned/EuroFWadults.csv", row.names = 1)
 FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
 EuroSpecies <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1) %>%
   distinct() %>%
@@ -82,7 +82,7 @@ ggplot()+
 
 # Predict validation dataset ----------------------------------------------
 # make predictions
-predictions <- make_predictions(validation, unique(FuncTraits$Order), coef, GLMM)
+predictions <- make_predictions(validation[,-ncol(validation)], unique(FuncTraits$Order), coef, GLMM)
 
 # calculate roc-auc and pr-auc
 auc <- performance(prediction(predictions$prediction, validation$interaction), "auc")@y.values[[1]]
