@@ -12,7 +12,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 source("code/functions.R")
-load("data/models/GLMM_22032022.RData")
+load("data/models/GLMM_21032022.RData")
 
 # Check model convergence -------------------------------------------------
 mcmc_trace(GLMM, regex_pars = "global_coef_mean")
@@ -42,8 +42,7 @@ EuroMW$interaction[is.na(EuroMW$interaction)] <- 0
 predictor_names <- c("Intercept", 
                      colnames(select(training, 
                                      -Predator, -Prey, -Order.predator, -Order.prey,
-                                     -Herbivore.predator, -Herbivore.prey, -interaction,
-                                     -ClutchSize.prey, -ClutchSize.predator)))
+                                     -Herbivore.predator, -Herbivore.prey, -interaction)))
 
 # prepare a validation dataset with the same prevalence than the metaweb
 prev <- mean(EuroMW$interaction)

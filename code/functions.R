@@ -76,8 +76,7 @@ get_predictors <- function(Species_List, FuncTraits){
 make_predictions <- function(predictors, order_level, coef, model){
   x <- select(predictors, 
               -Predator, -Prey, -Order.predator, -Order.prey,
-              -Herbivore.predator, -Herbivore.prey, -ClutchSize.predator,
-              -ClutchSize.prey)
+              -Herbivore.predator, -Herbivore.prey)
   
   x <- cbind(rep(1, nrow(predictors)), x) %>% as_data()
   predator_order <- as.numeric(factor(predictors$Order.pred, levels = order_level))
