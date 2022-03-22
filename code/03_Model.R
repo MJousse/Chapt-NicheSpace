@@ -44,7 +44,7 @@ training <- EuroMW[training_id, ]
 # extract predictors
 predictors <- select(training, 
                      -Predator, -Prey, -Order.predator, -Order.prey,
-                     -Herbivore.predator, -Herbivore.prey, -interaction)
+                     -Carnivore.predator, -Carnivore.prey, -interaction)
 
 # add a column for the intercept
 predictors <- cbind(rep(1, nrow(training)), predictors) %>% as_data()
@@ -121,7 +121,7 @@ training <- HighArcticFW[training_id, ]
 # extract predictors
 predictors <- select(training, 
                      -Predator, -Prey, -Order.predator, -Order.prey,
-                     -Herbivore.predator, -Herbivore.prey, -interaction)
+                     -Carnivore.predator, -Carnivore.prey, -interaction)
 
 # add a column for the intercept
 predictors <- cbind(rep(1, nrow(training)), predictors) %>% as_data()
@@ -155,7 +155,7 @@ distribution(y) <- bernoulli(p)
 
 # Train the model with greta ----------------------------------------------
 m <- model(global_coef_mean, global_coef_sd)
-ArcticModel <- mcmc(m, n_samples = 15000, warmup = 10000, chains = 4)
+ArcticModel <- mcmc(m, n_samples = 20000, warmup = 10000, chains = 4)
 
 # save the model
 save(ArcticModel, global_coef_mean, global_coef_sd, training_id, training, coef,  
@@ -198,7 +198,7 @@ training <- PyreneesFW[training_id, ]
 # extract predictors
 predictors <- select(training, 
                      -Predator, -Prey, -Order.predator, -Order.prey,
-                     -Herbivore.predator, -Herbivore.prey, -interaction)
+                     -Carnivore.predator, -Carnivore.prey, -interaction)
 
 # add a column for the intercept
 predictors <- cbind(rep(1, nrow(training)), predictors) %>% as_data()
@@ -273,7 +273,7 @@ training <- SerengetiFW[training_id, ]
 # extract predictors
 predictors <- select(training, 
                      -Predator, -Prey, -Order.predator, -Order.prey,
-                     -Herbivore.predator, -Herbivore.prey, -interaction)
+                     -Carnivore.predator, -Carnivore.prey, -interaction)
 
 # add a column for the intercept
 predictors <- cbind(rep(1, nrow(training)), predictors) %>% as_data()
@@ -307,7 +307,7 @@ distribution(y) <- bernoulli(p)
 
 # Train the model with greta ----------------------------------------------
 m <- model(global_coef_mean, global_coef_sd)
-SerengetiModel <- mcmc(m, n_samples = 15000, warmup = 10000, chains = 4)
+SerengetiModel <- mcmc(m, n_samples = 20000, warmup = 10000, chains = 4)
 
 # save the model
 save(SerengetiModel, global_coef_mean, global_coef_sd, training_id, training, coef,  
