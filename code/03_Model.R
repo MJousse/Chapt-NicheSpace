@@ -80,9 +80,10 @@ distribution(y) <- bernoulli(p)
 m <- model(global_coef_mean, global_coef_sd)
 EuroModel <- mcmc(m, n_samples = 20000, warmup = 10000, chains = 4)
 
-# save the model
+# save the model on OneDrive (too big for Github...)
 save(EuroModel, global_coef_mean, global_coef_sd, training_id, training, coef,  
-     file =  paste0("data/models/EuroModel_", format(Sys.Date(), "%d%m%Y"), ".RData"))
+     file =  paste0("~/OneDrive/Chapt-NicheSpace/models/EuroModel_", 
+                    format(Sys.Date(), "%d%m%Y"), ".RData"))
 
 # -------------------------------------------------------------------------
 
@@ -158,7 +159,8 @@ ArcticModel <- mcmc(m, n_samples = 15000, warmup = 10000, chains = 4)
 
 # save the model
 save(ArcticModel, global_coef_mean, global_coef_sd, training_id, training, coef,  
-     file =  paste0("data/models/ArcticModel_", format(Sys.Date(), "%d%m%Y"), ".RData"))
+     file =  paste0("~/OneDrive/Chapt-NicheSpace/models/ArcticModel_", 
+                    format(Sys.Date(), "%d%m%Y"), ".RData"))
 
 # -------------------------------------------------------------------------
 
@@ -234,7 +236,8 @@ PyreneesModel <- mcmc(m, n_samples = 20000, warmup = 10000, chains = 4)
 
 # save the model
 save(PyreneesModel, global_coef_mean, global_coef_sd, training_id, training, coef,  
-     file =  paste0("data/models/PyreneesModel_", format(Sys.Date(), "%d%m%Y"), ".RData"))
+     file =  paste0("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel_", 
+                    format(Sys.Date(), "%d%m%Y"), ".RData"))
 
 # Prepare training dataset ------------------------------------------------
 # load data and standardize
@@ -308,4 +311,5 @@ SerengetiModel <- mcmc(m, n_samples = 15000, warmup = 10000, chains = 4)
 
 # save the model
 save(SerengetiModel, global_coef_mean, global_coef_sd, training_id, training, coef,  
-     file =  paste0("data/models/SerengetiModel_", format(Sys.Date(), "%d%m%Y"), ".RData"))
+     file =  paste0("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel_", 
+                    format(Sys.Date(), "%d%m%Y"), ".RData"))
