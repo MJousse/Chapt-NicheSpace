@@ -124,7 +124,8 @@ colnames(pyrenneesFW) <- c("Prey", "Predator")
 # get gbif species name
 gbif_names <- map_df(
   unique(c(pyrenneesFW$Prey, pyrenneesFW$Predator)),
-  name_backbone, phylum = "Chordata") # Clean species names
+  name_backbone, phylum = "Chordata") %>%
+  filter(class %in% c("Amphibia", "Reptilia", "Mammalia", "Aves"))
 
 # standardize food web
 pyrenneesFW <- data.frame(Predator = gbif_names$species[match(pyrenneesFW$Predator, gbif_names$canonicalName)], 
@@ -138,7 +139,7 @@ write.csv(pyrenneesFW, "data/cleaned/pyrenneesFW.csv")
 # save species name with taxonomy
 PyrenneesFW_species <- gbif_names %>%
   select(Species = species, Class = class, Order = order, Family = family, Genus = genus) %>%
-  filter(!is.na(Class))
+  filter(!is.na(Class) & Class %in% c("Amphibia", "Reptilia", "Aves", "Mammalia"))
 write.csv(PyrenneesFW_species, "data/cleaned/pyrenneesFWTaxo.csv")
 
 # High Arctic food web ----------------------------------------------------
