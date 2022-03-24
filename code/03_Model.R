@@ -8,11 +8,11 @@ set.seed(16)
 library(dplyr)
 library(greta)
 source("code/functions.R")
+FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
 
 # Prepare training dataset ------------------------------------------------
 # load data and standardize
 EuroInteractions <- read.csv("data/cleaned/EuroFWadults.csv", row.names = 1)
-FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
 EuroSpecies <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1) %>%
   distinct() %>%
   filter(!is.na(Species))
@@ -90,7 +90,7 @@ save(EuroModel, global_coef_mean, global_coef_sd, training_id, training, coef,
 # Prepare training dataset ------------------------------------------------
 # load data and standardize
 HighArcticInteractions <- read.csv("data/cleaned/HighArcticFW.csv", row.names = 1)
-HighArcticSpecies <- read.csv("data/cleaned/HighArcticFW.csv", row.names = 1) %>%
+HighArcticSpecies <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1) %>%
   distinct() %>%
   filter(!is.na(Species))
 
@@ -241,7 +241,8 @@ save(PyreneesModel, global_coef_mean, global_coef_sd, training_id, training, coe
 
 # Prepare training dataset ------------------------------------------------
 # load data and standardize
-SerengetiInteractions <- read.csv("data/cleaned/SerengetiFW.csv", row.names = 1)
+SerengetiInteractions <- read.csv("data/cleaned/SerengetiFW.csv", row.names = 1) %>%
+  select(Predator = Consumer_Species, Prey = Resource_Species)
 SerengetiSpecies <- read.csv("data/cleaned/SerengetiFWTaxo.csv", row.names = 1) %>%
   distinct() %>%
   filter(!is.na(Species))
@@ -260,7 +261,7 @@ SerengetiFW <- left_join(SerengetiFW, SerengetiInteractions)
 SerengetiFW$interaction[is.na(SerengetiFW$interaction)] <- 0
 
 # take 70% of positives and as many negatives for training
-N = round(0.7 * sum(EuroMW$interaction))
+N = round(0.7 * sum(SerengetiFW$interaction))
 training_positives <- sample(seq_len(sum(SerengetiFW$interaction)), size = N)
 training_negatives <- sample(seq_len(sum(SerengetiFW$interaction==0)), size = N)
 training_id <- as.numeric(c(
