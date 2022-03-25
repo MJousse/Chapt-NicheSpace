@@ -42,7 +42,10 @@ training <- EuroMW[training_id, ]
 
 # Set up the bayesian glmm ------------------------------------------------
 # extract predictors
-training <- select(training,  -Predator, -Prey, - Order.prey, -Herbivore.predator,  -Herbivore.prey)
+training <- select(training,  -Predator, -Prey, -Order.prey, 
+                   -Herbivore.predator,  -Herbivore.prey) %>%
+  mutate(Order.predator = factor(Order.predator, 
+                                 levels = unique(FuncTraits$Order)))
 euroMW_form <- bf(interaction ~ 1 + . + (1 + .|Order.predator), family = bernoulli())
 
 get_prior(euroMW_form, data = training)
@@ -58,48 +61,12 @@ prior_predictions <- brm(formula = euroMW_form,
                          prior = model_priors,
                          sample_prior = "only", inits = "0")
 
-training %>%
-  add_predicted_draws(prior_predictions, ndraws = 6, seed = 4321) %>% 
-  ggplot(aes(x = Order.predator, y = .prediction)) + geom_point(alpha = 0.5) + facet_wrap(~.draw)
-
-# add a column for the intercept
-predictors <- cbind(rep(1, nrow(training)), predictors) %>% as_data()
-y <- as_data(training$interaction)
-
-# get levels for the random effect: predator order
-predator_order <- as.numeric(factor(training$Order.pred, levels = unique(FuncTraits$Order)))
-
-# number of predictors and orders
-norder <- length(unique(FuncTraits$Order))
-ntraits <- ncol(predictors)
-
-# common effect
-global_coef_mean <- normal(0, 1, ntraits)
-global_coef_sd <- cauchy(0, 3, truncation = c(0.001, Inf), dim = ntraits)
-
-# coef for each order is drawn from global mean and sd
-coef <- normal(global_coef_mean, global_coef_sd, dim = c(ntraits))
-for (i in c(2:norder)){
-  coef <- cbind(coef, normal(global_coef_mean, global_coef_sd, dim = c(ntraits)))
-}
-
-# linear prediction
-linear_predicton <- rowSums(predictors * t(coef[,predator_order]))
-
-# ilogit of linear prediction
-p <- ilogit(linear_predicton)
-
-# interaction as Bernoulli trial
-distribution(y) <- bernoulli(p)
-
-# Train the model with greta ----------------------------------------------
-m <- model(global_coef_mean, global_coef_sd)
-EuroModel <- mcmc(m, n_samples = 20000, warmup = 10000, chains = 4)
+EuroModel <- update(prior_predictions, sample_prior = "no", 
+                    cores = 16, inits = "0", iter = 10000)
 
 # save the model on OneDrive (too big for Github...)
-save(EuroModel, global_coef_mean, global_coef_sd, training_id, training, coef,  
-     file =  paste0("~/OneDrive/Chapt-NicheSpace/models/EuroModel_", 
-                    format(Sys.Date(), "%d%m%Y"), ".RData"))
+saveRDS(EuroModel,
+        file = paste0("~/OneDrive/Chapt-NicheSpace/models/EuroModel_brms.rds"))
 
 # -------------------------------------------------------------------------
 
@@ -135,48 +102,32 @@ training <- HighArcticFW[training_id, ]
 
 # Set up the bayesian glmm ------------------------------------------------
 # extract predictors
-predictors <- select(training, 
-                     -Predator, -Prey, -Order.predator, -Order.prey,
-                     -Carnivore.predator, -Carnivore.prey, -interaction)
+training <- select(training,  -Predator, -Prey, -Order.prey, 
+                   -Herbivore.predator,  -Herbivore.prey) %>%
+  mutate(Order.predator = factor(Order.predator, 
+                                 levels = unique(FuncTraits$Order)))
+ArcticFW_form <- bf(interaction ~ 1 + . + (1 + .|Order.predator), family = bernoulli())
 
-# add a column for the intercept
-predictors <- cbind(rep(1, nrow(training)), predictors) %>% as_data()
-y <- as_data(training$interaction)
+get_prior(ArcticFW_form, data = training)
 
-# get levels for the random effect: predator order
-predator_order <- as.numeric(factor(training$Order.pred, levels = unique(FuncTraits$Order)))
+model_priors <- c(
+  prior(normal(0, 1), class = "Intercept"),
+  prior(normal(0, 1), class = "b"),
+  prior(cauchy(0, 5), class = "sd")
+)
 
-# number of predictors and orders
-norder <- length(unique(FuncTraits$Order))
-ntraits <- ncol(predictors)
+prior_predictions <- brm(formula = ArcticFW_form,
+                         data = training,
+                         prior = model_priors,
+                         sample_prior = "only", inits = "0")
 
-# common effect
-global_coef_mean <- normal(0, 1, ntraits)
-global_coef_sd <- cauchy(0, 3, truncation = c(0.001, Inf), dim = ntraits)
-
-# coef for each order is drawn from global mean and sd
-coef <- normal(global_coef_mean, global_coef_sd, dim = c(ntraits))
-for (i in c(2:norder)){
-  coef <- cbind(coef, normal(global_coef_mean, global_coef_sd, dim = c(ntraits)))
-}
-
-# linear prediction
-linear_predicton <- rowSums(predictors * t(coef[,predator_order]))
-
-# ilogit of linear prediction
-p <- ilogit(linear_predicton)
-
-# interaction as Bernoulli trial
-distribution(y) <- bernoulli(p)
-
-# Train the model with greta ----------------------------------------------
-m <- model(global_coef_mean, global_coef_sd)
-ArcticModel <- mcmc(m, n_samples = 20000, warmup = 10000, chains = 4)
+ArcticModel <- update(prior_predictions, sample_prior = "no", cores = 16, 
+                      inits = "0", 
+                      cores = 16, inits = "0", iter = 10000)
 
 # save the model
-save(ArcticModel, global_coef_mean, global_coef_sd, training_id, training, coef,  
-     file =  paste0("~/OneDrive/Chapt-NicheSpace/models/ArcticModel_", 
-                    format(Sys.Date(), "%d%m%Y"), ".RData"))
+saveRDS(ArcticModel, 
+        file = paste0("~/OneDrive/Chapt-NicheSpace/models/ArcticModel_brms.rds"))
 
 # -------------------------------------------------------------------------
 
@@ -212,48 +163,31 @@ training <- PyreneesFW[training_id, ]
 
 # Set up the bayesian glmm ------------------------------------------------
 # extract predictors
-predictors <- select(training, 
-                     -Predator, -Prey, -Order.predator, -Order.prey,
-                     -Carnivore.predator, -Carnivore.prey, -interaction)
+training <- select(training,  -Predator, -Prey, -Order.prey, 
+                   -Herbivore.predator,  -Herbivore.prey) %>%
+  mutate(Order.predator = factor(Order.predator, 
+                                 levels = unique(FuncTraits$Order)))
+PyreneesFW_form <- bf(interaction ~ 1 + . + (1 + .|Order.predator), family = bernoulli())
 
-# add a column for the intercept
-predictors <- cbind(rep(1, nrow(training)), predictors) %>% as_data()
-y <- as_data(training$interaction)
+get_prior(PyreneesFW_form, data = training)
 
-# get levels for the random effect: predator order
-predator_order <- as.numeric(factor(training$Order.pred, levels = unique(FuncTraits$Order)))
+model_priors <- c(
+  prior(normal(0, 1), class = "Intercept"),
+  prior(normal(0, 1), class = "b"),
+  prior(cauchy(0, 5), class = "sd")
+)
 
-# number of predictors and orders
-norder <- length(unique(FuncTraits$Order))
-ntraits <- ncol(predictors)
+prior_predictions <- brm(formula = PyreneesFW_form,
+                         data = training,
+                         prior = model_priors,
+                         sample_prior = "only", inits = "0")
 
-# common effect
-global_coef_mean <- normal(0, 1, ntraits)
-global_coef_sd <- cauchy(0, 3, truncation = c(0.001, Inf), dim = ntraits)
-
-# coef for each order is drawn from global mean and sd
-coef <- normal(global_coef_mean, global_coef_sd, dim = c(ntraits))
-for (i in c(2:norder)){
-  coef <- cbind(coef, normal(global_coef_mean, global_coef_sd, dim = c(ntraits)))
-}
-
-# linear prediction
-linear_predicton <- rowSums(predictors * t(coef[,predator_order]))
-
-# ilogit of linear prediction
-p <- ilogit(linear_predicton)
-
-# interaction as Bernoulli trial
-distribution(y) <- bernoulli(p)
-
-# Train the model with greta ----------------------------------------------
-m <- model(global_coef_mean, global_coef_sd)
-PyreneesModel <- mcmc(m, n_samples = 20000, warmup = 10000, chains = 4)
+PyreneesModel <- update(prior_predictions, sample_prior = "no", 
+                        cores = 16, inits = "0", iter = 10000)
 
 # save the model
-save(PyreneesModel, global_coef_mean, global_coef_sd, training_id, training, coef,  
-     file =  paste0("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel_", 
-                    format(Sys.Date(), "%d%m%Y"), ".RData"))
+saveRDS(PyreneesModel, 
+        file = paste0("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel_brms.rds"))
 
 # Prepare training dataset ------------------------------------------------
 # load data and standardize
@@ -288,45 +222,28 @@ training <- SerengetiFW[training_id, ]
 
 # Set up the bayesian glmm ------------------------------------------------
 # extract predictors
-predictors <- select(training, 
-                     -Predator, -Prey, -Order.predator, -Order.prey,
-                     -Carnivore.predator, -Carnivore.prey, -interaction)
+training <- select(training,  -Predator, -Prey, -Order.prey, 
+                   -Herbivore.predator,  -Herbivore.prey) %>%
+  mutate(Order.predator = factor(Order.predator, 
+                                 levels = unique(FuncTraits$Order)))
+SerengetiFW_form <- bf(interaction ~ 1 + . + (1 + .|Order.predator), family = bernoulli())
 
-# add a column for the intercept
-predictors <- cbind(rep(1, nrow(training)), predictors) %>% as_data()
-y <- as_data(training$interaction)
+get_prior(SerengetiFW_form, data = training)
 
-# get levels for the random effect: predator order
-predator_order <- as.numeric(factor(training$Order.pred, levels = unique(FuncTraits$Order)))
+model_priors <- c(
+  prior(normal(0, 1), class = "Intercept"),
+  prior(normal(0, 1), class = "b"),
+  prior(cauchy(0, 5), class = "sd")
+)
 
-# number of predictors and orders
-norder <- length(unique(FuncTraits$Order))
-ntraits <- ncol(predictors)
+prior_predictions <- brm(formula = SerengetiFW_form,
+                         data = training,
+                         prior = model_priors,
+                         sample_prior = "only", inits = "0")
 
-# common effect
-global_coef_mean <- normal(0, 1, ntraits)
-global_coef_sd <- cauchy(0, 3, truncation = c(0.001, Inf), dim = ntraits)
-
-# coef for each order is drawn from global mean and sd
-coef <- normal(global_coef_mean, global_coef_sd, dim = c(ntraits))
-for (i in c(2:norder)){
-  coef <- cbind(coef, normal(global_coef_mean, global_coef_sd, dim = c(ntraits)))
-}
-
-# linear prediction
-linear_predicton <- rowSums(predictors * t(coef[,predator_order]))
-
-# ilogit of linear prediction
-p <- ilogit(linear_predicton)
-
-# interaction as Bernoulli trial
-distribution(y) <- bernoulli(p)
-
-# Train the model with greta ----------------------------------------------
-m <- model(global_coef_mean, global_coef_sd)
-SerengetiModel <- mcmc(m, n_samples = 20000, warmup = 10000, chains = 4)
+SerengetiModel <- update(prior_predictions, sample_prior = "no", 
+                         cores = 16, inits = "0", iter = 10000)
 
 # save the model
-save(SerengetiModel, global_coef_mean, global_coef_sd, training_id, training, coef,  
-     file =  paste0("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel_", 
-                    format(Sys.Date(), "%d%m%Y"), ".RData"))
+saveRDS(SerengetiModel, 
+     file = paste0("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel_brms.rds"))
