@@ -55,10 +55,12 @@ env.pca <- prcomp(rbind(Europe_clims, Pyrenees_clims, Serengeti_clims, HighArcti
                   center = T, scale.= T)
 summary(env.pca)
 fws <- c(rep("Europe", N), rep("Pyrenees", N), rep("Serengeti", N), rep("High Arctic", N))
-ggbiplot(env.pca, ellipse = T, groups = fws, obs.scale = 1, var.scale = 1) +
+p <- ggbiplot(env.pca, ellipse = T, groups = fws, obs.scale = 1, var.scale = 1) +
   scale_colour_manual(name = "Food web", values = c("royalblue4", "deepskyblue", "red2", "yellowgreen")) +
   theme_minimal() +
   theme(legend.position = "bottom")
+
+ggsave("figures/SI/PCAenv.pdf", p)
 
 env.centroid <- as.data.frame(env.pca$x) %>% cbind(fws) %>%
   group_by(fws) %>%
@@ -101,3 +103,22 @@ FWdist <- data.frame(FWs = c("Europe - High Arctic", "Europe - Pyrenees", "Europ
                      Geo.Dist = c(geo.dist),
                      Env.Dist = c(env.dist),
                      Comp.Dist = comp.dist)
+
+# Map
+library(rnaturalearth)
+library(rnaturalearthdata)
+world <- ne_countries(scale = "medium", returnclass = "sf")
+Europe <- st_transform(Europe, crs(world)) 
+Pyrenees <- st_transform(Pyrenees, crs(world)) 
+HighArctic <- st_transform(HighArctic, crs(world)) 
+Serengeti <- st_transform(Serengeti, crs(world)) 
+
+p <- ggplot() +
+  geom_sf(data = world) +
+  geom_sf(data = Europe, fill = "royalblue4", alpha = 0.4) +
+  geom_sf(data = Pyrenees, fill = "red3", alpha = 0.4) +
+  geom_sf(data = HighArctic, fill = "deepskyblue", alpha = 0.4) +
+  geom_sf(data = Serengeti, fill = "yellowgreen", alpha = 0.4) +
+  coord_sf(xlim = c(-100, 50), ylim = c(-25, 75)) 
+
+ggsave("figures/SI/FWmap.pdf", p)
