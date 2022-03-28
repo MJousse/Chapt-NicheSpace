@@ -1,0 +1,57 @@
+Name of File: Serengeti ecosystem
+
+Source of Data (institute): Digitized by FZS / TWCM from 1:50,000
+
+Person to contact: Honori Maliti
+
+How was data collected: digitized from 1:50,000 map sheets
+
+Description of data: serengeti ecosystem boundaries including park, and protected areas
+
+Projection: UTM Zone 36S
+
+Datum: Arc1960
+
+Date Aquired: 1996
+
+Modification	1: Turned polylines into polygons, snapped boundaries, separate polygons by protected area  
+		2: added Masai Mara (From ILRI)
+		3:
+
+Date Modified	1: Nov 2003
+		2:
+		3:
+
+Modified by whom1: Grant Hopcraft
+		2:
+		3:
+
+Reason for modification	1: Cleaning and editing data, suitable for queries
+			2:
+			3:
+
+Possible sources of error: Foot note on 1:50,000 maps warns that boundary is estimated. 
+
+Improvement suggestions: Check with national gazetted boundary descriptions, Maswa south-western boundary needs correcting (see maswa_boundary.shp), Ikoma north-western boundary needs correcting (see Grumeti-Ikorongo.shp)
+
+Data missing:
+
+Who has used data:
+
+Contact of people who have used data:
+
+Associated files and databases:
+
+
+
+Grant Hopcraft
+FZS
+Serengeti GIS and Database Center
+granthopcraft@fzs.org
+
+
+
+
+
+
+
