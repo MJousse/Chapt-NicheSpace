@@ -43,6 +43,7 @@ Serengeti_clims <- raster::extract(r, Serengeti_pt)
 # High Arctic
 HighArctic <- st_read("data/raw/polygons/CPCAD-BDCAPC_Dec2021.gdb/", layer = "CPCAD_BDCAPC_Dec2021") %>%
   filter(NAME_E == "Bylot Island Bird Sanctuary", BIOME == "T")
+st_write(HighArctic, "data/raw/polygons/HighArctic/Bylot.shp")
 HighArctic_pt <- do.call(rbind, st_sample(HighArctic, N)) %>%
   as_tibble() %>% setNames(c("lon","lat")) %>%
   SpatialPoints(proj4string = CRS("+proj=aea +lat_1=50 +lat_2=70 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs")) %>%
