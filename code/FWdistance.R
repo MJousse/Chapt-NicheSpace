@@ -32,7 +32,7 @@ Pyrenees_pt <- do.call(rbind, st_sample(Pyrenees, N)) %>%
 Pyrenees_clims <- raster::extract(r, Pyrenees_pt)
 
 # Serengeti
-Serengeti <- st_read("data/raw/polygons/Serengeti_Ecosystem/v3_serengeti_ecosystem.shp")
+Serengeti <- st_read("data/raw/polygons/Serengeti_Ecosystem/v3_serengeti_ecosystem.shp") %>% st_union()
 Serengeti_pt <- do.call(rbind, st_sample(Serengeti, N)) %>%
   as_tibble() %>% setNames(c("lon","lat")) %>%
   SpatialPoints(proj4string = CRS("+proj=utm +zone=36 +south +ellps=clrk80 +units=m +no_defs")) %>%
@@ -41,9 +41,10 @@ Serengeti_pt <- do.call(rbind, st_sample(Serengeti, N)) %>%
 Serengeti_clims <- raster::extract(r, Serengeti_pt)
 
 # High Arctic
-HighArctic <- st_read("data/raw/polygons/CPCAD-BDCAPC_Dec2021.gdb/", layer = "CPCAD_BDCAPC_Dec2021") %>%
-  filter(NAME_E == "Bylot Island Bird Sanctuary", BIOME == "T")
-st_write(HighArctic, "data/raw/polygons/HighArctic/Bylot.shp")
+#HighArctic <- st_read("data/raw/polygons/CPCAD-BDCAPC_Dec2021.gdb/", layer = "CPCAD_BDCAPC_Dec2021") %>%
+  #filter(NAME_E == "Bylot Island Bird Sanctuary", BIOME == "T")
+#st_write(HighArctic, "data/raw/polygons/HighArctic/Bylot.shp")
+HighArctic <- st_read("data/raw/polygons/HighArctic/Bylot.shp")
 HighArctic_pt <- do.call(rbind, st_sample(HighArctic, N)) %>%
   as_tibble() %>% setNames(c("lon","lat")) %>%
   SpatialPoints(proj4string = CRS("+proj=aea +lat_1=50 +lat_2=70 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs")) %>%
@@ -108,18 +109,29 @@ FWdist <- data.frame(FWs = c("Europe - High Arctic", "Europe - Pyrenees", "Europ
 # Map
 library(rnaturalearth)
 library(rnaturalearthdata)
+library(ggrepel)
 world <- ne_countries(scale = "medium", returnclass = "sf")
-Europe <- st_transform(Europe, crs(world)) 
-Pyrenees <- st_transform(Pyrenees, crs(world)) 
-HighArctic <- st_transform(HighArctic, crs(world)) 
-Serengeti <- st_transform(Serengeti, crs(world)) 
+sf_use_s2(FALSE)
+Europe <- st_transform(Europe, crs(world)) %>% st_union() %>% cbind(st_coordinates(st_centroid(Europe)))
+Pyrenees <- st_transform(Pyrenees, crs(world)) %>% st_union() %>% st_as_sf() %>% cbind(st_coordinates(st_centroid(Pyrenees)))
+HighArctic <- st_transform(HighArctic, crs(world)) %>% cbind(st_coordinates(st_centroid(HighArctic)))
+Serengeti <- st_transform(Serengeti, crs(world)) %>% cbind(st_coordinates(st_centroid(Serengeti)))
 
-p <- ggplot() +
+p <- ggplot(size = 0.1) +
   geom_sf(data = world) +
-  geom_sf(data = Europe, fill = "royalblue4", alpha = 0.4) +
-  geom_sf(data = Pyrenees, fill = "red3", alpha = 0.4) +
-  geom_sf(data = HighArctic, fill = "deepskyblue", alpha = 0.4) +
-  geom_sf(data = Serengeti, fill = "yellowgreen", alpha = 0.4) +
-  coord_sf(xlim = c(-100, 50), ylim = c(-25, 75)) 
+  geom_sf(data = Europe, fill = "royalblue4", color = "transparent", alpha = 0.8) +
+  geom_sf(data = Pyrenees, fill = "red3", alpha = 0.8) +
+  geom_sf(data = HighArctic, fill = "deepskyblue", alpha = 0.8) +
+  geom_sf(data = Serengeti, fill = "yellowgreen", alpha = 0.8) +
+  geom_text_repel(data = Pyrenees, aes(x = X, y = Y, label = "Pyrenees"), 
+                  fontface = "bold", nudge_x = -5, nudge_y = 0.25, colour = "red3") +
+  geom_text_repel(data = Europe, aes(x = X, y = Y, label = "Pyrenees"), 
+                  fontface = "bold", nudge_x = -5, nudge_y = 0.25, colour = "red3") +
+  geom_text_repel(data = HighArctic, aes(x = X, y = Y, label = "High Arctic"), 
+                  fontface = "bold", nudge_x = 5, nudge_y = 0.25, colour = "deepskyblue") +
+  geom_text_repel(data = Serengeti, aes(x = X, y = Y, label = "Serengeti"), 
+                  fontface = "bold", nudge_x = 5, nudge_y = 0.25, colour = "yellowgreen") +
+  coord_sf(xlim = c(-85, 70), ylim = c(0, 80)) +
+  theme_bw()
 
 ggsave("figures/SI/FWmap.pdf", p)
