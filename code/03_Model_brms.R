@@ -60,9 +60,11 @@ prior_predictions <- brm(formula = euroMW_form,
                          data = training,
                          prior = model_priors,
                          sample_prior = "only", inits = "0")
-
-EuroModel <- update(prior_predictions, sample_prior = "no", 
-                    cores = 16, inits = "0", iter = 10000)
+EuroModel <- brm(formula = euroMW_form,
+                 data = training,
+                 prior = model_priors, sample_prior = "no", 
+                    cores = 4, backend = "cmdstan", threads = 4,
+                    inits = "0", iter = 5000)
 
 # save the model on OneDrive (too big for Github...)
 saveRDS(EuroModel,
@@ -121,9 +123,11 @@ prior_predictions <- brm(formula = ArcticFW_form,
                          prior = model_priors,
                          sample_prior = "only", inits = "0")
 
-ArcticModel <- update(prior_predictions, sample_prior = "no", cores = 16, 
-                      inits = "0", 
-                      cores = 16, inits = "0", iter = 10000)
+ArcticModel <- brm(formula = ArcticFW_form,
+                   data = training,
+                   prior = model_priors, sample_prior = "no", 
+                   cores = 4, backend = "cmdstan", threads = 4,
+                   inits = "0", iter = 2000)
 
 # save the model
 saveRDS(ArcticModel, 
@@ -182,8 +186,12 @@ prior_predictions <- brm(formula = PyreneesFW_form,
                          prior = model_priors,
                          sample_prior = "only", inits = "0")
 
-PyreneesModel <- update(prior_predictions, sample_prior = "no", 
-                        cores = 16, inits = "0", iter = 10000)
+PyreneesModel <- brm(formula = PyreneesFW_form,
+                     data = training,
+                     prior = model_priors, sample_prior = "no", 
+                     cores = 4, backend = "cmdstan", threads = 4,
+                     inits = "0", iter = 2000)
+
 
 # save the model
 saveRDS(PyreneesModel, 
@@ -241,8 +249,12 @@ prior_predictions <- brm(formula = SerengetiFW_form,
                          prior = model_priors,
                          sample_prior = "only", inits = "0")
 
-SerengetiModel <- update(prior_predictions, sample_prior = "no", 
-                         cores = 16, inits = "0", iter = 10000)
+SerengetiModel <- brm(formula = PyreneesFW_form,
+                      data = training,
+                      prior = model_priors, sample_prior = "no", 
+                      cores = 4, backend = "cmdstan", threads = 4,
+                      inits = "0", iter = 2000)
+
 
 # save the model
 saveRDS(SerengetiModel, 
