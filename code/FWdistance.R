@@ -112,10 +112,14 @@ library(rnaturalearthdata)
 library(ggrepel)
 world <- ne_countries(scale = "medium", returnclass = "sf")
 sf_use_s2(FALSE)
-Europe <- st_transform(Europe, crs(world)) %>% st_union() %>% cbind(st_coordinates(st_centroid(Europe)))
-Pyrenees <- st_transform(Pyrenees, crs(world)) %>% st_union() %>% st_as_sf() %>% cbind(st_coordinates(st_centroid(Pyrenees)))
-HighArctic <- st_transform(HighArctic, crs(world)) %>% cbind(st_coordinates(st_centroid(HighArctic)))
-Serengeti <- st_transform(Serengeti, crs(world)) %>% cbind(st_coordinates(st_centroid(Serengeti)))
+Europe <- st_transform(Europe, crs(world)) %>% st_union()
+Europe_centroid <- st_coordinates(st_centroid(Europe))
+Pyrenees <- st_transform(Pyrenees, crs(world)) %>% st_union() 
+Pyrenees_centroid <- st_coordinates(st_centroid(Pyrenees))
+HighArctic <- st_transform(HighArctic, crs(world)) %>% st_union()
+HighArctic_centroid <- cbind(st_coordinates(st_centroid(HighArctic)))
+Serengeti <- st_transform(Serengeti, crs(world))
+Serengeti_centroid <- st_coordinates(st_centroid(Serengeti))
 
 p <- ggplot(size = 0.1) +
   geom_sf(data = world) +
@@ -123,14 +127,14 @@ p <- ggplot(size = 0.1) +
   geom_sf(data = Pyrenees, fill = "red3", alpha = 0.8) +
   geom_sf(data = HighArctic, fill = "deepskyblue", alpha = 0.8) +
   geom_sf(data = Serengeti, fill = "yellowgreen", alpha = 0.8) +
-  geom_text_repel(data = Pyrenees, aes(x = X, y = Y, label = "Pyrenees"), 
-                  fontface = "bold", nudge_x = -5, nudge_y = 0.25, colour = "red3") +
-  geom_text_repel(data = Europe, aes(x = X, y = Y, label = "Pyrenees"), 
-                  fontface = "bold", nudge_x = -5, nudge_y = 0.25, colour = "red3") +
-  geom_text_repel(data = HighArctic, aes(x = X, y = Y, label = "High Arctic"), 
-                  fontface = "bold", nudge_x = 5, nudge_y = 0.25, colour = "deepskyblue") +
-  geom_text_repel(data = Serengeti, aes(x = X, y = Y, label = "Serengeti"), 
-                  fontface = "bold", nudge_x = 5, nudge_y = 0.25, colour = "yellowgreen") +
+  geom_label_repel(data = as.data.frame(Pyrenees_centroid), aes(x = X, y = Y, label = "Pyrenees"), 
+                  fontface = "bold", nudge_x = -15, nudge_y = 5, colour = "red3") +
+  geom_label_repel(data = as.data.frame(Europe_centroid), aes(x = X, y = Y, label = "Europe"), 
+                  fontface = "bold", nudge_x = -25, nudge_y = 15, colour = "royalblue4") +
+  geom_label_repel(data = as.data.frame(HighArctic_centroid), aes(x = X, y = Y, label = "High Arctic"), 
+                  fontface = "bold", nudge_x = 15, nudge_y = -5, colour = "deepskyblue") +
+  geom_label_repel(data = as.data.frame(Serengeti_centroid), aes(x = X, y = Y, label = "Serengeti"), 
+                  fontface = "bold", nudge_x = 10, nudge_y = 5, colour = "yellowgreen") +
   coord_sf(xlim = c(-85, 70), ylim = c(0, 80)) +
   theme_bw()
 
