@@ -61,7 +61,7 @@ positions <- function(subgraph, motif_id){
     pos[which(colSums(subgraph) == 2)] <- 22
     pos[which(rowSums(subgraph) == 1 && colSums(subgraph) == 1)] <- 23
     pos[which(rowSums(subgraph) == 2)] <- 24
-  } else if (moti_id == 16){
+  } else if (motif_id == 16){
     pos <- rep(25,3)
   } else if (motif_id == 15){
     pos[which(rowSums(subgraph) == 1 && colSums(subgraph) == 2)] <- 26
@@ -81,3 +81,16 @@ m <- which(motifs(A) == 1)
 plot(A, vertex.size = 50, layout=layout_as_tree(A, flip.y = T), vertex.label = "")
 plot(A, vertex.size = 50, layout=layout_nicely(A), vertex.label = "")
 title(m,cex.main=3)
+
+# Check speed
+i <- 1
+size <- seq(from = 5, to = 100, by = 5)
+t <- rep(NA, length(size))
+for (N in size){
+  m = matrix(rbinom(n = N^2, size = 1, prob = 0.1), nrow = N)
+  tic = Sys.time()
+  x <- motif_role(m)
+  t[i] <- Sys.time() - tic
+  i = i+1
+}
+

@@ -89,3 +89,41 @@ make_predictions <- function(predictors, order_level, coef, model){
   predictions <- data.frame(Predator = as.factor(predictors$Predator), Prey = as.factor(predictors$Prey), prediction = predictions)
   return(predictions)
 }
+
+species_role <- function(FW, threshold = 0, ncores = 4){
+  # centrality role
+  graph <- graph_from_edgelist(as.matrix(FW[,c("resource","consumer")])) # igraph
+  nodes <- vertex.attributes(graph)$name # save species name
+  indegree <- centr_degree(graph, mode = "in")$res
+  outdegree <- centr_degree(graph, mode = "out")$res
+  betweeness <- centr_betw(graph)$res
+  closeness <- centr_clo(graph)$res
+  eigen <- centr_eigen(graph)$vector
+  
+  # trophic level
+  ched_community <- Community(nodes = data.frame(node = nodes), 
+                              trophic.links = FW,
+                              properties = list(title = "FW"))
+  tl <- TrophicLevels(ched_community)
+  
+  # motifs role
+  m <- as.matrix(as_adjacency_matrix(graph))
+  motif_role <-motif_role(m)
+  
+  # module-based role
+  modulerole <- calc_topological_roles(graph, ncores = ncores) %>%
+    group_by(node) %>%
+    summarise(within_module_degree = median(within_module_degree, na.rm = T),
+              among_module_conn = median(among_module_conn, na.rm = T))
+  
+  return(list(centrality = data.frame(species = nodes,
+                   indegree,
+                   outdegree,
+                   betweeness,
+                   closeness,
+                   eigen),
+              trophiclevel = tl,
+              modulerole = modulerole[,c(2,3)],
+              motif_role = motif_role$position_count)
+  )
+}
