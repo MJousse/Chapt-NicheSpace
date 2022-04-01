@@ -3,11 +3,11 @@ load("code/functions_motifs.R")
 
 A = matrix(c(0,1,0,0,0,1,0,0,0), nrow = 3) # i <- j <- k
 B = matrix(c(0,1,1,0,0,1,0,1,0), nrow = 3) # i <- j <-> k -> i
-C = matrix(c(0,1,0,1,0,1,0,0,0), nrow = 3) # xxxi -> j -> k
+C = matrix(c(0,1,0,1,0,1,0,0,0), nrow = 3) # i <-> j <- k
 D = matrix(c(0,1,1,1,0,1,1,1,0), nrow = 3) # i <-> j <-> k
-E = matrix(c(0,0,1,1,0,1,0,0,0), nrow = 3) # i <- k -> j <- i
-G = matrix(c(0,1,1,1,0,1,0,0,0), nrow = 3) # xxxi -> j -> k
-H = matrix(c(0,0,1,1,0,1,1,1,0), nrow = 3) # i -> j -> k
+E = matrix(c(0,0,1,1,0,1,0,0,0), nrow = 3) # k -> i -> j <- k
+G = matrix(c(0,1,1,1,0,1,0,0,0), nrow = 3) # i <-> j -> k <- i 
+H = matrix(c(0,0,1,1,0,1,1,1,0), nrow = 3) # i <-> k <-> j <- i
 
 test_that("example", {
   expect_equal(which(motif_role(A)$motif_count==1), 5)
