@@ -29,7 +29,7 @@ positions <- function(subgraph, motif_id){
   pos <- rep(NA, 3)
   if (motif_id == 5){
     pos[which(rowSums(subgraph) == 0)] <- 1
-    pos[which(rowSums(subgraph) == 1 && colSums(subgraph) == 1)] <- 2
+    pos[which(rowSums(subgraph) == 1 & colSums(subgraph) == 1)] <- 2
     pos[which(colSums(subgraph) == 0)] <- 3
   } else if (motif_id == 8){
     pos[which(colSums(subgraph) == 2)] <- 4
@@ -59,17 +59,17 @@ positions <- function(subgraph, motif_id){
     pos[which(rowSums(subgraph) == 1)] <- 21
   } else if (motif_id == 13){
     pos[which(colSums(subgraph) == 2)] <- 22
-    pos[which(rowSums(subgraph) == 1 && colSums(subgraph) == 1)] <- 23
+    pos[which(rowSums(subgraph) == 1 & colSums(subgraph) == 1)] <- 23
     pos[which(rowSums(subgraph) == 2)] <- 24
   } else if (motif_id == 16){
     pos <- rep(25,3)
   } else if (motif_id == 15){
-    pos[which(rowSums(subgraph) == 1 && colSums(subgraph) == 2)] <- 26
-    pos[which(rowSums(subgraph) == 2 && colSums(subgraph) == 2)] <- 27
-    pos[which(rowSums(subgraph) == 2 && colSums(subgraph) == 1)] <- 28
+    pos[which(rowSums(subgraph) == 1 & colSums(subgraph) == 2)] <- 26
+    pos[which(rowSums(subgraph) == 2 & colSums(subgraph) == 2)] <- 27
+    pos[which(rowSums(subgraph) == 2 & colSums(subgraph) == 1)] <- 28
   } else if (motif_id == 11){
     pos <- rep(29,3)
-    pos[which(rowSums(subgraph) == 2 && colSums(subgraph) == 2)] <- 30
+    pos[which(rowSums(subgraph) == 2 & colSums(subgraph) == 2)] <- 30
   }
   return(pos)
 }
