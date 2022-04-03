@@ -115,20 +115,20 @@ title(m,cex.main=3)
 
 # Check speed
 i <- 1
-size <- seq(from = 5, to = 50, by = 5)
+size <- seq(from = 5, to = 10, by = 5)
 t1 <- rep(NA, length(size))
 t2 <- rep(NA, length(size))
 for (N in size){
-  m = matrix(rbinom(n = N^2, size = 1, prob = 0.1), nrow = N)
+  m = matrix(rbinom(n = N^2, size = 1, prob = 0.25), nrow = N)
   tic = Sys.time()
   x1 <- motif_role(m)
   t1[i] <- Sys.time() - tic
+  graph <- erdos.renyi.game(size, 0.25, directed = T)
   tic = Sys.time()
-  x2 <- motif_role2(m)
+  x2 <- calc_topological_roles(graph, nsim = 10)
   t2[i] <- Sys.time() - tic
   i = i+1
   print(all(x1$position_count == x2$position_count))
 }
 plot(size, t2, col = "blue")
 points(size, t1, col = "red")
-

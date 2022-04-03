@@ -1,4 +1,6 @@
 library(igraph)
+library(dplyr)
+library(tidyr)
 library(cheddar)
 library(multiweb)
 
@@ -14,11 +16,12 @@ pyreneesRoles <- species_role(pyreneesFW)
 
 serengetiFW <- read.csv("data/cleaned/SerengetiFW.csv", row.names = 1)
 serengetiFW <- serengetiFW %>%
-  transmute(resource = Prey, consumer = Predator)
+  transmute(resource = Resource_Species, consumer = Consumer_Species) %>%
+  drop_na()
 serengetiRoles <- species_role(serengetiFW)
 
 EuropeMW <- read.csv("data/cleaned/EuroFWadults.csv", row.names = 1)
 EuropeMW <- EuropeMW %>%
   transmute(resource = Prey, consumer = Predator)
-serengetiRoles <- species_role(EuropeMW)
+EuropeRoles <- species_role(EuropeMW)
 
