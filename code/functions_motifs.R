@@ -10,14 +10,45 @@ motif_role <- function(m){
       for (k in c((j+1):n)){
         subgraph <- m[c(i,j,k), c(i,j,k)]
         diag(subgraph) <- 0
-        subigraph <- graph_from_adjacency_matrix(subgraph)
-        if (is_connected(subigraph)){
+        if (sum(subgraph) >=2){
+          subigraph <- graph_from_adjacency_matrix(subgraph)
           motif_id <- which(motifs(subigraph) == 1)
-          motifs[motif_id] <- motifs[motif_id] + 1
-          pos <- positions(subgraph, motif_id)
-          out[i, pos[1]] = out[i, pos[1]] + 1
-          out[j, pos[2]] = out[j, pos[2]] + 1
-          out[k, pos[3]] = out[k, pos[3]] + 1
+          if (length(motif_id) == 1){
+            motifs[motif_id] <- motifs[motif_id] + 1
+            pos <- positions(subgraph, motif_id)
+            out[i, pos[1]] = out[i, pos[1]] + 1
+            out[j, pos[2]] = out[j, pos[2]] + 1
+            out[k, pos[3]] = out[k, pos[3]] + 1
+          }
+        }
+      }
+    }
+  }
+  return(list(motif_count = motifs, position_count = out))
+}
+
+motif_role2 <- function(m){
+  sp <- colnames(m)
+  n <- nrow(m)
+  out <- matrix(0, nrow = n, ncol = 30)
+  rownames(out) <- sp
+  colnames(out) <- paste0("position", c(1:30))
+  motifs <- rep(0,16)
+  for (i in c(1:(n-2))){
+    for (j in c((i+1):(n-1))){
+      for (k in c((j+1):n)){
+        subgraph <- m[c(i,j,k), c(i,j,k)]
+        diag(subgraph) <- 0
+        if (sum(subgraph) >=2){
+          subigraph <- graph_from_adjacency_matrix(subgraph)
+          motif_id <- which(motifs(subigraph) == 1)
+          if (length(motif_id) == 1){
+            motifs[motif_id] <- motifs[motif_id] + 1
+            pos <- positions(subgraph, motif_id)
+            out[i, pos[1]] = out[i, pos[1]] + 1
+            out[j, pos[2]] = out[j, pos[2]] + 1
+            out[k, pos[3]] = out[k, pos[3]] + 1
+          }
         }
       }
     }
@@ -84,13 +115,20 @@ title(m,cex.main=3)
 
 # Check speed
 i <- 1
-size <- seq(from = 5, to = 100, by = 5)
-t <- rep(NA, length(size))
+size <- seq(from = 5, to = 50, by = 5)
+t1 <- rep(NA, length(size))
+t2 <- rep(NA, length(size))
 for (N in size){
   m = matrix(rbinom(n = N^2, size = 1, prob = 0.1), nrow = N)
   tic = Sys.time()
-  x <- motif_role(m)
-  t[i] <- Sys.time() - tic
+  x1 <- motif_role(m)
+  t1[i] <- Sys.time() - tic
+  tic = Sys.time()
+  x2 <- motif_role2(m)
+  t2[i] <- Sys.time() - tic
   i = i+1
+  print(all(x1$position_count == x2$position_count))
 }
+plot(size, t2, col = "blue")
+points(size, t1, col = "red")
 
