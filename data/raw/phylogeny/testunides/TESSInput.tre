@@ -1,0 +1,585 @@
+#NEXUS
+[R-package APE, Thu Jul  6 16:06:59 2017]
+
+BEGIN TAXA;
+	DIMENSIONS NTAX = 286;
+	TAXLABELS
+		Amyda_cartilaginea_FMNH258869
+		Nilssonia_formosa_HBS125636
+		Nilssonia_hurum_HBS125638
+		Nilssonia_gangetica_HBS125646
+		Dogania_subplana_USNM572079
+		Palea_steindachneri_HBS119016
+		Pelodiscus_sinensis_AMNH106666
+		Apalone_ferox_CAS202549
+		Apalone_spinifera_HBS23197
+		Apalone_mutica_HBS108560
+		Rafetus_sp_AMNH200163
+		Chitra_chitra_HBS125606
+		Chitra_vandijki_HBS125628
+		Chitra_indica_HBS125613
+		Pelochelys_bibroni_HBS118593
+		Pelochelys_cantorii_HBS125640
+		Trionyx_triunguis_Tt24
+		Cycloderma_aubryi_FMNH98752
+		Cycloderma_frenatum_HBS117691
+		Lissemys_punctata_HBS125629
+		Lissemys_scutata_USNM520643
+		Cyclanorbis_senegalensis_HBS16390
+		Carettochelys_insculpta_HBS119093
+		Aldabrachelys_gigantea_HBS118599
+		Aldabrachelys_sp_HBS121013
+		Astrochelys_radiata_HBS117743
+		Astrochelys_yniphora_HBS119036
+		Pyxis_aarachnoides_HBS117734
+		Pyxis_planicauda_HBS117740
+		Chelonoidis_ephyppium_HBS117540
+		Chelonoidis_chathamensis_HBS117534
+		Chelonoidis_abingdoni_HBS117543
+		Chelonoidis_hoodensis_HBS117531
+		Chelonoidis_porteri_HBS117537
+		Chelonoidis_chilensis_HBS124031
+		Chelonoidis_carbonaria_HBS117901
+		Chelonoidis_denticulata_MVZ175382
+		Geochelone_elegans_MVZ244882
+		Geochelone_platynota_HBS119441
+		Geochelone_sulcata_AMCC111025
+		Chersina_angulata_HBS112643
+		Hompous_boulengeri_AMCC106886
+		Hompous_signatus_HBS122118
+		Hompous_areolatus_HBS124034
+		Psammobates_oculifer_HBS118601
+		Psammobates_tverroxi_HBS112455
+		Stigmochelys_pardalis_HBS109888
+		Kinixys_belliana_HBS112791
+		Kinixys_speckii_HBS112790
+		Kinixys_erosa_HBS124036
+		Kinixys_homeana_HBS125085
+		Kinixys_zombensis_HBS117690
+		Indotestudo_elongata_FMNH259056
+		Indotestudo_travancorica_AMCC142999
+		Indotestudo_forstenii_HBS108628
+		Malacochersus_tornieri_HBS121010
+		Testudo_graeca_HBS119114
+		Testudo_kleinmanni_MVZ230631
+		Testudo_marginata_HBS121593
+		Testudo_horsfieldi_HBS117909
+		Testudo_hermanni_MVZ244866
+		Gopherus_agassizii_GOAG01
+		Gopherus_morafkai_GOAG03
+		Gopherus_morafkai_Sinaloa_LC02
+		Gopherus_berlandieri_GOBE01
+		Gopherus_flavomarginatus_GOFL01
+		Gopherus_polyphemus_HBS108684
+		Manouria_eemys_HBS112449
+		Manouria_impressa_HBS119444
+		Batagur_baska_AMCC166654
+		Batagur_kachuga_FMNH224128
+		Batagur_dhongoka_AMNH166661
+		Batagur_borneoensis_HBS112448
+		Batagur_trivittata_HBS112440
+		Hardella_thurjii_AMNH125654
+		Pangshura_smithii_AMNH166664
+		Pangshura_tentoria_HBS116255
+		Pangshura_tecta_AMCC166665
+		Pangshura_sylhetensis_HBS124028
+		Morenia_ocellata_USNMFS36669
+		Morenia_petersi_FMNH260378
+		Geoclemys_hamiltonii_HBS108665
+		Malayemys_subtrijuga_FMNH258868
+		Orlitia_borneensis_AMNH166663
+		Siebenrockiella_crassicollis_FMNH259053
+		Siebenrockiella_leytensis_LACM183228
+		Cuora_amboinensis_FMNH255262
+		Cuora_bourreti_FMNH261574
+		Cuora_galbinifrons_FMNH255694
+		Cuora_picturata_FMNH261575
+		Cuora_aurocapitata_FMNH261570
+		Cuora_pani_HBS117865
+		Cuora_mccordi_HBS41892
+		Cuora_trifasciata_KFBG030278065
+		Cuora_flavomarginata_HBS41895
+		Cuora_yunnanensis_KIZPG1
+		Cuora_zhoui_HBS41855
+		Cuora_mouhotii_HBS41865
+		Mauremys_annamensis_FMNH262238
+		Mauremys_mutica_MVZ230476
+		Mauremys_caspica_MVZ230212
+		Mauremys_rivulata_AMNH168666
+		Mauremys_leprosa_MVZ178059
+		Mauremys_japonica_HBS116253
+		Mauremys_nigricans_LACM183201
+		Mauremys_reevesii_HBS113152
+		Mauremys_sinensis_MVZ230479
+		Geoemyda_japonica_AMNH166658
+		Geoemyda_spengleri_AMNH106625
+		Cyclemys_atripons_FMNH262710
+		Cyclemys_pulchristriata_FMNH259050
+		Cyclemys_dentata_HBS117903
+		Cyclemys_fusca_CAS210070
+		Cyclemys_oldhami_USNMFS35571
+		Cyclemys_sp_CAS208423
+		Cyclemys_sp_FMNH267458
+		Sacalia_bealei_HBS108668
+		Sacalia_quadriocellata_FMNH256542
+		Heosemys_annandalii_FMNH259074
+		Heosemys_grandis_HBS108666
+		Heosemys_depressa_HBS112432
+		Heosemys_spinosa_HBS109889
+		Leucocephalon_yuwonoi_HBS118604
+		Notochelys_platynota_FMNH267641
+		Melanochelys_trijuga_AMNH168668
+		Vijayachelys_silvatica_FMNH224188
+		Rhinoclemmys_annulata_USNM281878
+		Rhinoclemmys_pulcherrima_AMNH168669
+		Rhinoclemmys_rubida_HBS112647
+		Rhinoclemmys_areolata_HBS108667
+		Rhinoclemmys_melanosterna_HBS118626
+		Rhinoclemmys_diademata_HBS118631
+		Rhinoclemmys_punctularia_HBS123633
+		Rhinoclemmys_funerea_USNM559587
+		Chrysemys_dorsalis_HBS118632
+		Chrysemys_picta_HBS27134
+		Graptemys_barbouri_RCT277
+		Graptemys_caglei_RCT431
+		Graptemys_oouachitensis_RCT406
+		Graptemys_ernsti_RCT276
+		Graptemys_gibbonsi_RCT170
+		Graptemys_flavimaculata_RCT140
+		Graptemys_oculifera_RCT26
+		Graptemys_pearlensis_RCT242
+		Graptemys_pulchra_RCT258
+		Graptemys_ndelticola_RCT291
+		Graptemys_versa_RCT327
+		Graptemys_ppseudogeographica_RCT379
+		Graptemys_geographica_RCT396
+		Pseudemys_alabamensis_HBS117816
+		Pseudemys_rubriventris_USNM544373
+		Pseudemys_nelsoni_HBS108599
+		Pseudemys_peninsularis_CRI13953
+		Pseudemys_csuwanniensis_HBS108591
+		Pseudemys_cfloridana_HBS108682
+		Pseudemys_concinna_HBS117856
+		Pseudemys_gorzugi_HBS117907
+		Pseudemys_texana_RCT2
+		Trachemys_adiutrix_HBS117931
+		Trachemys_selegans_HBS23001
+		Trachemys_callirostris_HBS123591
+		Trachemys_emolli_HBS117899
+		Trachemys_grayi_MVZ263975
+		Trachemys_venusta_HBS117896
+		Trachemys_dorbigni_HBS123595
+		Trachemys_taylori_0604LG047
+		Trachemys_nebulosa_MVZ137443
+		Trachemys_gaigeae_TNHC50874
+		Trachemys_decorata_JFP598
+		Trachemys_stejnegeri_HBS108728
+		Trachemys_terrapen_JFP569
+		Trachemys_decussata_JFP629
+		Trachemys_sscripta_HBS108687
+		Malaclemys_terrapin_MVZ137745
+		Deirochelys_rchrysea_HBS108680
+		Clemmys_guttata_FMNH265273
+		Glyptemys_insculpta_HBS108711
+		Glyptemys_muhlenbergii_HBS108716
+		Emys_blandingii_HBS116243
+		Emys_orbicularis_HBS108690
+		Emys_trinacris_IPMB4706
+		Terrapene_carolina_HBS108689
+		Terrapene_coahuila_CD3304
+		Terrapene_nelsoni_Clm5_9
+		Terrapene_oluteola_HBS108701
+		Emys_marmorata_HBS39734
+		Emys_pallida_HBS115911
+		Platysternon_megacephalum_HBS16255
+		Chelydra_acutirostris_HBS29330
+		Chelydra_rossignonii_HBS29331
+		Chelydra_serpentina_HBS23551
+		Macrochelys_temminckii_HBS108582
+		Claudius_angustatus_HBS121589
+		Staurotypus_salvinii_HBS108669
+		Staurotypus_triporcatus_HBS117468
+		Kinosternon_acuta_HBS117455
+		Kinosternon_creaseri_K35
+		Kinosternon_herrerai_AMNH118236
+		Kinosternon_chimalhuaca_HBS120895
+		Kinosternon_hirtipes_5L5L2R
+		Kinosternon_sonoriense_HBS119037
+		Kinosternon_oaxacae_HBS120899
+		Kinosternon_integrum_JAC21644
+		Kinosternon_scorpioides_cruentatum_HBS119039
+		Kinosternon_dunni_K38
+		Kinosternon_leucostomum_USNM559573
+		Kinosternon_arizonense_CAS228101
+		Kinosternon_durangoense_UF108889
+		Kinosternon_flavescens_HBS107613
+		Kinosternon_baurii_HBS108574
+		Kinosternon_subrubrum_HBS119499
+		Sternotherus_carinatus_RCT21
+		Sternotherus_odoratus_CAS214343
+		Sternotherus_depressus_HBS116244
+		Sternotherus_minor_minor_RCT53
+		Dermatemys_mawii_HBS116865
+		Caretta_caretta_HBS112700
+		Lepidochelys_olivacea_HBS125086
+		Eretmocelys_imbricata_HBS112685
+		Chelonia_mydas_HBS109887
+		Dermochelys_coriacea_MVZ149847
+		Acanthochelys_pallidipectoris_HBS121003
+		Acanthochelys_spixii_HBS121001
+		Platemys_platycephala_HBS121007
+		Chelus_fimbriatus_HBS32240
+		Mesoclemmys_gibbus_BPN1497
+		Mesoclemmys_nasuta_HBS117905
+		Mesoclemmys_zuliae_HBS117467
+		Phrynops_geoffroanus_HBS119012
+		Phrynops_tuberosus_LACM183231
+		Phrynops_williamsi_HBS123589
+		Phrynops_hilarii_HBS112452
+		Mesoclemmys_hogei_HBS117946
+		Hydromedusa_tectifera_DZ10401
+		Chelodina_burrungandjii_000670M
+		Chelodina_rugosa_HBS32056
+		Chelodina_parkeri_AA042607
+		Chelodina_expansa_AMR125066
+		Chelodina_canni_657
+		Chelodina_pritchardi_AA21811
+		Chelodina_reimanni_451
+		Chelodina_gunaleni_LACM183224
+		Chelodina_novaeguineae_429
+		Chelodina_mccordi_493
+		Chelodina_timorensis_AMNH167209
+		Chelodina_steindachneri_ANWCR5058
+		Chelodina_longicollis_AMR123050
+		Chelodina_colliei_231
+		Elseya_albagula_AMR123067
+		Elseya_irwini_AA37087
+		Elseya_lavarackorum_321
+		Elseya_branderhorsti_AA42626
+		Elseya_ddentata_261
+		Elseya_Sth_Alligator_213
+		Elseya_novaeguineae_AA036553
+		Emydura_macquarii_HBS40172
+		Emydura_subglobosa_244
+		Emydura_tanybaraga_AMR125469
+		Emydura_victoriae_674
+		Elusor_macrurus_253
+		Rheodytes_leukops_239
+		Myuchelys_bellii_187
+		Myuchelys_georgesi_154
+		Myuchelys_latisternum_AMR120997
+		Myuchelys_purvisi_129
+		Erymnochelys_madagascariensis_HBS103217
+		Podocnemis_erythrocephala_HBS116250
+		Podocnemis_sextuberculata_HBS117925
+		Podocnemis_unifilis_HBS119089
+		Podocnemis_expansa_HBS117929
+		Podocnemis_vogli_AMCC183078
+		Peltocephalus_dumerilianus_HBS117944
+		Pelusios_adansonii_HBS123099
+		Pelusios_broadleyi_AMCC183062
+		Pelusios_castaneus_CAS219222
+		Pelusios_chapini_AMCC183067
+		Pelusios_castanoides_HBS117686
+		Pelusios_williamsi_AMCC183072
+		Pelusios_carinatus_HBS123638
+		Pelusios_rhodesianus_AMCC183070
+		Pelusios_bechuanicus_HBS119021
+		Pelusios_subniger_HBS112754
+		Pelusios_sinuatus_HBS112703
+		Pelusios_gabonensis_ROM19952
+		Pelusios_niger_HBS125084
+		Pelomedusa_ssubrufa_HBS119094
+	;
+END;
+BEGIN TREES;
+	TRANSLATE
+		1	Amyda_cartilaginea_FMNH258869,
+		2	Nilssonia_formosa_HBS125636,
+		3	Nilssonia_hurum_HBS125638,
+		4	Nilssonia_gangetica_HBS125646,
+		5	Dogania_subplana_USNM572079,
+		6	Palea_steindachneri_HBS119016,
+		7	Pelodiscus_sinensis_AMNH106666,
+		8	Apalone_ferox_CAS202549,
+		9	Apalone_spinifera_HBS23197,
+		10	Apalone_mutica_HBS108560,
+		11	Rafetus_sp_AMNH200163,
+		12	Chitra_chitra_HBS125606,
+		13	Chitra_vandijki_HBS125628,
+		14	Chitra_indica_HBS125613,
+		15	Pelochelys_bibroni_HBS118593,
+		16	Pelochelys_cantorii_HBS125640,
+		17	Trionyx_triunguis_Tt24,
+		18	Cycloderma_aubryi_FMNH98752,
+		19	Cycloderma_frenatum_HBS117691,
+		20	Lissemys_punctata_HBS125629,
+		21	Lissemys_scutata_USNM520643,
+		22	Cyclanorbis_senegalensis_HBS16390,
+		23	Carettochelys_insculpta_HBS119093,
+		24	Aldabrachelys_gigantea_HBS118599,
+		25	Aldabrachelys_sp_HBS121013,
+		26	Astrochelys_radiata_HBS117743,
+		27	Astrochelys_yniphora_HBS119036,
+		28	Pyxis_aarachnoides_HBS117734,
+		29	Pyxis_planicauda_HBS117740,
+		30	Chelonoidis_ephyppium_HBS117540,
+		31	Chelonoidis_chathamensis_HBS117534,
+		32	Chelonoidis_abingdoni_HBS117543,
+		33	Chelonoidis_hoodensis_HBS117531,
+		34	Chelonoidis_porteri_HBS117537,
+		35	Chelonoidis_chilensis_HBS124031,
+		36	Chelonoidis_carbonaria_HBS117901,
+		37	Chelonoidis_denticulata_MVZ175382,
+		38	Geochelone_elegans_MVZ244882,
+		39	Geochelone_platynota_HBS119441,
+		40	Geochelone_sulcata_AMCC111025,
+		41	Chersina_angulata_HBS112643,
+		42	Hompous_boulengeri_AMCC106886,
+		43	Hompous_signatus_HBS122118,
+		44	Hompous_areolatus_HBS124034,
+		45	Psammobates_oculifer_HBS118601,
+		46	Psammobates_tverroxi_HBS112455,
+		47	Stigmochelys_pardalis_HBS109888,
+		48	Kinixys_belliana_HBS112791,
+		49	Kinixys_speckii_HBS112790,
+		50	Kinixys_erosa_HBS124036,
+		51	Kinixys_homeana_HBS125085,
+		52	Kinixys_zombensis_HBS117690,
+		53	Indotestudo_elongata_FMNH259056,
+		54	Indotestudo_travancorica_AMCC142999,
+		55	Indotestudo_forstenii_HBS108628,
+		56	Malacochersus_tornieri_HBS121010,
+		57	Testudo_graeca_HBS119114,
+		58	Testudo_kleinmanni_MVZ230631,
+		59	Testudo_marginata_HBS121593,
+		60	Testudo_horsfieldi_HBS117909,
+		61	Testudo_hermanni_MVZ244866,
+		62	Gopherus_agassizii_GOAG01,
+		63	Gopherus_morafkai_GOAG03,
+		64	Gopherus_morafkai_Sinaloa_LC02,
+		65	Gopherus_berlandieri_GOBE01,
+		66	Gopherus_flavomarginatus_GOFL01,
+		67	Gopherus_polyphemus_HBS108684,
+		68	Manouria_eemys_HBS112449,
+		69	Manouria_impressa_HBS119444,
+		70	Batagur_baska_AMCC166654,
+		71	Batagur_kachuga_FMNH224128,
+		72	Batagur_dhongoka_AMNH166661,
+		73	Batagur_borneoensis_HBS112448,
+		74	Batagur_trivittata_HBS112440,
+		75	Hardella_thurjii_AMNH125654,
+		76	Pangshura_smithii_AMNH166664,
+		77	Pangshura_tentoria_HBS116255,
+		78	Pangshura_tecta_AMCC166665,
+		79	Pangshura_sylhetensis_HBS124028,
+		80	Morenia_ocellata_USNMFS36669,
+		81	Morenia_petersi_FMNH260378,
+		82	Geoclemys_hamiltonii_HBS108665,
+		83	Malayemys_subtrijuga_FMNH258868,
+		84	Orlitia_borneensis_AMNH166663,
+		85	Siebenrockiella_crassicollis_FMNH259053,
+		86	Siebenrockiella_leytensis_LACM183228,
+		87	Cuora_amboinensis_FMNH255262,
+		88	Cuora_bourreti_FMNH261574,
+		89	Cuora_galbinifrons_FMNH255694,
+		90	Cuora_picturata_FMNH261575,
+		91	Cuora_aurocapitata_FMNH261570,
+		92	Cuora_pani_HBS117865,
+		93	Cuora_mccordi_HBS41892,
+		94	Cuora_trifasciata_KFBG030278065,
+		95	Cuora_flavomarginata_HBS41895,
+		96	Cuora_yunnanensis_KIZPG1,
+		97	Cuora_zhoui_HBS41855,
+		98	Cuora_mouhotii_HBS41865,
+		99	Mauremys_annamensis_FMNH262238,
+		100	Mauremys_mutica_MVZ230476,
+		101	Mauremys_caspica_MVZ230212,
+		102	Mauremys_rivulata_AMNH168666,
+		103	Mauremys_leprosa_MVZ178059,
+		104	Mauremys_japonica_HBS116253,
+		105	Mauremys_nigricans_LACM183201,
+		106	Mauremys_reevesii_HBS113152,
+		107	Mauremys_sinensis_MVZ230479,
+		108	Geoemyda_japonica_AMNH166658,
+		109	Geoemyda_spengleri_AMNH106625,
+		110	Cyclemys_atripons_FMNH262710,
+		111	Cyclemys_pulchristriata_FMNH259050,
+		112	Cyclemys_dentata_HBS117903,
+		113	Cyclemys_fusca_CAS210070,
+		114	Cyclemys_oldhami_USNMFS35571,
+		115	Cyclemys_sp_CAS208423,
+		116	Cyclemys_sp_FMNH267458,
+		117	Sacalia_bealei_HBS108668,
+		118	Sacalia_quadriocellata_FMNH256542,
+		119	Heosemys_annandalii_FMNH259074,
+		120	Heosemys_grandis_HBS108666,
+		121	Heosemys_depressa_HBS112432,
+		122	Heosemys_spinosa_HBS109889,
+		123	Leucocephalon_yuwonoi_HBS118604,
+		124	Notochelys_platynota_FMNH267641,
+		125	Melanochelys_trijuga_AMNH168668,
+		126	Vijayachelys_silvatica_FMNH224188,
+		127	Rhinoclemmys_annulata_USNM281878,
+		128	Rhinoclemmys_pulcherrima_AMNH168669,
+		129	Rhinoclemmys_rubida_HBS112647,
+		130	Rhinoclemmys_areolata_HBS108667,
+		131	Rhinoclemmys_melanosterna_HBS118626,
+		132	Rhinoclemmys_diademata_HBS118631,
+		133	Rhinoclemmys_punctularia_HBS123633,
+		134	Rhinoclemmys_funerea_USNM559587,
+		135	Chrysemys_dorsalis_HBS118632,
+		136	Chrysemys_picta_HBS27134,
+		137	Graptemys_barbouri_RCT277,
+		138	Graptemys_caglei_RCT431,
+		139	Graptemys_oouachitensis_RCT406,
+		140	Graptemys_ernsti_RCT276,
+		141	Graptemys_gibbonsi_RCT170,
+		142	Graptemys_flavimaculata_RCT140,
+		143	Graptemys_oculifera_RCT26,
+		144	Graptemys_pearlensis_RCT242,
+		145	Graptemys_pulchra_RCT258,
+		146	Graptemys_ndelticola_RCT291,
+		147	Graptemys_versa_RCT327,
+		148	Graptemys_ppseudogeographica_RCT379,
+		149	Graptemys_geographica_RCT396,
+		150	Pseudemys_alabamensis_HBS117816,
+		151	Pseudemys_rubriventris_USNM544373,
+		152	Pseudemys_nelsoni_HBS108599,
+		153	Pseudemys_peninsularis_CRI13953,
+		154	Pseudemys_csuwanniensis_HBS108591,
+		155	Pseudemys_cfloridana_HBS108682,
+		156	Pseudemys_concinna_HBS117856,
+		157	Pseudemys_gorzugi_HBS117907,
+		158	Pseudemys_texana_RCT2,
+		159	Trachemys_adiutrix_HBS117931,
+		160	Trachemys_selegans_HBS23001,
+		161	Trachemys_callirostris_HBS123591,
+		162	Trachemys_emolli_HBS117899,
+		163	Trachemys_grayi_MVZ263975,
+		164	Trachemys_venusta_HBS117896,
+		165	Trachemys_dorbigni_HBS123595,
+		166	Trachemys_taylori_0604LG047,
+		167	Trachemys_nebulosa_MVZ137443,
+		168	Trachemys_gaigeae_TNHC50874,
+		169	Trachemys_decorata_JFP598,
+		170	Trachemys_stejnegeri_HBS108728,
+		171	Trachemys_terrapen_JFP569,
+		172	Trachemys_decussata_JFP629,
+		173	Trachemys_sscripta_HBS108687,
+		174	Malaclemys_terrapin_MVZ137745,
+		175	Deirochelys_rchrysea_HBS108680,
+		176	Clemmys_guttata_FMNH265273,
+		177	Glyptemys_insculpta_HBS108711,
+		178	Glyptemys_muhlenbergii_HBS108716,
+		179	Emys_blandingii_HBS116243,
+		180	Emys_orbicularis_HBS108690,
+		181	Emys_trinacris_IPMB4706,
+		182	Terrapene_carolina_HBS108689,
+		183	Terrapene_coahuila_CD3304,
+		184	Terrapene_nelsoni_Clm5_9,
+		185	Terrapene_oluteola_HBS108701,
+		186	Emys_marmorata_HBS39734,
+		187	Emys_pallida_HBS115911,
+		188	Platysternon_megacephalum_HBS16255,
+		189	Chelydra_acutirostris_HBS29330,
+		190	Chelydra_rossignonii_HBS29331,
+		191	Chelydra_serpentina_HBS23551,
+		192	Macrochelys_temminckii_HBS108582,
+		193	Claudius_angustatus_HBS121589,
+		194	Staurotypus_salvinii_HBS108669,
+		195	Staurotypus_triporcatus_HBS117468,
+		196	Kinosternon_acuta_HBS117455,
+		197	Kinosternon_creaseri_K35,
+		198	Kinosternon_herrerai_AMNH118236,
+		199	Kinosternon_chimalhuaca_HBS120895,
+		200	Kinosternon_hirtipes_5L5L2R,
+		201	Kinosternon_sonoriense_HBS119037,
+		202	Kinosternon_oaxacae_HBS120899,
+		203	Kinosternon_integrum_JAC21644,
+		204	Kinosternon_scorpioides_cruentatum_HBS119039,
+		205	Kinosternon_dunni_K38,
+		206	Kinosternon_leucostomum_USNM559573,
+		207	Kinosternon_arizonense_CAS228101,
+		208	Kinosternon_durangoense_UF108889,
+		209	Kinosternon_flavescens_HBS107613,
+		210	Kinosternon_baurii_HBS108574,
+		211	Kinosternon_subrubrum_HBS119499,
+		212	Sternotherus_carinatus_RCT21,
+		213	Sternotherus_odoratus_CAS214343,
+		214	Sternotherus_depressus_HBS116244,
+		215	Sternotherus_minor_minor_RCT53,
+		216	Dermatemys_mawii_HBS116865,
+		217	Caretta_caretta_HBS112700,
+		218	Lepidochelys_olivacea_HBS125086,
+		219	Eretmocelys_imbricata_HBS112685,
+		220	Chelonia_mydas_HBS109887,
+		221	Dermochelys_coriacea_MVZ149847,
+		222	Acanthochelys_pallidipectoris_HBS121003,
+		223	Acanthochelys_spixii_HBS121001,
+		224	Platemys_platycephala_HBS121007,
+		225	Chelus_fimbriatus_HBS32240,
+		226	Mesoclemmys_gibbus_BPN1497,
+		227	Mesoclemmys_nasuta_HBS117905,
+		228	Mesoclemmys_zuliae_HBS117467,
+		229	Phrynops_geoffroanus_HBS119012,
+		230	Phrynops_tuberosus_LACM183231,
+		231	Phrynops_williamsi_HBS123589,
+		232	Phrynops_hilarii_HBS112452,
+		233	Mesoclemmys_hogei_HBS117946,
+		234	Hydromedusa_tectifera_DZ10401,
+		235	Chelodina_burrungandjii_000670M,
+		236	Chelodina_rugosa_HBS32056,
+		237	Chelodina_parkeri_AA042607,
+		238	Chelodina_expansa_AMR125066,
+		239	Chelodina_canni_657,
+		240	Chelodina_pritchardi_AA21811,
+		241	Chelodina_reimanni_451,
+		242	Chelodina_gunaleni_LACM183224,
+		243	Chelodina_novaeguineae_429,
+		244	Chelodina_mccordi_493,
+		245	Chelodina_timorensis_AMNH167209,
+		246	Chelodina_steindachneri_ANWCR5058,
+		247	Chelodina_longicollis_AMR123050,
+		248	Chelodina_colliei_231,
+		249	Elseya_albagula_AMR123067,
+		250	Elseya_irwini_AA37087,
+		251	Elseya_lavarackorum_321,
+		252	Elseya_branderhorsti_AA42626,
+		253	Elseya_ddentata_261,
+		254	Elseya_Sth_Alligator_213,
+		255	Elseya_novaeguineae_AA036553,
+		256	Emydura_macquarii_HBS40172,
+		257	Emydura_subglobosa_244,
+		258	Emydura_tanybaraga_AMR125469,
+		259	Emydura_victoriae_674,
+		260	Elusor_macrurus_253,
+		261	Rheodytes_leukops_239,
+		262	Myuchelys_bellii_187,
+		263	Myuchelys_georgesi_154,
+		264	Myuchelys_latisternum_AMR120997,
+		265	Myuchelys_purvisi_129,
+		266	Erymnochelys_madagascariensis_HBS103217,
+		267	Podocnemis_erythrocephala_HBS116250,
+		268	Podocnemis_sextuberculata_HBS117925,
+		269	Podocnemis_unifilis_HBS119089,
+		270	Podocnemis_expansa_HBS117929,
+		271	Podocnemis_vogli_AMCC183078,
+		272	Peltocephalus_dumerilianus_HBS117944,
+		273	Pelusios_adansonii_HBS123099,
+		274	Pelusios_broadleyi_AMCC183062,
+		275	Pelusios_castaneus_CAS219222,
+		276	Pelusios_chapini_AMCC183067,
+		277	Pelusios_castanoides_HBS117686,
+		278	Pelusios_williamsi_AMCC183072,
+		279	Pelusios_carinatus_HBS123638,
+		280	Pelusios_rhodesianus_AMCC183070,
+		281	Pelusios_bechuanicus_HBS119021,
+		282	Pelusios_subniger_HBS112754,
+		283	Pelusios_sinuatus_HBS112703,
+		284	Pelusios_gabonensis_ROM19952,
+		285	Pelusios_niger_HBS125084,
+		286	Pelomedusa_ssubrufa_HBS119094
+	;
+	TREE * UNTITLED = [&R] ((((((((((1:17.000507,((2:9.606419,3:9.606419):1.608924,4:11.215343):5.785164):10.754426,5:27.754932):8.533581,6:36.288513):6.974254,7:43.262768):12.7934,(((8:13.651836,9:13.651836):9.046158,10:22.697995):18.705052,11:41.403047):14.65312):7.765069,((((12:5.854694,13:5.854694):2.483959,14:8.338654):18.461522,(15:4.228514,16:4.228514):22.571662):15.342881,17:42.143057):21.67818):36.035192,(((18:17.917216,19:17.917216):7.882213,(20:12.494191,21:12.494191):13.305237):4.362799,22:30.162227):69.694201):49.335203,23:149.191631):33.449664,((((((((((24:0.297552,25:0.297552):20.321132,((26:12.771789,27:12.771789):6.784461,(28:9.231642,29:9.231642):10.324609):1.062434):5.604363,((((30:0.498155,31:0.498155):0.93025,((32:0.609002,33:0.609002):0.375435,34:0.984436):0.443969):13.74683,35:15.175236):3.510786,(36:15.447989,37:15.447989):3.238033):7.537025):3.464646,((38:5.097278,39:5.097278):13.58826,40:18.685538):11.002156):1.393765,((((41:19.208725,(42:8.966402,43:8.966402):10.242324):5.144431,44:24.353157):3.52553,((45:13.789258,46:13.789258):11.940201,47:25.729459):2.149228):2.431006,((48:1.007613,49:1.007613):11.577159,((50:5.557882,51:5.557882):3.554979,52:9.112861):3.47191):17.724922):0.771766):12.325339,((((53:7.256075,54:7.256075):8.125491,55:15.381567):11.172645,56:26.554212):7.667065,(((57:15.778218,(58:11.972557,59:11.972557):3.805661):6.262544,60:22.040763):2.346077,61:24.386839):9.834438):9.18552):9.04056,((((62:6.823104,(63:3.657893,64:3.657893):3.165211):3.394239,65:10.217343):10.432342,(66:8.248263,67:8.248263):12.401422):27.509826,(68:23.781614,69:23.781614):24.377897):4.287846):15.269804,((((((((((70:6.294351,71:6.294351):2.620601,72:8.914952):3.402119,(73:8.179969,74:8.179969):4.137102):1.293991,75:13.611062):2.933507,(((76:3.339189,77:3.339189):4.105162,78:7.444351):2.628063,79:10.072414):6.472155):8.678445,(80:11.709908,81:11.709908):13.513106):5.669821,82:30.892835):7.874277,(83:20.898544,84:20.898544):17.868567):11.149608,(85:24.569156,86:24.569156):25.347564):6.805332,(((((((87:12.873929,(88:7.774934,(89:5.870937,90:5.870937):1.903996):5.098996):3.716418,((((91:2.796585,92:2.796585):4.724645,(93:4.250526,94:4.250526):3.270704):5.777392,95:13.298622):0.800276,(96:11.579641,97:11.579641):2.519258):2.491449):3.226568,98:19.816915):18.87721,((99:20.434345,100:20.434345):12.884741,(((((101:3.623991,102:3.623991):6.280455,103:9.904446):3.911443,104:13.815889):3.884776,(105:6.111223,106:6.111223):11.589441):4.898318,107:22.598983):10.720104):5.375039):3.085,(108:18.125569,109:18.125569):23.653557):4.614847,((((((110:4.792608,111:4.792608):7.517385,((112:8.166272,(113:5.984124,(114:4.384551,115:4.384551):1.599573):2.182148):1.520723,116:9.686994):2.622999):13.011841,(117:5.837806,118:5.837806):19.484027):5.472458,(((119:8.461502,120:8.461502):5.279279,121:13.740781):9.893706,122:23.634487):7.159804):2.52307,(123:29.142292,124:29.142292):4.17507):2.888701,(125:23.425195,126:23.425195):12.780868):10.18791):3.120304,(((127:7.275902,128:7.275902):4.349489,129:11.625391):2.795292,(130:10.33153,((131:5.390213,(132:3.056478,133:3.056478):2.333735):1.02446,134:6.414674):3.916856):4.089153):35.093594):7.207775):10.995109):23.294306,(((((135:5.961967,136:5.961967):17.683795,(((((137:8.641445,(((138:3.217582,139:3.217582):3.318059,(((((140:1.973773,141:1.973773):1.274277,(142:1.43119,143:1.43119):1.81686):0.773108,144:4.021158):0.544026,145:4.565184):1.519768,(146:4.430822,147:4.430822):1.654129):0.450689):1.242411,148:7.778052):0.863393):3.348271,149:11.989716):3.742849,((150:4.098783,151:4.098783):4.723357,((((152:2.907556,153:2.907556):1.809867,154:4.717423):0.346769,155:5.064191):2.350911,(156:4.889948,(157:2.385516,158:2.385516):2.504432):2.525154):1.407037):6.910425):1.927366,(((159:2.457206,160:2.457206):9.371798,(((161:5.166022,(162:3.859297,(163:2.388621,164:2.388621):1.470676):1.306725):2.147267,((165:4.287337,166:4.287337):2.009432,167:6.29677):1.016519):2.508607,168:9.821895):2.007108):3.391473,((((169:1.946129,170:1.946129):2.184108,171:4.130237):2.003906,172:6.134143):5.310761,173:11.444904):3.775572):2.439455):2.232814,174:19.892745):3.753018):3.609623,175:27.255386):12.300206,((176:18.027849,(177:12.064485,178:12.064485):5.963364):2.481585,(((179:11.499627,(180:4.76803,181:4.76803):6.731596):4.416812,((182:5.65195,183:5.65195):4.954465,(184:3.860939,185:3.860939):6.745475):5.310024):2.334627,(186:5.712643,187:5.712643):12.538423):2.258368):19.046158):41.879289,188:81.434881):9.576586):32.906223,(((((189:3.239118,190:3.239118):2.287758,191:5.526876):16.076499,192:21.603375):81.023757,(((193:18.689596,(194:5.630989,195:5.630989):13.058607):37.846043,((((((196:1.684067,197:1.684067):8.478064,198:10.162131):3.448796,(199:8.161786,(((200:4.619671,201:4.619671):1.377713,202:5.997384):1.295794,(203:4.751982,204:4.751982):2.541196):0.868608):5.449141):3.751829,(205:11.667107,206:11.667107):5.695649):9.461357,(((207:7.40067,208:7.40067):5.106502,209:12.507171):5.623918,(210:7.938019,211:7.938019):10.19307):8.693024):8.234142,((212:12.821509,213:12.821509):5.60761,(214:11.970353,215:11.970353):6.458766):16.629135):21.477386):22.780327,216:79.315967):23.311165):11.047932,((((217:15.832199,218:15.832199):2.952397,219:18.784596):14.159092,220:32.943689):28.162004,221:61.105692):52.569372):10.242626):58.723605):26.069608,(((((((222:6.885237,223:6.885237):18.549734,224:25.434971):8.253615,225:33.688586):8.236751,(((226:15.650354,(227:10.535481,228:10.535481):5.114873):11.875066,(((229:1.096023,230:1.096023):5.98701,231:7.083033):2.46396,232:9.546993):17.978428):5.072269,233:32.597689):9.327648):32.621252,234:74.546588):15.749589,((((((235:3.717509,236:3.717509):5.803827,237:9.521336):2.117121,238:11.638456):6.508392,(((((239:3.397398,(240:2.7679,241:2.7679):0.629498):0.629526,(242:1.386567,243:1.386567):2.640357):1.356441,(244:2.950415,245:2.950415):2.43295):2.729028,246:8.112393):3.088637,247:11.201031):6.945818):2.611613,248:20.758462):55.068063,((((249:11.062641,(250:6.093699,251:6.093699):4.968942):5.989961,(((252:2.038193,253:2.038193):0.850223,254:2.888416):10.576408,255:13.464824):3.587778):9.189261,((256:8.088114,((257:3.749127,258:3.749127):1.1724,259:4.921526):3.166587):12.535312,(260:15.748759,261:15.748759):4.874666):5.618438):11.071653,((262:7.848074,(263:6.979231,264:6.979231):0.868843):3.39141,265:11.239484):26.074033):38.513008):14.469653):67.931856,(((266:80.73334,((((267:13.994226,268:13.994226):5.919167,269:19.913392):5.940409,270:25.853801):12.92861,271:38.782411):41.950929):7.308085,272:88.041425):35.544294,(((((273:16.76137,(274:15.675483,(275:8.658934,276:8.658934):7.016549):1.085887):6.030428,(277:10.500261,278:10.500261):12.291536):2.37847,(279:9.477394,280:9.477394):15.692874):3.976356,((((281:9.052752,282:9.052752):11.969433,283:21.022184):4.689734,284:25.711918):1.637171,285:27.349089):1.797534):18.19076,286:47.337383):76.248336):34.642315):50.48287);
+END;
