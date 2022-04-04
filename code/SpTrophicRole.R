@@ -1,8 +1,10 @@
 library(igraph)
 library(dplyr)
 library(tidyr)
-library(cheddar)
+library(NetIndices)
 library(multiweb)
+source("code/functions.R")
+source("code/functions_motifs.R")
 
 arcticFW <- read.csv("data/cleaned/HighArcticFW.csv", row.names = 1)
 arcticFW <- arcticFW %>%
@@ -24,4 +26,3 @@ EuropeMW <- read.csv("data/cleaned/EuroFWadults.csv", row.names = 1)
 EuropeMW <- EuropeMW %>%
   transmute(resource = Prey, consumer = Predator)
 EuropeRoles <- species_role(EuropeMW)
-

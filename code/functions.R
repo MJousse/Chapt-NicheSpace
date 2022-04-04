@@ -100,30 +100,28 @@ species_role <- function(FW, threshold = 0, ncores = 4){
   closeness <- centr_clo(graph)$res
   eigen <- centr_eigen(graph)$vector
   
-  # trophic level
-  ched_community <- Community(nodes = data.frame(node = nodes), 
-                              trophic.links = FW,
-                              properties = list(title = "FW"))
-  tl <- TrophicLevels(ched_community)
+  # trophic level and omnivory
+  m <- as.matrix(as_adjacency_matrix(graph))
+  tl <- TrophInd(m)
   
   # motifs role
-  m <- as.matrix(as_adjacency_matrix(graph))
   motif_role <-motif_role(m)
   
   # module-based role
-  modulerole <- calc_topological_roles(graph, ncores = ncores, nsim = 10) %>%
+  modulerole <- calc_topological_roles(graph, ncores = ncores, nsim = 100) %>%
     group_by(node) %>%
     summarise(within_module_degree = median(within_module_degree, na.rm = T),
               among_module_conn = median(among_module_conn, na.rm = T))
   
-  return(list(centrality = data.frame(species = nodes,
+  return(data.frame(species = nodes,
                    indegree,
                    outdegree,
                    betweeness,
                    closeness,
-                   eigen),
-              trophiclevel = tl,
-              modulerole = modulerole[,c(2,3)],
-              motif_role = motif_role$position_count)
+                   eigen,
+                   tl,
+                   modulerole[,c(2,3)],
+                   motif_role$position_count,
+                   row.names = c(1:length(nodes)))
   )
 }
