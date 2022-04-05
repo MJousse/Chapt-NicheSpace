@@ -108,7 +108,7 @@ species_role <- function(FW, threshold = 0, ncores = 4){
   motif_role <-motif_role(m)
   
   # module-based role
-  modulerole <- calc_topological_roles(graph, ncores = ncores, nsim = 100) %>%
+  modulerole <- calc_topological_roles(graph, ncores = ncores, nsim = 10) %>%
     group_by(node) %>%
     summarise(within_module_degree = median(within_module_degree, na.rm = T),
               among_module_conn = median(among_module_conn, na.rm = T))
