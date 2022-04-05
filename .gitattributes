@@ -1,3 +1,0 @@
-*.RData filter=lfs diff=lfs merge=lfs -text
-data/models/GLMM_07032022.RData filter=lfs diff=lfs merge=lfs -text
-data/models/GLMM_07032022test.RData filter=lfs diff=lfs merge=lfs -text
