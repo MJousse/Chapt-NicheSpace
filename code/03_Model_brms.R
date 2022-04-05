@@ -46,7 +46,7 @@ training <- select(training,  -Predator, -Prey, -Order.prey,
                    -Herbivore.predator,  -Herbivore.prey) %>%
   mutate(Order.predator = factor(Order.predator, 
                                  levels = unique(FuncTraits$Order)))
-euroMW_form <- bf(interaction ~ 1 + . + (1 + .|Order.predator), family = bernoulli())
+euroMW_form <- bf(interaction ~ 1 + . + (1 + .||Order.predator), family = bernoulli())
 
 get_prior(euroMW_form, data = training)
 
@@ -64,7 +64,7 @@ EuroModel <- brm(formula = euroMW_form,
                  data = training,
                  prior = model_priors, sample_prior = "no", 
                     cores = 4, backend = "cmdstan", threads = 4,
-                    inits = "0", iter = 5000)
+                    inits = "0", iter = 2000)
 
 # save the model on OneDrive (too big for Github...)
 saveRDS(EuroModel,
@@ -108,7 +108,7 @@ training <- select(training,  -Predator, -Prey, -Order.prey,
                    -Herbivore.predator,  -Herbivore.prey) %>%
   mutate(Order.predator = factor(Order.predator, 
                                  levels = unique(FuncTraits$Order)))
-ArcticFW_form <- bf(interaction ~ 1 + . + (1 + .|Order.predator), family = bernoulli())
+ArcticFW_form <- bf(interaction ~ 1 + . + (1 + .||Order.predator), family = bernoulli())
 
 get_prior(ArcticFW_form, data = training)
 
@@ -171,7 +171,7 @@ training <- select(training,  -Predator, -Prey, -Order.prey,
                    -Herbivore.predator,  -Herbivore.prey) %>%
   mutate(Order.predator = factor(Order.predator, 
                                  levels = unique(FuncTraits$Order)))
-PyreneesFW_form <- bf(interaction ~ 1 + . + (1 + .|Order.predator), family = bernoulli())
+PyreneesFW_form <- bf(interaction ~ 1 + . + (1 + .||Order.predator), family = bernoulli())
 
 get_prior(PyreneesFW_form, data = training)
 
@@ -234,7 +234,7 @@ training <- select(training,  -Predator, -Prey, -Order.prey,
                    -Herbivore.predator,  -Herbivore.prey) %>%
   mutate(Order.predator = factor(Order.predator, 
                                  levels = unique(FuncTraits$Order)))
-SerengetiFW_form <- bf(interaction ~ 1 + . + (1 + .|Order.predator), family = bernoulli())
+SerengetiFW_form <- bf(interaction ~ 1 + . + (1 + .||Order.predator), family = bernoulli())
 
 get_prior(SerengetiFW_form, data = training)
 
