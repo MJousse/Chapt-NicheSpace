@@ -1,5 +1,3 @@
-# I want to calculate the phylo distance between a given species and a species pool (distance to nearest taxon)
-
 library(ape)
 library(dplyr)
 library(tidyr)
@@ -48,15 +46,15 @@ arctic <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1)
 # Phylogenetic distance matrix
 phydist <- cophenetic(tetrapodtrees)
 
-minphylodist <- function(target_species, species_pool, phylodist){
+mntd <- function(target_species, species_pool, phylodist){ # Shortest phylo distance
   if (target_species %in% colnames(phylodist)){
     min(phylodist[target_species, colnames(phylodist) %in% species_pool])
   } else {NA}
 }
 
-arctic_phylodist <- map_dbl(arctic$Species, minphylodist, europe$Species, phydist)
-pyrenees_phylodist <- map_dbl(pyrenees$Species, minphylodist, europe$Species, phydist)
-serengeti_phylodist <- map_dbl(serengeti$Species, minphylodist, europe$Species, phydist)
+arctic_mntd <- map_dbl(arctic$Species, mntd, europe$Species, phydist)
+pyrenees_mntd <- map_dbl(pyrenees$Species, mntd, europe$Species, phydist)
+serengeti_mntd <- map_dbl(serengeti$Species, mntd, europe$Species, phydist)
 
 # functional distance 
 library(mFD)
@@ -72,24 +70,24 @@ traits_cat <- data.frame(trait_name = colnames(traits),
 
 sp_funct.dist <- funct.dist(traits, traits_cat, metric = "gower", scale_euclid = "scale_center")
 
-minfuncdist <- function(target_species, species_pool, funcdist){
+fnnd <- function(target_species, species_pool, funcdist){
   funcdist <- as.matrix(funcdist)
   if (target_species %in% colnames(funcdist)){
     min(funcdist[target_species, colnames(funcdist) %in% species_pool])
   } else {NA}
 }
 
-meanfuncdist <- function(target_species, species_pool, funcdist){
+fmpd <- function(target_species, species_pool, funcdist){
   funcdist <- as.matrix(funcdist)
   if (target_species %in% colnames(funcdist)){
     mean(funcdist[target_species, colnames(funcdist) %in% species_pool])
   } else {NA}
 }
 
-arctic_fnnd <- map_dbl(arctic$Species, minfuncdist, europe$Species, sp_funct.dist)
-pyrenees_fnnd <- map_dbl(pyrenees$Species, minfuncdist, europe$Species, sp_funct.dist)
-serengeti_fnnd <- map_dbl(serengeti$Species, minfuncdist, europe$Species, sp_funct.dist)
+arctic_fnnd <- map_dbl(arctic$Species, fnnd, europe$Species, sp_funct.dist)
+pyrenees_fnnd <- map_dbl(pyrenees$Species, fnnd, europe$Species, sp_funct.dist)
+serengeti_fnnd <- map_dbl(serengeti$Species, fnnd, europe$Species, sp_funct.dist)
 
-arctic_fmpd <- map_dbl(arctic$Species, minfuncdist, europe$Species, sp_funct.dist)
-pyrenees_fmpd <- map_dbl(pyrenees$Species, minfuncdist, europe$Species, sp_funct.dist)
-serengeti_fmpd <- map_dbl(serengeti$Species, minfuncdist, europe$Species, sp_funct.dist)
+arctic_fmpd <- map_dbl(arctic$Species, fmpd, europe$Species, sp_funct.dist)
+pyrenees_fmpd <- map_dbl(pyrenees$Species, fmpd, europe$Species, sp_funct.dist)
+serengeti_fmpd <- map_dbl(serengeti$Species, fmpd, europe$Species, sp_funct.dist)
