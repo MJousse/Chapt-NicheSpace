@@ -39,22 +39,11 @@ turtletree$tip.label <- turtle_lab[turtle_lab %in% species &!is.na(turtle_lab)]
 # create big phylogeny
 tetrapodtrees <- mammaltrees[[sample]] + squamatetrees[[sample]] + birdtrees[[sample]] + amphibiantrees[[sample]] + turtletree
 
-# create community matrix
+# species list in FW
 europe <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1)
 pyrenees <- read.csv("data/cleaned/pyrenneesFWTaxo.csv", row.names = 1)
 serengeti <- read.csv("data/cleaned/SerengetiFWTaxo.csv", row.names = 1) %>% drop_na()
 arctic <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1)
-species <- unique(c(europe$Species, pyrenees$Species, serengeti$Species, arctic$Species)) 
-species <- species[species %in% tetrapodtrees$tip.label]
-
-comm <- c()%>%
-  rbind(species %in% europe$Species) %>%
-  rbind(species %in% pyrenees$Species) %>%
-  rbind(species %in% serengeti$Species) %>%
-  rbind(species %in% arctic$Species) %>%
-  as.data.frame(row.names = c("Europe", "Pyrenees", "Serengeti", "Arctic"))
-
-colnames(comm) <- species
 
 # Phylogenetic distance matrix
 phydist <- cophenetic(tetrapodtrees)
@@ -65,6 +54,42 @@ minphylodist <- function(target_species, species_pool, phylodist){
   } else {NA}
 }
 
-arcticdist <- map_dbl(arctic$Species, minphylodist, europe$Species, phydist)
-pyreneesdist <- map_dbl(pyrenees$Species, minphylodist, europe$Species, phydist)
-serengetidist <- map_dbl(serengeti$Species, minphylodist, europe$Species, phydist)
+arctic_phylodist <- map_dbl(arctic$Species, minphylodist, europe$Species, phydist)
+pyrenees_phylodist <- map_dbl(pyrenees$Species, minphylodist, europe$Species, phydist)
+serengeti_phylodist <- map_dbl(serengeti$Species, minphylodist, europe$Species, phydist)
+
+# functional distance 
+library(mFD)
+traits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1, stringsAsFactors = T)
+rownames(traits) <- traits$Species
+traits <- traits %>%
+  select(-Species, -Class, -Order, -Family, -Genus) %>%
+  drop_na()
+
+traits_cat <- data.frame(trait_name = colnames(traits),
+                         trait_type = c("N", "Q", rep("F", 12), "Q", "Q", "Q", "F", "F", "F"),
+                         fuzzy_name = c(NA, NA, rep("Habitat", 12), NA, NA, NA, rep("TrophicLevel", 3)))
+
+sp_funct.dist <- funct.dist(traits, traits_cat, metric = "gower", scale_euclid = "scale_center")
+
+minfuncdist <- function(target_species, species_pool, funcdist){
+  funcdist <- as.matrix(funcdist)
+  if (target_species %in% colnames(funcdist)){
+    min(funcdist[target_species, colnames(funcdist) %in% species_pool])
+  } else {NA}
+}
+
+meanfuncdist <- function(target_species, species_pool, funcdist){
+  funcdist <- as.matrix(funcdist)
+  if (target_species %in% colnames(funcdist)){
+    mean(funcdist[target_species, colnames(funcdist) %in% species_pool])
+  } else {NA}
+}
+
+arctic_fnnd <- map_dbl(arctic$Species, minfuncdist, europe$Species, sp_funct.dist)
+pyrenees_fnnd <- map_dbl(pyrenees$Species, minfuncdist, europe$Species, sp_funct.dist)
+serengeti_fnnd <- map_dbl(serengeti$Species, minfuncdist, europe$Species, sp_funct.dist)
+
+arctic_fmpd <- map_dbl(arctic$Species, minfuncdist, europe$Species, sp_funct.dist)
+pyrenees_fmpd <- map_dbl(pyrenees$Species, minfuncdist, europe$Species, sp_funct.dist)
+serengeti_fmpd <- map_dbl(serengeti$Species, minfuncdist, europe$Species, sp_funct.dist)
