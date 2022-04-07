@@ -11,6 +11,7 @@ squamatetrees <- read.nexus("data/raw/phylogeny/squamates/output.nex")
 birdtrees <- read.nexus("data/raw/phylogeny/birds/output.nex")
 amphibiantrees <- read.nexus("data/raw/phylogeny/amphibians/output.nex")
 turtletrees <- read.nexus("data/raw/phylogeny/turtles/sampleFromPosterior.100.tre")
+traits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1, stringsAsFactors = T)
 
 # Correct tip labels
 label_key <- read.csv("../phylogeny/vertlife_gbif_key.csv", row.names = 1)
@@ -31,8 +32,8 @@ turtle_lab <- sub("_[^_]+$", "", turtle_lab)
 turtle_lab <- gsub("_", " ", turtle_lab)
 turtle_lab <- map_df(turtle_lab, name_backbone, order = "Testudines")$species
 turtletree <- turtletrees[[sample]]
-turtletree <- keep.tip(turtletree, which(turtle_lab %in% species &!is.na(turtle_lab)))
-turtletree$tip.label <- turtle_lab[turtle_lab %in% species &!is.na(turtle_lab)]
+turtletree <- keep.tip(turtletree, which(turtle_lab %in% traits$Species &!is.na(turtle_lab)))
+turtletree$tip.label <- turtle_lab[turtle_lab %in% traits$Species &!is.na(turtle_lab)]
 
 # create big phylogeny
 tetrapodtrees <- mammaltrees[[sample]] + squamatetrees[[sample]] + birdtrees[[sample]] + amphibiantrees[[sample]] + turtletree
@@ -58,10 +59,9 @@ serengeti_mntd <- map_dbl(serengeti$Species, mntd, europe$Species, phydist)
 
 # functional distance 
 library(mFD)
-traits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1, stringsAsFactors = T)
 rownames(traits) <- traits$Species
 traits <- traits %>%
-  select(-Species, -Class, -Order, -Family, -Genus) %>%
+  dplyr::select(-Species, -Class, -Order, -Family, -Genus) %>%
   drop_na()
 
 traits_cat <- data.frame(trait_name = colnames(traits),
@@ -91,3 +91,31 @@ serengeti_fnnd <- map_dbl(serengeti$Species, fnnd, europe$Species, sp_funct.dist
 arctic_fmpd <- map_dbl(arctic$Species, fmpd, europe$Species, sp_funct.dist)
 pyrenees_fmpd <- map_dbl(pyrenees$Species, fmpd, europe$Species, sp_funct.dist)
 serengeti_fmpd <- map_dbl(serengeti$Species, fmpd, europe$Species, sp_funct.dist)
+
+df <- data.frame(Arctic = arctic_fnnd, Pyrenees = pyrenees_fnnd, Serengeti = serengeti_fnnd)
+fills <- c("Serengeti" = "yellowgreen", "Pyrenees" = "red3", "Arctic" = "deepskyblue")
+p1 <- ggplot() +
+  geom_histogram(data = data.frame(serengeti_fmpd), aes(serengeti_fmpd, fill = "Serengeti"), alpha= 0.3) +
+  geom_histogram(data = data.frame(pyrenees_fmpd), aes(pyrenees_fmpd, fill = "Pyrenees"), alpha= 0.3) +
+  geom_histogram(data = data.frame(arctic_fmpd), aes(arctic_fmpd, fill = "Arctic"), alpha= 0.3) +
+  theme_minimal() +
+  labs(fill = "Food web", x = "Mean functional distance") +
+  scale_fill_manual(values = fills) +
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal")
+  
+p2 <- ggplot() +
+  geom_histogram(data = data.frame(serengeti_mntd), aes(serengeti_mntd, fill = "Serengeti"), alpha= 0.3) +
+  geom_histogram(data = data.frame(pyrenees_mntd), aes(pyrenees_mntd, fill = "Pyrenees"), alpha= 0.3) +
+  geom_histogram(data = data.frame(arctic_mntd), aes(arctic_mntd, fill = "Arctic"), alpha= 0.3) +
+  theme_minimal() +
+  labs(fill = "Food web", x = "Phylogenetic distance to neareast taxon") +
+  scale_fill_manual(values = fills) +
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal")
+
+library(patchwork)
+p<-p1+p2
+
+ggsave("figures/SI/SPdist.png", p, device = "png")
+  
