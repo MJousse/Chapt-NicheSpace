@@ -46,6 +46,7 @@ arctic <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1)
 
 # Phylogenetic distance matrix
 phydist <- cophenetic(tetrapodtrees)
+write.csv(phydist, "data/checkpoints/phylodist.csv")
 
 mntd <- function(target_species, species_pool, phylodist){ # Shortest phylo distance
   if (target_species %in% colnames(phylodist)){

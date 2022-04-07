@@ -98,34 +98,18 @@ comp.dist <- c(JaccardDissimilarity(Europe.species, HighArctic.species),
                JaccardDissimilarity(HighArctic.species, Serengeti.species),
                JaccardDissimilarity(Pyrenees.species, Serengeti.species))
 
-# Functional distance (mean pairwise distance)
-library(mFD)
+# Phylogenetic distance (mean shortest distance)
+library(picante)
+phydist <- as.matrix(read.csv("data/checkpoints/phylodist.csv", row.names = 1))
+colnames(phydist) <- rownames(phydist)
+community <- data.frame(rbind(Europe = as.numeric(rownames(phydist) %in% Europe.species),
+                              HighArctic = as.numeric(rownames(phydist) %in% HighArctic.species),
+                              Pyrenees = as.numeric(rownames(phydist) %in% Pyrenees.species),
+                              Serengeti = as.numeric(rownames(phydist) %in% Serengeti.species))
+)
 
-traits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1, stringsAsFactors = T)
-rownames(traits) <- traits$Species
-traits <- traits %>%
-  dplyr::select(-Species, -Class, -Order, -Family, -Genus)
-
-traits_cat <- data.frame(trait_name = colnames(traits),
-                         trait_type = c("N", "Q", rep("F", 12), "Q", "Q", "Q", "F", "F", "F"),
-                         fuzzy_name = c(NA, NA, rep("Habitat", 12), NA, NA, NA, rep("TrophicLevel", 3)))
-community <- data.frame(rbind(Europe = as.numeric(rownames(traits) %in% Europe.species),
-                   Pyrenees = as.numeric(rownames(traits) %in% Pyrenees.species),
-                   Serengeti = as.numeric(rownames(traits) %in% Serengeti.species),
-                   HighArctic = as.numeric(rownames(traits) %in% HighArctic.species)
-                   ))
-colnames(community) <- rownames(traits)
-
-funct_dist <- funct.dist(traits, traits_cat, "gower", scale_euclid = "scale_center")
-fspace <- quality.fspaces(funct_dist, maxdim_pcoa = 10)
-sp_faxes_coord <- fspace$details_fspaces$sp_pc_coord
-quality.fspaces.plot(fspace, quality_metric = "mad", 
-                     fspaces_plot = c("pcoa_2d", "pcoa_3d", "pcoa_4d", "pcoa_5d", "pcoa_6d"),
-                     gradient_deviation = c(neg = "darkblue", nul = "grey80", pos = "darkred"),
-                     gradient_deviation_quality = c(low = "yellow", high = "red"))
-
-
-fw_func_beta <- beta.fd.hill(as.matrix(community), funct_dist)
+colnames(community) <- rownames(phydist)
+fw.comdistnt <- comdistnt(community, phydist)
 
 # Everything together:
 FWdist <- data.frame(FW1 = c("Europe", "Europe", "Europe",
@@ -134,7 +118,8 @@ FWdist <- data.frame(FW1 = c("Europe", "Europe", "Europe",
                      FW2 = c("High Arctic", "Pyrenees", "Serengeti", "Pyrenees", "Serengeti", "Serengeti", "Europe", "Serengeti"),
                      Geo.Dist = c(geo.dist,NA,NA),
                      Env.Dist = c(env.dist,NA,NA),
-                     Comp.Dist = c(comp.dist,NA,NA))
+                     Comp.Dist = c(comp.dist,NA,NA),
+                     Phylo.Dist = c(fw.comdistnt, NA, NA))
 
 # Visualie
 p1 <- ggplot(FWdist, aes(x = FW1, y = FW2)) +
@@ -173,6 +158,19 @@ p3 <- ggplot(FWdist, aes(x = FW1, y = FW2)) +
         legend.justification = c(1, 0),
         legend.position = "bottom",
         legend.direction = "horizontal")
+
+p4 <- ggplot(FWdist, aes(x = FW1, y = FW2)) +
+  geom_tile(aes(fill = Phylo.Dist), color = "white") +
+  scale_fill_gradient2(low = "white", high = "red", name="Phylogenetic\nDissimilarity", na.value="transparent") +
+  theme_minimal()+ 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1,
+                                   hjust = 1))+
+  coord_fixed() +
+  theme(axis.title = element_blank(),
+        legend.justification = c(1, 0),
+        legend.position = "bottom",
+        legend.direction = "horizontal")
+
 
 library(patchwork)
 p<-p1+p2+p3
