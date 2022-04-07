@@ -28,3 +28,13 @@ EuropeMW <- EuropeMW %>%
 EuropeRoles <- species_role(EuropeMW, ncores = 8)
 
 save(arcticRoles, pyreneesRoles, serengetiRoles, EuropeRoles, file = "data/checkpoints/SpeciesRole.RData")
+
+rm(list = ls())
+load("data/checkpoints/SpeciesRole.RData")
+rownames(EuropeRoles) <- EuropeRoles$species
+EuropeRoles <- dplyr::select(EuropeRoles, -species) %>%
+  select_at(vars(-contains("position")))
+role.pca <- prcomp(EuropeRoles, center = T, scale.= T)
+ggbiplot(role.pca, obs.scale = 1, var.scale = 1 , groups = EuropeRoles$TL) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
