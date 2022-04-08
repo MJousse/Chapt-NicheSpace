@@ -99,7 +99,6 @@ comp.dist <- c(JaccardDissimilarity(Europe.species, HighArctic.species),
                JaccardDissimilarity(Pyrenees.species, Serengeti.species))
 
 # Phylogenetic distance (mean shortest distance)
-library(picante)
 phydist <- as.matrix(read.csv("data/checkpoints/phylodist.csv", row.names = 1))
 colnames(phydist) <- rownames(phydist)
 community <- data.frame(rbind(Europe = as.numeric(rownames(phydist) %in% Europe.species),
@@ -109,7 +108,7 @@ community <- data.frame(rbind(Europe = as.numeric(rownames(phydist) %in% Europe.
 )
 
 colnames(community) <- rownames(phydist)
-fw.comdistnt <- comdistnt(community, phydist)
+fw.comdistnt <- betadiv(community, phydist)
 
 # Everything together:
 FWdist <- data.frame(FW1 = c("Europe", "Europe", "Europe",
