@@ -2,7 +2,10 @@ library(ape)
 library(dplyr)
 library(tidyr)
 library(purrr)
+library(mFD)
+library(patchwork)
 library(rgbif)
+load("code/DistanceFunctions.R")
 sample = 1
 
 # load phylogenies
@@ -48,18 +51,11 @@ arctic <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1)
 phydist <- cophenetic(tetrapodtrees)
 write.csv(phydist, "data/checkpoints/phylodist.csv")
 
-mntd <- function(target_species, species_pool, phylodist){ # Shortest phylo distance
-  if (target_species %in% colnames(phylodist)){
-    min(phylodist[target_species, colnames(phylodist) %in% species_pool])
-  } else {NA}
-}
-
 arctic_mntd <- map_dbl(arctic$Species, mntd, europe$Species, phydist)
 pyrenees_mntd <- map_dbl(pyrenees$Species, mntd, europe$Species, phydist)
 serengeti_mntd <- map_dbl(serengeti$Species, mntd, europe$Species, phydist)
 
 # functional distance 
-library(mFD)
 rownames(traits) <- traits$Species
 traits <- traits %>%
   dplyr::select(-Species, -Class, -Order, -Family, -Genus) %>%
@@ -70,20 +66,6 @@ traits_cat <- data.frame(trait_name = colnames(traits),
                          fuzzy_name = c(NA, NA, rep("Habitat", 12), NA, NA, NA, rep("TrophicLevel", 3)))
 
 sp_funct.dist <- funct.dist(traits, traits_cat, metric = "gower", scale_euclid = "scale_center")
-
-fnnd <- function(target_species, species_pool, funcdist){
-  funcdist <- as.matrix(funcdist)
-  if (target_species %in% colnames(funcdist)){
-    min(funcdist[target_species, colnames(funcdist) %in% species_pool])
-  } else {NA}
-}
-
-fmpd <- function(target_species, species_pool, funcdist){
-  funcdist <- as.matrix(funcdist)
-  if (target_species %in% colnames(funcdist)){
-    mean(funcdist[target_species, colnames(funcdist) %in% species_pool])
-  } else {NA}
-}
 
 arctic_fnnd <- map_dbl(arctic$Species, fnnd, europe$Species, sp_funct.dist)
 pyrenees_fnnd <- map_dbl(pyrenees$Species, fnnd, europe$Species, sp_funct.dist)
@@ -115,7 +97,6 @@ p2 <- ggplot() +
   theme(legend.position = "bottom",
         legend.direction = "horizontal")
 
-library(patchwork)
 p<-p1+p2
 
 ggsave("figures/SI/SPdist.png", p, device = "png")
