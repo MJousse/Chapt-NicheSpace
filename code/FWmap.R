@@ -16,7 +16,9 @@ HighArctic <- st_read("data/raw/polygons/HighArctic/Bylot.shp")
 
 # Polygons
 world <- map_data('world')
-Europe <- st_transform(Europe, st_crs("EPSG:4326")) %>% st_union()
+#Europe <- st_transform(Europe, st_crs("EPSG:4326")) %>% st_union()
+#st_write(Europe, "data/raw/polygons/Europe/Europe.shp")
+Europe <- st_read("data/raw/polygons/Europe/Europe.shp")
 Europe_centroid <- st_coordinates(st_centroid(Europe))
 Pyrenees <- st_transform(Pyrenees, st_crs("EPSG:4326")) %>% st_union() 
 Pyrenees_centroid <- st_coordinates(st_centroid(Pyrenees))
@@ -105,13 +107,13 @@ p <- ggplot() +
   geom_label_repel(data = as.data.frame(Pyrenees_centroid), aes(x = X, y = Y, label = "Pyrenees"), 
                    fontface = "bold", nudge_x = -15, nudge_y = -10, colour = "red3") +
   geom_label_repel(data = as.data.frame(Europe_centroid), aes(x = X, y = Y, label = "Europe"), 
-                   fontface = "bold", nudge_x = 25, nudge_y = 20, colour = "royalblue4") +
+                   fontface = "bold", nudge_x = 10, nudge_y = 10, colour = "royalblue4") +
   geom_label_repel(data = as.data.frame(HighArctic_centroid), aes(x = X, y = Y, label = "High Arctic"), 
                    fontface = "bold", nudge_x = -5, nudge_y = -10, colour = "deepskyblue") +
   geom_label_repel(data = as.data.frame(Serengeti_centroid), aes(x = X, y = Y, label = "Serengeti"), 
                    fontface = "bold", nudge_x = 18, nudge_y = 13, colour = "yellowgreen") +
-  annotation_custom(euro_barchart, xmin = Europe_centroid[,1]+18, xmax = Europe_centroid[,1]+32, 
-                    ymin = Europe_centroid[,2]+6, ymax = Europe_centroid[,2]+18) + 
+  annotation_custom(euro_barchart, xmin = Europe_centroid[,1]+3, xmax = Europe_centroid[,1]+17, 
+                    ymin = Europe_centroid[,2]-4, ymax = Europe_centroid[,2]+8) + 
   annotation_custom(pyrenees_barchart, xmin = Pyrenees_centroid[,1]-22, xmax = Pyrenees_centroid[,1]-8, 
                     ymin = Pyrenees_centroid[,2]-24, ymax = Pyrenees_centroid[,2]-12) + 
   annotation_custom(arctic_barchart, xmin = HighArctic_centroid[,1]-12, xmax = HighArctic_centroid[,1]+2, 
