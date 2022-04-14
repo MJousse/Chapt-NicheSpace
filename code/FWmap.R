@@ -3,8 +3,8 @@ library(dplyr)
 library(sf)
 library(tidyr)
 library(ggrepel)
-library(scatterpie)
 library(maps)
+library(rphylopic)
 sf_use_s2(FALSE)
 
 Europe <- st_read("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions2016.shp") %>%
@@ -16,7 +16,9 @@ HighArctic <- st_read("data/raw/polygons/HighArctic/Bylot.shp")
 
 # Polygons
 world <- map_data('world')
-Europe <- st_transform(Europe, st_crs("EPSG:4326")) %>% st_union()
+#Europe <- st_transform(Europe, st_crs("EPSG:4326")) %>% st_union()
+#st_write(Europe, "data/raw/polygons/Europe/Europe.shp")
+Europe <- st_read("data/raw/polygons/Europe/Europe.shp")
 Europe_centroid <- st_coordinates(st_centroid(Europe))
 Pyrenees <- st_transform(Pyrenees, st_crs("EPSG:4326")) %>% st_union() 
 Pyrenees_centroid <- st_coordinates(st_centroid(Pyrenees))
@@ -40,7 +42,7 @@ df$col <- NA
 df$col[which(df$from == "Europe")] <- "royalblue4"
 df$col[which(df$from == "Pyrenees")] <- "red3"
 df$col[which(df$from == "HighArctic")] <- "deepskyblue"
-df$col[which(df$from == "Serengeti")] <- "yellowgreen"
+df$col[which(df$from == "Serengeti")] <- "chartreuse4"
 
 # Species proportions
 Europe_sp <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1)
@@ -58,11 +60,13 @@ comp[which(comp$FW == "Europe"), c("long", "lat")] <- Europe_centroid
 comp[which(comp$FW == "Pyrenees"), c("long", "lat")] <- Pyrenees_centroid
 comp[which(comp$FW == "High Arctic"), c("long", "lat")] <- HighArctic_centroid
 comp[which(comp$FW == "Serengeti"), c("long", "lat")] <- Serengeti_centroid
+colorbar <- c("#8dd3c7", "#ffffb3", "#bebada", "#fb8072")
 euro_barchart <- ggplotGrob(
   ggplot(comp[comp$FW == "Europe",])+
     geom_bar(aes(x=Class, fill = Class, y = Proportion),
              position='dodge',stat='identity', color = "black") +
     labs(x = NULL, y = NULL) + 
+    scale_fill_manual(values =colorbar) +
     theme(legend.position = "none", rect = element_blank(),
           line = element_blank(), text = element_blank()) 
 )
@@ -71,6 +75,7 @@ pyrenees_barchart <- ggplotGrob(
     geom_bar(aes(x=Class, fill = Class, y = Proportion),
              position='dodge',stat='identity', color = "black") +
     labs(x = NULL, y = NULL) + 
+    scale_fill_manual(values =colorbar) +
     theme(legend.position = "none", rect = element_blank(),
           line = element_blank(), text = element_blank()) 
 )
@@ -79,6 +84,7 @@ arctic_barchart <- ggplotGrob(
     geom_bar(aes(x=Class, fill = Class, y = Proportion),
              position='dodge',stat='identity', color = "black") +
     labs(x = NULL, y = NULL) + 
+    scale_fill_manual(values =colorbar) +
     theme(legend.position = "none", rect = element_blank(),
           line = element_blank(), text = element_blank()) 
 )
@@ -87,8 +93,31 @@ serengeti_barchart <- ggplotGrob(
     geom_bar(aes(x=Class, fill = Class, y = Proportion),
              position='dodge',stat='identity', color = "black") +
     labs(x = NULL, y = NULL) + 
+    scale_fill_manual(values =colorbar) +
     theme(legend.position = "none", rect = element_blank(),
           line = element_blank(), text = element_blank()) 
+)
+
+legend <- data.frame(Class = c("Amphibia", "Aves", "Mammalia", "Reptilia"),
+                     Proportion = c(0.15, 0.35, 0.25, 0.20))
+frog <- image_data("c07ce7b7-5fb5-484f-83a0-567bb0795e18", size = "64")[[1]]
+lizard <- image_data("83053aee-0f56-4cf3-bbfa-9207e6f13f46", size = "64")[[1]]
+eagle <- image_data("92589388-08e3-422f-b452-aa7454411a9c", size = "64")[[1]]
+lynx <- image_data("24f763a3-accf-44c9-9a08-71e9834047b7", size = "64")[[1]]
+
+legend_barchart <- ggplotGrob(
+  ggplot(legend)+
+    geom_bar(aes(x=Class, fill = Class, y = Proportion),
+             position='dodge', stat='identity', color = "black") +
+    labs(x = NULL, y = NULL, title = "Community composition") + 
+    scale_fill_manual(values = colorbar) +
+    add_phylopic(frog, x = 1, y = legend$Proportion[1]+0.06, alpha = 1, ysize = 0.7, color = "black") +
+    add_phylopic(eagle, x = 2, y = legend$Proportion[2]+0.02, alpha = 1, ysize = 0.8, color = "black") +
+    add_phylopic(lynx, x = 3, y = legend$Proportion[3]+0.06, alpha = 1, ysize = 0.65, color = "black") +
+    add_phylopic(lizard, x = 4, y = legend$Proportion[4]+0.03, alpha = 1, ysize = 0.55, color = "black") +
+    lims(y = c(0,0.4))+
+    theme(legend.position = "none", rect = element_blank(),
+          line = element_blank(), text = element_blank(), title = element_text(size = 8, face = "bold"), plot.margin = unit(c(0, 0, 0, 0), "null")) 
 )
 
 p <- ggplot() +
@@ -96,7 +125,7 @@ p <- ggplot() +
   geom_sf(data = Europe, fill = alpha("royalblue4", 0.5), color = "royalblue4") +
   geom_sf(data = Pyrenees, fill = alpha("red3", 0.5), color = "red3") +
   geom_sf(data = HighArctic, fill = alpha("deepskyblue", 0.5), color = "deepskyblue") +
-  geom_sf(data = Serengeti, fill = alpha("yellowgreen", 0.5), color =  "yellowgreen") +
+  geom_sf(data = Serengeti, fill = alpha("chartreuse4", 0.5), color =  "chartreuse4") +
   geom_curve(data=df,
              aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col),
              size=0.75,
@@ -105,19 +134,21 @@ p <- ggplot() +
   geom_label_repel(data = as.data.frame(Pyrenees_centroid), aes(x = X, y = Y, label = "Pyrenees"), 
                    fontface = "bold", nudge_x = -15, nudge_y = -10, colour = "red3") +
   geom_label_repel(data = as.data.frame(Europe_centroid), aes(x = X, y = Y, label = "Europe"), 
-                   fontface = "bold", nudge_x = 25, nudge_y = 20, colour = "royalblue4") +
+                   fontface = "bold", nudge_x = 10, nudge_y = 10, colour = "royalblue4") +
   geom_label_repel(data = as.data.frame(HighArctic_centroid), aes(x = X, y = Y, label = "High Arctic"), 
                    fontface = "bold", nudge_x = -5, nudge_y = -10, colour = "deepskyblue") +
   geom_label_repel(data = as.data.frame(Serengeti_centroid), aes(x = X, y = Y, label = "Serengeti"), 
-                   fontface = "bold", nudge_x = 18, nudge_y = 13, colour = "yellowgreen") +
-  annotation_custom(euro_barchart, xmin = Europe_centroid[,1]+18, xmax = Europe_centroid[,1]+32, 
-                    ymin = Europe_centroid[,2]+6, ymax = Europe_centroid[,2]+18) + 
+                   fontface = "bold", nudge_x = 18, nudge_y = 13, colour = "chartreuse4") +
+  annotation_custom(euro_barchart, xmin = Europe_centroid[,1]+3, xmax = Europe_centroid[,1]+17, 
+                    ymin = Europe_centroid[,2]-4, ymax = Europe_centroid[,2]+8) + 
   annotation_custom(pyrenees_barchart, xmin = Pyrenees_centroid[,1]-22, xmax = Pyrenees_centroid[,1]-8, 
                     ymin = Pyrenees_centroid[,2]-24, ymax = Pyrenees_centroid[,2]-12) + 
   annotation_custom(arctic_barchart, xmin = HighArctic_centroid[,1]-12, xmax = HighArctic_centroid[,1]+2, 
                     ymin = HighArctic_centroid[,2]-24, ymax = HighArctic_centroid[,2]-12) + 
   annotation_custom(serengeti_barchart, xmin = Serengeti_centroid[,1]+11, xmax = Serengeti_centroid[,1]+25, 
                     ymin = Serengeti_centroid[,2]-3, ymax = Serengeti_centroid[,2]+11) + 
+  annotation_custom(legend_barchart, xmin = -90, xmax = -50, 
+                    ymin = -5, ymax = 20) + 
   coord_sf(xlim = c(-85, 70), ylim = c(0, 80)) +
   theme_void()
 
