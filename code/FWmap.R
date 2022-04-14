@@ -3,7 +3,6 @@ library(dplyr)
 library(sf)
 library(tidyr)
 library(ggrepel)
-library(scatterpie)
 library(maps)
 library(rphylopic)
 sf_use_s2(FALSE)
@@ -118,7 +117,7 @@ legend_barchart <- ggplotGrob(
     add_phylopic(lizard, x = 4, y = legend$Proportion[4]+0.03, alpha = 1, ysize = 0.55, color = "black") +
     lims(y = c(0,0.4))+
     theme(legend.position = "none", rect = element_blank(),
-          line = element_blank(), text = element_blank(), title = element_text(size = 10, face = "bold"), plot.margin = unit(c(0, 0, 0, 0), "null")) 
+          line = element_blank(), text = element_blank(), title = element_text(size = 8, face = "bold"), plot.margin = unit(c(0, 0, 0, 0), "null")) 
 )
 
 p <- ggplot() +
