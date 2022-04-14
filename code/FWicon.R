@@ -1,18 +1,22 @@
 library(igraph)
+library(dplyr)
 library(NetIndices)
+library(ggplot2)
 
 arcticFW <- read.csv("data/cleaned/HighArcticFW.csv", row.names = 1)
 arcticFW <- arcticFW %>%
   transmute(resource = Prey, consumer = Predator)
-arctic.igraph <- graph_from_edgelist(as.matrix(arcticFW))
+arctic.igraph <- simplify(graph_from_edgelist(as.matrix(arcticFW)))
 arctic.matrix <- Matrix::as.matrix(as_adjacency_matrix(arctic.igraph))
 
 lay<-matrix(nrow = nrow(arctic.matrix), ncol=2) # create a matrix with one column as runif, the other as trophic level
 lay[,1]<-sample(c(1:nrow(arctic.matrix)), nrow(arctic.matrix))
 lay[,2]<-scale(TrophInd(arctic.matrix)$TL-1) + rnorm(nrow(arctic.matrix), mean =0,sd = 0.2)
 
-plot(arctic.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=.5,
+png("figures/FWgraphs/arctic.png")
+plot(arctic.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=1,
      vertex.color = "deepskyblue", edge.color = alpha("deepskyblue", 0.3))
+dev.off()
 
 EuropeMW <- read.csv("data/cleaned/EuroFWadults.csv", row.names = 1)
 sp <- unique(c(EuropeMW$Predator, EuropeMW$Prey))[sample(c(1:200))]
@@ -20,15 +24,35 @@ EuropeMW <- EuropeMW %>%
   transmute(resource = Prey, consumer = Predator) %>%
   filter(resource %in% sp, consumer %in% sp)
 
-europe.igraph <- graph_from_edgelist(as.matrix(EuropeMW))
+europe.igraph <- simplify(graph_from_edgelist(as.matrix(EuropeMW)))
 europe.matrix <- Matrix::as.matrix(as_adjacency_matrix(europe.igraph))
 
 lay<-matrix(nrow = nrow(europe.matrix), ncol=2) # create a matrix with one column as runif, the other as trophic level
 lay[,1]<-sample(c(1:nrow(europe.matrix)), nrow(europe.matrix))
 lay[,2]<-scale(TrophInd(europe.matrix)$TL-1) + rnorm(nrow(europe.matrix), mean =0,sd = 0.2)
 
-plot(europe.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=.5,
+png("figures/FWgraphs/europe.png")
+plot(europe.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=1,
      vertex.color = "royalblue4", edge.color = alpha("royalblue4", 0.3))
+dev.off()
+
+EuropeMW <- read.csv("data/cleaned/EuroFWadults.csv", row.names = 1)
+sp <- unique(c(EuropeMW$Predator, EuropeMW$Prey))[sample(c(1:50))]
+EuropeMW <- EuropeMW %>%
+  transmute(resource = Prey, consumer = Predator) %>%
+  filter(resource %in% sp, consumer %in% sp)
+
+europe.igraph <- simplify(graph_from_edgelist(as.matrix(EuropeMW)))
+europe.matrix <- Matrix::as.matrix(as_adjacency_matrix(europe.igraph))
+
+lay<-matrix(nrow = nrow(europe.matrix), ncol=2) # create a matrix with one column as runif, the other as trophic level
+lay[,1]<-sample(c(1:nrow(europe.matrix)), nrow(europe.matrix))
+lay[,2]<-scale(TrophInd(europe.matrix)$TL-1) + rnorm(nrow(europe.matrix), mean =0,sd = 0.5)
+
+png("figures/FWgraphs/simplifiedEurope.png")
+plot(europe.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=1,
+     vertex.color = "royalblue4", edge.color = alpha("royalblue4", 0.3))
+dev.off()
 
 SerengetiFW <- read.csv("data/cleaned/SerengetiFW.csv", row.names = 1)
 sp <- unique(c(SerengetiFW$Consumer_Species, SerengetiFW$Resource_Species))[sample(c(1:100))]
@@ -36,15 +60,17 @@ SerengetiFW <- SerengetiFW %>%
   transmute(resource = Resource_Species, consumer = Consumer_Species) %>%
   filter(resource %in% sp, consumer %in% sp)
 
-serengeti.igraph <- graph_from_edgelist(as.matrix(SerengetiFW))
+serengeti.igraph <- simplify(graph_from_edgelist(as.matrix(SerengetiFW)))
 serengeti.matrix <- Matrix::as.matrix(as_adjacency_matrix(serengeti.igraph))
 
 lay<-matrix(nrow = nrow(serengeti.matrix), ncol=2) # create a matrix with one column as runif, the other as trophic level
 lay[,1]<-sample(c(1:nrow(serengeti.matrix)), nrow(serengeti.matrix))
 lay[,2]<-scale(TrophInd(serengeti.matrix)$TL-1) + rnorm(nrow(serengeti.matrix), mean =0,sd = 0.2)
 
-plot(serengeti.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=.5,
+png("figures/FWgraphs/serengeti.png")
+serengeti_graph <- plot(serengeti.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=1,
      vertex.color = "chartreuse4", edge.color = alpha("chartreuse4", 0.3))
+dev.off()
 
 PyreneesFW <- read.csv("data/cleaned/pyrenneesFW.csv", row.names = 1)
 sp <- unique(c(PyreneesFW$Predator, PyreneesFW$Prey))[sample(c(1:100))]
@@ -59,5 +85,7 @@ lay<-matrix(nrow = nrow(pyrenees.matrix), ncol=2) # create a matrix with one col
 lay[,1]<-sample(c(1:nrow(pyrenees.matrix)), nrow(pyrenees.matrix))
 lay[,2]<-scale(TrophInd(pyrenees.matrix)$TL-1) + rnorm(nrow(pyrenees.matrix), mean =0,sd = 0.3)
 
-plot(pyrenees.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=.5,
+png("figures/FWgraphs/pyrenees.png")
+pyrenees_graph <- plot(pyrenees.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=1,
      vertex.color = "red3", edge.color = alpha("red3", 0.2))
+dev.off()
