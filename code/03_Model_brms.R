@@ -9,6 +9,15 @@ library(dplyr)
 library(brms)
 source("code/functions.R")
 FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
+brms_form <- bf(interaction ~ 1 + 
+                  (Omnivore.predator + Carnivore.predator + Habitat_breadth.predator + BM.predator + Longevity.predator + ClutchSize.predator +
+                     Omnivore.prey + Carnivore.prey + Habitat_breadth.prey + BM.prey + Longevity.prey + ClutchSize.prey + 
+                     ActivityTime.match + Habitat.match + BM.match) + 
+                  (1 + (Omnivore.predator + Carnivore.predator + Habitat_breadth.predator + BM.predator + Longevity.predator + ClutchSize.predator 
+                        + Omnivore.prey + Carnivore.prey + Habitat_breadth.prey + BM.prey + Longevity.prey + ClutchSize.prey + 
+                          ActivityTime.match + Habitat.match + BM.match) || Order.predator), 
+                family = bernoulli())
+
 
 # Prepare training dataset ------------------------------------------------
 # load data and standardize
@@ -46,9 +55,8 @@ training <- select(training,  -Predator, -Prey, -Order.prey,
                    -Herbivore.predator,  -Herbivore.prey) %>%
   mutate(Order.predator = factor(Order.predator, 
                                  levels = unique(FuncTraits$Order)))
-euroMW_form <- bf(interaction ~ 1 + . + (1 + .||Order.predator), family = bernoulli())
 
-get_prior(euroMW_form, data = training)
+get_prior(brms_form, data = training)
 
 model_priors <- c(
   prior(normal(0, 1), class = "Intercept"),
@@ -56,11 +64,11 @@ model_priors <- c(
   prior(cauchy(0, 5), class = "sd")
 )
 
-prior_predictions <- brm(formula = euroMW_form,
+prior_predictions <- brm(formula = brms_form,
                          data = training,
                          prior = model_priors,
                          sample_prior = "only", inits = "0")
-EuroModel <- brm(formula = euroMW_form,
+EuroModel <- brm(formula = brms_form,
                  data = training,
                  prior = model_priors, sample_prior = "no", 
                     cores = 4, backend = "cmdstan", threads = 4,
@@ -108,9 +116,8 @@ training <- select(training,  -Predator, -Prey, -Order.prey,
                    -Herbivore.predator,  -Herbivore.prey) %>%
   mutate(Order.predator = factor(Order.predator, 
                                  levels = unique(FuncTraits$Order)))
-ArcticFW_form <- bf(interaction ~ 1 + . + (1 + .||Order.predator), family = bernoulli())
 
-get_prior(ArcticFW_form, data = training)
+get_prior(brms_form, data = training)
 
 model_priors <- c(
   prior(normal(0, 1), class = "Intercept"),
@@ -118,12 +125,12 @@ model_priors <- c(
   prior(cauchy(0, 5), class = "sd")
 )
 
-prior_predictions <- brm(formula = ArcticFW_form,
+prior_predictions <- brm(formula = brms_form,
                          data = training,
                          prior = model_priors,
                          sample_prior = "only", inits = "0")
 
-ArcticModel <- brm(formula = ArcticFW_form,
+ArcticModel <- brm(formula = brms_form,
                    data = training,
                    prior = model_priors, sample_prior = "no", 
                    cores = 4, backend = "cmdstan", threads = 4,
@@ -171,9 +178,8 @@ training <- select(training,  -Predator, -Prey, -Order.prey,
                    -Herbivore.predator,  -Herbivore.prey) %>%
   mutate(Order.predator = factor(Order.predator, 
                                  levels = unique(FuncTraits$Order)))
-PyreneesFW_form <- bf(interaction ~ 1 + . + (1 + .||Order.predator), family = bernoulli())
 
-get_prior(PyreneesFW_form, data = training)
+get_prior(brms_form, data = training)
 
 model_priors <- c(
   prior(normal(0, 1), class = "Intercept"),
@@ -181,12 +187,12 @@ model_priors <- c(
   prior(cauchy(0, 5), class = "sd")
 )
 
-prior_predictions <- brm(formula = PyreneesFW_form,
+prior_predictions <- brm(formula = brms_form,
                          data = training,
                          prior = model_priors,
                          sample_prior = "only", inits = "0")
 
-PyreneesModel <- brm(formula = PyreneesFW_form,
+PyreneesModel <- brm(formula = brms_form,
                      data = training,
                      prior = model_priors, sample_prior = "no", 
                      cores = 4, backend = "cmdstan", threads = 4,
@@ -205,7 +211,8 @@ SerengetiSpecies <- read.csv("data/cleaned/SerengetiFWTaxo.csv", row.names = 1) 
   distinct() %>%
   filter(!is.na(Species))
 
-# transform trait into predictors for every species pair
+# transform trait into predictors for every species pairbf(interaction ~ 1 + . + (1 + .||Order.predator), family = bernoulli())
+
 SerengetiFW <- get_predictors(SerengetiSpecies$Species, FuncTraits)
 
 # scale predictors
@@ -234,9 +241,8 @@ training <- select(training,  -Predator, -Prey, -Order.prey,
                    -Herbivore.predator,  -Herbivore.prey) %>%
   mutate(Order.predator = factor(Order.predator, 
                                  levels = unique(FuncTraits$Order)))
-SerengetiFW_form <- bf(interaction ~ 1 + . + (1 + .||Order.predator), family = bernoulli())
 
-get_prior(SerengetiFW_form, data = training)
+get_prior(brms_form, data = training)
 
 model_priors <- c(
   prior(normal(0, 1), class = "Intercept"),
@@ -244,12 +250,12 @@ model_priors <- c(
   prior(cauchy(0, 5), class = "sd")
 )
 
-prior_predictions <- brm(formula = SerengetiFW_form,
+prior_predictions <- brm(formula = brms_form,
                          data = training,
                          prior = model_priors,
                          sample_prior = "only", inits = "0")
 
-SerengetiModel <- brm(formula = PyreneesFW_form,
+SerengetiModel <- brm(formula = brms_form,
                       data = training,
                       prior = model_priors, sample_prior = "no", 
                       cores = 4, backend = "cmdstan", threads = 4,
