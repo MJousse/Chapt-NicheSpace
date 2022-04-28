@@ -92,9 +92,9 @@ Arctic_Arctic_predictions <- select(HighArcticFW, Predator, Prey, interaction) %
 Arctic_Arctic_predictions$training <- ifelse(c(1:nrow(HighArcticFW) %in% as.numeric(rownames(ArcticModel$data))), 1, 0)
 
 # predict european metaweb
-Arctic_Europe_predictions <- predict(ArcticModel, newdata = EuroMWscaled, allow_new_levels = TRUE)
-Arctic_Europe_predictions <- select(EuroMW, Predator, Prey, interaction) %>%
-  bind_cols(as.data.frame(Arctic_Europe_predictions))
+Arctic_Euro_predictions <- predict(ArcticModel, newdata = EuroMWscaled, allow_new_levels = TRUE)
+Arctic_Euro_predictions <- select(EuroMW, Predator, Prey, interaction) %>%
+  bind_cols(as.data.frame(Arctic_Euro_predictions))
 
 # predict pyrenees food web
 Arctic_Pyrenees_predictions <- predict(ArcticModel, newdata = PyreneesFWscaled, allow_new_levels = TRUE)
@@ -145,3 +145,83 @@ Euro_Pyrenees_predictions <- select(PyreneesFW, Predator, Prey, interaction) %>%
 Euro_Serengeti_predictions <- predict(EuropeModel, newdata = SerengetiFWscaled, allow_new_levels = TRUE)
 Euro_Serengeti_predictions <- select(SerengetiFW, Predator, Prey, interaction) %>%
   bind_cols(as.data.frame(Euro_Serengeti_predictions))
+
+# Predictions using the Pyrenees model --------------------------------------
+# find the mean and sd of the predictors to scale new data
+Pyrenees_mean <- apply(PyreneesFW[,var2scale], MARGIN = 2, mean)
+Pyrenees_sd <- apply(PyreneesFW[,var2scale], MARGIN = 2, sd)
+
+# scale predictors
+HighArcticFWscaled <- HighArcticFW
+HighArcticFWscaled[,var2scale] <- sweep(HighArcticFW[,var2scale], MARGIN = 2, Pyrenees_mean)
+HighArcticFWscaled[,var2scale] <- sweep(HighArcticFW[,var2scale], MARGIN = 2, FUN = "/", 2*Pyrenees_sd)
+EuroMWscaled <- EuroMW
+EuroMWscaled[,var2scale] <- sweep(EuroMW[,var2scale], MARGIN = 2, Pyrenees_mean)
+EuroMWscaled[,var2scale] <- sweep(EuroMW[,var2scale], MARGIN = 2, FUN = "/", 2*Pyrenees_sd)
+PyreneesFWscaled <- PyreneesFW
+PyreneesFWscaled[,var2scale] <- sweep(PyreneesFW[,var2scale], MARGIN = 2, Pyrenees_mean)
+PyreneesFWscaled[,var2scale] <- sweep(PyreneesFW[,var2scale], MARGIN = 2, FUN = "/", 2*Pyrenees_sd)
+SerengetiFWscaled <- SerengetiFW
+SerengetiFWscaled[,var2scale] <- sweep(SerengetiFW[,var2scale], MARGIN = 2, Pyrenees_mean)
+SerengetiFWscaled[,var2scale] <- sweep(SerengetiFW[,var2scale], MARGIN = 2, FUN = "/", 2*Pyrenees_sd)
+
+# predict arctic food webs
+Pyrenees_Arctic_predictions <- predict(PyreneesModel, newdata = HighArcticFWscaled, allow_new_levels = TRUE)
+Pyrenees_Arctic_predictions <- select(HighArcticFW, Predator, Prey, interaction) %>%
+  bind_cols(as.data.frame(Pyrenees_Arctic_predictions))
+
+# predict european metaweb
+Pyrenees_Euro_predictions <- predict(PyreneesModel, newdata = EuroMWscaled, allow_new_levels = TRUE)
+Pyrenees_Euro_predictions <- select(EuroMW, Predator, Prey, interaction) %>%
+  bind_cols(as.data.frame(Pyrenees_Euro_predictions))
+
+# predict pyrenees food web
+Pyrenees_Pyrenees_predictions <- predict(PyreneesModel, newdata = PyreneesFWscaled, allow_new_levels = TRUE)
+Pyrenees_Pyrenees_predictions <- select(PyreneesFW, Predator, Prey, interaction) %>%
+  bind_cols(as.data.frame(Pyrenees_Pyrenees_predictions))
+Pyrenees_Pyrenees_predictions$training <- ifelse(c(1:nrow(PyreneesFW) %in% as.numeric(rownames(PyreneesModel$data))), 1, 0)
+
+# predict serengeti food web
+Pyrenees_Serengeti_predictions <- predict(PyreneesModel, newdata = SerengetiFWscaled, allow_new_levels = TRUE)
+Pyrenees_Serengeti_predictions <- select(SerengetiFW, Predator, Prey, interaction) %>%
+  bind_cols(as.data.frame(Pyrenees_Serengeti_predictions))
+
+# Predictions using the Serengeti model --------------------------------------
+# find the mean and sd of the predictors to scale new data
+Serengeti_mean <- apply(EuroMW[,var2scale], MARGIN = 2, mean)
+Serengeti_sd <- apply(EuroMW[,var2scale], MARGIN = 2, sd)
+
+# scale predictors
+HighArcticFWscaled <- HighArcticFW
+HighArcticFWscaled[,var2scale] <- sweep(HighArcticFW[,var2scale], MARGIN = 2, Serengeti_mean)
+HighArcticFWscaled[,var2scale] <- sweep(HighArcticFW[,var2scale], MARGIN = 2, FUN = "/", 2*Serengeti_sd)
+EuroMWscaled <- EuroMW
+EuroMWscaled[,var2scale] <- sweep(EuroMW[,var2scale], MARGIN = 2, Serengeti_mean)
+EuroMWscaled[,var2scale] <- sweep(EuroMW[,var2scale], MARGIN = 2, FUN = "/", 2*Serengeti_sd)
+PyreneesFWscaled <- PyreneesFW
+PyreneesFWscaled[,var2scale] <- sweep(PyreneesFW[,var2scale], MARGIN = 2, Serengeti_mean)
+PyreneesFWscaled[,var2scale] <- sweep(PyreneesFW[,var2scale], MARGIN = 2, FUN = "/", 2*Serengeti_sd)
+SerengetiFWscaled <- SerengetiFW
+SerengetiFWscaled[,var2scale] <- sweep(SerengetiFW[,var2scale], MARGIN = 2, Serengeti_mean)
+SerengetiFWscaled[,var2scale] <- sweep(SerengetiFW[,var2scale], MARGIN = 2, FUN = "/", 2*Serengeti_sd)
+
+# predict arctic food webs
+Serengeti_Arctic_predictions <- predict(SerengetiModel, newdata = HighArcticFWscaled, allow_new_levels = TRUE)
+Serengeti_Arctic_predictions <- select(HighArcticFW, Predator, Prey, interaction) %>%
+  bind_cols(as.data.frame(Serengeti_Arctic_predictions))
+
+# predict european metaweb
+Serengeti_Euro_predictions <- predict(SerengetiModel, newdata = EuroMWscaled, allow_new_levels = TRUE)
+Serengeti_Euro_predictions <- select(EuroMW, Predator, Prey, interaction) %>%
+  bind_cols(as.data.frame(Serengeti_Euro_predictions))
+
+# predict pyrenees food web
+Serengeti_Pyrenees_predictions <- predict(SerengetiModel, newdata = PyreneesFWscaled, allow_new_levels = TRUE)
+Serengeti_Pyrenees_predictions <- select(PyreneesFW, Predator, Prey, interaction) %>%
+  bind_cols(as.data.frame(Serengeti_Pyrenees_predictions))
+
+# predict serengeti food web
+Serengeti_Serengeti_predictions <- predict(SerengetiModel, newdata = SerengetiFWscaled, allow_new_levels = TRUE)
+Serengeti_Serengeti_predictions <- select(SerengetiFW, Predator, Prey, interaction) %>%
+  bind_cols(as.data.frame(Serengeti_Serengeti_predictions))
+Serengeti_Serengeti_predictions$training <- ifelse(c(1:nrow(SerengetiFW) %in% as.numeric(rownames(SerengetiModel$data))), 1, 0)
