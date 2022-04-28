@@ -165,8 +165,49 @@ p[p<0] <- 0
 y <- rbinom(n, size = 1, prob = p)
 d<-data.frame(x,y) %>%
   ggplot(aes(x,y))+
-  geom_point(alpha = 0.5, size = 3) +
+  geom_point(alpha = 0.5, size = 5) +
   geom_smooth(method = "glm", method.args = list(family = "binomial"), col = "royalblue4", fill = alpha("royalblue4", 0.5)) +
   theme_void() +
   theme(text = element_blank(), axis.line = element_line(size = 3))
 ggsave("figures/conceptual/logisiticreg.png", plot = d)
+
+# multidimension of functional traits
+functraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1, stringsAsFactors = T)
+library(mFD)
+rownames(functraits) <- functraits$Species
+traits <- functraits %>%
+  slice_sample(n=100) %>%
+  dplyr::select(-Species, -Class, -Order, -Family, -Genus) %>%
+  drop_na()
+traits_cat <- data.frame(trait_name = colnames(traits),
+                         trait_type = c("N", "Q", rep("F", 12), "Q", "Q", "Q", "F", "F", "F"),
+                         fuzzy_name = c(NA, NA, rep("Habitat", 12), NA, NA, NA, rep("TrophicLevel", 3)))
+# compute trait-based distances:
+dist_traits <- mFD::funct.dist(
+  sp_tr         = traits,
+  tr_cat        = traits_cat,
+  metric        = "gower",
+  scale_euclid  = "noscale",
+  ordinal_var   = "classic",
+  weight_type   = "equal",
+  stop_if_NA    = TRUE)
+
+fspaces <- mFD::quality.fspaces(
+  sp_dist             = dist_traits,
+  fdendro             = "average",
+  maxdim_pcoa         = 9,
+  deviation_weighting = c("absolute"),
+  fdist_scaling       = c(TRUE, FALSE))
+
+sp_faxes_coord <- fspaces$"details_fspaces"$"sp_pc_coord"
+col <- c("Amphibia" = "#8dd3c7", "Aves" = "#ffffb3", "Mammalia" = "#bebada", "Reptilia" = "#fb8072")
+classes <-as.character(functraits$Class[match(rownames(sp_faxes_coord), functraits$Species)])
+col <- col[classes]
+p <- ggplot(data.frame(sp_faxes_coord)) +
+  geom_hline(yintercept = 0, size = 3) +
+  geom_vline(xintercept = 0, size = 3) +
+  geom_point(aes(PC2, PC3), fill = col, size = 7, shape = 21, alpha = 0.8) +
+  theme_minimal() +
+  theme(panel.grid = element_blank(), panel.border = element_rect(color = "black", fill = "transparent", size = 4), text = element_blank())
+
+ggsave("figures/conceptual/traits.png", p)
