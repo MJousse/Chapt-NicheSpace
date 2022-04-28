@@ -156,3 +156,17 @@ par(bg=NA)
 plot(pyrenees.simplified, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=runif(length(E(pyrenees.simplified)), min = 0, max = 10),
      vertex.color = "red3", edge.color = alpha("red3", 0.2))
 dev.off()
+
+# mock logistic regression
+n<-100
+x <- seq(from = 0, to = 1, length.out = n)
+p <- x
+p[p<0] <- 0
+y <- rbinom(n, size = 1, prob = p)
+d<-data.frame(x,y) %>%
+  ggplot(aes(x,y))+
+  geom_point(alpha = 0.5, size = 3) +
+  geom_smooth(method = "glm", method.args = list(family = "binomial"), col = "royalblue4", fill = alpha("royalblue4", 0.5)) +
+  theme_void() +
+  theme(text = element_blank(), axis.line = element_line(size = 3))
+ggsave("figures/conceptual/logisiticreg.png", plot = d)
