@@ -1,5 +1,9 @@
 library(tidybayes)
 library(bayesplot)
+library(brms)
+library(dplyr)
+library(ggplot2)
+library(tibble)
 
 # Load model
 ArcticModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/ArcticModel_brms.rds")
@@ -30,20 +34,61 @@ R2_pyrenees <- bayes_R2(PyreneesModel)
 R2_serengeti <- bayes_R2(SerengetiModel)
 
 # Compare Coefficients
-fixed_effects_names <- c("Intercept", "Omnivore.predator", "Carnivore.predator", "Habitat_breadth.predator",
+# fixed effects
+predictors <- c("Intercept", "Omnivore.predator", "Carnivore.predator", "Habitat_breadth.predator",
        "BM.predator", "Longevity.predator", "ClutchSize.predator", "Omnivore.prey",
        "Habitat_breadth.prey", "BM.prey", "Longevity.prey", "ClutchSize.prey", "ActivityTime.match",
        "Habitat.match", "BM.match")
 foodwebs <- c("Arctic", "Europe", "Pyrenees", "Serengeti")
 fixed_effects <- rbind(
-  fixef(ArcticModel, pars = fixed_effects_names),
-  fixef(EuropeModel, pars = fixed_effects_names),
-  fixef(PyreneesModel, pars = fixed_effects_names),
-  fixef(SerengetiModel, pars = fixed_effects_names)) %>%
+  fixef(ArcticModel, pars = predictors),
+  fixef(EuropeModel, pars = predictors),
+  fixef(PyreneesModel, pars = predictors),
+  fixef(SerengetiModel, pars = predictors)) %>%
   as.data.frame() %>%
-  cbind(model = rep(foodwebs, each = length(fixed_effects_names))) %>%
-  cbind(coef = factor(rep(fixed_effects_names, times = length(foodwebs)), levels = fixed_effects_names))
+  cbind(model = rep(foodwebs, each = length(predictors))) %>%
+  cbind(coef = factor(rep(predictors, times = length(foodwebs)), levels = predictors))
   
 ggplot(fixed_effects) +
-  geom_pointrange(aes(x = coef, y = Estimate, ymin = Q2.5, ymax = Q97.5, color = FW), position = position_dodge(width=0.9))
+  geom_pointrange(aes(x = coef, y = Estimate, ymin = Q2.5, ymax = Q97.5, color = model), position = position_dodge(width=0.9))
 
+# random effects
+ArcticRandomEffects <- ranef(ArcticModel, pars = predictors)
+EuropeRandomEffects <- ranef(EuropeModel, pars = predictors)
+PyreneesRandomEffects <- ranef(PyreneesModel, pars = predictors)
+SerengetiRandomEffects <- ranef(SerengetiModel, pars = predictors)
+
+RandomEffects <- data.frame(model = c(), order = c(), coef = factor(c(), levels = predictors), est = c(), Q2.5 = c(), Q97.5 = c())
+for (ipredictor in c(1:length(predictors))){
+  RandomEffecti <-
+    bind_rows(
+      ArcticRandomEffects$Order.predator[,,ipredictor] %>%
+        as.data.frame() %>%
+        rownames_to_column(var = "order") %>%
+        mutate(model = "Arctic", coef = predictors[ipredictor]),
+      EuropeRandomEffects$Order.predator[,,ipredictor] %>%
+        as.data.frame() %>%
+        rownames_to_column(var = "order") %>%
+        mutate(model = "Europe", coef = predictors[ipredictor]),
+      PyreneesRandomEffects$Order.predator[,,ipredictor] %>%
+        as.data.frame() %>%
+        rownames_to_column(var = "order") %>%
+        mutate(model = "Pyrenees", coef = predictors[ipredictor]),
+      SerengetiRandomEffects$Order.predator[,,ipredictor] %>%
+        as.data.frame() %>%
+        rownames_to_column(var = "order") %>%
+        mutate(model = "Serengeti", coef = predictors[ipredictor]),
+      ) %>% 
+    mutate(coef = factor(coef, levels = predictors))
+  # add fixed effect
+  fe <- filter(fixed_effects, coef == predictors[ipredictor])
+  RandomEffecti[,c(2,4,5)] <- RandomEffecti[,c(2,4,5)] + fe$Estimate[match(RandomEffecti$model, fe$model)]
+  RandomEffects <- rbind(RandomEffects, RandomEffecti)
+}
+
+ggplot(aes(x = 1, y = Estimate), data = fixed_effects) +
+  geom_point(data = RandomEffects, aes(color = model), position = position_dodge(width=0.9), shape =1, alpha = 0.5) +
+  geom_point(data = fixed_effects, aes(fill = model), position = position_dodge(width=0.9), shape = 21, size = 2) +
+  geom_linerange(data = fixed_effects, aes(ymin = Q2.5, ymax = Q97.5, color = model), position = position_dodge(width = 0.9)) +
+  geom_hline(yintercept = 0)+
+  facet_wrap(vars(coef), scales = "free", nrow = 2)
