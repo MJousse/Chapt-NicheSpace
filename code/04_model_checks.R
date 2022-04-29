@@ -36,7 +36,7 @@ R2_serengeti <- bayes_R2(SerengetiModel)
 # Compare Coefficients
 # fixed effects
 predictors <- c("Intercept", "Omnivore.predator", "Carnivore.predator", "Habitat_breadth.predator",
-       "BM.predator", "Longevity.predator", "ClutchSize.predator", "Omnivore.prey",
+       "BM.predator", "Longevity.predator", "ClutchSize.predator", "Omnivore.prey", "Carnivore.prey",
        "Habitat_breadth.prey", "BM.prey", "Longevity.prey", "ClutchSize.prey", "ActivityTime.match",
        "Habitat.match", "BM.match")
 foodwebs <- c("Arctic", "Europe", "Pyrenees", "Serengeti")
