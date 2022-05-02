@@ -1,6 +1,8 @@
 library(ROCR)
 library(dplyr)
 library(tidyr)
+library(ggplot2)
+library(patchwork)
 rm(list = ls())
 load("data/checkpoints/predictions.RData")
 
@@ -26,10 +28,46 @@ for (combination in c(1:nrow(overall_performance))){
    }
   }
 }
+write.csv(species_performance, "data/checkpoints/species_performance.csv")
 
-ggplot(species_performance) +
-  geom_jitter(aes(x = Source, y = auc, colour = Source), alpha = 0.25) +
-  geom_point(data = overall_performance, aes(x = Source, y = auc, fill = Source), shape = 21, size = 3) +
-  facet_wrap(~Target, nrow = 1)
+FWdist <- read.csv("data/checkpoints/FWdist.csv", row.names = 1)
+FWdist[!is.na(FWdist) & FWdist == "High Arctic"] <- "Arctic"
 
+overall_performance[overall_performance == "Euro"] <- "Europe"
+species_performance[species_performance == "Euro"] <- "Europe"
+overall_performance <- left_join(overall_performance, FWdist, by = c("Source" = "FW2", "Target" = "FW1"))
+species_performance <- left_join(species_performance, FWdist, by = c("Source" = "FW2", "Target" = "FW1"))
 
+p1 <- ggplot(species_performance) +
+  geom_jitter(aes(x = geo.dist/1000, y = auc, colour = Source), alpha = 0.2, height = 0, width = 0.3) +
+  geom_point(data = overall_performance, aes(x = geo.dist/1000, y = auc, fill = Source), shape = 21, size = 3) +
+  scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  labs(y = "", x = "Geographic distance (10³km)", fill = "Source food web", colour = "Source food web")+
+  facet_wrap(~Target, nrow = 1) +
+  theme_minimal() +
+  theme(axis.line = element_line(size = 0.5), strip.text = element_text(size = 12),
+        strip.background = element_rect(colour = "black"))
+
+p2 <- ggplot(species_performance) +
+  geom_jitter(aes(x = env.dist, y = auc, colour = Source), alpha = 0.2, height = 0, width = 0.2) +
+  geom_point(data = overall_performance, aes(x = env.dist, y = auc, fill = Source), shape = 21, size = 3) +
+  scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  labs(y = "roc-auc", x = "Environmental distance", fill = "Source food web", colour = "Source food web") +
+  facet_wrap(~Target, nrow = 1) +
+  theme_minimal() +
+  theme(axis.line = element_line(size = 0.5), strip.text = element_blank())
+
+p3 <- ggplot(species_performance) +
+  geom_jitter(aes(x = phylo.dist, y = auc, colour = Source), alpha = 0.2, height = 0, width = 3) +
+  geom_point(data = overall_performance, aes(x = phylo.dist, y = auc, fill = Source), shape = 21, size = 3) +
+  scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  labs(y = "", x = "Phylogenetic distance", fill = "Source food web", colour = "Source food web") +
+  facet_wrap(~Target, nrow = 1) +
+  theme_minimal() +
+  theme(axis.line = element_line(size = 0.5), strip.text = element_blank())
+
+(p1 / p2 / p3)+ plot_layout(guides = "collect") +
+  plot_annotation(title = 'Target food web', theme = theme(plot.title = element_text(hjust = 0.5)))
