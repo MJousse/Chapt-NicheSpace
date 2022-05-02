@@ -1,3 +1,4 @@
+
 # Compositional distance
 JaccardDissimilarity <- function(x, y){
   a = sum(x %in% y)

@@ -11,7 +11,7 @@ library(raster)
 library(ggbiplot)
 library(patchwork)
 library(purrr)
-load("code/DistanceFunctions.R")
+source("code/DistanceFunctions.R")
 
 # Environmental Dissimilarity ---------------------------------------------
 # 1.In each food web, get worldclim data for N random points in the polygon
@@ -124,6 +124,7 @@ FWdist <- data.frame(FW1 = c("Europe", "Europe", "Europe",
                      Geo.Dist = c(geo.dist,NA,NA),
                      Env.Dist = c(env.dist,NA,NA),
                      Comp.Dist = c(comp.dist,NA,NA))
+write.csv(FWdist, "data/checkpoints/FWdist.csv")
 
 # geographic distance plot
 p1 <- ggplot(FWdist, aes(x = FW1, y = FW2)) +
