@@ -1,7 +1,11 @@
-# Step 03: Train the predictive model on the European metaweb
-# 1. Prepare the training dataset
-# 2. Set up the GLMM with greta package
-# 3. Train the model
+# Step 04: Train a predictive model on each food web
+# For each model (one per food web):
+# 1. Load and standardize training data
+# 1.1 load the data
+# 1.2 standardize continuous predictors
+# 1.3 take 70% of all interactions + equal number of non-interactions
+# 2. Set up bayesian GLMM with brms
+# 3. Train the model and save it on OneDrive (too big for GitHub)
 
 rm(list = ls())
 set.seed(16)

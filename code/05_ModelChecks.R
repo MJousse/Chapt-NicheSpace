@@ -1,3 +1,12 @@
+# Step 05: Check model behavior and compare coefficients
+# For each model (one per food web):
+# 1. Load the models
+# 2. Check convergence with Rhat and trace plots
+# 3. Posterior predictive check (predict realistic number of interactions)
+# 4. Check R2
+# 5. Compare coefficiens: *creates figure XX of manuscript*
+
+rm(list = ls())
 library(tidybayes)
 library(bayesplot)
 library(brms)
@@ -5,35 +14,39 @@ library(dplyr)
 library(ggplot2)
 library(tibble)
 
-# Load model
+# Load the models ---------------------------------------------------------
 ArcticModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/ArcticModel_brms.rds")
 EuropeModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/EuroModel_brms.rds")
 PyreneesModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel_brms.rds")
 SerengetiModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel_brms.rds")
 
-# Check convergence with Rhat and trace plots
+# Check convergence -------------------------------------------------------
 summary(ArcticModel)
+hist(rhat(ArcticModel))
 mcmc_trace(ArcticModel, regex_pars = "b_")
 summary(EuropeModel)
+hist(rhat(EuropeModel))
 mcmc_trace(EuropeModel, regex_pars = "b_")
 summary(PyreneesModel)
+hist(rhat(PyreneesModel))
 mcmc_trace(PyreneesModel, regex_pars = "b_")
 summary(SerengetiModel)
+hist(rhat(SerengetiModel))
 mcmc_trace(SerengetiModel, regex_pars = "b_")
 
-# Posterior predictive checks
+# Posterior predictive checks ---------------------------------------------
 pp_check(ArcticModel, ndraws = 100, type = "bars_grouped", group = "Order.predator")
 pp_check(EuropeModel, ndraws = 100, type = "bars_grouped", group = "Order.predator")
 pp_check(PyreneesModel, ndraws = 100, type = "bars_grouped", group = "Order.predator")
 pp_check(SerengetiModel, ndraws = 100, type = "bars_grouped", group = "Order.predator")
 
-# Bayes R2
+# Bayes R2 ----------------------------------------------------------------
 R2_arctic <- bayes_R2(ArcticModel)
 R2_europe <- bayes_R2(EuropeModel)
 R2_pyrenees <- bayes_R2(PyreneesModel)
 R2_serengeti <- bayes_R2(SerengetiModel)
 
-# Compare Coefficients
+# Compare coefficients ----------------------------------------------------
 # fixed effects
 predictors <- c("Intercept", "Omnivore.predator", "Carnivore.predator", "Habitat_breadth.predator",
        "BM.predator", "Longevity.predator", "ClutchSize.predator", "Omnivore.prey", "Carnivore.prey",
@@ -86,6 +99,7 @@ for (ipredictor in c(1:length(predictors))){
   RandomEffects <- rbind(RandomEffects, RandomEffecti)
 }
 
+# Plot coefficients -------------------------------------------------------
 coef_plot <- ggplot(aes(x = 1, y = exp(Estimate)), data = fixed_effects) +
   geom_point(data = RandomEffects, aes(color = model), position = position_dodge(width=0.9), shape =1, alpha = 0.5) +
   geom_point(data = fixed_effects, aes(fill = model), position = position_dodge(width=0.9), shape = 21, size = 2) +

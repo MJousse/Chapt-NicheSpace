@@ -1,4 +1,4 @@
-# Step xx: Create matrix of phylogenetic distance
+# Step 03: Create matrix of phylogenetic distance
 # 1. Clean turtle labels
 # 2. Calculate distance from 100 posterior samples
 # 3. Take the mean and sd
@@ -76,6 +76,6 @@ for (tree in c(1:100)){
 phydist_mean <- apply(simplify2array(phydist), 1:2, mean)
 phydist_sd <- apply(simplify2array(phydist), 1:2, sd)
 
-write.csv(phydist_mean, "data/checkpoints/phylodist.csv")
-write.csv(phydist_sd, "data/checkpoints/phylodist.csv")
+write.csv(phydist_mean, "data/checkpoints/phylodist_mean.csv")
+write.csv(phydist_sd, "data/checkpoints/phylodist_sd.csv")
 

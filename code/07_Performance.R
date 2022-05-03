@@ -1,3 +1,8 @@
+# Step 07: Calculate the performance of models for each target food web
+# For combination of mode-target food web
+# 1. Calculate the overall roc-auc and pr-auc
+# 2. Calculate the species specific roc-auc and pr-auc
+
 library(ROCR)
 library(dplyr)
 library(tidyr)
@@ -24,11 +29,12 @@ for (combination in c(1:nrow(overall_performance))){
      sp_auc <- performance(prediction(sp_predictions$Estimate, sp_predictions$interaction), "auc")@y.values[[1]]
      sp_aucpr <- performance(prediction(sp_predictions$Estimate, sp_predictions$interaction), "aucpr")@y.values[[1]]
      species_performance <- rbind(species_performance,
-                                  data.frame(sourceFW, targetFW, species, auc = sp_auc, aucpr = sp_aucpr))
+                                  data.frame(sourceFW, targetFW, species, auc = sp_auc, aucpr = sp_aucpr, prevalence = sum(sp_predictions$interaction)/nrow(sp_predictions)))
    }
   }
 }
 write.csv(species_performance, "data/checkpoints/species_performance.csv")
+write.csv(overall_performance, "data/checkpoints/overall_performance.csv")
 
 species_performance <- read.csv("data/checkpoints/species_performance.csv", row.names = 1)
 FWdist <- read.csv("data/checkpoints/FWdist.csv", row.names = 1)

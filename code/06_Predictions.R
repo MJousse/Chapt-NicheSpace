@@ -1,3 +1,12 @@
+# Step 06: Predict each food web (target food web) using each model (calibrated on source food web)
+# 1. Load and standardize data
+# For each model (one per food web):
+# 2. Standardize predictors of target food web with the mean and sd of source food web
+# 3. Make predictions for each target food web with 100 posterior samples
+# Keep the mean, sd, 95% Credible interval of each prediction +
+# the expected value, and whether the data was used for training
+# 4. Save everything
+
 # Predictions
 library(dplyr)
 library(brms)
@@ -226,6 +235,7 @@ Serengeti_Serengeti_predictions <- select(SerengetiFW, Predator, Prey, interacti
   bind_cols(as.data.frame(Serengeti_Serengeti_predictions))
 Serengeti_Serengeti_predictions$training <- ifelse(c(1:nrow(SerengetiFW) %in% as.numeric(rownames(SerengetiModel$data))), 1, 0)
 
+# Save everything ---------------------------------------------------------
 save(Arctic_Arctic_predictions, Arctic_Euro_predictions, Arctic_Pyrenees_predictions, Arctic_Serengeti_predictions,
      Euro_Arctic_predictions, Euro_Euro_predictions, Euro_Pyrenees_predictions, Euro_Serengeti_predictions,
      Pyrenees_Arctic_predictions, Pyrenees_Euro_predictions, Pyrenees_Pyrenees_predictions, Pyrenees_Serengeti_predictions,

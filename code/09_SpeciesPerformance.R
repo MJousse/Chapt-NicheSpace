@@ -20,6 +20,7 @@ arctic <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1)
 
 # load matrix of phylogenetic distance
 phydist <- as.matrix(read.csv("data/checkpoints/phylodist.csv", row.names = 1))
+colnames(phydist) <- gsub("\\.", " ", colnames(phydist))
 
 # calculate distance
 arctic_mntd <- map_dbl(arctic$Species, mntd, europe$Species, phydist)
@@ -75,3 +76,20 @@ p2 <- ggplot() +
 # patchwork and save
 p<-p1+p2
 ggsave("figures/SI/SPdist.png", p, device = "png")
+
+# Correlating to model performance ----------------------------------------
+species_performance <- read.csv("data/checkpoints/species_performance.csv", row.names = 1) %>%
+  filter(Source != Target)
+
+species_performance$mntd <- NA
+species_performance$mntd[species_performance$Source == "Euro"] <- map_dbl(species_performance$species[species_performance$Source == "Euro"], mntd, europe$Species, phydist)
+species_performance$mntd[species_performance$Source == "Pyrenees"] <- map_dbl(species_performance$species[species_performance$Source == "Pyrenees"], mntd, pyrenees$Species, phydist)
+species_performance$mntd[species_performance$Source == "Serengeti"] <- map_dbl(species_performance$species[species_performance$Source == "Serengeti"], mntd, serengeti$Species, phydist)
+species_performance$mntd[species_performance$Source == "Arctic"] <- map_dbl(species_performance$species[species_performance$Source == "Arctic"], mntd, arctic$Species, phydist)
+
+species_performance$fmpd <- NA
+species_performance$fmpd[species_performance$Source == "Euro"] <- map_dbl(species_performance$species[species_performance$Source == "Euro"], fmpd, europe$Species, sp_funct.dist)
+species_performance$fmpd[species_performance$Source == "Pyrenees"] <- map_dbl(species_performance$species[species_performance$Source == "Pyrenees"], fmpd, pyrenees$Species, sp_funct.dist)
+species_performance$fmpd[species_performance$Source == "Serengeti"] <- map_dbl(species_performance$species[species_performance$Source == "Serengeti"], fmpd, serengeti$Species, sp_funct.dist)
+species_performance$fmpd[species_performance$Source == "Arctic"] <- map_dbl(species_performance$species[species_performance$Source == "Arctic"], fmpd, arctic$Species, sp_funct.dist)
+
