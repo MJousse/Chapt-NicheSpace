@@ -30,6 +30,7 @@ for (combination in c(1:nrow(overall_performance))){
 }
 write.csv(species_performance, "data/checkpoints/species_performance.csv")
 
+species_performance <- read.csv("data/checkpoints/species_performance.csv", row.names = 1)
 FWdist <- read.csv("data/checkpoints/FWdist.csv", row.names = 1)
 FWdist[!is.na(FWdist) & FWdist == "High Arctic"] <- "Arctic"
 
