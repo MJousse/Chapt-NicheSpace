@@ -9,7 +9,7 @@ library(tidyr)
 library(purrr)
 library(mFD)
 library(patchwork)
-load("code/DistanceFunctions.R")
+source("code/DistanceFunctions.R")
 
 # Phylogenetic distance to nearest taxon in Europe ------------------------
 # species list
