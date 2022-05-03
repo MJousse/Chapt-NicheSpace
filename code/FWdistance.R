@@ -6,12 +6,13 @@
 # 5. Make plots of distance and map of food web
 
 library(dplyr)
+library(tidyr)
 library(sf)
 library(raster)
 library(ggbiplot)
 library(patchwork)
 library(purrr)
-load("code/DistanceFunctions.R")
+source("code/DistanceFunctions.R")
 
 # Environmental Dissimilarity ---------------------------------------------
 # 1.In each food web, get worldclim data for N random points in the polygon
@@ -114,20 +115,18 @@ community <- data.frame(rbind(Europe = as.numeric(rownames(phydist) %in% Europe.
 colnames(community) <- rownames(phydist)
 fw.comdistnt <- phylobetadiv(community, phydist)
 
-
 # Visualization -----------------------------------------------------------
 # put everything together
-FWdist <- data.frame(FW1 = c("Europe", "Europe", "Europe",
-                             "High Arctic", "High Arctic",
-                             "Pyrenees", "Europe", "Serengeti"),
-                     FW2 = c("High Arctic", "Pyrenees", "Serengeti", "Pyrenees", "Serengeti", "Serengeti", "Europe", "Serengeti"),
-                     Geo.Dist = c(geo.dist,NA,NA),
-                     Env.Dist = c(env.dist,NA,NA),
-                     Comp.Dist = c(comp.dist,NA,NA))
+foodwebs <- c("Europe", "High Arctic", "Pyrenees", "Serengeti")
+FWdist <- expand_grid(FW1 = foodwebs, FW2 = foodwebs)
+FWdist$geo.dist <- c(as.matrix(geo.dist))
+FWdist$env.dist <- c(as.matrix(env.dist))
+FWdist$phylo.dist <- c(fw.comdistnt)
+write.csv(FWdist, "data/checkpoints/FWdist.csv")
 
 # geographic distance plot
 p1 <- ggplot(FWdist, aes(x = FW1, y = FW2)) +
-  geom_tile(aes(fill = Geo.Dist/1000), color = "white") +
+  geom_tile(aes(fill = geo.dist/1000), color = "white") +
   scale_fill_gradient2(low = "white", high = "red", name="Geographic Distance (10^3km)", na.value="transparent",
                        guide = guide_colourbar(title.position = "top", 
                                                barwidth = 8,
@@ -144,7 +143,7 @@ p1 <- ggplot(FWdist, aes(x = FW1, y = FW2)) +
 
 # environmental dissimilarity plot
 p2 <- ggplot(FWdist, aes(x = FW1, y = FW2)) +
-  geom_tile(aes(fill = Env.Dist), color = "white") +
+  geom_tile(aes(fill = env.dist), color = "white") +
   scale_fill_gradient2(low = "white", high = "red", name="Environmental Dissimilarity", na.value="transparent",
                        guide = guide_colourbar(title.position = "top", 
                                                barwidth = 8,
@@ -159,27 +158,9 @@ p2 <- ggplot(FWdist, aes(x = FW1, y = FW2)) +
         legend.direction = "horizontal",
         text = element_text(size = 8))
 
-# compositional dissimilarity plot
-p3 <- ggplot(FWdist, aes(x = FW1, y = FW2)) +
-  geom_tile(aes(fill = Comp.Dist), color = "white") +
-  scale_fill_gradient(low = "white", high = "red", name="Compositional Dissimilarity", na.value="transparent",
-                       limit = c(0.8,1),
-                      guide = guide_colourbar(title.position = "top", 
-                                              barwidth = 8,
-                                              barheight = 0.75)) +
-  theme_minimal()+ 
-  theme(axis.text.x = element_text(angle = 45, vjust = 1,
-                                   hjust = 1))+
-  coord_fixed() +
-  theme(axis.title = element_blank(),text = element_text(size =8),
-        legend.justification = c(1, 0),
-        legend.position = "bottom",
-        legend.direction = "horizontal")
-
 # phylogenetic dissimilarity plot
-df <- reshape2::melt(fw.comdistnt, value.name = "Phylo.Dist")
-p4 <- ggplot(df, aes(x = Var1, y = Var2)) +
-  geom_tile(aes(fill = Phylo.Dist), color = "white") +
+p3 <- ggplot(FWdist, aes(x = FW1, y = FW2)) +
+  geom_tile(aes(fill = phylo.dist), color = "white") +
   scale_fill_gradient2(low = "white", high = "red", name="Phylogenetic Dissimilarity", na.value="transparent",
                        guide = guide_colourbar(title.position = "top", 
                                                barwidth = 8,
@@ -194,5 +175,5 @@ p4 <- ggplot(df, aes(x = Var1, y = Var2)) +
         text = element_text(size = 8))
 
 # patchwork and save
-p<-p1+p2+p3 + p4 + plot_layout(nrow =2)
+p<-p1+p2+p3 +plot_layout(nrow =2)
 ggsave("figures/SI/FWdist.png", p, device = "png")

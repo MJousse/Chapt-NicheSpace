@@ -36,7 +36,7 @@ R2_serengeti <- bayes_R2(SerengetiModel)
 # Compare Coefficients
 # fixed effects
 predictors <- c("Intercept", "Omnivore.predator", "Carnivore.predator", "Habitat_breadth.predator",
-       "BM.predator", "Longevity.predator", "ClutchSize.predator", "Omnivore.prey",
+       "BM.predator", "Longevity.predator", "ClutchSize.predator", "Omnivore.prey", "Carnivore.prey",
        "Habitat_breadth.prey", "BM.prey", "Longevity.prey", "ClutchSize.prey", "ActivityTime.match",
        "Habitat.match", "BM.match")
 foodwebs <- c("Arctic", "Europe", "Pyrenees", "Serengeti")
@@ -86,10 +86,14 @@ for (ipredictor in c(1:length(predictors))){
   RandomEffects <- rbind(RandomEffects, RandomEffecti)
 }
 
-ggplot(aes(x = 1, y = exp(Estimate)), data = fixed_effects) +
+coef_plot <- ggplot(aes(x = 1, y = exp(Estimate)), data = fixed_effects) +
   geom_point(data = RandomEffects, aes(color = model), position = position_dodge(width=0.9), shape =1, alpha = 0.5) +
   geom_point(data = fixed_effects, aes(fill = model), position = position_dodge(width=0.9), shape = 21, size = 2) +
   geom_linerange(data = fixed_effects, aes(ymin = exp(Q2.5), ymax = exp(Q97.5), color = model), position = position_dodge(width = 0.9)) +
-  geom_hline(yintercept = 1)+
+  geom_hline(yintercept = 0)+
+  scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   lims(y= c(0,10))+
   facet_wrap(vars(coef), scales = "free", nrow = 2)
+
+ggsave("figures/coef_plot.png", coef_plot)
