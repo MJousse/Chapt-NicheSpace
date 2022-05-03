@@ -86,9 +86,10 @@ for (ipredictor in c(1:length(predictors))){
   RandomEffects <- rbind(RandomEffects, RandomEffecti)
 }
 
-ggplot(aes(x = 1, y = Estimate), data = fixed_effects) +
+ggplot(aes(x = 1, y = exp(Estimate)), data = fixed_effects) +
   geom_point(data = RandomEffects, aes(color = model), position = position_dodge(width=0.9), shape =1, alpha = 0.5) +
   geom_point(data = fixed_effects, aes(fill = model), position = position_dodge(width=0.9), shape = 21, size = 2) +
-  geom_linerange(data = fixed_effects, aes(ymin = Q2.5, ymax = Q97.5, color = model), position = position_dodge(width = 0.9)) +
-  geom_hline(yintercept = 0)+
+  geom_linerange(data = fixed_effects, aes(ymin = exp(Q2.5), ymax = exp(Q97.5), color = model), position = position_dodge(width = 0.9)) +
+  geom_hline(yintercept = 1)+
+  lims(y= c(0,10))+
   facet_wrap(vars(coef), scales = "free", nrow = 2)
