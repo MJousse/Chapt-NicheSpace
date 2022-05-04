@@ -47,6 +47,7 @@ write.csv(overall_performance, "data/checkpoints/overall_performance.csv")
 # Visualize transferability -----------------------------------------------
 # add dissimilarity
 species_performance <- read.csv("data/checkpoints/species_performance.csv", row.names = 1)
+overall_performance <- read.csv("data/checkpoints/overall_performance.csv", row.names = 1)
 FWdist <- read.csv("data/checkpoints/FWdist.csv", row.names = 1)
 FWdist[!is.na(FWdist) & FWdist == "High Arctic"] <- "Arctic"
 overall_performance[overall_performance == "Euro"] <- "Europe"
@@ -97,6 +98,7 @@ ggsave("figures/ModelTransferability.png", p)
 # glm with overall logit-auc and log(aucpr/prevalence) as response
 # distances as fixed effect
 # source and target region as crossed random effect
+overall_performance <- filter(overall_performance, Source != Target)
 
 # transform responses
 overall_performance$logitauc <- log(overall_performance$auc / (1-overall_performance$auc))
@@ -116,7 +118,7 @@ auc_model <- brm(logitauc ~ geo.dist + env.dist + phylo.dist + (1|Source) + (1|T
       prior(cauchy(0, 5), class = "sd")
     ), 
     sample_prior = "no",
-    iter = 1000)
+    iter = 2000)
 
 # model with log aucpr/prevalence as response using brms
 aucpr_model <- brm(logaucpr ~ geo.dist + env.dist + phylo.dist + (1|Source) + (1|Target),
@@ -127,4 +129,4 @@ aucpr_model <- brm(logaucpr ~ geo.dist + env.dist + phylo.dist + (1|Source) + (1
                    prior(cauchy(0, 5), class = "sd")
                  ), 
                  sample_prior = "no",
-                 iter = 1000)
+                 iter = 2000)

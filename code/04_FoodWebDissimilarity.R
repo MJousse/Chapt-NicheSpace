@@ -106,7 +106,7 @@ comp.dist <- c(JaccardDissimilarity(Europe.species, HighArctic.species),
 
 # Phylogenetic Dissimilarity ----------------------------------------------
 # the mean phylogenetic distance to the nearest taxon
-phydist <- as.matrix(read.csv("data/checkpoints/phylodist.csv", row.names = 1))
+phydist <- as.matrix(read.csv("data/checkpoints/phylodist_mean.csv", row.names = 1))
 colnames(phydist) <- rownames(phydist)
 community <- data.frame(rbind(Europe = as.numeric(rownames(phydist) %in% Europe.species),
                               HighArctic = as.numeric(rownames(phydist) %in% HighArctic.species),

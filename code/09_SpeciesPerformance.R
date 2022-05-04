@@ -1,8 +1,9 @@
-# Step xx: Measure distances between species in target food web to species in Europe
+# Step 09: Measure distances between species in target food web to species in source food web
 # 1. Calculate nearest taxon phylogenetic distance
 # 2. Calculate mean functional distance
 # 3. Make plots
 
+rm(list =ls())
 library(ape)
 library(dplyr)
 library(tidyr)
@@ -11,23 +12,17 @@ library(mFD)
 library(patchwork)
 source("code/DistanceFunctions.R")
 
-# Phylogenetic distance to nearest taxon in Europe ------------------------
 # species list
 europe <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1)
 pyrenees <- read.csv("data/cleaned/pyrenneesFWTaxo.csv", row.names = 1)
 serengeti <- read.csv("data/cleaned/SerengetiFWTaxo.csv", row.names = 1) %>% drop_na()
 arctic <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1)
 
-# load matrix of phylogenetic distance
-phydist <- as.matrix(read.csv("data/checkpoints/phylodist.csv", row.names = 1))
+# phylogenetic distance matrix
+phydist <- as.matrix(read.csv("data/checkpoints/phylodist_mean.csv", row.names = 1))
 colnames(phydist) <- gsub("\\.", " ", colnames(phydist))
 
-# calculate distance
-arctic_mntd <- map_dbl(arctic$Species, mntd, europe$Species, phydist)
-pyrenees_mntd <- map_dbl(pyrenees$Species, mntd, europe$Species, phydist)
-serengeti_mntd <- map_dbl(serengeti$Species, mntd, europe$Species, phydist)
-
-# Mean functional distance to species in Europe ---------------------------
+# Functional distance matrix ----------------------------------------------
 traits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1, stringsAsFactors = T)
 
 # create objects for mFD
@@ -42,53 +37,55 @@ traits_cat <- data.frame(trait_name = colnames(traits),
 # calculate pairwise distance
 sp_funct.dist <- funct.dist(traits, traits_cat, metric = "gower", scale_euclid = "scale_center")
 
-# calculate each species mean functional distance
-arctic_fmpd <- map_dbl(arctic$Species, fmpd, europe$Species, sp_funct.dist)
-pyrenees_fmpd <- map_dbl(pyrenees$Species, fmpd, europe$Species, sp_funct.dist)
-serengeti_fmpd <- map_dbl(serengeti$Species, fmpd, europe$Species, sp_funct.dist)
-
-# Make plot ---------------------------------------------------------------
-fills <- c("Serengeti" = "yellowgreen", "Pyrenees" = "red3", "Arctic" = "deepskyblue")
-
-# functional distance
-p1 <- ggplot() +
-  geom_histogram(data = data.frame(serengeti_fmpd), aes(serengeti_fmpd, fill = "Serengeti"), alpha= 0.3) +
-  geom_histogram(data = data.frame(pyrenees_fmpd), aes(pyrenees_fmpd, fill = "Pyrenees"), alpha= 0.3) +
-  geom_histogram(data = data.frame(arctic_fmpd), aes(arctic_fmpd, fill = "Arctic"), alpha= 0.3) +
-  theme_minimal() +
-  labs(fill = "Food web", x = "Mean functional distance") +
-  scale_fill_manual(values = fills) +
-  theme(legend.position = "bottom",
-        legend.direction = "horizontal")
-
-# phylogenetic distance
-p2 <- ggplot() +
-  geom_histogram(data = data.frame(serengeti_mntd), aes(serengeti_mntd, fill = "Serengeti"), alpha= 0.3) +
-  geom_histogram(data = data.frame(pyrenees_mntd), aes(pyrenees_mntd, fill = "Pyrenees"), alpha= 0.3) +
-  geom_histogram(data = data.frame(arctic_mntd), aes(arctic_mntd, fill = "Arctic"), alpha= 0.3) +
-  theme_minimal() +
-  labs(fill = "Food web", x = "Phylogenetic distance to neareast taxon") +
-  scale_fill_manual(values = fills) +
-  theme(legend.position = "bottom",
-        legend.direction = "horizontal")
-
-# patchwork and save
-p<-p1+p2
-ggsave("figures/SI/SPdist.png", p, device = "png")
-
-# Correlating to model performance ----------------------------------------
+# Add distances to species performance ------------------------------------
 species_performance <- read.csv("data/checkpoints/species_performance.csv", row.names = 1) %>%
-  filter(Source != Target)
+  filter(Source != Target, auc != 1)
 
+# Mean nearest taxon distance
 species_performance$mntd <- NA
 species_performance$mntd[species_performance$Source == "Euro"] <- map_dbl(species_performance$species[species_performance$Source == "Euro"], mntd, europe$Species, phydist)
 species_performance$mntd[species_performance$Source == "Pyrenees"] <- map_dbl(species_performance$species[species_performance$Source == "Pyrenees"], mntd, pyrenees$Species, phydist)
 species_performance$mntd[species_performance$Source == "Serengeti"] <- map_dbl(species_performance$species[species_performance$Source == "Serengeti"], mntd, serengeti$Species, phydist)
 species_performance$mntd[species_performance$Source == "Arctic"] <- map_dbl(species_performance$species[species_performance$Source == "Arctic"], mntd, arctic$Species, phydist)
 
+# Functional mean pairwise distance
 species_performance$fmpd <- NA
 species_performance$fmpd[species_performance$Source == "Euro"] <- map_dbl(species_performance$species[species_performance$Source == "Euro"], fmpd, europe$Species, sp_funct.dist)
 species_performance$fmpd[species_performance$Source == "Pyrenees"] <- map_dbl(species_performance$species[species_performance$Source == "Pyrenees"], fmpd, pyrenees$Species, sp_funct.dist)
 species_performance$fmpd[species_performance$Source == "Serengeti"] <- map_dbl(species_performance$species[species_performance$Source == "Serengeti"], fmpd, serengeti$Species, sp_funct.dist)
 species_performance$fmpd[species_performance$Source == "Arctic"] <- map_dbl(species_performance$species[species_performance$Source == "Arctic"], fmpd, arctic$Species, sp_funct.dist)
 
+# Correlate transferability to distance metrics ---------------------------
+# glm with species-specific logit-auc and log(aucpr/prevalence) as response
+# phylogenetic and functional distance as predictors
+# source and target region as crossed random effect + prevalence as random effect
+
+# transform responses
+species_performance$logitauc <- log(species_performance$auc / (1-species_performance$auc))
+species_performance$logaucpr <- log(species_performance$aucpr / species_performance$prevalence)
+
+# scale predictors
+species_performance$mntd <- as.vector(scale(species_performance$mntd))
+species_performance$fmpd <- as.vector(scale(species_performance$fmpd))
+
+# model with logit auc as response using brms
+auc_model <- brm(logitauc ~ mntd + fmpd + prevalence + (1|Source) + (1|Target),
+                 data = species_performance,
+                 prior = c(
+                   prior(normal(0, 1), class = "Intercept"),
+                   prior(normal(0, 1), class = "b"),
+                   prior(cauchy(0, 5), class = "sd")
+                 ), 
+                 sample_prior = "no",
+                 iter = 2000)
+
+# model with log aucpr/prevalence as response using brms
+aucpr_model <- brm(logaucpr ~ mntd + fmpd + prevalence + (1|Source) + (1|Target),
+                   data = species_performance,
+                   prior = c(
+                     prior(normal(0, 1), class = "Intercept"),
+                     prior(normal(0, 1), class = "b"),
+                     prior(cauchy(0, 5), class = "sd")
+                   ), 
+                   sample_prior = "no",
+                   iter = 2000)
