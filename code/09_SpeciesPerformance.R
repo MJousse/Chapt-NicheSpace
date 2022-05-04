@@ -47,7 +47,6 @@ arctic_fmpd <- map_dbl(arctic$Species, fmpd, europe$Species, sp_funct.dist)
 pyrenees_fmpd <- map_dbl(pyrenees$Species, fmpd, europe$Species, sp_funct.dist)
 serengeti_fmpd <- map_dbl(serengeti$Species, fmpd, europe$Species, sp_funct.dist)
 
-
 # Make plot ---------------------------------------------------------------
 fills <- c("Serengeti" = "yellowgreen", "Pyrenees" = "red3", "Arctic" = "deepskyblue")
 
