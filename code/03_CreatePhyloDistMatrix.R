@@ -60,8 +60,7 @@ for (tree in c(1:100)){
   turtle_tree <- keep.tip(turtle_tree, which(turtle_lab %in% traits$Species &!is.na(turtle_lab)))
   turtle_lab <- turtle_lab[which(turtle_lab %in% traits$Species &!is.na(turtle_lab))]
   turtle_tree$tip.label <- turtle_lab
-  mam_dist[[1]] <- cophenetic(mam_tree)
-  
+
   # combine everything
   tetrapodtree <- mam_tree + squam_tree + bird_tree + amphi_tree + turtle_tree
   
