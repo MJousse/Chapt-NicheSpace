@@ -67,6 +67,7 @@ species_performance$logaucpr <- log(species_performance$aucpr / species_performa
 # scale predictors
 species_performance$mntd <- as.vector(scale(species_performance$mntd))
 species_performance$fmpd <- as.vector(scale(species_performance$fmpd))
+species_performance$prevalence <- as.vector(scale(log(species_performance$prevalence)))
 
 # model with logit auc as response using brms
 auc_model <- brm(logitauc ~ mntd + fmpd + prevalence + (1|Source) + (1|Target),
