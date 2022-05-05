@@ -10,6 +10,7 @@ library(dplyr)
 library(tidyr)
 library(NetIndices)
 library(multiweb)
+library(ggplot2)
 source("code/functions.R")
 source("code/functions_motifs.R")
 
@@ -48,7 +49,6 @@ empirical_roles <- bind_rows(
 )
 write.csv(empirical_roles, file = "data/checkpoints/SpeciesRole.csv")
 
-
 # Trophic roles in predicted webs -----------------------------------------
 load("data/checkpoints/predictions.RData")
 foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
@@ -80,11 +80,14 @@ species_roles <- left_join(predicted_roles, empirical_roles,
                            by = c("species", "role", "targetFW" = "FW"))
 
 # calculate the error as the standardized mean difference
-role_sd <- empirical_roles %>% group_by(role) %>% summarise(sd = sd(empirical))
-species_roles$error = (species_roles$predicted - species_roles$empirical) / (role_sd$sd[match(species_roles$role, role_sd$role)])
+species_roles$error = (species_roles$predicted - species_roles$empirical)
+sd_role_error <- species_roles %>% group_by(role) %>% summarise(sd = sd(error))
+species_roles$error_std = species_roles$error / sd_role_error$sd[match(species_roles$role, sd_role_error$role)]
 species_roles$insample <- species_roles$targetFW == species_roles$sourceFW
 
 # plot
-ggplot(species_roles, aes(x = role, y = error, fill = insample)) +
+species_roles$role <- factor(species_roles$role, levels = unique(species_roles$role))
+ggplot(species_roles, aes(x = role, y = error_std, fill = insample)) +
   geom_point() +
-  geom_boxplot()
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
