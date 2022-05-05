@@ -64,6 +64,7 @@ for (combination in c(1:nrow(combinations))){
     transmute(resource = Prey, consumer = Predator, interaction = Estimate)
   role <- c()
   for (i in c(1:100)){
+    # TOCHANGE FOR POSTERIOR DRAWS
     predictions$interaction <- rbinom(nrow(predictions), 1, predictions$interaction)
     predictions <- filter(predictions, interaction == 1)
     role <- rbind(role, species_role(predictions, ncores = 4))
