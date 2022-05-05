@@ -1,7 +1,8 @@
-# Step 09: Measure distances between species in target food web to species in source food web
-# 1. Calculate nearest taxon phylogenetic distance
-# 2. Calculate mean functional distance
-# 3. Make plots
+# Step 09: Correlate species-specific performance to how distant it is from the species pool
+# of the food webs on which the model has been trained on
+# 1. Calculate the functional distance between all species
+# 2. Calculate mean functional distance and phylogenetic distance to nearest taxon
+# 3. Correlated species-specific performance to these distances.
 
 rm(list =ls())
 library(ape)
@@ -41,14 +42,14 @@ sp_funct.dist <- funct.dist(traits, traits_cat, metric = "gower", scale_euclid =
 species_performance <- read.csv("data/checkpoints/species_performance.csv", row.names = 1) %>%
   filter(Source != Target, auc != 1)
 
-# Mean nearest taxon distance
+# mean nearest taxon distance
 species_performance$mntd <- NA
 species_performance$mntd[species_performance$Source == "Euro"] <- map_dbl(species_performance$species[species_performance$Source == "Euro"], mntd, europe$Species, phydist)
 species_performance$mntd[species_performance$Source == "Pyrenees"] <- map_dbl(species_performance$species[species_performance$Source == "Pyrenees"], mntd, pyrenees$Species, phydist)
 species_performance$mntd[species_performance$Source == "Serengeti"] <- map_dbl(species_performance$species[species_performance$Source == "Serengeti"], mntd, serengeti$Species, phydist)
 species_performance$mntd[species_performance$Source == "Arctic"] <- map_dbl(species_performance$species[species_performance$Source == "Arctic"], mntd, arctic$Species, phydist)
 
-# Functional mean pairwise distance
+# functional mean pairwise distance
 species_performance$fmpd <- NA
 species_performance$fmpd[species_performance$Source == "Euro"] <- map_dbl(species_performance$species[species_performance$Source == "Euro"], fmpd, europe$Species, sp_funct.dist)
 species_performance$fmpd[species_performance$Source == "Pyrenees"] <- map_dbl(species_performance$species[species_performance$Source == "Pyrenees"], fmpd, pyrenees$Species, sp_funct.dist)

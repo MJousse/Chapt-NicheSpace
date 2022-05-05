@@ -107,7 +107,7 @@ species_role <- function(FW, threshold = 0, ncores = 4){
   # motifs role
   motif_role <-motif_role(m)
   # normalized
-  motif_role$position_count <- sweep(motif_role$position_count, MARGIN = 1, FUN = "/", rowSums(motif_role$position_count))
+  #motif_role$position_count <- sweep(motif_role$position_count, MARGIN = 1, FUN = "/", rowSums(motif_role$position_count))
   
   # module-based role
   modulerole <- calc_topological_roles(graph, ncores = ncores, nsim = 10) %>%
