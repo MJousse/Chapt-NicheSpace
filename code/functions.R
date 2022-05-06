@@ -73,23 +73,6 @@ get_predictors <- function(Species_List, FuncTraits){
   return(FW)
 }
 
-make_predictions <- function(predictors, order_level, coef, model){
-  x <- select(predictors, 
-              -Predator, -Prey, -Order.predator, -Order.prey,
-              -Herbivore.predator, -Herbivore.prey)
-  
-  x <- cbind(rep(1, nrow(predictors)), x) %>% as_data()
-  predator_order <- as.numeric(factor(predictors$Order.pred, levels = order_level))
-  linear_predictor <- rowSums(x * t(coef[,predator_order]))
-  
-  p <- ilogit(linear_predictor)
-  
-  predictions <- calculate(p, values = model, nsim = 100)
-  predictions <- colMeans(predictions[[1]])
-  predictions <- data.frame(Predator = as.factor(predictors$Predator), Prey = as.factor(predictors$Prey), prediction = predictions)
-  return(predictions)
-}
-
 species_role <- function(FW, threshold = 0, ncores = 4){
   # centrality role
   graph <- graph_from_edgelist(as.matrix(FW[,c("resource","consumer")])) # igraph
