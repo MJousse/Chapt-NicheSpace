@@ -127,3 +127,17 @@ species_role <- function(FW, threshold = 0, ncores = 4){
                    row.names = c(1:length(nodes)))
   )
 }
+
+make_predictions <- function(Model, newdata, ndraws = 100, allow_new_levels = TRUE, extrapolation = F){
+  predictions <- predict(Model, newdata = newdata, allow_new_levels = allow_new_levels, ndraws = ndraws, summary = F)
+  rownames(predictions) <- paste0("draws", c(1:ndraws))
+  predictions <- as.data.frame(t(predictions))
+  predictions$Estimate <- apply(predictions, MARGIN = 1, mean)
+  predictions$Est.Error <- apply(predictions[,-ncol(predictions)], MARGIN = 1, sd)
+  predictions <- select(newdata, Predator, Prey, interaction) %>%
+    bind_cols(predictions)
+  if (!extrapolation){
+    predictions$training <- ifelse(c(1:nrow(newdata) %in% as.numeric(rownames(Model$data))), 1, 0)
+  }
+  return(predictions)
+}
