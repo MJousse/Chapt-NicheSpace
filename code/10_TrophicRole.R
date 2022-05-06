@@ -60,14 +60,12 @@ predicted_roles <-c()
 for (combination in c(1:nrow(combinations))){
   sourceFW <- combinations[combination, "Source"]
   targetFW <- combinations[combination, "Target"]
-  predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions")) %>%
-    transmute(resource = Prey, consumer = Predator, interaction = Estimate)
-  role <- c()
-  for (i in c(1:100)){
-    # TOCHANGE FOR POSTERIOR DRAWS
-    predictions$interaction <- rbinom(nrow(predictions), 1, predictions$interaction)
+  role <- foreach(i=c(1:100), .combine = rbind) %dopar% {
+    predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions")) %>%
+      transmute(resource = Prey, consumer = Predator, 
+                interaction = get(paste0("draws", i)))
     predictions <- filter(predictions, interaction == 1)
-    role <- rbind(role, species_role(predictions, ncores = 4))
+    species_role(predictions, ncores = 1)
   }
   role_mean <- group_by(role, species) %>% summarise_all(mean)
   role_sd <- group_by(role, species) %>% summarise_all(sd)
