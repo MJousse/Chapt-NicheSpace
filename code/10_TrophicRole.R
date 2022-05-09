@@ -67,13 +67,14 @@ for (combination in c(1:nrow(combinations))){
   print(Sys.time())
   print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
-  role <- foreach(i=c(1:100), .combine = rbind, .packages = c("igraph", "NetIndices", "multiweb"),
+  role <- foreach(i=c(1:100), .combine = rbind, 
+                  .packages = c("igraph", "NetIndices", "multiweb", "dplyr"),
                   .export = c("motif_role", "positions")) %dopar% {
-    predictions <- data.frame(resource = predictions$Prey, 
+    prediction <- data.frame(resource = predictions$Prey, 
                               consumer = predictions$Predator, 
                               interaction = predictions[,paste0("draws",i)])
-    predictions <- predictions[predictions$interaction == 1,]
-    species_role(predictions, ncores = 0)
+    prediction <- prediction[prediction$interaction == 1,]
+    species_role(prediction, ncores = 0)
   }
   role_mean <- group_by(role, species) %>% summarise_all(mean, na.rm = T)
   role_sd <- group_by(role, species) %>% summarise_all(sd, na.rm = T)
