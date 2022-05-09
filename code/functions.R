@@ -73,7 +73,7 @@ get_predictors <- function(Species_List, FuncTraits){
   return(FW)
 }
 
-species_role <- function(FW, threshold = 0, ncores = 4){
+species_role <- function(FW, ncores = 4){
   # centrality role
   graph <- graph_from_edgelist(as.matrix(FW[,c("resource","consumer")])) # igraph
   nodes <- vertex.attributes(graph)$name # save species name

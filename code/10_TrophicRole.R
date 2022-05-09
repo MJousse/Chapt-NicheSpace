@@ -19,26 +19,26 @@ source("code/functions_motifs.R")
 arcticFW <- read.csv("data/cleaned/HighArcticFW.csv", row.names = 1)
 arcticFW <- arcticFW %>%
   transmute(resource = Prey, consumer = Predator)
-arcticRoles <- species_role(arcticFW, ncores = 8)
+arcticRoles <- species_role(arcticFW, ncores = 16)
 
 # pyrenees
 pyreneesFW <- read.csv("data/cleaned/pyrenneesFW.csv", row.names = 1)
 pyreneesFW <- pyreneesFW %>%
   transmute(resource = Prey, consumer = Predator)
-pyreneesRoles <- species_role(pyreneesFW, ncores = 8)
+pyreneesRoles <- species_role(pyreneesFW, ncores = 16)
 
 # serengeti
 serengetiFW <- read.csv("data/cleaned/SerengetiFW.csv", row.names = 1)
 serengetiFW <- serengetiFW %>%
   transmute(resource = Resource_Species, consumer = Consumer_Species) %>%
   drop_na()
-serengetiRoles <- species_role(serengetiFW, ncores = 8)
+serengetiRoles <- species_role(serengetiFW, ncores = 16)
 
 # europe
 europeMW <- read.csv("data/cleaned/EuroFWadults.csv", row.names = 1)
 europeMW <- europeMW %>%
   transmute(resource = Prey, consumer = Predator)
-europeRoles <- species_role(europeMW, ncores = 8)
+europeRoles <- species_role(europeMW, ncores = 16)
 
 # bind and save
 empirical_roles <- bind_rows(
@@ -50,6 +50,10 @@ empirical_roles <- bind_rows(
 write.csv(empirical_roles, file = "data/checkpoints/SpeciesRole.csv")
 
 # Trophic roles in predicted webs -----------------------------------------
+library(foreach)
+library(doParallel)
+cl <- makeCluster(15) 
+registerDoParallel(cl)
 load("data/checkpoints/predictions.RData")
 foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
 combinations <- expand_grid(Source = foodwebs, Target = foodwebs)
@@ -60,19 +64,23 @@ predicted_roles <-c()
 for (combination in c(1:nrow(combinations))){
   sourceFW <- combinations[combination, "Source"]
   targetFW <- combinations[combination, "Target"]
-  role <- foreach(i=c(1:100), .combine = rbind) %dopar% {
-    predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions")) %>%
-      transmute(resource = Prey, consumer = Predator, 
-                interaction = get(paste0("draws", i)))
-    predictions <- filter(predictions, interaction == 1)
-    species_role(predictions, ncores = 1)
+  print(Sys.time())
+  print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
+  predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
+  role <- foreach(i=c(1:100), .combine = rbind, .packages = c("igraph", "NetIndices", "multiweb"),
+                  .export = c("motif_role", "positions")) %dopar% {
+    predictions <- data.frame(resource = predictions$Prey, 
+                              consumer = predictions$Predator, 
+                              interaction = predictions[,paste0("draws",i)])
+    predictions <- predictions[predictions$interaction == 1,]
+    species_role(predictions, ncores = 0)
   }
-  role_mean <- group_by(role, species) %>% summarise_all(mean)
-  role_sd <- group_by(role, species) %>% summarise_all(sd)
+  role_mean <- group_by(role, species) %>% summarise_all(mean, na.rm = T)
+  role_sd <- group_by(role, species) %>% summarise_all(sd, na.rm = T)
   predicted_roles <- rbind(predicted_roles, 
                            pivot_longer(role_mean, -species, names_to = "role", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
 }
-
+stopCluster(cl)
 
 # Compare the empirical roles and predicted roles -------------------------
 species_roles <- left_join(predicted_roles, empirical_roles,
