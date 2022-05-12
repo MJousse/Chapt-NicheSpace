@@ -108,6 +108,9 @@ coef_plot <- ggplot(aes(x = 1, y = exp(Estimate)), data = fixed_effects) +
   scale_y_continuous(limits = c(0.001,1000), trans = "log10")+
   scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  facet_wrap(vars(coef), scales = "free", nrow = 2)
+  facet_wrap(vars(coef), scales = "free_x", nrow = 2)+
+  labs(color = "Model", fill = "Model") + 
+  theme_classic() +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.x = element_blank())
 
 ggsave("figures/coef_plot.png", coef_plot)
