@@ -82,6 +82,7 @@ for (combination in c(1:nrow(combinations))){
                            pivot_longer(role_mean, -species, names_to = "role", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
 }
 stopCluster(cl)
+write.csv(predicted_roles, file = "data/checkpoints/predicted_roles.csv")
 
 # Compare the empirical roles and predicted roles -------------------------
 species_roles <- left_join(predicted_roles, empirical_roles,
