@@ -153,3 +153,66 @@ p <- ggplot() +
   theme_void()
 
 ggsave("figures/SI/FWmap.pdf", p)
+
+# Performance and distance mini-maps
+overall_performance <- read.csv("data/checkpoints/overall_performance.csv", row.names = 1)
+overall_performance[overall_performance == "Arctic"] <- "HighArctic"
+overall_performance[overall_performance == "Euro"] <- "Europe"
+FWdist <- read.csv("data/checkpoints/FWdist.csv", row.names = 1)
+FWdist[FWdist == "High Arctic"] = "HighArctic"
+
+df <- df %>%
+  left_join(overall_performance, by = c("from" = "Source", "to" = "Target")) %>%
+  left_join(FWdist, by = c("from" = "FW2", "to" = "FW1"))
+
+centroids <- rbind(Europe_centroid, HighArctic_centroid, Pyrenees_centroid, Serengeti_centroid) %>%
+  as_tibble() %>%
+  mutate(col = c("royalblue4", "deepskyblue", "red3", "chartreuse4"))
+perform <- ggplot(df) +
+  geom_curve(data=df,
+             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = auc),
+             curvature=0.25, alpha = 0.6) +
+  scale_size_continuous(range = c(0.5,6), limits = c(0.6,1))+
+  xlim(c(min(df$fromlong), max(df$fromlong)+5))+
+  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 6, shape = 21, stroke = 3, fill = "white")+
+  scale_color_identity() +
+  theme_void() +
+  theme(legend.position = "none")
+
+geo_dist <- ggplot(df) +
+  geom_curve(data=df,
+             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = geo.dist),
+             curvature=0.25, alpha = 0.6) +
+  scale_size_continuous(range = c(0.5,6), limits = c(3500, 18000))+
+  xlim(c(min(df$fromlong), max(df$fromlong)+5))+
+  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 6, shape = 21, stroke = 3, fill = "white")+
+  scale_color_identity() +
+  theme_void() +
+  theme(legend.position = "none")
+  
+env_dist <- ggplot(df) +
+  geom_curve(data=df,
+             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = env.dist),
+             curvature=0.25, alpha = 0.6) +
+  scale_size_continuous(range = c(0.5,6), limits = c(1,10))+
+  xlim(c(min(df$fromlong), max(df$fromlong)+5))+
+  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 6, shape = 21, stroke = 3, fill = "white")+
+  scale_color_identity() +
+  theme_void() +
+  theme(legend.position = "none")
+
+phylo_dist <- ggplot(df) +
+  geom_curve(data=df,
+             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = phylo.dist),
+             curvature=0.25, alpha = 0.6) +
+  scale_size_continuous(range = c(0.5,6), limits= c(0, 200))+
+  xlim(c(min(df$fromlong), max(df$fromlong)+5))+
+  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 6, shape = 21, stroke = 3, fill = "white")+
+  scale_color_identity() +
+  theme_void() +
+  theme(legend.position = "none")
+
+ggsave("figures/conceptual/performance_map.png", perform)
+ggsave("figures/conceptual/geodist_map.png", geo_dist)
+ggsave("figures/conceptual/envdist_map.png", env_dist)
+ggsave("figures/conceptual/phydist_map.png", phylo_dist)
