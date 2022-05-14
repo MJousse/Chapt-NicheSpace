@@ -11,6 +11,8 @@ library(tidyr)
 library(purrr)
 library(mFD)
 library(patchwork)
+library(brms)
+library(ggplot2)
 source("code/DistanceFunctions.R")
 
 # species list
@@ -91,3 +93,60 @@ aucpr_model <- brm(logaucpr ~ mntd + fmpd + prevalence + (1|Source) + (1|Target)
                    ), 
                    sample_prior = "no",
                    iter = 2000)
+mydatab <- data.frame(
+  mntd = species_performance$mntd,
+  Source = species_performance$Source,
+  Target = species_performance$Target,
+  prevalence = 0,
+  fmpd = 0
+)
+
+species_performance_fitmntd <- cbind(species_performance, fitted(auc_model, mydatab, re_formula=NULL))
+species_performance_fitmntd$Estimate <- exp(species_performance_fitmntd$Estimate)/(1+exp(species_performance_fitmntd$Estimate))
+species_performance_fitmntd$Q2.5 <- exp(species_performance_fitmntd$Q2.5)/(1+exp(species_performance_fitmntd$Q2.5))
+species_performance_fitmntd$Q97.5 <- exp(species_performance_fitmntd$Q97.5)/(1+exp(species_performance_fitmntd$Q97.5))
+
+p1 <- ggplot(species_performance_fitmntd) +
+  geom_point(aes(y = auc, x = mntd, colour = Source), size = 0.5, alpha = .3) +
+  geom_ribbon(aes(x = mntd, y = Estimate, ymin = Q2.5, ymax = Q97.5, fill = Source),
+              alpha = .3) +
+  geom_line(aes(x = mntd, y = Estimate, color = Source),
+            size = 1) +
+  scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  labs(x = "Phylogenetic distance", y = "roc-auc", colour = "Source food web", fill = "Source food web") + 
+  facet_wrap(~Target, nrow = 1) +
+  theme_minimal() +
+  theme(axis.line = element_line(size = 0.5), strip.text = element_text(size = 12),
+        strip.background = element_rect(colour = "black"))
+
+mydatab <- data.frame(
+  mntd = 0,
+  Source = species_performance$Source,
+  Target = species_performance$Target,
+  prevalence = 0,
+  fmpd = species_performance$fmpd
+)
+
+species_performance_fitfmpd <- cbind(species_performance, fitted(auc_model, mydatab, re_formula=NULL))
+species_performance_fitfmpd$Estimate <- exp(species_performance_fitfmpd$Estimate)/(1+exp(species_performance_fitfmpd$Estimate))
+species_performance_fitfmpd$Q2.5 <- exp(species_performance_fitfmpd$Q2.5)/(1+exp(species_performance_fitfmpd$Q2.5))
+species_performance_fitfmpd$Q97.5 <- exp(species_performance_fitfmpd$Q97.5)/(1+exp(species_performance_fitfmpd$Q97.5))
+
+p2 <- ggplot(species_performance_fitfmpd) +
+  geom_point(aes(y = auc, x = fmpd, colour = Source), size = 0.5, alpha = .3) +
+  geom_ribbon(aes(x = fmpd, y = Estimate, ymin = Q2.5, ymax = Q97.5, fill = Source),
+              alpha = .3) +
+  geom_line(aes(x = fmpd, y = Estimate, color = Source),
+            size = 1) +
+  scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  labs(x = "Functional distance", y = "roc-auc", colour = "Source food web", fill = "Source food web") + 
+  facet_wrap(~Target, nrow = 1) +
+  theme_minimal() +
+  theme(axis.line = element_line(size = 0.5), strip.text = element_blank())
+
+p<-p1/p2 + plot_layout(guides = "collect") +
+  plot_annotation(title = 'Target food web', theme = theme(plot.title = element_text(hjust = 0.45)))
+
+ggsave("figures/SpeciesPerformance.png", p)
