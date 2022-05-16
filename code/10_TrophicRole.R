@@ -52,18 +52,17 @@ write.csv(empirical_roles, file = "data/checkpoints/SpeciesRole.csv")
 # Trophic roles in predicted webs -----------------------------------------
 library(foreach)
 library(doParallel)
-cl <- makeCluster(15) 
-registerDoParallel(cl)
 load("data/checkpoints/predictions.RData")
 foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
 combinations <- expand_grid(Source = foodwebs, Target = foodwebs)
 predicted_roles <-c()
-
+cl <- makeCluster(15) 
+registerDoParallel(cl)
 # for each combination of source and target webs, use 100 posterior sample
 # calculate the roles of all species in these sample, and extract the mean
 for (combination in c(1:nrow(combinations))){
-  sourceFW <- combinations[combination, "Source"]
-  targetFW <- combinations[combination, "Target"]
+  sourceFW <- as.character(combinations[combination, "Source"])
+  targetFW <- as.character(combinations[combination, "Target"])
   print(Sys.time())
   print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
@@ -75,7 +74,7 @@ for (combination in c(1:nrow(combinations))){
                               interaction = predictions[,paste0("draws",i)])
     prediction <- prediction[prediction$interaction == 1,]
     species_role(prediction, ncores = 0)
-  }
+                  }
   role_mean <- group_by(role, species) %>% summarise_all(mean, na.rm = T)
   role_sd <- group_by(role, species) %>% summarise_all(sd, na.rm = T)
   predicted_roles <- rbind(predicted_roles, 
