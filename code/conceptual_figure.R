@@ -369,7 +369,6 @@ p <- ggplot() +
 
 ggsave("figures/SI/FWmap.pdf", p)
 
-
 # Performance ~ distances mini-maps ---------------------------------------
 overall_performance <- read.csv("data/checkpoints/overall_performance.csv", row.names = 1)
 overall_performance[overall_performance == "Arctic"] <- "HighArctic"
@@ -388,9 +387,9 @@ perform <- ggplot(df) +
   geom_curve(data=df,
              aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = auc),
              curvature=0.25, alpha = 0.6) +
-  scale_size_continuous(range = c(0.5,6), limits = c(0.6,1))+
+  scale_size_continuous(range = c(0.5,12), limits = c(0.6,1))+
   xlim(c(min(df$fromlong), max(df$fromlong)+5))+
-  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 6, shape = 21, stroke = 3, fill = "white")+
+  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
   scale_color_identity() +
   theme_void() +
   theme(legend.position = "none")
@@ -399,9 +398,9 @@ geo_dist <- ggplot(df) +
   geom_curve(data=df,
              aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = geo.dist),
              curvature=0.25, alpha = 0.6) +
-  scale_size_continuous(range = c(0.5,6), limits = c(3500, 18000))+
+  scale_size_continuous(range = c(0.5,12), limits = c(3500, 18000))+
   xlim(c(min(df$fromlong), max(df$fromlong)+5))+
-  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 6, shape = 21, stroke = 3, fill = "white")+
+  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
   scale_color_identity() +
   theme_void() +
   theme(legend.position = "none")
@@ -410,9 +409,9 @@ env_dist <- ggplot(df) +
   geom_curve(data=df,
              aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = env.dist),
              curvature=0.25, alpha = 0.6) +
-  scale_size_continuous(range = c(0.5,6), limits = c(1,10))+
+  scale_size_continuous(range = c(0.5,12), limits = c(1,10))+
   xlim(c(min(df$fromlong), max(df$fromlong)+5))+
-  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 6, shape = 21, stroke = 3, fill = "white")+
+  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
   scale_color_identity() +
   theme_void() +
   theme(legend.position = "none")
@@ -421,9 +420,9 @@ phylo_dist <- ggplot(df) +
   geom_curve(data=df,
              aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = phylo.dist),
              curvature=0.25, alpha = 0.6) +
-  scale_size_continuous(range = c(0.5,6), limits= c(0, 200))+
+  scale_size_continuous(range = c(0.5,12), limits= c(0, 200))+
   xlim(c(min(df$fromlong), max(df$fromlong)+5))+
-  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 6, shape = 21, stroke = 3, fill = "white")+
+  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
   scale_color_identity() +
   theme_void() +
   theme(legend.position = "none")
