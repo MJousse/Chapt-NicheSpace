@@ -13,7 +13,7 @@ library(mFD)
 library(patchwork)
 library(brms)
 library(ggplot2)
-source("code/DistanceFunctions.R")
+source("code/functions_distance.R")
 
 # species list
 europe <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1)
