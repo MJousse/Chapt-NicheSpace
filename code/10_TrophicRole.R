@@ -80,9 +80,9 @@ for (combination in c(1:nrow(combinations))){
   role_sd <- group_by(role, species) %>% summarise_all(sd, na.rm = T)
   predicted_roles <- rbind(predicted_roles, 
                            pivot_longer(role_mean, -species, names_to = "role", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
+  write.csv(predicted_roles, file = "data/checkpoints/predicted_roles.csv")
 }
 stopCluster(cl)
-write.csv(predicted_roles, file = "data/checkpoints/predicted_roles.csv")
 
 # Compare the empirical roles and predicted roles -------------------------
 species_roles <- left_join(predicted_roles, empirical_roles,
