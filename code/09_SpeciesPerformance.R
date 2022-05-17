@@ -42,7 +42,7 @@ sp_funct.dist <- funct.dist(traits, traits_cat, metric = "gower", scale_euclid =
 
 # Add distances to species performance ------------------------------------
 species_performance <- read.csv("data/checkpoints/species_performance.csv", row.names = 1) %>%
-  filter(Source != Target, auc != 1)
+  filter(Source != Target)
 
 # mean nearest taxon distance
 species_performance$mntd <- NA
@@ -64,7 +64,7 @@ species_performance$fmpd[species_performance$Source == "Arctic"] <- map_dbl(spec
 # source and target region as crossed random effect + prevalence as random effect
 
 # transform responses
-species_performance$logitauc <- log(species_performance$auc / (1-species_performance$auc))
+species_performance$logitauc <- log(species_performance$auc / (1.001-species_performance$auc))
 species_performance$logaucpr <- log(species_performance$aucpr / species_performance$prevalence)
 
 # scale predictors
