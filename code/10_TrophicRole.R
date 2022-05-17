@@ -56,7 +56,7 @@ load("data/checkpoints/predictions.RData")
 foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
 combinations <- expand_grid(Source = foodwebs, Target = foodwebs)
 predicted_roles <-c()
-cl <- makeCluster(15) 
+cl <- makeCluster(10) 
 registerDoParallel(cl)
 # for each combination of source and target webs, use 100 posterior sample
 # calculate the roles of all species in these sample, and extract the mean
