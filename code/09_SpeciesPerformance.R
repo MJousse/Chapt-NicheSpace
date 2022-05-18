@@ -58,6 +58,9 @@ species_performance$fmpd[species_performance$Source == "Pyrenees"] <- map_dbl(sp
 species_performance$fmpd[species_performance$Source == "Serengeti"] <- map_dbl(species_performance$species[species_performance$Source == "Serengeti"], fmpd, serengeti$Species, sp_funct.dist)
 species_performance$fmpd[species_performance$Source == "Arctic"] <- map_dbl(species_performance$species[species_performance$Source == "Arctic"], fmpd, arctic$Species, sp_funct.dist)
 
+# remove species that were not in phylogeny
+species_performance <- filter(species_performance, species %in% colnames(phydist))
+
 # Correlate transferability to distance metrics ---------------------------
 # glm with species-specific logit-auc and log(aucpr/prevalence) as response
 # phylogenetic and functional distance as predictors
@@ -68,12 +71,12 @@ species_performance$logitauc <- log(species_performance$auc / (1.001-species_per
 species_performance$logaucpr <- log(species_performance$aucpr / species_performance$prevalence)
 
 # scale predictors
-species_performance$mntd <- as.vector(scale(species_performance$mntd))
-species_performance$fmpd <- as.vector(scale(species_performance$fmpd))
-species_performance$prevalence <- as.vector(scale(log(species_performance$prevalence)))
+species_performance$mntd_sc <- as.vector(scale(species_performance$mntd))
+species_performance$fmpd_sc <- as.vector(scale(species_performance$fmpd))
+species_performance$prevalence_sc <- as.vector(scale(log(species_performance$prevalence)))
 
 # model with logit auc as response using brms
-auc_model <- brm(logitauc ~ mntd + fmpd + prevalence + (1|Source) + (1|Target),
+auc_model <- brm(logitauc ~ mntd_sc + fmpd_sc + prevalence_sc + (1|Source) + (1|Target),
                  data = species_performance,
                  prior = c(
                    prior(normal(0, 1), class = "Intercept"),
@@ -84,7 +87,7 @@ auc_model <- brm(logitauc ~ mntd + fmpd + prevalence + (1|Source) + (1|Target),
                  iter = 2000)
 
 # model with log aucpr/prevalence as response using brms
-aucpr_model <- brm(logaucpr ~ mntd + fmpd + prevalence + (1|Source) + (1|Target),
+aucpr_model <- brm(logaucpr ~ mntd_sc + fmpd_sc + prevalence_sc + (1|Source) + (1|Target),
                    data = species_performance,
                    prior = c(
                      prior(normal(0, 1), class = "Intercept"),
@@ -94,11 +97,11 @@ aucpr_model <- brm(logaucpr ~ mntd + fmpd + prevalence + (1|Source) + (1|Target)
                    sample_prior = "no",
                    iter = 2000)
 mydatab <- data.frame(
-  mntd = species_performance$mntd,
+  mntd_sc = species_performance$mntd_sc,
   Source = species_performance$Source,
   Target = species_performance$Target,
-  prevalence = 0,
-  fmpd = 0
+  prevalence_sc = 0,
+  fmpd_sc = 0
 )
 
 species_performance_fitmntd <- cbind(species_performance, fitted(auc_model, mydatab, re_formula=NULL))
@@ -114,18 +117,18 @@ p1 <- ggplot(species_performance_fitmntd) +
             size = 1) +
   scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  labs(x = "Phylogenetic distance", y = "roc-auc", colour = "Source food web", fill = "Source food web") + 
+  labs(x = "Phylogenetic distance", y = "", colour = "Source food web", fill = "Source food web") + 
   facet_wrap(~Target, nrow = 1) +
   theme_minimal() +
   theme(axis.line = element_line(size = 0.5), strip.text = element_text(size = 12),
         strip.background = element_rect(colour = "black"))
 
 mydatab <- data.frame(
-  mntd = 0,
+  mntd_sc = 0,
   Source = species_performance$Source,
   Target = species_performance$Target,
-  prevalence = 0,
-  fmpd = species_performance$fmpd
+  prevalence_sc = 0,
+  fmpd_sc = species_performance$fmpd_sc
 )
 
 species_performance_fitfmpd <- cbind(species_performance, fitted(auc_model, mydatab, re_formula=NULL))
@@ -146,7 +149,33 @@ p2 <- ggplot(species_performance_fitfmpd) +
   theme_minimal() +
   theme(axis.line = element_line(size = 0.5), strip.text = element_blank())
 
-p<-p1/p2 + plot_layout(guides = "collect") +
+mydatab <- data.frame(
+  mntd_sc = 0,
+  Source = species_performance$Source,
+  Target = species_performance$Target,
+  prevalence_sc = species_performance$prevalence_sc,
+  fmpd_sc = 0
+)
+
+species_performance_fitprev <- cbind(species_performance, fitted(auc_model, mydatab, re_formula=NULL))
+species_performance_fitprev$Estimate <- exp(species_performance_fitprev$Estimate)/(1+exp(species_performance_fitprev$Estimate))
+species_performance_fitprev$Q2.5 <- exp(species_performance_fitprev$Q2.5)/(1+exp(species_performance_fitprev$Q2.5))
+species_performance_fitprev$Q97.5 <- exp(species_performance_fitprev$Q97.5)/(1+exp(species_performance_fitprev$Q97.5))
+
+p3 <- ggplot(species_performance_fitprev) +
+  geom_point(aes(y = auc, x = prevalence, colour = Source), size = 0.5, alpha = .3) +
+  geom_ribbon(aes(x = prevalence, y = Estimate, ymin = Q2.5, ymax = Q97.5, fill = Source),
+              alpha = .3) +
+  geom_line(aes(x = prevalence, y = Estimate, color = Source),
+            size = 1) +
+  scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  labs(x = "Prevalence", y = "", colour = "Source food web", fill = "Source food web") + 
+  facet_wrap(~Target, nrow = 1) +
+  theme_minimal() +
+  theme(axis.line = element_line(size = 0.5), strip.text = element_blank())
+
+p<-p1/p2/p3 + plot_layout(guides = "collect") +
   plot_annotation(title = 'Target food web', theme = theme(plot.title = element_text(hjust = 0.45)))
 
 ggsave("figures/SpeciesPerformance.png", p)
