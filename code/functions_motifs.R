@@ -104,31 +104,3 @@ positions <- function(subgraph, motif_id){
   }
   return(pos)
 }
-
-
-A = matrix(c(0,1,1,0,0,0,0,1,0), nrow = 3)
-A = graph_from_adjacency_matrix(A)
-m <- which(motifs(A) == 1)
-plot(A, vertex.size = 50, layout=layout_as_tree(A, flip.y = T), vertex.label = "")
-plot(A, vertex.size = 50, layout=layout_nicely(A), vertex.label = "")
-title(m,cex.main=3)
-
-# Check speed
-i <- 1
-size <- seq(from = 5, to = 10, by = 5)
-t1 <- rep(NA, length(size))
-t2 <- rep(NA, length(size))
-for (N in size){
-  m = matrix(rbinom(n = N^2, size = 1, prob = 0.25), nrow = N)
-  tic = Sys.time()
-  x1 <- motif_role(m)
-  t1[i] <- Sys.time() - tic
-  graph <- erdos.renyi.game(size, 0.25, directed = T)
-  tic = Sys.time()
-  x2 <- calc_topological_roles(graph, nsim = 10)
-  t2[i] <- Sys.time() - tic
-  i = i+1
-  print(all(x1$position_count == x2$position_count))
-}
-plot(size, t2, col = "blue")
-points(size, t1, col = "red")
