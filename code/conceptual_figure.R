@@ -159,60 +159,31 @@ plot(pyrenees.simplified, layout = lay, vertex.label=NA, vertex.size=10, edge.ar
 dev.off()
 
 # Logistic regression icon ------------------------------------------------
-n<-100
-x <- seq(from = 0, to = 1, length.out = n)
-p <- x
-p[p<0] <- 0
-y <- rbinom(n, size = 1, prob = p)
-d<-data.frame(x,y) %>%
-  ggplot(aes(x,y))+
-  geom_point(alpha = 0.5, size = 5) +
-  geom_smooth(method = "glm", method.args = list(family = "binomial"), col = "royalblue4", fill = alpha("royalblue4", 0.5)) +
-  theme_void() +
-  theme(text = element_blank(), axis.line = element_line(size = 3))
-ggsave("figures/conceptual/logisiticreg.png", plot = d)
+library(tidybayes)
+EuropeModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/EuroModel_brms.rds")
+fe_only <- tibble(BM.prey = seq(-2, 2, length.out=100))
+fe_only[,c("Omnivore.predator", "Carnivore.predator", "Habitat_breadth.predator", "Longevity.predator", "ClutchSize.predator", "Omnivore.prey", "Carnivore.prey",
+           "Habitat_breadth.prey", "BM.predator", "Longevity.prey", "ClutchSize.prey", "ActivityTime.match",
+           "Habitat.match", "BM.match")] <- 0
+fe_only <- fe_only %>%
+  add_epred_draws(EuropeModel,
+                   re_formula = NA,
+                   scale = "response", ndraws = 1e3)
 
-# Functional traits icon --------------------------------------------------
-# multidimension of functional traits
-functraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1, stringsAsFactors = T)
-library(mFD)
-rownames(functraits) <- functraits$Species
-traits <- functraits %>%
-  slice_sample(n=100) %>%
-  dplyr::select(-Species, -Class, -Order, -Family, -Genus) %>%
-  drop_na()
-traits_cat <- data.frame(trait_name = colnames(traits),
-                         trait_type = c("N", "Q", rep("F", 12), "Q", "Q", "Q", "F", "F", "F"),
-                         fuzzy_name = c(NA, NA, rep("Habitat", 12), NA, NA, NA, rep("TrophicLevel", 3)))
-# compute trait-based distances:
-dist_traits <- mFD::funct.dist(
-  sp_tr         = traits,
-  tr_cat        = traits_cat,
-  metric        = "gower",
-  scale_euclid  = "noscale",
-  ordinal_var   = "classic",
-  weight_type   = "equal",
-  stop_if_NA    = TRUE)
+fe_only_mean <- fe_only %>% 
+  group_by(BM.prey) %>%
+  summarize(.epred = mean(.epred))
 
-fspaces <- mFD::quality.fspaces(
-  sp_dist             = dist_traits,
-  fdendro             = "average",
-  maxdim_pcoa         = 9,
-  deviation_weighting = c("absolute"),
-  fdist_scaling       = c(TRUE, FALSE))
-
-sp_faxes_coord <- fspaces$"details_fspaces"$"sp_pc_coord"
-col <- c("Amphibia" = "#8dd3c7", "Aves" = "#ffffb3", "Mammalia" = "#bebada", "Reptilia" = "#fb8072")
-classes <-as.character(functraits$Class[match(rownames(sp_faxes_coord), functraits$Species)])
-col <- col[classes]
-p <- ggplot(data.frame(sp_faxes_coord)) +
-  geom_hline(yintercept = 0, size = 3) +
-  geom_vline(xintercept = 0, size = 3) +
-  geom_point(aes(PC2, PC3), fill = col, size = 7, shape = 21, alpha = 0.8) +
-  theme_minimal() +
-  theme(panel.grid = element_blank(), panel.border = element_rect(color = "black", fill = "transparent", size = 4), text = element_blank())
-
-ggsave("figures/conceptual/traits.png", p)
+p<-ggplot(fe_only,
+       aes(x = BM.prey, y = .epred)) +
+  stat_interval(aes(alpha = stat(level)), color = "royalblue4", .width = c(0.8, 0.95)) +
+  geom_line(data = fe_only_mean, color = "royalblue4", size = 1) +
+  scale_alpha_discrete(range = c(0.05, 0.1))+
+  labs(x = "Prey body mass", y = "Interaction probability") +
+  theme_minimal() + 
+  theme(panel.grid = element_blank(), axis.line = element_line(size = 1),
+        axis.text = element_blank(), legend.position = "none", axis.title = element_text(size = 12))
+ggsave("figures/conceptual/logisiticreg.png", p, width = 2, height = 2)
 
 # Map of the Food Webs ----------------------------------------------------
 library(sf)
@@ -253,11 +224,9 @@ df[which(df$to == "Europe"), c("tolong", "tolat")] <- Europe_centroid
 df[which(df$to == "Pyrenees"), c("tolong", "tolat")] <- Pyrenees_centroid
 df[which(df$to == "HighArctic"), c("tolong", "tolat")] <- HighArctic_centroid
 df[which(df$to == "Serengeti"), c("tolong", "tolat")]  <- Serengeti_centroid
-df$col <- NA
-df$col[which(df$from == "Europe")] <- "royalblue4"
-df$col[which(df$from == "Pyrenees")] <- "red3"
-df$col[which(df$from == "HighArctic")] <- "deepskyblue"
-df$col[which(df$from == "Serengeti")] <- "chartreuse4"
+df$size <- 0.5
+df$size[which(df$from == "Europe" & df$to == "HighArctic")] <- 1
+
 
 # species proportions
 Europe_sp <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1)
@@ -332,7 +301,7 @@ legend_barchart <- ggplotGrob(
     add_phylopic(lizard, x = 4, y = legend$Proportion[4]+0.03, alpha = 1, ysize = 0.55, color = "black") +
     lims(y = c(0,0.4))+
     theme(legend.position = "none", rect = element_blank(),
-          line = element_blank(), text = element_blank(), title = element_text(size = 8, face = "bold"), plot.margin = unit(c(0, 0, 0, 0), "null")) 
+          line = element_blank(), text = element_blank(), title = element_text(size = 10, face = "bold"), plot.margin = unit(c(0, 0, 0, 0), "null")) 
 )
 
 p <- ggplot() +
@@ -342,32 +311,34 @@ p <- ggplot() +
   geom_sf(data = HighArctic, fill = alpha("deepskyblue", 0.5), color = "deepskyblue") +
   geom_sf(data = Serengeti, fill = alpha("chartreuse4", 0.5), color =  "chartreuse4") +
   geom_curve(data=df,
-             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col),
-             size=0.75,
+             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, size = size), color = "black",
              curvature=0.25, alpha = 0.6) + 
   scale_colour_identity() +
+  scale_size(range = c(0.5,2))+
   geom_label_repel(data = as.data.frame(Pyrenees_centroid), aes(x = X, y = Y, label = "Pyrenees"), 
                    fontface = "bold", nudge_x = -15, nudge_y = -10, colour = "red3") +
   geom_label_repel(data = as.data.frame(Europe_centroid), aes(x = X, y = Y, label = "Europe"), 
-                   fontface = "bold", nudge_x = 10, nudge_y = 10, colour = "royalblue4") +
-  geom_label_repel(data = as.data.frame(HighArctic_centroid), aes(x = X, y = Y, label = "High Arctic"), 
+                   fontface = "bold", nudge_x = 13, nudge_y = 10, colour = "royalblue4") +
+  geom_label_repel(data = as.data.frame(HighArctic_centroid), aes(x = X, y = Y, label = "Arctic"), 
                    fontface = "bold", nudge_x = -5, nudge_y = -10, colour = "deepskyblue") +
   geom_label_repel(data = as.data.frame(Serengeti_centroid), aes(x = X, y = Y, label = "Serengeti"), 
-                   fontface = "bold", nudge_x = 18, nudge_y = 13, colour = "chartreuse4") +
-  annotation_custom(euro_barchart, xmin = Europe_centroid[,1]+3, xmax = Europe_centroid[,1]+17, 
-                    ymin = Europe_centroid[,2]-4, ymax = Europe_centroid[,2]+8) + 
-  annotation_custom(pyrenees_barchart, xmin = Pyrenees_centroid[,1]-22, xmax = Pyrenees_centroid[,1]-8, 
-                    ymin = Pyrenees_centroid[,2]-24, ymax = Pyrenees_centroid[,2]-12) + 
-  annotation_custom(arctic_barchart, xmin = HighArctic_centroid[,1]-12, xmax = HighArctic_centroid[,1]+2, 
-                    ymin = HighArctic_centroid[,2]-24, ymax = HighArctic_centroid[,2]-12) + 
-  annotation_custom(serengeti_barchart, xmin = Serengeti_centroid[,1]+11, xmax = Serengeti_centroid[,1]+25, 
-                    ymin = Serengeti_centroid[,2]-3, ymax = Serengeti_centroid[,2]+11) + 
-  annotation_custom(legend_barchart, xmin = -90, xmax = -50, 
-                    ymin = -5, ymax = 20) + 
+                   fontface = "bold", nudge_x = 23, nudge_y = 20, colour = "chartreuse4") +
+  annotation_custom(euro_barchart, xmin = Europe_centroid[,1]+3, xmax = Europe_centroid[,1]+23, 
+                    ymin = Europe_centroid[,2]-13, ymax = Europe_centroid[,2]+8) + 
+  annotation_custom(pyrenees_barchart, xmin = Pyrenees_centroid[,1]-25, xmax = Pyrenees_centroid[,1]-5, 
+                    ymin = Pyrenees_centroid[,2]-27, ymax = Pyrenees_centroid[,2]-12) + 
+  annotation_custom(arctic_barchart, xmin = HighArctic_centroid[,1]-15, xmax = HighArctic_centroid[,1]+5, 
+                    ymin = HighArctic_centroid[,2]-29, ymax = HighArctic_centroid[,2]-14) + 
+  annotation_custom(serengeti_barchart, xmin = Serengeti_centroid[,1]+13, xmax = Serengeti_centroid[,1]+33, 
+                    ymin = Serengeti_centroid[,2]-3, ymax = Serengeti_centroid[,2]+18) + 
+  annotation_custom(legend_barchart, xmin = -90, xmax = -40, 
+                    ymin = -5, ymax = 25) + 
   coord_sf(xlim = c(-85, 70), ylim = c(0, 80)) +
-  theme_void()
+  theme_void() +
+  theme(legend.position = "none")
 
 ggsave("figures/SI/FWmap.pdf", p)
+ggsave("figures/SI/FWmap.png", p)
 
 # Performance ~ distances mini-maps ---------------------------------------
 overall_performance <- read.csv("data/checkpoints/overall_performance.csv", row.names = 1)
