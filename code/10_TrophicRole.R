@@ -56,8 +56,6 @@ load("data/checkpoints/predictions.RData")
 foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
 combinations <- expand_grid(Source = foodwebs, Target = foodwebs)
 predicted_roles <-c()
-cl <- makeCluster(10) 
-registerDoParallel(cl)
 # for each combination of source and target webs, use 100 posterior sample
 # calculate the roles of all species in these sample, and extract the mean
 for (combination in c(1:nrow(combinations))){
@@ -66,6 +64,8 @@ for (combination in c(1:nrow(combinations))){
   print(Sys.time())
   print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
+  cl <- makeCluster(10) 
+  registerDoParallel(cl)
   role <- foreach(i=c(1:100), .combine = rbind, 
                   .packages = c("igraph", "NetIndices", "multiweb", "dplyr"),
                   .export = c("motif_role", "positions")) %dopar% {
@@ -75,13 +75,13 @@ for (combination in c(1:nrow(combinations))){
     prediction <- prediction[prediction$interaction == 1,]
     species_role(prediction, ncores = 0)
                   }
+  stopCluster(cl)
   role_mean <- group_by(role, species) %>% summarise_all(mean, na.rm = T)
   role_sd <- group_by(role, species) %>% summarise_all(sd, na.rm = T)
   predicted_roles <- rbind(predicted_roles, 
                            pivot_longer(role_mean, -species, names_to = "role", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
   write.csv(predicted_roles, file = "data/checkpoints/predicted_roles.csv")
 }
-stopCluster(cl)
 
 # Compare the empirical roles and predicted roles -------------------------
 species_roles <- left_join(predicted_roles, empirical_roles,
