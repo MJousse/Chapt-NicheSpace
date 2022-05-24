@@ -54,7 +54,8 @@ library(foreach)
 library(doParallel)
 load("data/checkpoints/predictions.RData")
 foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
-combinations <- expand_grid(Source = foodwebs, Target = foodwebs)
+combinations <- expand_grid(Source = foodwebs, Target = foodwebs) %>%
+  filter(Target != "Euro")
 predicted_roles <-c()
 # for each combination of source and target webs, use 100 posterior sample
 # calculate the roles of all species in these sample, and extract the mean
@@ -64,7 +65,7 @@ for (combination in c(1:nrow(combinations))){
   print(Sys.time())
   print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
-  cl <- makeCluster(10) 
+  cl <- makeCluster(5) 
   registerDoParallel(cl)
   role <- foreach(i=c(1:100), .combine = rbind, 
                   .packages = c("igraph", "NetIndices", "multiweb", "dplyr", "tidyr"),
