@@ -67,7 +67,7 @@ for (combination in c(1:nrow(combinations))){
   cl <- makeCluster(10) 
   registerDoParallel(cl)
   role <- foreach(i=c(1:100), .combine = rbind, 
-                  .packages = c("igraph", "NetIndices", "multiweb", "dplyr"),
+                  .packages = c("igraph", "NetIndices", "multiweb", "dplyr", "tidyr"),
                   .export = c("motif_role", "positions")) %dopar% {
     prediction <- data.frame(resource = predictions$Prey, 
                               consumer = predictions$Predator, 

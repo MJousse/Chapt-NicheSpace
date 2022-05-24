@@ -1,5 +1,5 @@
 # Test
-load("code/functions_motifs.R")
+source("code/functions_motifs.R")
 
 A = matrix(c(0,1,0,0,0,1,0,0,0), nrow = 3) # i <- j <- k
 B = matrix(c(0,1,1,0,0,1,0,1,0), nrow = 3) # i <- j <-> k -> i

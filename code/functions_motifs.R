@@ -5,51 +5,22 @@ motif_role <- function(m){
   rownames(out) <- sp
   colnames(out) <- paste0("position", c(1:30))
   motifs <- rep(0,16)
-  for (i in c(1:(n-2))){
-    for (j in c((i+1):(n-1))){
-      for (k in c((j+1):n)){
-        subgraph <- m[c(i,j,k), c(i,j,k)]
-        diag(subgraph) <- 0
-        if (sum(subgraph) >=2){
-          subigraph <- graph_from_adjacency_matrix(subgraph)
-          motif_id <- which(motifs(subigraph) == 1)
-          if (length(motif_id) == 1){
-            motifs[motif_id] <- motifs[motif_id] + 1
-            pos <- positions(subgraph, motif_id)
-            out[i, pos[1]] = out[i, pos[1]] + 1
-            out[j, pos[2]] = out[j, pos[2]] + 1
-            out[k, pos[3]] = out[k, pos[3]] + 1
-          }
-        }
-      }
-    }
-  }
-  return(list(motif_count = motifs, position_count = out))
-}
-
-motif_role2 <- function(m){
-  sp <- colnames(m)
-  n <- nrow(m)
-  out <- matrix(0, nrow = n, ncol = 30)
-  rownames(out) <- sp
-  colnames(out) <- paste0("position", c(1:30))
-  motifs <- rep(0,16)
-  for (i in c(1:(n-2))){
-    for (j in c((i+1):(n-1))){
-      for (k in c((j+1):n)){
-        subgraph <- m[c(i,j,k), c(i,j,k)]
-        diag(subgraph) <- 0
-        if (sum(subgraph) >=2){
-          subigraph <- graph_from_adjacency_matrix(subgraph)
-          motif_id <- which(motifs(subigraph) == 1)
-          if (length(motif_id) == 1){
-            motifs[motif_id] <- motifs[motif_id] + 1
-            pos <- positions(subgraph, motif_id)
-            out[i, pos[1]] = out[i, pos[1]] + 1
-            out[j, pos[2]] = out[j, pos[2]] + 1
-            out[k, pos[3]] = out[k, pos[3]] + 1
-          }
-        }
+  three_sp <- expand_grid(i =c(1:n), j = c(1:n), k = c(1:n)) %>% dplyr::filter(i<j,j<k)
+  for (row in c(1:nrow(three_sp))){
+    i = three_sp$i[row]
+    j = three_sp$j[row]
+    k = three_sp$k[row]
+    subgraph <- m[c(i,j,k), c(i,j,k)]
+    diag(subgraph) <- 0
+    if (sum(subgraph) >=2){
+      subigraph <- graph_from_adjacency_matrix(subgraph)
+      motif_id <- which(motifs(subigraph) == 1)
+      if (length(motif_id) == 1){
+        motifs[motif_id] <- motifs[motif_id] + 1
+        pos <- positions(subgraph, motif_id)
+        out[i, pos[1]] = out[i, pos[1]] + 1
+        out[j, pos[2]] = out[j, pos[2]] + 1
+        out[k, pos[3]] = out[k, pos[3]] + 1
       }
     }
   }
