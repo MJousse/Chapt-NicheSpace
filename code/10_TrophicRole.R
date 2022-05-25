@@ -85,18 +85,26 @@ for (combination in c(1:nrow(combinations))){
 }
 
 # Compare the empirical roles and predicted roles -------------------------
+empirical_roles <- read.csv("data/checkpoints/SpeciesRole.csv", row.names = 1)
+predicted_roles <- read.csv("data/checkpoints/predicted_roles.csv", row.names = 1)
+
 species_roles <- left_join(predicted_roles, empirical_roles,
                            by = c("species", "role", "targetFW" = "FW"))
 
 # calculate the error as the standardized mean difference
 species_roles$error = (species_roles$predicted - species_roles$empirical)
-sd_role_error <- species_roles %>% group_by(role) %>% summarise(sd = sd(error))
+sd_role_error <- species_roles %>% group_by(role) %>% summarise(sd = sd(error, na.rm = T))
 species_roles$error_std = species_roles$error / sd_role_error$sd[match(species_roles$role, sd_role_error$role)]
 species_roles$insample <- species_roles$targetFW == species_roles$sourceFW
 
 # plot
 species_roles$role <- factor(species_roles$role, levels = unique(species_roles$role))
-ggplot(species_roles, aes(x = role, y = error_std, fill = insample)) +
-  geom_point() +
-  geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(subset(species_roles, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9")), aes(x = role, y = error_std, fill = role)) +
+  scale_fill_manual(values = c(rep("#e41a1c", 5), rep("#377eb8",2), rep("#4daf4a", 2), rep("#984ea3", 8))) +
+  geom_violin(scale = "width") +
+  geom_hline(yintercept = 0)+
+  facet_grid(targetFW~sourceFW) +
+  labs(y = "Standardized Error", x = "Species role") +
+  ylim(c(-5,5))+
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none")
