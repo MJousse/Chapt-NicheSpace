@@ -5,7 +5,8 @@ motif_role <- function(m){
   rownames(out) <- sp
   colnames(out) <- paste0("position", c(1:30))
   motifs <- rep(0,16)
-  three_sp <- expand_grid(i =c(1:n), j = c(1:n), k = c(1:n)) %>% dplyr::filter(i<j,j<k)
+  three_sp <- as.data.frame(t(combn(1:n, 3)))
+  colnames(three_sp) <- c("i", "j", "k")
   for (row in c(1:nrow(three_sp))){
     i = three_sp$i[row]
     j = three_sp$j[row]
