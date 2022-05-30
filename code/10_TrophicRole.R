@@ -98,8 +98,8 @@ species_roles$insample <- species_roles$targetFW == species_roles$sourceFW
 
 # plot
 species_roles$role <- factor(species_roles$role, levels = unique(species_roles$role))
-ggplot(subset(species_roles, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9")), aes(x = role, y = error_std, fill = role)) +
-  scale_fill_manual(values = c(rep("#e41a1c", 5), rep("#377eb8",2), rep("#4daf4a", 2), rep("#984ea3", 8))) +
+ggplot(subset(species_roles, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = error_std, fill = role)) +
+  scale_fill_manual(values = c(rep("#e41a1c", 5), rep("#377eb8",2), rep("#4daf4a", 2), rep("#984ea3", 10))) +
   geom_violin(scale = "width") +
   geom_hline(yintercept = 0)+
   facet_grid(sourceFW~targetFW) +
