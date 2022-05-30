@@ -103,7 +103,7 @@ ggplot(subset(species_roles, role %in% c("indegree", "outdegree", "betweeness", 
   scale_fill_manual(values = c(rep("#e41a1c", 5), rep("#377eb8",2), rep("#4daf4a", 2), rep("#984ea3", 8))) +
   geom_violin(scale = "width") +
   geom_hline(yintercept = 0)+
-  facet_grid(targetFW~sourceFW) +
+  facet_grid(sourceFW~targetFW) +
   labs(y = "Standardized Error", x = "Species role") +
   ylim(c(-5,5))+
   theme_classic() +
