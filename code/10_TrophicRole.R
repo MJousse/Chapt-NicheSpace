@@ -108,7 +108,7 @@ correlations <- species_roles %>%
   summarise(correlation = cor(predicted, empirical))
 
 # plot
-correlations$role <- factor(correlations$role, levels = unique(correlations$role))
+correlations$role <- factor(correlations$role, levels = rev(unique(empirical_roles$role)))
 ggplot(subset(correlations, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation, fill = sourceFW)) +
   geom_point(shape = 21, size = 4, alpha=0.8) +
   scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
@@ -117,4 +117,28 @@ ggplot(subset(correlations, role %in% c("indegree", "outdegree", "betweeness", "
   facet_grid(~targetFW) +
   labs(y = "Correlation", x = "Species role") +
   ylim(c(-0.5,1))+
-  theme_classic()
+  theme_bw()
+
+intercepts <- filter(fitted_models, term == "(Intercept)")
+intercepts$role <- factor(intercepts$role, levels = rev(unique(empirical_roles$role)))
+ggplot(subset(intercepts, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = estimate, fill = sourceFW)) +
+  geom_point(shape = 21, size = 4, alpha=0.8) +
+  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  coord_flip() +
+  geom_hline(yintercept = 0)+
+  facet_grid(~targetFW) +
+  labs(y = "Intercept", x = "Species role") +
+  ylim(c(-0.5,10000))+
+  theme_bw()
+
+slopes <- filter(fitted_models, term == "empirical")
+slopes$role <- factor(slopes$role, levels = rev(unique(slopes$role)))
+ggplot(subset(slopes, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = estimate, fill = sourceFW)) +
+  geom_point(shape = 21, size = 4, alpha=0.8) +
+  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  coord_flip() +
+  geom_hline(yintercept = 0)+
+  facet_grid(~targetFW) +
+  labs(y = "Slope", x = "Species role") +
+  ylim(c(-10,10))+
+  theme_bw()
