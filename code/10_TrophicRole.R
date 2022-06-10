@@ -90,20 +90,31 @@ predicted_roles <- read.csv("data/checkpoints/predicted_roles.csv", row.names = 
 species_roles <- left_join(predicted_roles, empirical_roles,
                            by = c("species", "role", "targetFW" = "FW"))
 
-# calculate the error as the standardized mean difference
-species_roles$error = (species_roles$predicted - species_roles$empirical)
-sd_role_error <- species_roles %>% group_by(role) %>% summarise(sd = sd(error, na.rm = T))
-species_roles$error_std = species_roles$error / sd_role_error$sd[match(species_roles$role, sd_role_error$role)]
-species_roles$insample <- species_roles$targetFW == species_roles$sourceFW
+# calculate the slope, intercept and r^2 for all role, targetFW and sourceFW
+library(purrr)
+library(broom)
+fitted_models = species_roles %>% 
+  drop_na() %>%
+  nest(data = -c(role, targetFW, sourceFW)) %>%
+  mutate(model = map(data, ~ lm(predicted ~ empirical, data = .x)),
+         tidied = map(model, tidy)
+  ) %>%
+  unnest(tidied) %>%
+  dplyr::select(role, targetFW, sourceFW, term, estimate, std.error)
+
+correlations <- species_roles %>% 
+  drop_na() %>%
+  group_by(role, targetFW, sourceFW) %>%
+  summarise(correlation = cor(predicted, empirical))
 
 # plot
-species_roles$role <- factor(species_roles$role, levels = unique(species_roles$role))
-ggplot(subset(species_roles, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = error_std, fill = role)) +
-  scale_fill_manual(values = c(rep("#e41a1c", 5), rep("#377eb8",2), rep("#4daf4a", 2), rep("#984ea3", 10))) +
-  geom_violin(scale = "width") +
+correlations$role <- factor(correlations$role, levels = unique(correlations$role))
+ggplot(subset(correlations, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation, fill = sourceFW)) +
+  geom_point(shape = 21, size = 4, alpha=0.8) +
+  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  coord_flip() +
   geom_hline(yintercept = 0)+
-  facet_grid(sourceFW~targetFW) +
-  labs(y = "Standardized Error", x = "Species role") +
-  ylim(c(-5,5))+
-  theme_classic() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position = "none")
+  facet_grid(~targetFW) +
+  labs(y = "Correlation", x = "Species role") +
+  ylim(c(-0.5,1))+
+  theme_classic()
