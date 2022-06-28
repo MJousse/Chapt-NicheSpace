@@ -88,7 +88,11 @@ empirical_roles <- read.csv("data/checkpoints/SpeciesRole.csv", row.names = 1)
 predicted_roles <- read.csv("data/checkpoints/predicted_roles.csv", row.names = 1)
 
 species_roles <- left_join(predicted_roles, empirical_roles,
-                           by = c("species", "role", "targetFW" = "FW"))
+                           by = c("species", "role", "targetFW" = "FW")) %>%
+  drop_na() %>%
+  group_by(role, targetFW, sourceFW) %>%
+  mutate(predicted_scaled = (predicted - mean(empirical, na.rm = T))/sd(empirical, na.rm = T),
+         empirical_scaled = (empirical - mean(empirical, na.rm = T))/sd(empirical, na.rm = T))
 
 # calculate the slope, intercept and r^2 for all role, targetFW and sourceFW
 library(purrr)
@@ -96,7 +100,7 @@ library(broom)
 fitted_models = species_roles %>% 
   drop_na() %>%
   nest(data = -c(role, targetFW, sourceFW)) %>%
-  mutate(model = map(data, ~ lm(predicted ~ empirical, data = .x)),
+  mutate(model = map(data, ~ lm(predicted_scaled ~ empirical_scaled, data = .x)),
          tidied = map(model, tidy)
   ) %>%
   unnest(tidied) %>%
@@ -123,28 +127,24 @@ p<-ggplot(subset(correlations, role %in% c("indegree", "outdegree", "betweeness"
 ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600)
 
 intercepts <- filter(fitted_models, term == "(Intercept)")
-# standardized by mean in empirical
-role_mean <- empirical_roles %>% group_by(FW, role) %>% summarise(mean = mean(empirical, na.rm=T))
-intercepts <- left_join(intercepts, role_mean, by=c("targetFW" = "FW", "role" = "role"))
-intercepts$bias <- intercepts$estimate / intercepts$mean
 intercepts$role <- factor(intercepts$role, levels = rev(unique(empirical_roles$role)))
 
 ggplot(subset(intercepts, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = estimate, fill = sourceFW)) +
   geom_point(shape = 21, size = 4, alpha=0.8) +
   scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   coord_flip() +
-  scale_y_continuous(limits= c(-500, 500)) +
+  scale_y_continuous(limits= c(-10, 20)) +
   geom_hline(yintercept = 0)+
   facet_grid(~targetFW) +
   labs(y = "Intercept", x = "Species role") +
   theme_bw()
 
-slopes <- filter(fitted_models, term == "empirical")
-slopes$role <- factor(slopes$role, levels = rev(unique(slopes$role)))
+slopes <- filter(fitted_models, term == "empirical_scaled")
+slopes$role <- factor(slopes$role, levels = levels(intercepts$role))
 ggplot(subset(slopes, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = estimate, fill = sourceFW)) +
   geom_point(shape = 21, size = 4, alpha=0.8) +
   scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  scale_y_continuous(limits = c(-1,30))+
+  scale_y_continuous(limits = c(-3,35))+
   coord_flip() +
   geom_hline(yintercept = 0)+
   facet_grid(~targetFW) +
