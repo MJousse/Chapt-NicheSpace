@@ -111,6 +111,37 @@ species_role <- function(FW, ncores = 4){
   )
 }
 
+fw_properties <- function(FW, nsim){
+  # centrality role
+  graph <- graph_from_edgelist(as.matrix(FW[,c("resource","consumer")])) # igraph
+  m <- as.matrix(as_adjacency_matrix(graph))
+  connectance <- sum(m)/nrow(m)^2
+  TLs <- TrophInd(m)
+  meanTL <- mean(TLs$TL)
+  maxTL <- max(TLs$TL)
+  motifs <- motifs(graph, size = 3)
+  motifs <- motifs[!is.na(motifs)]
+  names(motifs) <- paste0("motif", c(1:13))
+  diameter <- diameter(graph)
+  cohesion <- cohesion(graph)
+  n_clusters <- c()
+  modularity <- c()
+  for (i in c(1:nsim)){
+    clusters <- cluster_spinglass(graph)
+    n_clusters <- c(n_clusters, length(unique(clusters$membership)))
+    modularity <- c(modularity, clusters$modularity)
+  }
+  return(c(connectance = connectance,
+           meanTL = meanTL,
+           maxTL = maxTL,
+           motifs,
+           diameter = diameter,
+           cohesion = cohesion,
+           n_cluster = mean(n_clusters),
+           modularity = mean(modularity))
+  )
+}
+
 make_predictions <- function(Model, newdata, ndraws = 100, allow_new_levels = TRUE, extrapolation = F){
   predictions <- predict(Model, newdata = newdata, allow_new_levels = allow_new_levels, ndraws = ndraws, summary = F)
   rownames(predictions) <- paste0("draws", c(1:ndraws))
