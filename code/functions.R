@@ -74,6 +74,8 @@ get_predictors <- function(Species_List, FuncTraits){
 }
 
 species_role <- function(FW, ncores = 4){
+  # remove self-loop
+  FW <- FW[FW$resource != FW$consumer,]
   # centrality role
   graph <- graph_from_edgelist(as.matrix(FW[,c("resource","consumer")])) # igraph
   nodes <- vertex.attributes(graph)$name # save species name
@@ -112,10 +114,12 @@ species_role <- function(FW, ncores = 4){
 }
 
 fw_properties <- function(FW, nsim){
+  # remove self-loop
+  FW <- FW[FW$resource != FW$consumer,]
   # centrality role
   graph <- graph_from_edgelist(as.matrix(FW[,c("resource","consumer")])) # igraph
   m <- as.matrix(as_adjacency_matrix(graph))
-  connectance <- sum(m)/nrow(m)^2
+  connectance <- sum(m)/(nrow(m) * (nrow(m)-1))
   TLs <- TrophInd(m)
   meanTL <- mean(TLs$TL)
   maxTL <- max(TLs$TL)

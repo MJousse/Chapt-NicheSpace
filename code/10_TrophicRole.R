@@ -53,7 +53,7 @@ write.csv(empirical_roles, file = "data/checkpoints/SpeciesRole.csv")
 library(foreach)
 library(doParallel)
 load("data/checkpoints/predictions.RData")
-foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
+foodwebs <- c("Arctic", "Pyrenees", "Serengeti", "Euro")
 combinations <- expand_grid(Source = foodwebs, Target = foodwebs)
 predicted_roles <-c()
 # for each combination of source and target webs, use 100 posterior sample
@@ -64,7 +64,7 @@ for (combination in c(1:nrow(combinations))){
   print(Sys.time())
   print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
-  cl <- makeCluster(4) 
+  cl <- makeCluster(2) 
   registerDoParallel(cl)
   role <- foreach(i=c(1:100), .combine = rbind, 
                   .packages = c("igraph", "NetIndices", "multiweb", "dplyr", "tidyr"),

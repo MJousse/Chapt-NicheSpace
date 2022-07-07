@@ -62,7 +62,7 @@ for (combination in c(1:nrow(combinations))){
   print(Sys.time())
   print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
-  cl <- makeCluster(4) 
+  cl <- makeCluster(8) 
   registerDoParallel(cl)
   properties <- foreach(i=c(1:100), .combine = rbind, 
                   .packages = c("igraph", "NetIndices", "dplyr", "tidyr")) %dopar% {
@@ -73,11 +73,10 @@ for (combination in c(1:nrow(combinations))){
                     fw_properties(prediction, nsim = 10)
                   }
   stopCluster(cl)
-  properties_mean <- apply(properties, MARGIN = 1, mean)
-  properties_sd <- apply(fw_properties, MARGIN = 1, sd)
+  fw_properties_mean <- apply(properties, MARGIN = 2, mean)
+  fw_properties_sd <- apply(properties, MARGIN = 2, sd)
   predicted_properties <- rbind(predicted_properties, 
-                                data.frame(t(properties_mean)) %>% pivot_longer(everything(), names_to = "metric", values_to = "predicted") %>%
-                                  mutate(targetFW = targetFW, sourceFW = sourceFW))
+                                data.frame(t(fw_properties_mean)) %>% pivot_longer(everything(), names_to = "metric", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
   write.csv(predicted_properties, file = "data/checkpoints/PredictedProperties.csv")
 }
 
