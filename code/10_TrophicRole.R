@@ -120,16 +120,17 @@ correlations_summary <- correlations %>%
   summarise(correlation_mean = mean(correlation, na.rm = T), correlation_min = min(correlation, na.rm = T), correlation_max = max(correlation, na.rm = T))
 
 ggplot(subset(correlations_summary, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation_mean, colour = insample, fill = insample)) +
-  geom_pointrange(aes(ymin = correlation_min, ymax = correlation_max, group = insample), position=position_dodge(width=0.5), shape= 21, size = 0.5, alpha=0.8) +
+  geom_pointrange(aes(ymin = correlation_min, ymax = correlation_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
   geom_hline(yintercept = 0)+
-  labs(y = "Correlation", x = "Species role", color = "Prediction", fill = "Prediction", title = "Predicted food web") +
+  labs(y = "Correlation", x = "Species role", color = "Prediction", fill = "Prediction") +
   ylim(c(-0.5,1))+
   theme_bw() +
-  theme(strip.background = element_rect(fill = "transparent"), plot.title = element_text(hjust = 0.5))
+  theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)),
+        legend.title = element_blank(), axis.text.x = element_blank())
 
-ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600)
+ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600, width = 18, units = "cm")
 
 
 p <- ggplot(subset(correlations, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation, fill = sourceFW)) +
