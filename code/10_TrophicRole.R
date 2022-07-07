@@ -91,8 +91,8 @@ species_roles <- left_join(predicted_roles, empirical_roles,
                            by = c("species", "role", "targetFW" = "FW")) %>%
   drop_na() %>%
   group_by(role, targetFW, sourceFW) %>%
-  mutate(predicted_scaled = (predicted - mean(empirical, na.rm = T))/sd(empirical, na.rm = T),
-         empirical_scaled = (empirical - mean(empirical, na.rm = T))/sd(empirical, na.rm = T))
+  mutate(predicted_scaled = (predicted)/sd(empirical, na.rm = T),
+         empirical_scaled = (empirical)/sd(empirical, na.rm = T))
 
 # calculate the slope, intercept and r^2 for all role, targetFW and sourceFW
 library(purrr)
@@ -112,8 +112,27 @@ correlations <- species_roles %>%
   summarise(correlation = cor(predicted, empirical))
 
 # plot
-correlations$role <- factor(correlations$role, levels = rev(unique(empirical_roles$role)))
-p<-ggplot(subset(correlations, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation, fill = sourceFW)) +
+correlations$role <- factor(correlations$role, levels = unique(empirical_roles$role))
+correlations$insample <- factor(correlations$targetFW == correlations$sourceFW, levels = c(T,F), labels = c("in-sample", "out-of-sample"))
+
+correlations_summary <- correlations %>%
+  group_by(role, insample) %>%
+  summarise(correlation_mean = mean(correlation, na.rm = T), correlation_min = min(correlation, na.rm = T), correlation_max = max(correlation, na.rm = T))
+
+ggplot(subset(correlations_summary, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation_mean, colour = insample, fill = insample)) +
+  geom_pointrange(aes(ymin = correlation_min, ymax = correlation_max, group = insample), position=position_dodge(width=0.5), shape= 21, size = 0.5, alpha=0.8) +
+  scale_color_manual(values =  c("grey50","black")) +
+  scale_fill_manual(values = c("white","black")) +
+  geom_hline(yintercept = 0)+
+  labs(y = "Correlation", x = "Species role", color = "Prediction", fill = "Prediction", title = "Predicted food web") +
+  ylim(c(-0.5,1))+
+  theme_bw() +
+  theme(strip.background = element_rect(fill = "transparent"), plot.title = element_text(hjust = 0.5))
+
+ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600)
+
+
+p <- ggplot(subset(correlations, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation, fill = sourceFW)) +
   geom_point(shape = 21, size = 3, alpha=0.8) +
   scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   coord_flip() +
@@ -123,8 +142,6 @@ p<-ggplot(subset(correlations, role %in% c("indegree", "outdegree", "betweeness"
   ylim(c(-0.5,1))+
   theme_bw() +
   theme(strip.background = element_rect(fill = "transparent"), plot.title = element_text(hjust = 0.5))
-
-ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600)
 
 intercepts <- filter(fitted_models, term == "(Intercept)")
 intercepts$role <- factor(intercepts$role, levels = rev(unique(empirical_roles$role)))
