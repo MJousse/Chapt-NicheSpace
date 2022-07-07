@@ -77,7 +77,7 @@ for (combination in c(1:nrow(combinations))){
   fw_properties_sd <- apply(properties, MARGIN = 2, sd)
   predicted_properties <- rbind(predicted_properties, 
                                 data.frame(t(fw_properties_mean)) %>% pivot_longer(everything(), names_to = "metric", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
-  write.csv(predicted_roles, file = "data/checkpoints/predicted_roles.csv")
+  write.csv(predicted_properties, file = "data/checkpoints/PredictedProperties.csv")
 }
 
 # Compare the empirical roles and predicted roles -------------------------
