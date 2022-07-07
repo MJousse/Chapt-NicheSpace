@@ -53,7 +53,7 @@ library(doParallel)
 load("data/checkpoints/predictions.RData")
 foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
 combinations <- expand_grid(Source = foodwebs, Target = foodwebs)
-predicted_roles <-c()
+predicted_properties <-c()
 # for each combination of source and target webs, use 100 posterior sample
 # calculate the roles of all species in these sample, and extract the mean
 for (combination in c(1:nrow(combinations))){
@@ -64,19 +64,19 @@ for (combination in c(1:nrow(combinations))){
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
   cl <- makeCluster(8) 
   registerDoParallel(cl)
-  role <- foreach(i=c(1:100), .combine = rbind, 
+  properties <- foreach(i=c(1:100), .combine = rbind, 
                   .packages = c("igraph", "NetIndices", "dplyr", "tidyr")) %dopar% {
                     prediction <- data.frame(resource = predictions$Prey, 
                                              consumer = predictions$Predator, 
                                              interaction = predictions[,paste0("draws",i)])
                     prediction <- prediction[prediction$interaction == 1,]
-                    fw_properties(prediction, ncores = 0)
+                    fw_properties(prediction, nsim = 10)
                   }
   stopCluster(cl)
-  fw_properties_mean <- apply(fw_properties, MARGIN = 1, mean)
-  fw_properties_sd <- apply(fw_properties, MARGIN = 1, sd)
-  predicted_roles <- rbind(predicted_roles, 
-                           pivot_longer(role_mean, -species, names_to = "role", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
+  fw_properties_mean <- apply(properties, MARGIN = 2, mean)
+  fw_properties_sd <- apply(properties, MARGIN = 2, sd)
+  predicted_properties <- rbind(predicted_properties, 
+                                data.frame(t(fw_properties_mean)) %>% pivot_longer(everything(), names_to = "metric", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
   write.csv(predicted_roles, file = "data/checkpoints/predicted_roles.csv")
 }
 
