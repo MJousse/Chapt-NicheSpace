@@ -86,8 +86,7 @@ species_role <- function(FW, ncores = 4){
   eigen <- centr_eigen(graph)$vector
   
   # trophic level and omnivory
-  m2 <- fix_basal(graph)
-  tl <- TrophInd(m)
+  tl <- trophiclevels(graph)
   
   # motifs role
   m <- as.matrix(as_adjacency_matrix(graph))
@@ -118,15 +117,13 @@ fw_properties <- function(FW, nsim){
   # centrality role
   graph <- graph_from_edgelist(as.matrix(FW[,c("resource","consumer")])) # igraph
   connectance <- ecount(graph)/vcount(graph)^2
-  m <- fix_basal(graph)
-  TLs <- TrophInd(m)
+  TLs <- trophiclevels(graph)
   meanTL <- mean(TLs$TL)
   maxTL <- max(TLs$TL)
   motifs <- motifs(graph, size = 3)
   motifs <- motifs[!is.na(motifs)]
   names(motifs) <- paste0("motif", c(1:13))
   diameter <- diameter(graph)
-  cohesion <- cohesion(graph)
   n_clusters <- c()
   modularity <- c()
   for (i in c(1:nsim)){
@@ -140,8 +137,8 @@ fw_properties <- function(FW, nsim){
            motifs,
            diameter = diameter,
            cohesion = cohesion,
-           n_cluster = median(n_clusters),
-           modularity = mean(modularity))
+           n_clusters = n_clusters[which.max(modularity)],
+           modularity = modularity[which.max(modularity)])
   )
 }
 
@@ -157,6 +154,11 @@ make_predictions <- function(Model, newdata, ndraws = 100, allow_new_levels = TR
     predictions$training <- ifelse(c(1:nrow(newdata) %in% as.numeric(rownames(Model$data))), 1, 0)
   }
   return(predictions)
+}
+
+trophiclevels <- function(graph){
+  m <- fix_basal(graph) # the algorithm fails when the only prey of a group of species is only each other
+  TrophInd(m)
 }
 
 fix_basal <- function(graph){
