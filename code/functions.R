@@ -89,7 +89,7 @@ species_role <- function(FW, ncores = 4){
   tl <- trophiclevels(graph)
   
   # motifs role
-  m <- as.matrix(as_adjacency_matrix(graph))
+  m <- get.adjacency(graph,sparse=FALSE)
   motif_role <-motif_role(m)
   # normalized
   #motif_role$position_count <- sweep(motif_role$position_count, MARGIN = 1, FUN = "/", rowSums(motif_role$position_count))
@@ -136,7 +136,6 @@ fw_properties <- function(FW, nsim){
            maxTL = maxTL,
            motifs,
            diameter = diameter,
-           cohesion = cohesion,
            n_clusters = n_clusters[which.max(modularity)],
            modularity = modularity[which.max(modularity)])
   )
@@ -176,11 +175,15 @@ fix_basal <- function(graph){
   if (any(is.infinite(sptb))){
     # problematic species do not have paths to non-problematic basal species
     probl_sp <- which(is.infinite(sptb))
-    # problematic *basal* species are the one that have the lowest trophic level
-    tls <- round(TrophInd(m[probl_sp, probl_sp]),5)
-    probl_basal <- rownames(tls)[tls$TL == min(tls$TL)]
-    # remove interactions between problematic basal species
-    m[probl_basal, probl_basal] <- 0
+    if (length(probl_sp) > 1){
+      # problematic *basal* species are the one that have the lowest trophic level
+      tls <- round(TrophInd(m[probl_sp, probl_sp]),5)
+      probl_basal <- rownames(tls)[tls$TL == min(tls$TL)]
+      # remove interactions between problematic basal species
+      m[probl_basal, probl_basal] <- 0
+    } else {
+      m[probl_sp, probl_sp] <- 0
+    }
   }
   return(m)
 }
