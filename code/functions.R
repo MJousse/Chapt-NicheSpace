@@ -86,10 +86,11 @@ species_role <- function(FW, ncores = 4){
   eigen <- centr_eigen(graph)$vector
   
   # trophic level and omnivory
-  m <- as.matrix(as_adjacency_matrix(graph))
+  m2 <- fix_basal(graph)
   tl <- TrophInd(m)
   
   # motifs role
+  m <- as.matrix(as_adjacency_matrix(graph))
   motif_role <-motif_role(m)
   # normalized
   #motif_role$position_count <- sweep(motif_role$position_count, MARGIN = 1, FUN = "/", rowSums(motif_role$position_count))
@@ -114,12 +115,10 @@ species_role <- function(FW, ncores = 4){
 }
 
 fw_properties <- function(FW, nsim){
-  # remove self-loop
-  FW <- FW[FW$resource != FW$consumer,]
   # centrality role
   graph <- graph_from_edgelist(as.matrix(FW[,c("resource","consumer")])) # igraph
-  m <- as.matrix(as_adjacency_matrix(graph))
-  connectance <- sum(m)/(nrow(m) * (nrow(m)-1))
+  connectance <- ecount(graph)/vcount(graph)^2
+  m <- fix_basal(graph)
   TLs <- TrophInd(m)
   meanTL <- mean(TLs$TL)
   maxTL <- max(TLs$TL)
@@ -141,7 +140,7 @@ fw_properties <- function(FW, nsim){
            motifs,
            diameter = diameter,
            cohesion = cohesion,
-           n_cluster = mean(n_clusters),
+           n_cluster = median(n_clusters),
            modularity = mean(modularity))
   )
 }
@@ -158,4 +157,28 @@ make_predictions <- function(Model, newdata, ndraws = 100, allow_new_levels = TR
     predictions$training <- ifelse(c(1:nrow(newdata) %in% as.numeric(rownames(Model$data))), 1, 0)
   }
   return(predictions)
+}
+
+fix_basal <- function(graph){
+  # There is a problem with calculating trophic level when the prey of a group of species is only each other
+  # for example: if C eats A and B, and A and B eat each other
+  # m <- matrix(c(1,1,1,0,1,1,0,1,1), nrow = 3); TrophInd(m) returns negative trophic levels
+  # solution is to remove the interactions between 'problematic' species (A and B in example)
+  m <- get.adjacency(graph,sparse=FALSE)
+  # find non-problematic basal species
+  basal <- which(colSums(m)==0)
+  # shortest path to basal
+  sptb <- shortest.paths(graph,to = V(graph)[basal], mode = "in")
+  sptb[is.infinite(sptb)] <- NA
+  sptb <- apply(sptb, MARGIN = 1, min, na.rm = T)
+  if (any(is.infinite(sptb))){
+    # problematic species do not have paths to non-problematic basal species
+    probl_sp <- which(is.infinite(sptb))
+    # problematic *basal* species are the one that have the lowest trophic level
+    tls <- round(TrophInd(m[probl_sp, probl_sp]),5)
+    probl_basal <- rownames(tls)[tls$TL == min(tls$TL)]
+    # remove interactions between problematic basal species
+    m[probl_basal, probl_basal] <- 0
+  }
+  return(m)
 }
