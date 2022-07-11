@@ -70,7 +70,7 @@ for (combination in c(1:nrow(combinations))){
                                              consumer = predictions$Predator, 
                                              interaction = predictions[,paste0("draws",i)])
                     prediction <- prediction[prediction$interaction == 1,]
-                    fw_properties(prediction, nsim = 10)
+                    fw_properties(prediction, nsim = 1)
                   }
   stopCluster(cl)
   fw_properties_mean <- apply(properties, MARGIN = 2, mean)
