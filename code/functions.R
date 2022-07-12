@@ -73,7 +73,7 @@ get_predictors <- function(Species_List, FuncTraits){
   return(FW)
 }
 
-species_role <- function(FW, ncores = 4){
+species_role <- function(FW, ncores = 4, nsim =10){
   # remove self-loop
   FW <- FW[FW$resource != FW$consumer,]
   # centrality role
@@ -95,7 +95,7 @@ species_role <- function(FW, ncores = 4){
   #motif_role$position_count <- sweep(motif_role$position_count, MARGIN = 1, FUN = "/", rowSums(motif_role$position_count))
   
   # module-based role
-  modulerole <- calc_topological_roles(graph, ncores = ncores, nsim = 10) %>%
+  modulerole <- calc_topological_roles(graph, ncores = ncores, nsim = nsim) %>%
     group_by(node) %>%
     summarise(within_module_degree = median(within_module_degree, na.rm = T),
               among_module_conn = median(among_module_conn, na.rm = T))
