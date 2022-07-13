@@ -120,8 +120,8 @@ fw_properties <- function(FW, nsim){
   TLs <- trophiclevels(graph)
   meanTL <- mean(TLs$TL)
   maxTL <- max(TLs$TL)
-  motifs <- motifs(graph, size = 3)
-  motifs <- motifs[!is.na(motifs)]
+  motifs <- motifs(graph, size = 3) 
+  motifs <- motifs[c(5, 8, 12, 7, 3, 9, 14, 6, 10, 13, 16, 15, 11) ]# reorganize as in Stouffer's paper
   names(motifs) <- paste0("motif", c(1:13))
   diameter <- diameter(graph)
   n_clusters <- c()

@@ -85,20 +85,20 @@ empirical_properties <- read.csv("data/checkpoints/EmpiricalProperties.csv", row
 predicted_properties <- read.csv("data/checkpoints/PredictedProperties.csv", row.names = 1)
 
 fw_properties <- left_join(predicted_properties, empirical_properties,
-                           by = c("species", "role", "targetFW" = "FW")) %>%
+                           by = c("metric", "targetFW" = "FW")) %>%
   drop_na() %>%
-  mutate(error = (predicted - empirical)/empirical,
-         insampe = (targetFW == sourceFW))
+  mutate(error = predicted/empirical,
+         insample = (targetFW == sourceFW))
 
-ggplot(subset(fw_properties, metric %in% c("connectance", "maxTL", "meanTL", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation_mean, colour = insample, fill = insample)) +
-  geom_pointrange(aes(ymin = correlation_min, ymax = correlation_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
+ggplot(filter(fw_properties, metric %in% c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter", "motif2", "motif1", "motif4", "motif5"), !is.infinite(error)), aes(x = metric, y = error, colour = insample, fill = insample)) +
+  geom_pointrange(aes(ymin = error, ymax = error, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
-  geom_hline(yintercept = 0)+
-  labs(y = "Correlation", x = "Species role", color = "Prediction", fill = "Prediction") +
-  ylim(c(-0.5,1))+
+  geom_hline(yintercept = 1)+
+  labs(y = "Error", x = "Property", color = "Prediction", fill = "Prediction") +
+  scale_y_continuous(trans = "log")+
   theme_bw() +
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)),
-        legend.title = element_blank(), axis.text.x = element_blank())
+        legend.title = element_blank())
 
-ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600, width = 18, units = "cm")
+ggsave("figures/FWproperties.png", dpi = 600, width = 18, units = "cm")
