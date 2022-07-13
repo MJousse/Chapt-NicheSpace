@@ -81,12 +81,24 @@ for (combination in c(1:nrow(combinations))){
 }
 
 # Compare the empirical roles and predicted roles -------------------------
-empirical_roles <- read.csv("data/checkpoints/SpeciesRole.csv", row.names = 1)
-predicted_roles <- read.csv("data/checkpoints/predicted_roles.csv", row.names = 1)
+empirical_properties <- read.csv("data/checkpoints/EmpiricalProperties.csv", row.names = 1)
+predicted_properties <- read.csv("data/checkpoints/PredictedProperties.csv", row.names = 1)
 
-species_roles <- left_join(predicted_roles, empirical_roles,
+fw_properties <- left_join(predicted_properties, empirical_properties,
                            by = c("species", "role", "targetFW" = "FW")) %>%
   drop_na() %>%
-  group_by(role, targetFW, sourceFW) %>%
-  mutate(predicted_scaled = (predicted - mean(empirical, na.rm = T))/sd(empirical, na.rm = T),
-         empirical_scaled = (empirical - mean(empirical, na.rm = T))/sd(empirical, na.rm = T))
+  mutate(error = (predicted - empirical)/empirical,
+         insampe = (targetFW == sourceFW))
+
+ggplot(subset(fw_properties, metric %in% c("connectance", "maxTL", "meanTL", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation_mean, colour = insample, fill = insample)) +
+  geom_pointrange(aes(ymin = correlation_min, ymax = correlation_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
+  scale_color_manual(values =  c("grey50","black")) +
+  scale_fill_manual(values = c("white","black")) +
+  geom_hline(yintercept = 0)+
+  labs(y = "Correlation", x = "Species role", color = "Prediction", fill = "Prediction") +
+  ylim(c(-0.5,1))+
+  theme_bw() +
+  theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)),
+        legend.title = element_blank(), axis.text.x = element_blank())
+
+ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600, width = 18, units = "cm")
