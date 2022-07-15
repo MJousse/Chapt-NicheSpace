@@ -64,7 +64,7 @@ for (combination in c(1:nrow(combinations))){
   print(Sys.time())
   print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
-  cl <- makeCluster(2) 
+  cl <- makeCluster(8) 
   registerDoParallel(cl)
   role <- foreach(i=c(1:100), .combine = rbind, 
                   .packages = c("igraph", "NetIndices", "multiweb", "dplyr", "tidyr"),
@@ -73,7 +73,7 @@ for (combination in c(1:nrow(combinations))){
                               consumer = predictions$Predator, 
                               interaction = predictions[,paste0("draws",i)])
     prediction <- prediction[prediction$interaction == 1,]
-    species_role(prediction, ncores = 0)
+    species_role(prediction, ncores = 0, nsim=1)
                   }
   stopCluster(cl)
   role_mean <- group_by(role, species) %>% summarise_all(mean, na.rm = T)

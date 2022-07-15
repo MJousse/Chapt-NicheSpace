@@ -141,6 +141,31 @@ Pyrennees_traits <- read.csv("data/checkpoints/PyrenneesTraits.csv", row.names =
 HighArctic_traits <- read.csv("data/checkpoints/HighArcticTraits.csv", row.names = 1)
 
 
+# Check trait coverage ----------------------------------------------------
+# europe
+Euro_coverage <- select(Euro_traits, -Species, -Genus, -Class, -Order, -Family) %>% #remove taxonomy
+  mutate(habitat = Forest) %>% # let's threat habitat as 1 trait
+  select(Trophic_level, Diel_activity, habitat, Body_mass_g, Longevity_d, Litter_clutch_size)
+Euro_coverage <- sum(!is.na(Euro_coverage)) / (ncol(Euro_coverage) * nrow(Euro_coverage))
+
+# arctic
+Arctic_coverage <- select(HighArctic_traits, -Species, -Genus, -Class, -Order, -Family) %>% #remove taxonomy
+  mutate(habitat = Forest) %>% # let's threat habitat as 1 trait
+  select(Trophic_level, Diel_activity, habitat, Body_mass_g, Longevity_d, Litter_clutch_size)
+Arctic_coverage <- sum(!is.na(Arctic_coverage)) / (ncol(Arctic_coverage) * nrow(Arctic_coverage))
+
+# pyrenees
+Pyrenees_coverage <- select(Pyrennees_traits, -Species, -Genus, -Class, -Order, -Family) %>% #remove taxonomy
+  mutate(habitat = Forest) %>% # let's threat habitat as 1 trait
+  select(Trophic_level, Diel_activity, habitat, Body_mass_g, Longevity_d, Litter_clutch_size)
+Pyrenees_coverage <- sum(!is.na(Pyrenees_coverage)) / (ncol(Pyrenees_coverage) * nrow(Pyrenees_coverage))
+
+# serengeti
+Serengeti_coverage <- select(Serengeti_traits, -Species, -Genus, -Class, -Order, -Family) %>% #remove taxonomy
+  mutate(habitat = Forest) %>% # let's threat habitat as 1 trait
+  select(Trophic_level, Diel_activity, habitat, Body_mass_g, Longevity_d, Litter_clutch_size)
+Serengeti_coverage <- sum(!is.na(Serengeti_coverage)) / (ncol(Serengeti_coverage) * nrow(Serengeti_coverage))
+
 # Impute missing data for each class separately ----------------------------
 # Join data from all food webs
 Tetrapods_traits <- bind_rows(Euro_traits, Serengeti_traits, Pyrennees_traits, HighArctic_traits) %>%
