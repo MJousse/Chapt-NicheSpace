@@ -101,16 +101,15 @@ for (ipredictor in c(1:length(predictors))){
 
 # Plot coefficients -------------------------------------------------------
 coef_plot <- ggplot(aes(x = 1, y = exp(Estimate)), data = fixed_effects) +
-  geom_point(data = RandomEffects, aes(color = model), position = position_dodge(width=0.9), shape =1, alpha = 0.5) +
   geom_point(data = fixed_effects, aes(fill = model), position = position_dodge(width=0.9), shape = 21, size = 2) +
   geom_linerange(data = fixed_effects, aes(ymin = exp(Q2.5), ymax = exp(Q97.5), color = model), position = position_dodge(width = 0.9)) +
   geom_hline(yintercept = 1)+
-  scale_y_continuous(limits = c(0.001,1000), trans = "log10")+
+  scale_y_continuous(limits = c(0.002,30), trans = "log10")+
   scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   facet_wrap(vars(coef), scales = "free_x", nrow = 2)+
-  labs(color = "Model", fill = "Model") + 
+  labs(color = "Model", fill = "Model", y = "Odds ratio") + 
   theme_classic() +
-  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.x = element_blank())
+  theme(axis.text.x = element_blank(), axis.line.x = element_blank(), axis.ticks.x = element_blank(), axis.title.x = element_blank())
 
-ggsave("figures/coef_plot.png", coef_plot)
+ggsave("figures/SI/coef_plot.png", coef_plot, width = 7)
