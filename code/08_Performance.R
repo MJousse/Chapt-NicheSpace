@@ -19,7 +19,9 @@ foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
 # Calculate performance ---------------------------------------------------
 overall_performance <- expand_grid(Source = foodwebs, Target = foodwebs) %>%
   mutate(auc = NA, aucpr = NA, prevalence = NA)
+overall_performance_draws <- data.frame()
 species_performance <- data.frame()
+species_performance_draws <- data.frame()
 
 # for each combinaison calculate the overall auc and aucpr
 # in each target food web, calculate the auc and aucpr of each species
@@ -30,6 +32,9 @@ for (combination in c(1:nrow(overall_performance))){
   overall_performance[combination, "auc"] <- performance(prediction(predictions$Estimate, predictions$interaction), "auc")@y.values[[1]]
   overall_performance[combination, "aucpr"] <- performance(prediction(predictions$Estimate, predictions$interaction), "aucpr")@y.values[[1]]
   overall_performance[combination, "prevalence"] <- sum(predictions$interaction)/nrow(predictions)
+  overall_performance_draws <- rbind(overall_performance_draws,
+                                     data.frame(sourceFW = sourceFW, targetFW= targetFW,
+                                           performance_draws(select(predictions, starts_with("draws")), predictions$interaction)))
   fw_sp <- unique(predictions$Predator)
   for (species in fw_sp){
    sp_predictions <- filter(predictions, Predator == species | Prey == species)
@@ -38,11 +43,16 @@ for (combination in c(1:nrow(overall_performance))){
      sp_aucpr <- performance(prediction(sp_predictions$Estimate, sp_predictions$interaction), "aucpr")@y.values[[1]]
      species_performance <- rbind(species_performance,
                                   data.frame(sourceFW, targetFW, species, auc = sp_auc, aucpr = sp_aucpr, prevalence = sum(sp_predictions$interaction)/nrow(sp_predictions)))
+     species_performance_draws <- rbind(species_performance_draws,
+                                        data.frame(sourceFW = sourceFW, targetFW= targetFW, species,
+                                                   performance_draws(select(sp_predictions, starts_with("draws")), sp_predictions$interaction)))
    }
   }
 }
 write.csv(species_performance, "data/checkpoints/species_performance.csv")
 write.csv(overall_performance, "data/checkpoints/overall_performance.csv")
+write.csv(species_performance_draws, "data/checkpoints/species_performance_draws.csv")
+write.csv(overall_performance_draws, "data/checkpoints/overall_performance_draws.csv")
 
 # Visualize transferability -----------------------------------------------
 # add dissimilarity

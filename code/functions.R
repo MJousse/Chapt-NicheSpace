@@ -187,3 +187,15 @@ fix_basal <- function(graph){
   }
   return(m)
 }
+
+performance_draws <- function(draws, interactions){
+  out <- data.frame()
+  for (i in c(1:ncol(draws))){
+    tp <- sum(draws[,i] == 1 & interactions == 1)
+    tn <- sum(draws[,i] == 0 & interactions == 0)
+    fp <- sum(draws[,i] == 1 & interactions == 0)
+    fn <- sum(draws[,i] == 0 & interactions == 1)
+    out <- rbind(out, data.frame(draw = i, tpr = tp/(tp+fn), tnr = tn/(tn+fp), ppv = tp/(tp+fp), npv = tn/(fn+tn)))
+  }
+  return(out)
+}
