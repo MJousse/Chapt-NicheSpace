@@ -91,8 +91,10 @@ species_roles <- left_join(predicted_roles, empirical_roles,
                            by = c("species", "role", "targetFW" = "FW")) %>%
   drop_na() %>%
   group_by(role, targetFW, sourceFW) %>%
-  mutate(predicted_scaled = (predicted)/sd(empirical, na.rm = T),
-         empirical_scaled = (empirical)/sd(empirical, na.rm = T))
+  mutate(predicted_scaled = (predicted)/(sd(empirical, na.rm = T)),
+         empirical_scaled = (empirical)/(sd(empirical, na.rm = T)))
+
+species_roles$predicted_scaled[is.infinite(species_roles$predicted_scaled)] <- NA # don't model roles without variation...
 
 # calculate the slope, intercept and r^2 for all role, targetFW and sourceFW
 library(purrr)
@@ -133,7 +135,7 @@ ggplot(subset(correlations_summary, role %in% c("indegree", "outdegree", "betwee
 ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600, width = 18, units = "cm")
 
 
-p <- ggplot(subset(correlations, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation, fill = sourceFW)) +
+p <- ggplot(correlations, aes(x = role, y = correlation, fill = sourceFW)) +
   geom_point(shape = 21, size = 3, alpha=0.8) +
   scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   coord_flip() +
@@ -146,12 +148,13 @@ p <- ggplot(subset(correlations, role %in% c("indegree", "outdegree", "betweenes
 
 intercepts <- filter(fitted_models, term == "(Intercept)")
 intercepts$role <- factor(intercepts$role, levels = rev(unique(empirical_roles$role)))
+intercepts$Zscore <- intercepts$estimate/intercepts$std.error
 
-ggplot(subset(intercepts, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = estimate, fill = sourceFW)) +
+ggplot(intercepts, aes(x = role, y = estimate, fill = sourceFW)) +
   geom_point(shape = 21, size = 4, alpha=0.8) +
   scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   coord_flip() +
-  scale_y_continuous(limits= c(-10, 20)) +
+  scale_y_continuous(limits= c(-1, 300), trans = "pseudo_log", breaks = c(0, 10, 100, 1000)) +
   geom_hline(yintercept = 0)+
   facet_grid(~targetFW) +
   labs(y = "Intercept", x = "Species role") +
@@ -159,12 +162,13 @@ ggplot(subset(intercepts, role %in% c("indegree", "outdegree", "betweeness", "cl
 
 slopes <- filter(fitted_models, term == "empirical_scaled")
 slopes$role <- factor(slopes$role, levels = levels(intercepts$role))
-ggplot(subset(slopes, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = estimate, fill = sourceFW)) +
+
+ggplot(slopes, aes(x = role, y = estimate, fill = sourceFW)) +
   geom_point(shape = 21, size = 4, alpha=0.8) +
   scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  scale_y_continuous(limits = c(-3,35))+
+  scale_y_continuous(limits = c(-3,15))+
   coord_flip() +
-  geom_hline(yintercept = 0)+
+  geom_hline(yintercept = 1)+
   facet_grid(~targetFW) +
   labs(y = "Slope", x = "Species role") +
   theme_bw()
