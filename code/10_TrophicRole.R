@@ -115,7 +115,7 @@ correlations <- species_roles %>%
 
 # plot
 correlations$role <- factor(correlations$role, levels = unique(empirical_roles$role))
-correlations$insample <- factor(correlations$targetFW == correlations$sourceFW, levels = c(T,F), labels = c("in-sample", "out-of-sample"))
+correlations$insample <- factor(correlations$targetFW == correlations$sourceFW, levels = c(T,F), labels = c("within food web", "between food web"))
 
 correlations_summary <- correlations %>%
   group_by(role, insample) %>%

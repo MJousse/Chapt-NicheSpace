@@ -87,18 +87,30 @@ predicted_properties <- read.csv("data/checkpoints/PredictedProperties.csv", row
 fw_properties <- left_join(predicted_properties, empirical_properties,
                            by = c("metric", "targetFW" = "FW")) %>%
   drop_na() %>%
-  mutate(error = predicted/empirical,
+  mutate(error = (predicted-empirical)/empirical,
          insample = (targetFW == sourceFW))
+
+fw_properties$metric <- factor(fw_properties$metric, levels = c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter", paste0("motif", c(1:13))))
+fw_properties$insample <- factor(fw_properties$insample, levels = c(T,F), labels = c("within food web", "between food webs"))
 
 ggplot(filter(fw_properties, metric %in% c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter", "motif2", "motif1", "motif4", "motif5"), !is.infinite(error)), aes(x = metric, y = error, colour = insample, fill = insample)) +
   geom_pointrange(aes(ymin = error, ymax = error, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
-  geom_hline(yintercept = 1)+
-  labs(y = "Error", x = "Property", color = "Prediction", fill = "Prediction") +
-  scale_y_continuous(trans = "log")+
+  geom_hline(yintercept = 0)+
+  labs(y = "Relative error", x = "Property", color = "Prediction", fill = "Prediction") +
+  scale_y_continuous(breaks = seq(-10,50,10), limits = c(-10,50))+
   theme_bw() +
-  theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)),
-        legend.title = element_blank())
+  theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)))
 
 ggsave("figures/FWproperties.png", dpi = 600, width = 18, units = "cm")
+
+ggplot(filter(fw_properties, !is.infinite(error)), aes(x = metric, y = error, fill = sourceFW)) +
+  geom_pointrange(aes(ymin = error, ymax = error, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
+  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  facet_grid(~targetFW, scales = "free") +
+  coord_flip() +
+  geom_hline(yintercept = 0)+
+  labs(y = "Relative error", x = "Property", color = "Prediction", fill = "Prediction") +
+  theme_bw() +
+  theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)))
