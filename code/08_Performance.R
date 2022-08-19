@@ -120,23 +120,21 @@ overall_performance$env.dist <- as.vector(scale(overall_performance$env.dist))
 overall_performance$phylo.dist <- as.vector(scale(overall_performance$phylo.dist))
 
 # model with logit auc as response using brms
-auc_model <- brm(logitauc ~ geo.dist + env.dist + phylo.dist + (1|Source) + (1|Target),
-    data = overall_performance,
-    prior = c(
-      prior(normal(0, 1), class = "Intercept"),
-      prior(normal(0, 1), class = "b"),
-      prior(cauchy(0, 5), class = "sd")
-    ), 
+auc_model <- bf(logitauc ~ env.dist + phylo.dist + (1|Source) + (1|Target))
+env_model <- bf(env.dist ~ geo.dist)
+phylo_model <- bf(phylo.dist ~ geo.dist)
+
+auc_sem_model <- brm(auc_model + env_model + phylo_model + set_rescor(FALSE),
+    data = overall_performance, 
     sample_prior = "no",
     iter = 2000)
 
 # model with log aucpr/prevalence as response using brms
-aucpr_model <- brm(logaucpr ~ geo.dist + env.dist + phylo.dist + (1|Source) + (1|Target),
-                 data = overall_performance,
-                 prior = c(
-                   prior(normal(0, 1), class = "Intercept"),
-                   prior(normal(0, 1), class = "b"),
-                   prior(cauchy(0, 5), class = "sd")
-                 ), 
+aucpr_model <- bf(logaucpr ~ env.dist + phylo.dist + (1|Source) + (1|Target))
+env_model <- bf(env.dist ~ geo.dist)
+phylo_model <- bf(phylo.dist ~ geo.dist)
+
+aucpr_model <- brm(aucpr_model + env_model + phylo_model + set_rescor(FALSE),
+                 data = overall_performance, 
                  sample_prior = "no",
                  iter = 2000)
