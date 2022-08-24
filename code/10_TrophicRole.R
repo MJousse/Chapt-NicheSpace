@@ -86,6 +86,7 @@ for (combination in c(1:nrow(combinations))){
 # Compare the empirical roles and predicted roles -------------------------
 empirical_roles <- read.csv("data/checkpoints/SpeciesRole.csv", row.names = 1)
 predicted_roles <- read.csv("data/checkpoints/predicted_roles.csv", row.names = 1)
+empirical_roles$FW[empirical_roles$FW == "Europe"] <- "Euro"
 
 species_roles <- left_join(predicted_roles, empirical_roles,
                            by = c("species", "role", "targetFW" = "FW")) %>%
