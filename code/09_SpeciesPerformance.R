@@ -61,6 +61,8 @@ species_performance$fmpd[species_performance$Source == "Arctic"] <- map_dbl(spec
 # remove species that were not in phylogeny
 species_performance <- filter(species_performance, species %in% colnames(phydist))
 
+write.csv(species_performance, "data/checkpoints/species_performance_trans.csv")
+
 # Correlate transferability to distance metrics ---------------------------
 # glm with species-specific logit-auc and log(aucpr/prevalence) as response
 # phylogenetic and functional distance as predictors
@@ -117,11 +119,11 @@ p1 <- ggplot(species_performance_fitmntd) +
             size = 1) +
   scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  labs(x = "Phylogenetic distance", y = "", colour = "Source food web", fill = "Source food web") + 
+  labs(x = "Phylogenetic distance", y = "", colour = "Model", fill = "Model") + 
   facet_wrap(~Target, nrow = 1) +
   theme_minimal() +
-  theme(axis.line = element_line(size = 0.5), strip.text = element_text(size = 12),
-        strip.background = element_rect(colour = "black"))
+  theme(axis.line = element_line(size = 0.5), strip.text = element_text(size = 10),
+        strip.background = element_rect(colour = "black"), axis.text = element_text(size = 8), axis.title = element_text(size = 10), legend.text = element_text(size = 8), legend.key.size = unit(0.5,"cm"))
 
 mydatab <- data.frame(
   mntd_sc = 0,
@@ -144,10 +146,10 @@ p2 <- ggplot(species_performance_fitfmpd) +
             size = 1) +
   scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  labs(x = "Functional distance", y = "roc-auc", colour = "Source food web", fill = "Source food web") + 
+  labs(x = "Functional distance", y = "roc-auc", colour = "Model", fill = "Model") + 
   facet_wrap(~Target, nrow = 1) +
   theme_minimal() +
-  theme(axis.line = element_line(size = 0.5), strip.text = element_blank())
+  theme(axis.line = element_line(size = 0.5), strip.text = element_blank(), axis.text = element_text(size = 8), axis.title = element_text(size = 10), legend.text = element_text(size = 8), legend.key.size = unit(0.5,"cm"))
 
 mydatab <- data.frame(
   mntd_sc = 0,
@@ -170,12 +172,13 @@ p3 <- ggplot(species_performance_fitprev) +
             size = 1) +
   scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  labs(x = "Prevalence", y = "", colour = "Source food web", fill = "Source food web") + 
+  scale_x_continuous(breaks = c(0, 0.1, 0.2, 0.3))+
+  labs(x = "Prevalence", y = "", colour = "Model", fill = "Model") + 
   facet_wrap(~Target, nrow = 1) +
   theme_minimal() +
-  theme(axis.line = element_line(size = 0.5), strip.text = element_blank())
+  theme(axis.line = element_line(size = 0.5), strip.text = element_blank(), axis.text = element_text(size = 8), axis.title = element_text(size = 10), legend.text = element_text(size = 8), legend.key.size = unit(0.5,"cm"))
 
 p<-p1/p2/p3 + plot_layout(guides = "collect") +
-  plot_annotation(title = 'Target food web', theme = theme(plot.title = element_text(hjust = 0.45)))
+  plot_annotation(title = 'Predicted food web', theme = theme(plot.title = element_text(hjust = 0.45, size = 10)))
 
-ggsave("figures/SpeciesPerformance.png", p)
+ggsave("figures/SpeciesPerformance.png", p, width = 18, height = 12, units = "cm", dpi = 600)
