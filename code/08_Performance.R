@@ -185,14 +185,13 @@ geo_fe <- tibble(geo.dist_sc = seq(min(overall_performance$geo.dist_sc),
          y = exp(.epred)/(1+exp(.epred)))
 
 geo_fe <- geo_fe %>% 
-  group_by(x) %>%
-  summarize(mean = mean(y),
-            u95 = quantile(y, 0.975),
-            l95 = quantile(y, 0.025))
+  group_by(x)  %>%
+  summarize(median_qi(y, width = 0.95)) %>%
+  select(x, y, ymin, ymax)
 
 p1 <- ggplot(geo_fe,
-       aes(x = x/1000, y = mean)) +
-  geom_lineribbon(aes(ymin = l95, ymax = u95), alpha= 0.5) +
+       aes(x = x/1000, y = y)) +
+  geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
   geom_point(aes(x = geo.dist/1000, y = auc), data = overall_performance) +
   labs(y = "AUC", x = "Geographic distance (10³km)")+
   theme_minimal() +
@@ -209,14 +208,13 @@ env_fe <- tibble(env.dist_sc = seq(min(overall_performance$env.dist_sc),
          y = exp(.epred)/(1+exp(.epred)))
 
 env_fe <- env_fe %>% 
-  group_by(x) %>%
-  summarize(mean = mean(y),
-            u95 = quantile(y, 0.975),
-            l95 = quantile(y, 0.025))
+  group_by(x)  %>%
+  summarize(median_qi(y, width = 0.95)) %>%
+  select(x, y, ymin, ymax)
 
 p2 <- ggplot(env_fe,
-             aes(x = x, y = mean)) +
-  geom_lineribbon(aes(ymin = l95, ymax = u95), alpha= 0.5) +
+             aes(x = x, y = y)) +
+  geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
   geom_point(aes(x = env.dist, y = auc), data = overall_performance) +
   labs(y = "AUC", x = "Environmental distance")+
   lims(y = c(0.1,1))+
@@ -234,13 +232,12 @@ phylo_fe <- tibble(phylo.dist_sc = seq(min(overall_performance$phylo.dist_sc),
 
 phylo_fe <- phylo_fe %>% 
   group_by(x) %>%
-  summarize(mean = mean(y),
-            u95 = quantile(y, 0.975),
-            l95 = quantile(y, 0.025))
+  summarize(median_qi(y, width = 0.95)) %>%
+  select(x, y, ymin, ymax)
 
 p3 <- ggplot(phylo_fe,
-             aes(x = x, y = mean)) +
-  geom_lineribbon(aes(ymin = l95, ymax = u95), alpha= 0.5) +
+             aes(x = x, y = y)) +
+  geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
   geom_point(aes(x = phylo.dist, y = auc), data = overall_performance) +
   labs(y = "AUC", x = "Phylogenetic distance")+
   lims(y = c(0.1,1))+
