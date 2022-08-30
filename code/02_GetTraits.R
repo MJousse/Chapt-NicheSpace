@@ -29,7 +29,6 @@ Rept_traits$Species <- map_df(Rept_traits$Best_guess_binomial, name_backbone, cl
 Tetrapod_traits <- bind_rows(Amphi_traits, Bird_traits, Mam_traits, Rept_traits)
 write.csv(Tetrapod_traits, "data/checkpoints/TetrapodTraits.csv")
 
-
 # European metaweb --------------------------------------------------------
 # load species
 Euro_species <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1)
@@ -139,7 +138,6 @@ Euro_traits <- read.csv("data/checkpoints/EuroTraits.csv", row.names = 1)
 Serengeti_traits <- read.csv("data/checkpoints/SerengetiTraits.csv", row.names = 1)
 Pyrennees_traits <- read.csv("data/checkpoints/PyrenneesTraits.csv", row.names = 1)
 HighArctic_traits <- read.csv("data/checkpoints/HighArcticTraits.csv", row.names = 1)
-
 
 # Check trait coverage ----------------------------------------------------
 # europe
