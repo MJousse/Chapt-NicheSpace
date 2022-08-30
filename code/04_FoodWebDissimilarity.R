@@ -12,7 +12,7 @@ library(raster)
 library(ggbiplot)
 library(patchwork)
 library(purrr)
-source("code/DistanceFunctions.R")
+source("code/functions_distance.R")
 
 # Environmental Dissimilarity ---------------------------------------------
 # 1.In each food web, get worldclim data for N random points in the polygon
@@ -53,13 +53,10 @@ Serengeti_pt <- do.call(rbind, st_sample(Serengeti, N)) %>%
 Serengeti_clims <- raster::extract(r, Serengeti_pt)
 
 # high arctic
-#HighArctic <- st_read("data/raw/polygons/CPCAD-BDCAPC_Dec2021.gdb/", layer = "CPCAD_BDCAPC_Dec2021") %>%
-  #filter(NAME_E == "Bylot Island Bird Sanctuary", BIOME == "T")
-#st_write(HighArctic, "data/raw/polygons/HighArctic/Bylot.shp")
-HighArctic <- st_read("data/raw/polygons/HighArctic/Bylot.shp")
+HighArctic <- st_read("data/raw/polygons/HighArctic/QuebecLabrador50.shp")
 HighArctic_pt <- do.call(rbind, st_sample(HighArctic, N)) %>%
   as_tibble() %>% setNames(c("lon","lat")) %>%
-  SpatialPoints(proj4string = CRS("+proj=aea +lat_1=50 +lat_2=70 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs")) %>%
+  SpatialPoints(proj4string = CRS(" +proj=lcc +lat_1=49 +lat_2=77 +lat_0=63.390675 +lon_0=-91.86666666666666 +x_0=6200000 +y_0=3000000 +datum=NAD83 +units=m +no_defs")) %>%
   spTransform(CRS("+init=epsg:3857"))
 HighArctic_clims <- raster::extract(r, HighArctic_pt)
 
@@ -102,7 +99,6 @@ comp.dist <- c(JaccardDissimilarity(Europe.species, HighArctic.species),
                JaccardDissimilarity(HighArctic.species, Pyrenees.species),
                JaccardDissimilarity(HighArctic.species, Serengeti.species),
                JaccardDissimilarity(Pyrenees.species, Serengeti.species))
-
 
 # Phylogenetic Dissimilarity ----------------------------------------------
 # the mean phylogenetic distance to the nearest taxon
