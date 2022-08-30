@@ -13,8 +13,10 @@ library(tidyr)
 library(ggplot2)
 library(patchwork)
 library(brms)
+library(tidybayes)
 load("data/checkpoints/predictions.RData")
 foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
+source("code/functions.R")
 
 # Calculate performance ---------------------------------------------------
 overall_performance <- expand_grid(Source = foodwebs, Target = foodwebs) %>%
@@ -31,6 +33,8 @@ for (combination in c(1:nrow(overall_performance))){
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
   if (sourceFW == targetFW){
     predictions_test <- filter(predictions, training == 0)
+  } else {
+    predictions_test <- predictions
   }
   overall_performance[combination, "auc"] <- performance(prediction(predictions_test$Estimate, predictions_test$interaction), "auc")@y.values[[1]]
   overall_performance[combination, "aucpr"] <- performance(prediction(predictions_test$Estimate, predictions_test$interaction), "aucpr")@y.values[[1]]
@@ -105,7 +109,7 @@ p3 <- ggplot(species_performance) +
 # everything together and save
 p <- (p1 / p2 / p3)+ plot_layout(guides = "collect") +
   plot_annotation(title = 'Target food web', theme = theme(plot.title = element_text(hjust = 0.5)))
-ggsave("figures/ModelTransferability.png", p)
+ggsave("figures/SI/ModelTransferabilityFull.png", p)
 
 # Correlate transferability to distance metrics ---------------------------
 # glm with overall logit-auc and log(aucpr/prevalence) as response
@@ -195,7 +199,7 @@ p1 <- ggplot(geo_fe,
   geom_point(aes(x = geo.dist/1000, y = auc), data = overall_performance) +
   labs(y = "AUC", x = "Geographic distance (10³km)")+
   theme_minimal() +
-  lims(y = c(0.1,1))+
+  lims(y = c(0.25,1))+
   theme(axis.line = element_line(size = 0.5), strip.text = element_text(size = 12),
         strip.background = element_rect(colour = "black"), panel.grid = element_blank())
 
@@ -217,7 +221,7 @@ p2 <- ggplot(env_fe,
   geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
   geom_point(aes(x = env.dist, y = auc), data = overall_performance) +
   labs(y = "AUC", x = "Environmental distance")+
-  lims(y = c(0.1,1))+
+  lims(y = c(0.25,1))+
   theme_minimal() +
   theme(axis.line = element_line(size = 0.5), panel.grid = element_blank(),
         axis.title.y = element_blank(), axis.text.y = element_blank())
@@ -240,7 +244,7 @@ p3 <- ggplot(phylo_fe,
   geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
   geom_point(aes(x = phylo.dist, y = auc), data = overall_performance) +
   labs(y = "AUC", x = "Phylogenetic distance")+
-  lims(y = c(0.1,1))+
+  lims(y = c(0.25,1))+
   theme_minimal() +
   theme(axis.line = element_line(size = 0.5), panel.grid = element_blank(),
         axis.title.y = element_blank(), axis.text.y = element_blank())
