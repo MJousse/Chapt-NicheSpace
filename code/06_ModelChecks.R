@@ -1,4 +1,4 @@
-# Step 05: Check model behavior and compare coefficients
+# Step 06: Check model behavior and compare coefficients
 # For each model (one per food web):
 # 1. Load the models
 # 2. Check convergence with Rhat and trace plots
