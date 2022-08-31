@@ -6,27 +6,42 @@ library(ggplot2)
 set.seed(1234)
 par(bg=NA)
 
-# arctic
-arcticFW <- read.csv("data/cleaned/HighArcticFW.csv", row.names = 1)
-arcticFW <- arcticFW %>%
+# nunavik
+nunavikFW <- read.csv("data/cleaned/HighArcticFW.csv", row.names = 1)
+nunavikFW <- nunavikFW %>%
   transmute(resource = Prey, consumer = Predator)
-arctic.igraph <- simplify(graph_from_edgelist(as.matrix(arcticFW)))
-arctic.matrix <- Matrix::as.matrix(as_adjacency_matrix(arctic.igraph))
+nunavik.igraph <- simplify(graph_from_edgelist(as.matrix(nunavikFW)))
+nunavik.matrix <- Matrix::as.matrix(as_adjacency_matrix(nunavik.igraph))
 
-lay<-matrix(nrow = nrow(arctic.matrix), ncol=2) # create a matrix with one column as runif, the other as trophic level
-lay[,1]<-sample(c(1:nrow(arctic.matrix)), nrow(arctic.matrix))
-lay[,2]<-TrophInd(arctic.matrix)$TL-1 + runif(nrow(arctic.matrix), min =0, max = 1)
+lay<-matrix(nrow = nrow(nunavik.matrix), ncol=2) # create a matrix with one column as runif, the other as trophic level
+lay[,1]<-sample(c(1:nrow(nunavik.matrix)), nrow(nunavik.matrix))
+lay[,2]<-TrophInd(nunavik.matrix)$TL-1 + runif(nrow(nunavik.matrix), min =0, max = 1)
 
-png("figures/FWgraphs/arctic.png")
+png("figures/FWgraphs/nunavik.png")
 par(bg=NA)
-plot(arctic.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=4,
+plot(nunavik.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=4,
+     vertex.color = "deepskyblue", edge.color = alpha("deepskyblue", 0.2))
+dev.off()
+
+# simplified
+vid <- sample(c(1:length(V(nunavik.igraph))), 60)
+nunavik.simplified <- induced_subgraph(nunavik.igraph, vid)
+Isolated = which(degree(nunavik.simplified)==0)
+lay <- lay[vid,]
+if (length(Isolated !=0)){
+  lay <- lay[-Isolated,]
+}
+nunavik.simplified <- delete.vertices(nunavik.simplified, Isolated)
+png("figures/conceptual/simplifiedNunavik.png")
+par(bg=NA)
+plot(nunavik.simplified, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=5,
      vertex.color = "deepskyblue", edge.color = alpha("deepskyblue", 0.2))
 dev.off()
 
 # mock prediction
-png("figures/conceptual/predictedArctic.png")
+png("figures/conceptual/predictedNunavik.png")
 par(bg=NA)
-plot(arctic.igraph, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=runif(length(E(arctic.igraph)), min = 0, max = 10),
+plot(nunavik.simplified, layout = lay, vertex.label=NA, vertex.size=10, edge.arrow.size=0, edge.width=runif(length(E(nunavik.simplified)), min = 0, max = 10),
      vertex.color = "deepskyblue", edge.color = alpha("deepskyblue", 0.2))
 dev.off()
 
@@ -198,7 +213,7 @@ Europe <- st_read("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions20
 Pyrenees <- st_read("data/raw/polygons/EuropeanMountainAreas/m_massifs_v1.shp") %>%
   filter(name_mm == "Pyrenees")
 Serengeti <- st_read("data/raw/polygons/Serengeti_Ecosystem/v3_serengeti_ecosystem.shp") %>% st_union()
-HighArctic <- st_read("data/raw/polygons/HighArctic/Bylot.shp")
+Nunavik <- st_read("data/raw/polygons/HighArctic/QuebecLabrador50.shp")
 
 # polygons
 world <- map_data('world')
@@ -208,41 +223,41 @@ Europe <- st_read("data/raw/polygons/Europe/Europe.shp")
 Europe_centroid <- st_coordinates(st_centroid(Europe))
 Pyrenees <- st_transform(Pyrenees, st_crs("EPSG:4326")) %>% st_union() 
 Pyrenees_centroid <- st_coordinates(st_centroid(Pyrenees))
-HighArctic <- st_transform(HighArctic, st_crs("EPSG:4326")) %>% st_union()
-HighArctic_centroid <- cbind(st_coordinates(st_centroid(HighArctic)))
+Nunavik <- st_transform(Nunavik, st_crs("EPSG:4326")) %>% st_union()
+Nunavik_centroid <- cbind(st_coordinates(st_centroid(Nunavik)))
 Serengeti <- st_transform(Serengeti, st_crs("EPSG:4326"))
 Serengeti_centroid <- st_coordinates(st_centroid(Serengeti))
 
 # curves
-df <- expand_grid(from = c("Europe", "Pyrenees", "HighArctic", "Serengeti"), to = c("Europe", "Pyrenees", "HighArctic", "Serengeti")) %>%
+df <- expand_grid(from = c("Europe", "Pyrenees", "Nunavik", "Serengeti"), to = c("Europe", "Pyrenees", "Nunavik", "Serengeti")) %>%
   filter(from != to)
 df[which(df$from == "Europe"), c("fromlong", "fromlat")] <- Europe_centroid
 df[which(df$from == "Pyrenees"), c("fromlong", "fromlat")] <- Pyrenees_centroid
-df[which(df$from == "HighArctic"), c("fromlong", "fromlat")] <- HighArctic_centroid
+df[which(df$from == "Nunavik"), c("fromlong", "fromlat")] <- Nunavik_centroid
 df[which(df$from == "Serengeti"), c("fromlong", "fromlat")] <- Serengeti_centroid
 df[which(df$to == "Europe"), c("tolong", "tolat")] <- Europe_centroid
 df[which(df$to == "Pyrenees"), c("tolong", "tolat")] <- Pyrenees_centroid
-df[which(df$to == "HighArctic"), c("tolong", "tolat")] <- HighArctic_centroid
+df[which(df$to == "Nunavik"), c("tolong", "tolat")] <- Nunavik_centroid
 df[which(df$to == "Serengeti"), c("tolong", "tolat")]  <- Serengeti_centroid
 df$size <- 0.5
-df$size[which(df$from == "Europe" & df$to == "HighArctic")] <- 1
+df$size[which(df$from == "Europe" & df$to == "Nunavik")] <- 1
 
 
 # species proportions
 Europe_sp <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1)
 Pyrenees_sp <- read.csv("data/cleaned/pyrenneesFWTaxo.csv", row.names = 1)
-HighArctic_sp <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1)
+Nunavik_sp <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1)
 Serengeti_sp <- read.csv("data/cleaned/SerengetiFWTaxo.csv", row.names = 1)
 comp <- bind_rows(c(table(Europe_sp$Class) / nrow(Europe_sp), size = nrow(Europe_sp)),
           c(table(Pyrenees_sp$Class) / nrow(Pyrenees_sp), size = nrow(Pyrenees_sp)),
-          c(table(HighArctic_sp$Class) / nrow(HighArctic_sp), size = nrow(HighArctic_sp)),
+          c(table(Nunavik_sp$Class) / nrow(Nunavik_sp), size = nrow(Nunavik_sp)),
           c(table(Serengeti_sp$Class) / nrow(Serengeti_sp), size = nrow(Serengeti_sp))) %>%
-  mutate(FW = c("Europe", "Pyrenees", "High Arctic", "Serengeti")) %>%
+  mutate(FW = c("Europe", "Pyrenees", "Nunavik", "Serengeti")) %>%
   pivot_longer(cols = -c(FW, size), values_to = "Proportion", names_to = "Class")
 comp[is.na(comp)] <- 0
 comp[which(comp$FW == "Europe"), c("long", "lat")] <- Europe_centroid
 comp[which(comp$FW == "Pyrenees"), c("long", "lat")] <- Pyrenees_centroid
-comp[which(comp$FW == "High Arctic"), c("long", "lat")] <- HighArctic_centroid
+comp[which(comp$FW == "Nunavik"), c("long", "lat")] <- Nunavik_centroid
 comp[which(comp$FW == "Serengeti"), c("long", "lat")] <- Serengeti_centroid
 colorbar <- c("#8dd3c7", "#ffffb3", "#bebada", "#fb8072")
 euro_barchart <- ggplotGrob(
@@ -263,8 +278,8 @@ pyrenees_barchart <- ggplotGrob(
     theme(legend.position = "none", rect = element_blank(),
           line = element_blank(), text = element_blank()) 
 )
-arctic_barchart <- ggplotGrob(
-  ggplot(comp[comp$FW == "High Arctic",])+
+nunavik_barchart <- ggplotGrob(
+  ggplot(comp[comp$FW == "Nunavik",])+
     geom_bar(aes(x=Class, fill = Class, y = Proportion),
              position='dodge',stat='identity', color = "black") +
     labs(x = NULL, y = NULL) + 
@@ -308,7 +323,7 @@ p <- ggplot() +
   geom_polygon(data =world, aes(long, lat, group = group), color = "grey90", fill = "grey90") +
   geom_sf(data = Europe, fill = alpha("royalblue4", 0.5), color = "royalblue4") +
   geom_sf(data = Pyrenees, fill = alpha("red3", 0.5), color = "red3") +
-  geom_sf(data = HighArctic, fill = alpha("deepskyblue", 0.5), color = "deepskyblue") +
+  geom_sf(data = Nunavik, fill = alpha("deepskyblue", 0.5), color = "deepskyblue") +
   geom_sf(data = Serengeti, fill = alpha("chartreuse4", 0.5), color =  "chartreuse4") +
   geom_curve(data=df,
              aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, size = size), color = "black",
@@ -319,7 +334,7 @@ p <- ggplot() +
                    fontface = "bold", nudge_x = -15, nudge_y = -10, colour = "red3") +
   geom_label_repel(data = as.data.frame(Europe_centroid), aes(x = X, y = Y, label = "Europe"), 
                    fontface = "bold", nudge_x = 13, nudge_y = 10, colour = "royalblue4") +
-  geom_label_repel(data = as.data.frame(HighArctic_centroid), aes(x = X, y = Y, label = "Arctic"), 
+  geom_label_repel(data = as.data.frame(Nunavik_centroid), aes(x = X, y = Y, label = "Nunavik"), 
                    fontface = "bold", nudge_x = -5, nudge_y = -10, colour = "deepskyblue") +
   geom_label_repel(data = as.data.frame(Serengeti_centroid), aes(x = X, y = Y, label = "Serengeti"), 
                    fontface = "bold", nudge_x = 23, nudge_y = 20, colour = "chartreuse4") +
@@ -327,8 +342,8 @@ p <- ggplot() +
                     ymin = Europe_centroid[,2]-13, ymax = Europe_centroid[,2]+8) + 
   annotation_custom(pyrenees_barchart, xmin = Pyrenees_centroid[,1]-25, xmax = Pyrenees_centroid[,1]-5, 
                     ymin = Pyrenees_centroid[,2]-27, ymax = Pyrenees_centroid[,2]-12) + 
-  annotation_custom(arctic_barchart, xmin = HighArctic_centroid[,1]-15, xmax = HighArctic_centroid[,1]+5, 
-                    ymin = HighArctic_centroid[,2]-29, ymax = HighArctic_centroid[,2]-14) + 
+  annotation_custom(nunavik_barchart, xmin = Nunavik_centroid[,1]-15, xmax = Nunavik_centroid[,1]+5, 
+                    ymin = Nunavik_centroid[,2]-27, ymax = Nunavik_centroid[,2]-12) + 
   annotation_custom(serengeti_barchart, xmin = Serengeti_centroid[,1]+13, xmax = Serengeti_centroid[,1]+33, 
                     ymin = Serengeti_centroid[,2]-3, ymax = Serengeti_centroid[,2]+18) + 
   annotation_custom(legend_barchart, xmin = -90, xmax = -40, 
@@ -337,68 +352,67 @@ p <- ggplot() +
   theme_void() +
   theme(legend.position = "none")
 
-ggsave("figures/SI/FWmap.pdf", p)
-ggsave("figures/SI/FWmap.png", p)
+ggsave("figures/conceptual/FWmap.png", p, scale = 2)
 
-# Performance ~ distances mini-maps ---------------------------------------
-overall_performance <- read.csv("data/checkpoints/overall_performance.csv", row.names = 1)
-overall_performance[overall_performance == "Arctic"] <- "HighArctic"
-overall_performance[overall_performance == "Euro"] <- "Europe"
-FWdist <- read.csv("data/checkpoints/FWdist.csv", row.names = 1)
-FWdist[FWdist == "High Arctic"] = "HighArctic"
-
-df <- df %>%
-  left_join(overall_performance, by = c("from" = "Source", "to" = "Target")) %>%
-  left_join(FWdist, by = c("from" = "FW2", "to" = "FW1"))
-
-centroids <- rbind(Europe_centroid, HighArctic_centroid, Pyrenees_centroid, Serengeti_centroid) %>%
-  as_tibble() %>%
-  mutate(col = c("royalblue4", "deepskyblue", "red3", "chartreuse4"))
-perform <- ggplot(df) +
-  geom_curve(data=df,
-             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = auc),
-             curvature=0.25, alpha = 0.6) +
-  scale_size_continuous(range = c(0.5,12), limits = c(0.6,1))+
-  xlim(c(min(df$fromlong), max(df$fromlong)+5))+
-  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
-  scale_color_identity() +
-  theme_void() +
-  theme(legend.position = "none")
-
-geo_dist <- ggplot(df) +
-  geom_curve(data=df,
-             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = geo.dist),
-             curvature=0.25, alpha = 0.6) +
-  scale_size_continuous(range = c(0.5,12), limits = c(3500, 18000))+
-  xlim(c(min(df$fromlong), max(df$fromlong)+5))+
-  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
-  scale_color_identity() +
-  theme_void() +
-  theme(legend.position = "none")
-  
-env_dist <- ggplot(df) +
-  geom_curve(data=df,
-             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = env.dist),
-             curvature=0.25, alpha = 0.6) +
-  scale_size_continuous(range = c(0.5,12), limits = c(1,10))+
-  xlim(c(min(df$fromlong), max(df$fromlong)+5))+
-  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
-  scale_color_identity() +
-  theme_void() +
-  theme(legend.position = "none")
-
-phylo_dist <- ggplot(df) +
-  geom_curve(data=df,
-             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = phylo.dist),
-             curvature=0.25, alpha = 0.6) +
-  scale_size_continuous(range = c(0.5,12), limits= c(0, 200))+
-  xlim(c(min(df$fromlong), max(df$fromlong)+5))+
-  geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
-  scale_color_identity() +
-  theme_void() +
-  theme(legend.position = "none")
-
-ggsave("figures/conceptual/performance_map.png", perform)
-ggsave("figures/conceptual/geodist_map.png", geo_dist)
-ggsave("figures/conceptual/envdist_map.png", env_dist)
-ggsave("figures/conceptual/phydist_map.png", phylo_dist)
+# # Performance ~ distances mini-maps ---------------------------------------
+# overall_performance <- read.csv("data/checkpoints/overall_performance.csv", row.names = 1)
+# overall_performance[overall_performance == "Arctic"] <- "HighArctic"
+# overall_performance[overall_performance == "Euro"] <- "Europe"
+# FWdist <- read.csv("data/checkpoints/FWdist.csv", row.names = 1)
+# FWdist[FWdist == "High Arctic"] = "HighArctic"
+# 
+# df <- df %>%
+#   left_join(overall_performance, by = c("from" = "Source", "to" = "Target")) %>%
+#   left_join(FWdist, by = c("from" = "FW2", "to" = "FW1"))
+# 
+# centroids <- rbind(Europe_centroid, HighArctic_centroid, Pyrenees_centroid, Serengeti_centroid) %>%
+#   as_tibble() %>%
+#   mutate(col = c("royalblue4", "deepskyblue", "red3", "chartreuse4"))
+# perform <- ggplot(df) +
+#   geom_curve(data=df,
+#              aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = auc),
+#              curvature=0.25, alpha = 0.6) +
+#   scale_size_continuous(range = c(0.5,12), limits = c(0.6,1))+
+#   xlim(c(min(df$fromlong), max(df$fromlong)+5))+
+#   geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
+#   scale_color_identity() +
+#   theme_void() +
+#   theme(legend.position = "none")
+# 
+# geo_dist <- ggplot(df) +
+#   geom_curve(data=df,
+#              aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = geo.dist),
+#              curvature=0.25, alpha = 0.6) +
+#   scale_size_continuous(range = c(0.5,12), limits = c(3500, 18000))+
+#   xlim(c(min(df$fromlong), max(df$fromlong)+5))+
+#   geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
+#   scale_color_identity() +
+#   theme_void() +
+#   theme(legend.position = "none")
+#   
+# env_dist <- ggplot(df) +
+#   geom_curve(data=df,
+#              aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = env.dist),
+#              curvature=0.25, alpha = 0.6) +
+#   scale_size_continuous(range = c(0.5,12), limits = c(1,10))+
+#   xlim(c(min(df$fromlong), max(df$fromlong)+5))+
+#   geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
+#   scale_color_identity() +
+#   theme_void() +
+#   theme(legend.position = "none")
+# 
+# phylo_dist <- ggplot(df) +
+#   geom_curve(data=df,
+#              aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, color = col, size = phylo.dist),
+#              curvature=0.25, alpha = 0.6) +
+#   scale_size_continuous(range = c(0.5,12), limits= c(0, 200))+
+#   xlim(c(min(df$fromlong), max(df$fromlong)+5))+
+#   geom_point(data = centroids, aes(x = X, y = Y, colour = col), size = 12, shape = 21, stroke = 5, fill = "white")+
+#   scale_color_identity() +
+#   theme_void() +
+#   theme(legend.position = "none")
+# 
+# ggsave("figures/conceptual/performance_map.png", perform)
+# ggsave("figures/conceptual/geodist_map.png", geo_dist)
+# ggsave("figures/conceptual/envdist_map.png", env_dist)
+# ggsave("figures/conceptual/phydist_map.png", phylo_dist)
