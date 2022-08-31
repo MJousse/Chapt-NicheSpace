@@ -1,4 +1,4 @@
-# Step 06: Predict each food web (target food web) using each model (calibrated on source food web)
+# Step 07: Predict each food web (target food web) using each model (calibrated on source food web)
 # 1. Load and standardize data
 # For each model (one per food web):
 # 2. Standardize predictors of target food web with the mean and sd of source food web

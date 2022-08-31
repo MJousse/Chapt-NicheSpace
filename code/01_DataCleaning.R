@@ -144,33 +144,29 @@ write.csv(PyrenneesFW_species, "data/cleaned/pyrenneesFWTaxo.csv")
 
 # High Arctic food web ----------------------------------------------------
 # raw data
-arcticFW_peak <- read.csv("data/raw/FW/HighArctic_peakyear.csv")
-arcticFW_crash <- read.csv("data/raw/FW/HighArctic_crashyear.csv")
-threshold <- 0
+arcticFW <- read.csv("data/raw/FW/Tundra_Nunavik_Trophic_relationships.txt", sep = "\t", row.names = 1)
 
-# Combine crash and peak years
-arcticFW <- rbind(arcticFW_crash, arcticFW_peak) %>%
-  group_by(Consumer, Resource) %>%
-  summarise(Diet = max(Diet)) %>%
-  filter(Diet > threshold) %>%
-  select(-Diet) %>% ungroup()
-
-# clean nodes
-arctic_nodes <- read.csv("data/raw/FW/HighArctic_nodes.csv")
-gbif_names <- map_df(arctic_nodes$Species,
+# get gbif species name
+arctic_species <- rownames(arcticFW)
+gbif_names <- map_df(arctic_species,
   name_backbone, phylum = "Chordata") # Clean species names
-arctic_nodes$Species <- gbif_names$species
+
+arctic_vertebrates_i <- gbif_names$class %in% c("Aves", "Mammalia", "Reptilia", "Amphibia") & !is.na(gbif_names$species)
+arctic_vertebrates <- gbif_names[arctic_vertebrates_i,]
+
+# keep only vertebrates
+arcticFW <- arcticFW[arctic_vertebrates_i, arctic_vertebrates_i]
 
 # standardize food web format
-arcticFW_clean <- left_join(arcticFW, arctic_nodes, by = c("Consumer" = "Functiongroup")) %>%
-  left_join(arctic_nodes, by = c("Resource" = "Functiongroup"), suffix = c("Consumer", "Resource")) %>%
-  select(Predator = SpeciesConsumer, Prey = SpeciesResource)
+arctic_interactions <- which(arcticFW == 1, arr.ind = T, useNames = F)
+arcticFW_clean <- data.frame(Predator = arctic_vertebrates$species[arctic_interactions[,2]],
+                             Prey = arctic_vertebrates$species[arctic_interactions[,1]])
 
 # save cleaned food web
 write.csv(arcticFW_clean, "data/cleaned/HighArcticFW.csv")
 
 # save clean species name with taxonomy
-arcticFW_species <- gbif_names %>%
-  select(Species = species, Class = class, Order = order, Family = family, Genus = genus) %>%
+arcticFW_species <- arctic_vertebrates %>%
+  dplyr::select(Species = species, Class = class, Order = order, Family = family, Genus = genus) %>%
   filter(!is.na(Class))
 write.csv(arcticFW_species, "data/cleaned/HighArcticFWTaxo.csv")

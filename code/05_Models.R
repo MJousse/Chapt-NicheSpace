@@ -1,4 +1,4 @@
-# Step 04: Train a predictive model on each food web
+# Step 05: Train a predictive model on each food web
 # For each model (one per food web):
 # 1. Load and standardize training data
 # 1.1 load the data
@@ -71,12 +71,12 @@ model_priors <- c(
 prior_predictions <- brm(formula = brms_form,
                          data = training,
                          prior = model_priors,
-                         sample_prior = "only", inits = "0")
+                         sample_prior = "only", init = "0")
 EuroModel <- brm(formula = brms_form,
                  data = training,
                  prior = model_priors, sample_prior = "no", 
                     cores = 4, backend = "cmdstan", threads = 4,
-                    inits = "0", iter = 2000)
+                    init = "0", iter = 2000)
 
 # save the model on OneDrive (too big for Github...)
 saveRDS(EuroModel,
@@ -132,13 +132,13 @@ model_priors <- c(
 prior_predictions <- brm(formula = brms_form,
                          data = training,
                          prior = model_priors,
-                         sample_prior = "only", inits = "0")
+                         sample_prior = "only", init = "0")
 
 ArcticModel <- brm(formula = brms_form,
                    data = training,
                    prior = model_priors, sample_prior = "no", 
                    cores = 4, backend = "cmdstan", threads = 4,
-                   inits = "0", iter = 2000)
+                   init = "0", iter = 2000)
 
 # save the model
 saveRDS(ArcticModel, 
@@ -194,13 +194,13 @@ model_priors <- c(
 prior_predictions <- brm(formula = brms_form,
                          data = training,
                          prior = model_priors,
-                         sample_prior = "only", inits = "0")
+                         sample_prior = "only", init = "0")
 
 PyreneesModel <- brm(formula = brms_form,
                      data = training,
                      prior = model_priors, sample_prior = "no", 
                      cores = 4, backend = "cmdstan", threads = 4,
-                     inits = "0", iter = 2000)
+                     init = "0", iter = 2000)
 
 
 # save the model
@@ -257,13 +257,13 @@ model_priors <- c(
 prior_predictions <- brm(formula = brms_form,
                          data = training,
                          prior = model_priors,
-                         sample_prior = "only", inits = "0")
+                         sample_prior = "only", init = "0")
 
 SerengetiModel <- brm(formula = brms_form,
                       data = training,
                       prior = model_priors, sample_prior = "no", 
                       cores = 4, backend = "cmdstan", threads = 4,
-                      inits = "0", iter = 2000)
+                      init = "0", iter = 2000)
 
 
 # save the model
