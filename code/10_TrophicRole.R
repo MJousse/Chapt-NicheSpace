@@ -102,21 +102,37 @@ library(purrr)
 library(broom)
 fitted_models = species_roles %>% 
   drop_na() %>%
-  nest(data = -c(role, targetFW, sourceFW)) %>%
-  mutate(model = map(data, ~ lm(predicted_scaled ~ empirical_scaled, data = .x)),
-         tidied = map(model, tidy)
-  ) %>%
-  unnest(tidied) %>%
-  dplyr::select(role, targetFW, sourceFW, term, estimate, std.error)
+  nest(data = -c(targetFW, sourceFW)) %>%
+  mutate(
+    model = map(data, ~ lmer(predicted_scaled ~ empirical_scaled + role, data = .x)),
+    tidied = map(model, tidy),
+    glanced = map(model, glance),
+    augmented = map(model, augment)
+  )
 
-correlations <- species_roles %>% 
-  drop_na() %>%
-  group_by(role, targetFW, sourceFW) %>%
-  summarise(correlation = cor(predicted, empirical))
+lm_coef <- fitted_models %>% 
+  unnest(tidied) %>%
+  dplyr::select(targetFW, sourceFW, effect, term, estimate, std.error)
+  
+goodness_of_fit <- fitted_models %>% 
+  unnest(glanced) %>%
+  dplyr::select(targetFW, sourceFW, )
 
 # plot
-correlations$role <- factor(correlations$role, levels = unique(empirical_roles$role))
-correlations$insample <- factor(correlations$targetFW == correlations$sourceFW, levels = c(T,F), labels = c("within food web", "between food web"))
+# R2
+goodness_of_fit$role <- factor(goodness_of_fit$role, levels = unique(empirical_roles$role))
+goodness_of_fit$insample <- factor(goodness_of_fit$targetFW == goodness_of_fit$sourceFW, levels = c(T,F), labels = c("within food web", "between food web"))
+
+ggplot(subset(goodness_of_fit, role %in% c("indegree", "outdegree", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = r.squared,y = 1, color = sourceFW)) +
+  geom_jitter() +
+  facet_grid(role~targetFW) +
+  geom_vline(xintercept = 0) +
+  theme_classic() +
+  scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) + 
+  labs(x = "R²", colour = "Model") +
+  theme(axis.line.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank(), axis.text.y = element_blank(),
+        panel.border = element_rect(fill = "transparent"), panel.grid.major.x = element_line())
+
 
 correlations_summary <- correlations %>%
   group_by(role, insample) %>%
