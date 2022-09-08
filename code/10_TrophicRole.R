@@ -89,26 +89,82 @@ predicted_roles <- read.csv("data/checkpoints/predicted_roles.csv", row.names = 
 empirical_roles$FW[empirical_roles$FW == "Europe"] <- "Euro"
 
 species_roles <- left_join(predicted_roles, empirical_roles,
-                           by = c("species", "role", "targetFW" = "FW")) %>%
-  drop_na() %>%
-  group_by(role, targetFW, sourceFW) %>%
-  mutate(predicted_scaled = (predicted)/(sd(empirical, na.rm = T)),
-         empirical_scaled = (empirical)/(sd(empirical, na.rm = T)))
+                           by = c("species", "role", "targetFW" = "FW")) 
 
 species_roles$predicted_scaled[is.infinite(species_roles$predicted_scaled)] <- NA # don't model roles without variation...
+
+# exploration
+ggplot(subset(species_roles, role %in% c("indegree", "outdegree", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")))+
+  geom_point(aes(y = predicted, x = empirical, color = sourceFW), alpha = 0.5) +
+  facet_grid(role~targetFW, scales = "free")
+
 
 # calculate the slope, intercept and r^2 for all role, targetFW and sourceFW
 library(purrr)
 library(broom)
+library(brms)
 fitted_models = species_roles %>% 
   drop_na() %>%
-  nest(data = -c(targetFW, sourceFW)) %>%
+  nest(data = -c(role)) %>%
   mutate(
-    model = map(data, ~ lmer(predicted_scaled ~ (1+empirical_scaled|role), data = .x)),
+    model = map(data, ~ lmer(predicted ~ 1 + empirical_scaled + (1+empirical_scaled|combination), data = .x)),
     tidied = map(model, tidy),
     glanced = map(model, glance),
     augmented = map(model, augment)
   )
+
+species_roles$combination <- factor(paste(species_roles$sourceFW, species_roles$targetFW, sep = "-"))
+
+# ok loop for each role
+for (irole in c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")){
+  d <- filter(species_roles, role == irole) %>%
+    drop_na() %>%
+    group_by(targetFW, sourceFW) %>%
+    mutate(empirical_scaled = (empirical - mean(empirical))/(sd(empirical, na.rm = T)))
+  
+  m <- brm(predicted ~ 1 + empirical_scaled + (1 + empirical_scaled | combination), data = d,
+           prior = c(
+             prior(normal(0, 1), class = "Intercept"),
+             prior(normal(0, 1), class = "b"),
+             prior(cauchy(0, 5), class = "sd")
+           ), 
+           sample_prior = "no",
+           cores = 3)
+  
+  d <- d %>% 
+    add_epred_draws(m, ndraws = 1e3) %>%
+    group_by(sourceFW, targetFW, empirical)  %>%
+    summarize(median_qi(.epred, width = 0.95))
+  
+  ggplot(d)  +
+    geom_lineribbon(aes(ymin = ymin, ymax = ymax, x = empirical, y = y, fill = sourceFW, color = sourceFW), alpha= 0.5) +
+    geom_abline(intercept = 0, slope = 1, linetype=  "dashed") +
+    facet_wrap(vars(targetFW), nrow = 1, scales = "free") +
+    theme_classic()
+  
+  ggsave(paste0("figures/exploration/species_role/", irole, ".png"), scale = 3)
+}
+
+
+m <- lmer(predicted_scaled ~ 1 + empirical_scaled + (1 + empirical_scaled | role) +
+            (1 + empirical_scaled | combination), data = species_roles)
+m <- brm(predicted_scaled ~ 1 + empirical_scaled +
+           (1 + empirical_scaled | role) +
+           (1 + empirical_scaled | combination), data = species_roles,
+         prior = c(prior(normal(0, 1), class = Intercept),
+                   prior(normal(0, 1), class = b),
+                   prior(cauchy(0, 2), class = sd),
+                   prior(lkj(4), class = cor)),
+         cores = 3, chains = 3)
+
+plot_data <- dplyr::select(species_roles, role, empirical, empirical_scaled, role, targetFW, sourceFW) %>%
+  drop_na() %>%
+  cbind(y_hat = predict(m))
+
+ggplot(subset(plot_data, role == "indegree"))+
+  geom_line(aes(y = y_hat, x = empirical, color = sourceFW), alpha = 0.5) +
+  facet_grid(.~targetFW, scales = "free")
+
 
 lm_coef <- fitted_models %>% 
   unnest(tidied) %>%
