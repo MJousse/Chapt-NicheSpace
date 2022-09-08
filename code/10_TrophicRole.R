@@ -146,11 +146,25 @@ for (irole in c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL
 }
 
 
-m <- lmer(predicted_scaled ~ 1 + empirical_scaled + (1 + empirical_scaled | role) +
-            (1 + empirical_scaled | combination), data = species_roles)
-m <- brm(predicted_scaled ~ 1 + empirical_scaled +
-           (1 + empirical_scaled | role) +
-           (1 + empirical_scaled | combination), data = species_roles,
+# try to transform roles to a real scale
+species_roles$empirical_trans <- species_roles$empirical
+species_roles$predicted_trans <- species_roles$predicted
+
+# log transform position, indegree, outdegree, and betweeness
+species_roles$empirical_trans[species_roles$role %in% c("indegree", "outdegree", "betweeness", "TL", "OI", paste0("position", c(1:30)))] <- 
+  log1p(species_roles$empirical[species_roles$role %in% c("indegree", "outdegree", "betweeness", "TL", "OI", paste0("position", c(1:30)))])
+species_roles$predicted_trans[species_roles$role %in% c("indegree", "outdegree", "betweeness", "TL", "OI", paste0("position", c(1:30)))] <- 
+  log1p(species_roles$predicted[species_roles$role %in% c("indegree", "outdegree", "betweeness", "TL", "OI", paste0("position", c(1:30)))])
+
+# logit transform among-module conn, eigenvector centrality, and closeness
+species_roles$empirical_trans[species_roles$role %in% c("among_module_conn", "eigen", "closeness")] <- 
+  log1p(species_roles$empirical[species_roles$role %in% c("among_module_conn", "eigen", "closeness")] / (1.0001- species_roles$empirical[species_roles$role %in% c("among_module_conn", "eigen", "closeness")]))
+species_roles$predicted_trans[species_roles$role %in% c("among_module_conn", "eigen", "closeness")] <- 
+  log1p(species_roles$predicted[species_roles$role %in% c("among_module_conn", "eigen", "closeness")] / (1.0001- species_roles$predicted[species_roles$role %in% c("among_module_conn", "eigen", "closeness")]))
+
+m <- brm(predicted_trans ~ 1 + empirical_trans +
+           (1 + empirical_trans | role) +
+           (1 + empirical_trans | combination), data = species_roles,
          prior = c(prior(normal(0, 1), class = Intercept),
                    prior(normal(0, 1), class = b),
                    prior(cauchy(0, 2), class = sd),
