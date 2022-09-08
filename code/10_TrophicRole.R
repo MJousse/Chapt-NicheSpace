@@ -105,12 +105,12 @@ library(broom)
 library(brms)
 fitted_models = species_roles %>% 
   drop_na() %>%
-  nest(data = -c(role)) %>%
+  nest(data = -c(role, sourceFW, targetFW)) %>%
   mutate(
-    model = map(data, ~ lmer(predicted ~ 1 + empirical_scaled + (1+empirical_scaled|combination), data = .x)),
+    model = map(data, ~ lm(predicted ~ 1 + empirical_scaled, data = .x)),
     tidied = map(model, tidy),
     glanced = map(model, glance),
-    augmented = map(model, augment)
+    augmented = map(model, augment, interval = "confidence")
   )
 
 species_roles$combination <- factor(paste(species_roles$sourceFW, species_roles$targetFW, sep = "-"))
@@ -186,7 +186,12 @@ lm_coef <- fitted_models %>%
   
 goodness_of_fit <- fitted_models %>% 
   unnest(glanced) %>%
-  dplyr::select(targetFW, sourceFW, )
+  dplyr::select(targetFW, sourceFW, r.squared)
+
+fitted <- fitted_models %>% 
+  unnest(augmented) %>%
+  dplyr::select(targetFW, sourceFW, .fitted, .upper, .lower) %>%
+  bind_cols(species_roles %>% ungroup() %>% drop_na() %>% dplyr::select(empirical))
 
 # plot
 # R2
