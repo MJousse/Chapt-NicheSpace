@@ -104,7 +104,7 @@ fitted_models = species_roles %>%
   drop_na() %>%
   nest(data = -c(targetFW, sourceFW)) %>%
   mutate(
-    model = map(data, ~ lmer(predicted_scaled ~ empirical_scaled + role, data = .x)),
+    model = map(data, ~ lmer(predicted_scaled ~ (1+empirical_scaled|role), data = .x)),
     tidied = map(model, tidy),
     glanced = map(model, glance),
     augmented = map(model, augment)
