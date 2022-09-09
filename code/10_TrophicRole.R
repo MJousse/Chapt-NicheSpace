@@ -211,59 +211,28 @@ ggplot(subset(goodness_of_fit, role %in% c("indegree", "outdegree", "position1",
   theme(axis.line.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank(), axis.text.y = element_blank(),
         panel.border = element_rect(fill = "transparent"), panel.grid.major.x = element_line())
 
+goodness_of_fit$insample <- factor(goodness_of_fit$targetFW == goodness_of_fit$sourceFW,
+                                   levels = c(T,F), labels = c("within food web", "across food web"))
 
-correlations_summary <- correlations %>%
+roles <-  c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")
+
+r2_summary <- goodness_of_fit %>%
+  filter(role %in% roles) %>%
+  mutate(role = factor(role, levels = roles)) %>%
   group_by(role, insample) %>%
-  summarise(correlation_mean = mean(correlation, na.rm = T), correlation_min = min(correlation, na.rm = T), correlation_max = max(correlation, na.rm = T))
+  summarise(r2_mean = mean(r.squared, na.rm = T), r2_min = min(r.squared, na.rm = T), r2_max = max(r.squared, na.rm = T))
 
-ggplot(subset(correlations_summary, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation_mean, colour = insample, fill = insample)) +
-  geom_pointrange(aes(ymin = correlation_min, ymax = correlation_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
+
+ggplot(subset(r2_summary, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = r2_mean, colour = insample, fill = insample)) +
+  geom_pointrange(aes(ymin = r2_min, ymax = r2_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
   geom_hline(yintercept = 0)+
-  labs(y = "Correlation", x = "Species role", color = "Prediction", fill = "Prediction") +
-  ylim(c(-0.5,1))+
+  labs(y = "R²", x = "Species role", color = "Prediction", fill = "Prediction") +
+  ylim(c(0,1))+
   theme_bw() +
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)),
         legend.title = element_blank(), axis.text.x = element_blank())
 
 ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600, width = 18, units = "cm")
 
-
-p <- ggplot(correlations, aes(x = role, y = correlation, fill = sourceFW)) +
-  geom_point(shape = 21, size = 3, alpha=0.8) +
-  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  coord_flip() +
-  geom_hline(yintercept = 0)+
-  facet_grid(~targetFW) +
-  labs(y = "Correlation", x = "Species role", fill = "Model", title = "Predicted food web") +
-  ylim(c(-0.5,1))+
-  theme_bw() +
-  theme(strip.background = element_rect(fill = "transparent"), plot.title = element_text(hjust = 0.5))
-
-intercepts <- filter(fitted_models, term == "(Intercept)")
-intercepts$role <- factor(intercepts$role, levels = rev(unique(empirical_roles$role)))
-intercepts$Zscore <- intercepts$estimate/intercepts$std.error
-
-ggplot(intercepts, aes(x = role, y = estimate, fill = sourceFW)) +
-  geom_point(shape = 21, size = 4, alpha=0.8) +
-  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  coord_flip() +
-  scale_y_continuous(limits= c(-1, 300), trans = "pseudo_log", breaks = c(0, 10, 100, 1000)) +
-  geom_hline(yintercept = 0)+
-  facet_grid(~targetFW) +
-  labs(y = "Intercept", x = "Species role") +
-  theme_bw()
-
-slopes <- filter(fitted_models, term == "empirical_scaled")
-slopes$role <- factor(slopes$role, levels = levels(intercepts$role))
-
-ggplot(slopes, aes(x = role, y = estimate, fill = sourceFW)) +
-  geom_point(shape = 21, size = 4, alpha=0.8) +
-  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  scale_y_continuous(limits = c(-3,15))+
-  coord_flip() +
-  geom_hline(yintercept = 1)+
-  facet_grid(~targetFW) +
-  labs(y = "Slope", x = "Species role") +
-  theme_bw()
