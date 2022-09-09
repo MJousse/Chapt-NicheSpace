@@ -115,54 +115,6 @@ fitted_models = species_roles %>%
 
 species_roles$combination <- factor(paste(species_roles$sourceFW, species_roles$targetFW, sep = "-"))
 
-# ok loop for each role
-for (irole in c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")){
-  d <- filter(species_roles, role == irole) %>%
-    drop_na() %>%
-    group_by(targetFW, sourceFW) %>%
-    mutate(empirical_scaled = (empirical - mean(empirical))/(sd(empirical, na.rm = T)))
-  
-  m <- brm(predicted ~ 1 + empirical_scaled + (1 + empirical_scaled | combination), data = d,
-           prior = c(
-             prior(normal(0, 1), class = "Intercept"),
-             prior(normal(0, 1), class = "b"),
-             prior(cauchy(0, 5), class = "sd")
-           ), 
-           sample_prior = "no",
-           cores = 3)
-  
-  d <- d %>% 
-    add_epred_draws(m, ndraws = 1e3) %>%
-    group_by(sourceFW, targetFW, empirical)  %>%
-    summarize(median_qi(.epred, width = 0.95))
-  
-  ggplot(d)  +
-    geom_lineribbon(aes(ymin = ymin, ymax = ymax, x = empirical, y = y, fill = sourceFW, color = sourceFW), alpha= 0.5) +
-    geom_abline(intercept = 0, slope = 1, linetype=  "dashed") +
-    facet_wrap(vars(targetFW), nrow = 1, scales = "free") +
-    theme_classic()
-  
-  ggsave(paste0("figures/exploration/species_role/", irole, ".png"), scale = 3)
-}
-
-m <- brm(predicted_trans ~ 1 + empirical_trans +
-           (1 + empirical_trans | role) +
-           (1 + empirical_trans | combination), data = species_roles,
-         prior = c(prior(normal(0, 1), class = Intercept),
-                   prior(normal(0, 1), class = b),
-                   prior(cauchy(0, 2), class = sd),
-                   prior(lkj(4), class = cor)),
-         cores = 3, chains = 3)
-
-plot_data <- dplyr::select(species_roles, role, empirical, empirical_scaled, role, targetFW, sourceFW) %>%
-  drop_na() %>%
-  cbind(y_hat = predict(m))
-
-ggplot(subset(plot_data, role == "indegree"))+
-  geom_line(aes(y = y_hat, x = empirical, color = sourceFW), alpha = 0.5) +
-  facet_grid(.~targetFW, scales = "free")
-
-
 lm_coef <- fitted_models %>% 
   unnest(tidied) %>%
   dplyr::select(targetFW, sourceFW, term, estimate, std.error)
