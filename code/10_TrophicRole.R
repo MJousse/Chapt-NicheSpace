@@ -175,9 +175,10 @@ fitted <- fitted_models %>%
   unnest(augmented) %>%
   dplyr::select(targetFW, sourceFW, empirical, .fitted, .upper, .lower)
 
+# plot individual regressions
 for (irole in unique(species_roles$role)){
-  filter(fitted, role == irole) %>%
-    ggplot(aes(x = empirical, y = .fitted)) +
+  d <- filter(fitted, role == irole)
+  ggplot(d, aes(x = empirical, y = .fitted)) +
     geom_ribbon(aes(ymin = .lower, ymax = .upper, fill = sourceFW), alpha = 0.5) +
     geom_line(aes(colour = sourceFW)) +
     geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
@@ -188,10 +189,17 @@ for (irole in unique(species_roles$role)){
 }
 
 
-# plot
-# R2
-goodness_of_fit$role <- factor(goodness_of_fit$role, levels = unique(empirical_roles$role))
-goodness_of_fit$insample <- factor(goodness_of_fit$targetFW == goodness_of_fit$sourceFW, levels = c(T,F), labels = c("within food web", "between food web"))
+# plot R2
+goodness_of_fit %>%
+  mutate(role = factor(role, levels = unique(goodness_of_fit$role))) %>%
+  ggplot() +
+  geom_point(aes(y = role, x = r.squared, color = sourceFW), alpha = 0.75, size = 2) +
+  labs(x = "R²", y = "Role", colour = "Model") +
+  facet_wrap(.~targetFW, nrow = 1, scales = "free_x") +
+  theme_classic() +
+  theme(panel.grid.major.y = element_line())
+
+ggsave(paste0("figures/exploration/species_role/R2.png"), scale = 3)
 
 ggplot(subset(goodness_of_fit, role %in% c("indegree", "outdegree", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = r.squared,y = 1, color = sourceFW)) +
   geom_jitter() +
