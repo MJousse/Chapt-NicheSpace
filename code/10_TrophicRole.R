@@ -107,15 +107,15 @@ fitted_models = species_roles %>%
 
 lm_coef <- fitted_models %>% 
   unnest(tidied) %>%
-  dplyr::select(targetFW, sourceFW, term, estimate, std.error)
+  dplyr::select(targetFW, sourceFW, role, term, estimate, std.error)
   
 goodness_of_fit <- fitted_models %>% 
   unnest(glanced) %>%
-  dplyr::select(targetFW, sourceFW, r.squared)
+  dplyr::select(targetFW, role, sourceFW, r.squared)
 
 fitted <- fitted_models %>% 
   unnest(augmented) %>%
-  dplyr::select(targetFW, sourceFW, empirical, .fitted, .upper, .lower)
+  dplyr::select(targetFW, sourceFW, role, empirical, .fitted, .upper, .lower)
 
 # plot individual regressions
 for (irole in unique(species_roles$role)){
@@ -125,11 +125,10 @@ for (irole in unique(species_roles$role)){
     geom_line(aes(colour = sourceFW)) +
     geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
     labs(x = "empirical", y = "predicted", colour = "Model", fill = "Model") + 
-    facet_wrap(.~targetFW, nrow = 1, scales = "free") +
+    facet_wrap(.~targetFW, nrow = 2, scales = "free") +
     theme_classic()
-  ggsave(paste0("figures/exploration/species_role/", irole, ".png"), scale = 3)
+  ggsave(paste0("figures/SI/species_role/", irole, ".png"), scale = 3)
 }
-
 
 # plot R2
 goodness_of_fit %>%
@@ -141,17 +140,7 @@ goodness_of_fit %>%
   theme_classic() +
   theme(panel.grid.major.y = element_line())
 
-ggsave(paste0("figures/exploration/species_role/R2.png"), scale = 3)
-
-ggplot(subset(goodness_of_fit, role %in% c("indegree", "outdegree", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = r.squared,y = 1, color = sourceFW)) +
-  geom_jitter() +
-  facet_grid(role~targetFW) +
-  geom_vline(xintercept = 0) +
-  theme_classic() +
-  scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) + 
-  labs(x = "R²", colour = "Model") +
-  theme(axis.line.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank(), axis.text.y = element_blank(),
-        panel.border = element_rect(fill = "transparent"), panel.grid.major.x = element_line())
+ggsave(paste0("figures/SI/species_role/R2.png"), scale = 3)
 
 goodness_of_fit$insample <- factor(goodness_of_fit$targetFW == goodness_of_fit$sourceFW,
                                    levels = c(T,F), labels = c("within food web", "across food web"))
@@ -164,7 +153,6 @@ r2_summary <- goodness_of_fit %>%
   group_by(role, insample) %>%
   summarise(r2_mean = mean(r.squared, na.rm = T), r2_min = min(r.squared, na.rm = T), r2_max = max(r.squared, na.rm = T))
 
-
 ggplot(subset(r2_summary, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = r2_mean, colour = insample, fill = insample)) +
   geom_pointrange(aes(ymin = r2_min, ymax = r2_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
@@ -176,5 +164,5 @@ ggplot(subset(r2_summary, role %in% c("indegree", "outdegree", "betweeness", "cl
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)),
         legend.title = element_blank(), axis.text.x = element_blank())
 
-ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600, width = 18, units = "cm")
+ggsave("figures/SpeciesRolePerformance.png", dpi = 600, width = 18, height = 9, units = "cm")
 
