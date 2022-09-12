@@ -89,87 +89,92 @@ predicted_roles <- read.csv("data/checkpoints/predicted_roles.csv", row.names = 
 empirical_roles$FW[empirical_roles$FW == "Europe"] <- "Euro"
 
 species_roles <- left_join(predicted_roles, empirical_roles,
-                           by = c("species", "role", "targetFW" = "FW")) %>%
-  drop_na() %>%
-  group_by(role, targetFW, sourceFW) %>%
-  mutate(predicted_scaled = (predicted)/(sd(empirical, na.rm = T)),
-         empirical_scaled = (empirical)/(sd(empirical, na.rm = T)))
-
-species_roles$predicted_scaled[is.infinite(species_roles$predicted_scaled)] <- NA # don't model roles without variation...
+                           by = c("species", "role", "targetFW" = "FW")) 
 
 # calculate the slope, intercept and r^2 for all role, targetFW and sourceFW
 library(purrr)
 library(broom)
+library(brms)
 fitted_models = species_roles %>% 
   drop_na() %>%
-  nest(data = -c(role, targetFW, sourceFW)) %>%
-  mutate(model = map(data, ~ lm(predicted_scaled ~ empirical_scaled, data = .x)),
-         tidied = map(model, tidy)
-  ) %>%
+  nest(data = -c(role, sourceFW, targetFW)) %>%
+  mutate(
+    model = map(data, ~ lm(predicted ~ 1 + empirical, data = .x)),
+    tidied = map(model, tidy),
+    glanced = map(model, glance),
+    augmented = map(model, augment, interval = "confidence")
+  )
+
+lm_coef <- fitted_models %>% 
   unnest(tidied) %>%
-  dplyr::select(role, targetFW, sourceFW, term, estimate, std.error)
+  dplyr::select(targetFW, sourceFW, term, estimate, std.error)
+  
+goodness_of_fit <- fitted_models %>% 
+  unnest(glanced) %>%
+  dplyr::select(targetFW, sourceFW, r.squared)
 
-correlations <- species_roles %>% 
-  drop_na() %>%
-  group_by(role, targetFW, sourceFW) %>%
-  summarise(correlation = cor(predicted, empirical))
+fitted <- fitted_models %>% 
+  unnest(augmented) %>%
+  dplyr::select(targetFW, sourceFW, empirical, .fitted, .upper, .lower)
 
-# plot
-correlations$role <- factor(correlations$role, levels = unique(empirical_roles$role))
-correlations$insample <- factor(correlations$targetFW == correlations$sourceFW, levels = c(T,F), labels = c("within food web", "between food web"))
+# plot individual regressions
+for (irole in unique(species_roles$role)){
+  d <- filter(fitted, role == irole)
+  ggplot(d, aes(x = empirical, y = .fitted)) +
+    geom_ribbon(aes(ymin = .lower, ymax = .upper, fill = sourceFW), alpha = 0.5) +
+    geom_line(aes(colour = sourceFW)) +
+    geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
+    labs(x = "empirical", y = "predicted", colour = "Model", fill = "Model") + 
+    facet_wrap(.~targetFW, nrow = 1, scales = "free") +
+    theme_classic()
+  ggsave(paste0("figures/exploration/species_role/", irole, ".png"), scale = 3)
+}
 
-correlations_summary <- correlations %>%
+
+# plot R2
+goodness_of_fit %>%
+  mutate(role = factor(role, levels = unique(goodness_of_fit$role))) %>%
+  ggplot() +
+  geom_point(aes(y = role, x = r.squared, color = sourceFW), alpha = 0.75, size = 2) +
+  labs(x = "R²", y = "Role", colour = "Model") +
+  facet_wrap(.~targetFW, nrow = 1, scales = "free_x") +
+  theme_classic() +
+  theme(panel.grid.major.y = element_line())
+
+ggsave(paste0("figures/exploration/species_role/R2.png"), scale = 3)
+
+ggplot(subset(goodness_of_fit, role %in% c("indegree", "outdegree", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = r.squared,y = 1, color = sourceFW)) +
+  geom_jitter() +
+  facet_grid(role~targetFW) +
+  geom_vline(xintercept = 0) +
+  theme_classic() +
+  scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) + 
+  labs(x = "R²", colour = "Model") +
+  theme(axis.line.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank(), axis.text.y = element_blank(),
+        panel.border = element_rect(fill = "transparent"), panel.grid.major.x = element_line())
+
+goodness_of_fit$insample <- factor(goodness_of_fit$targetFW == goodness_of_fit$sourceFW,
+                                   levels = c(T,F), labels = c("within food web", "across food web"))
+
+roles <-  c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")
+
+r2_summary <- goodness_of_fit %>%
+  filter(role %in% roles) %>%
+  mutate(role = factor(role, levels = roles)) %>%
   group_by(role, insample) %>%
-  summarise(correlation_mean = mean(correlation, na.rm = T), correlation_min = min(correlation, na.rm = T), correlation_max = max(correlation, na.rm = T))
+  summarise(r2_mean = mean(r.squared, na.rm = T), r2_min = min(r.squared, na.rm = T), r2_max = max(r.squared, na.rm = T))
 
-ggplot(subset(correlations_summary, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "TL", "OI", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = correlation_mean, colour = insample, fill = insample)) +
-  geom_pointrange(aes(ymin = correlation_min, ymax = correlation_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
+
+ggplot(subset(r2_summary, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = r2_mean, colour = insample, fill = insample)) +
+  geom_pointrange(aes(ymin = r2_min, ymax = r2_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
   geom_hline(yintercept = 0)+
-  labs(y = "Correlation", x = "Species role", color = "Prediction", fill = "Prediction") +
-  ylim(c(-0.5,1))+
+  labs(y = "R²", x = "Species role", color = "Prediction", fill = "Prediction") +
+  ylim(c(0,1))+
   theme_bw() +
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)),
         legend.title = element_blank(), axis.text.x = element_blank())
 
 ggsave("figures/SpeciesRoleCorrelation.png", dpi = 600, width = 18, units = "cm")
 
-
-p <- ggplot(correlations, aes(x = role, y = correlation, fill = sourceFW)) +
-  geom_point(shape = 21, size = 3, alpha=0.8) +
-  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  coord_flip() +
-  geom_hline(yintercept = 0)+
-  facet_grid(~targetFW) +
-  labs(y = "Correlation", x = "Species role", fill = "Model", title = "Predicted food web") +
-  ylim(c(-0.5,1))+
-  theme_bw() +
-  theme(strip.background = element_rect(fill = "transparent"), plot.title = element_text(hjust = 0.5))
-
-intercepts <- filter(fitted_models, term == "(Intercept)")
-intercepts$role <- factor(intercepts$role, levels = rev(unique(empirical_roles$role)))
-intercepts$Zscore <- intercepts$estimate/intercepts$std.error
-
-ggplot(intercepts, aes(x = role, y = estimate, fill = sourceFW)) +
-  geom_point(shape = 21, size = 4, alpha=0.8) +
-  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  coord_flip() +
-  scale_y_continuous(limits= c(-1, 300), trans = "pseudo_log", breaks = c(0, 10, 100, 1000)) +
-  geom_hline(yintercept = 0)+
-  facet_grid(~targetFW) +
-  labs(y = "Intercept", x = "Species role") +
-  theme_bw()
-
-slopes <- filter(fitted_models, term == "empirical_scaled")
-slopes$role <- factor(slopes$role, levels = levels(intercepts$role))
-
-ggplot(slopes, aes(x = role, y = estimate, fill = sourceFW)) +
-  geom_point(shape = 21, size = 4, alpha=0.8) +
-  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
-  scale_y_continuous(limits = c(-3,15))+
-  coord_flip() +
-  geom_hline(yintercept = 1)+
-  facet_grid(~targetFW) +
-  labs(y = "Slope", x = "Species role") +
-  theme_bw()
