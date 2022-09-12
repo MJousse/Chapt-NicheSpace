@@ -91,14 +91,6 @@ empirical_roles$FW[empirical_roles$FW == "Europe"] <- "Euro"
 species_roles <- left_join(predicted_roles, empirical_roles,
                            by = c("species", "role", "targetFW" = "FW")) 
 
-species_roles$predicted_scaled[is.infinite(species_roles$predicted_scaled)] <- NA # don't model roles without variation...
-
-# exploration
-ggplot(subset(species_roles, role %in% c("indegree", "outdegree", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")))+
-  geom_point(aes(y = predicted, x = empirical, color = sourceFW), alpha = 0.5) +
-  facet_grid(role~targetFW, scales = "free")
-
-
 # calculate the slope, intercept and r^2 for all role, targetFW and sourceFW
 library(purrr)
 library(broom)
