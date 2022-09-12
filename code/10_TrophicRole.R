@@ -105,8 +105,6 @@ fitted_models = species_roles %>%
     augmented = map(model, augment, interval = "confidence")
   )
 
-species_roles$combination <- factor(paste(species_roles$sourceFW, species_roles$targetFW, sep = "-"))
-
 lm_coef <- fitted_models %>% 
   unnest(tidied) %>%
   dplyr::select(targetFW, sourceFW, term, estimate, std.error)
