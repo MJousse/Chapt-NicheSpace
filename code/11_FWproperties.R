@@ -94,28 +94,28 @@ fw_properties$metric <- factor(fw_properties$metric, levels = c("connectance", "
 fw_properties$insample <- factor(fw_properties$insample, levels = c(T,F), labels = c("within food web", "between food webs"))
 
 p1 <- ggplot(filter(fw_properties, metric %in% c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter")), aes(x = metric, y = error, colour = insample, fill = insample)) +
-  geom_pointrange(aes(ymin = error, ymax = error, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
+  geom_point(position=position_dodge(width=0.75), shape= 21, size = 2, alpha = 0.7) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
   geom_hline(yintercept = 0)+
   labs(y = "Relative error", x = "", color = "Prediction", fill = "Prediction") +
   scale_y_continuous(breaks = seq(0,15,5), limits = c(-1,15))+
   theme_bw() +
-  theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)))
+  theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)), legend.title = element_blank())
 
 p2 <- ggplot(filter(fw_properties, metric %in% c("motif1", "motif2", "motif4", "motif5")), aes(x = metric, y = error, colour = insample, fill = insample)) +
-  geom_pointrange(aes(ymin = error, ymax = error, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
+  geom_point(position=position_dodge(width=0.75), shape= 21, size = 2, alpha = 0.7) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
   geom_hline(yintercept = 0)+
   labs(y = "", x = "", color = "Prediction", fill = "Prediction") +
   scale_y_continuous(breaks = seq(0,300,100), limits = c(-20,300))+
   theme_bw() +
-  theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)))
+  theme(strip.background = element_rect(fill = "transparent"), axis.title = element_blank(), legend.title = element_blank())
 
 p1 + p2 + plot_layout(guides = "collect")
 
-ggsave("figures/FWproperties.png", dpi = 600, width = 18, units = "cm")
+ggsave("figures/FWproperties.png", width = 18, height = 9, units = "cm")
 
 ggplot(filter(fw_properties, !is.infinite(error)), aes(x = metric, y = error, fill = sourceFW)) +
   geom_pointrange(aes(ymin = error, ymax = error, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
