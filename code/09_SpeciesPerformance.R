@@ -9,6 +9,7 @@ library(ape)
 library(dplyr)
 library(tidyr)
 library(purrr)
+library(tidybayes)
 library(mFD)
 library(patchwork)
 library(brms)
@@ -78,7 +79,7 @@ species_performance$fmpd_sc <- as.vector(scale(species_performance$fmpd))
 species_performance$prevalence_sc <- as.vector(scale(species_performance$prevalence))
 
 # model with logit auc as response using brms
-auc_mntd <- brm(logitauc ~ mntd_sc + (1|Source) + (1|Target),
+auc_mntd <- brm(logitauc ~ s(mntd_sc) + (1|Source) + (1|Target),
                  data = species_performance,
                  prior = c(
                    prior(normal(0, 1), class = "Intercept"),
@@ -88,7 +89,7 @@ auc_mntd <- brm(logitauc ~ mntd_sc + (1|Source) + (1|Target),
                  sample_prior = "no",
                  iter = 2000)
 
-auc_fmpd <- brm(logitauc ~ fmpd_sc + (1|Source) + (1|Target),
+auc_fmpd <- brm(logitauc ~ s(fmpd_sc) + (1|Source) + (1|Target),
                 data = species_performance,
                 prior = c(
                   prior(normal(0, 1), class = "Intercept"),
