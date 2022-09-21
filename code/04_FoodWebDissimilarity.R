@@ -64,7 +64,7 @@ HighArctic_clims <- raster::extract(r, HighArctic_pt)
 env.pca <- prcomp(rbind(Europe_clims, Pyrenees_clims, Serengeti_clims, HighArctic_clims),
                   center = T, scale.= T)
 summary(env.pca)
-fws <- c(rep("Europe", N), rep("Pyrenees", N), rep("Serengeti", N), rep("High Arctic", N))
+fws <- c(rep("Europe", N), rep("Pyrenees", N), rep("Serengeti", N), rep("Nunavik", N))
 p <- ggbiplot(env.pca, ellipse = T, groups = fws, obs.scale = 1, var.scale = 1) +
   scale_colour_manual(name = "Food web", values = c("royalblue4", "deepskyblue", "red2", "yellowgreen")) +
   theme_minimal() +
@@ -103,6 +103,8 @@ comp.dist <- c(JaccardDissimilarity(Europe.species, HighArctic.species),
 # Phylogenetic Dissimilarity ----------------------------------------------
 # the mean phylogenetic distance to the nearest taxon
 phydist <- as.matrix(read.csv("data/checkpoints/phylodist_mean.csv", row.names = 1))
+# square root the phylogenetic distance matrix (Letten & Cornwell, 2014)
+phydist <- sqrt(phydist)
 colnames(phydist) <- rownames(phydist)
 community <- data.frame(rbind(Europe = as.numeric(rownames(phydist) %in% Europe.species),
                               HighArctic = as.numeric(rownames(phydist) %in% HighArctic.species),
@@ -113,7 +115,7 @@ fw.comdistnt <- phylobetadiv(community, phydist)
 
 # Visualization -----------------------------------------------------------
 # put everything together
-foodwebs <- c("Europe", "High Arctic", "Pyrenees", "Serengeti")
+foodwebs <- c("Europe", "Nunavik", "Pyrenees", "Serengeti")
 FWdist <- expand_grid(FW1 = foodwebs, FW2 = foodwebs)
 FWdist$geo.dist <- c(as.matrix(geo.dist))
 FWdist$env.dist <- c(as.matrix(env.dist))

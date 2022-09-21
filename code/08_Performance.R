@@ -66,7 +66,7 @@ write.csv(overall_performance_draws, "data/checkpoints/overall_performance_draws
 species_performance <- read.csv("data/checkpoints/species_performance.csv", row.names = 1)
 overall_performance <- read.csv("data/checkpoints/overall_performance.csv", row.names = 1)
 FWdist <- read.csv("data/checkpoints/FWdist.csv", row.names = 1)
-FWdist[!is.na(FWdist) & FWdist == "High Arctic"] <- "Arctic"
+FWdist[!is.na(FWdist) & FWdist == "Nunavik"] <- "Arctic"
 overall_performance[overall_performance == "Euro"] <- "Europe"
 species_performance[species_performance == "Euro"] <- "Europe"
 overall_performance <- left_join(overall_performance, FWdist, by = c("Source" = "FW2", "Target" = "FW1"))
@@ -97,7 +97,7 @@ p2 <- ggplot(species_performance) +
 
 # phylogenetic distance
 p3 <- ggplot(species_performance) +
-  geom_jitter(aes(x = phylo.dist, y = auc, colour = Source), alpha = 0.2, height = 0, width = 3) +
+  geom_jitter(aes(x = phylo.dist, y = auc, colour = Source), alpha = 0.2, height = 0, width = 0.3) +
   geom_point(data = overall_performance, aes(x = phylo.dist, y = auc, fill = Source), shape = 21, size = 3) +
   scale_fill_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   scale_color_manual(values = c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
