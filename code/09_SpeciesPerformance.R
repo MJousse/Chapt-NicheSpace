@@ -24,6 +24,7 @@ arctic <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1)
 
 # phylogenetic distance matrix
 phydist <- as.matrix(read.csv("data/checkpoints/phylodist_mean.csv", row.names = 1))
+phydist <- sqrt(phydist)
 colnames(phydist) <- gsub("\\.", " ", colnames(phydist))
 
 # Functional distance matrix ----------------------------------------------
@@ -79,7 +80,7 @@ species_performance$fmpd_sc <- as.vector(scale(species_performance$fmpd))
 species_performance$prevalence_sc <- as.vector(scale(species_performance$prevalence))
 
 # model with logit auc as response using brms
-auc_mntd <- brm(logitauc ~ s(mntd_sc) + (1|Source) + (1|Target),
+auc_mntd <- brm(logitauc ~ s(mntd_sc, k = 5) + (1|Source) + (1|Target),
                  data = species_performance,
                  prior = c(
                    prior(normal(0, 1), class = "Intercept"),
@@ -89,7 +90,7 @@ auc_mntd <- brm(logitauc ~ s(mntd_sc) + (1|Source) + (1|Target),
                  sample_prior = "no",
                  iter = 2000)
 
-auc_fmpd <- brm(logitauc ~ s(fmpd_sc) + (1|Source) + (1|Target),
+auc_fmpd <- brm(logitauc ~ s(fmpd_sc, k = 5) + (1|Source) + (1|Target),
                 data = species_performance,
                 prior = c(
                   prior(normal(0, 1), class = "Intercept"),
@@ -99,7 +100,7 @@ auc_fmpd <- brm(logitauc ~ s(fmpd_sc) + (1|Source) + (1|Target),
                 sample_prior = "no",
                 iter = 2000)
 
-auc_prevalence <- brm(logitauc ~ s(prevalence_sc) + (1|Source) + (1|Target),
+auc_prevalence <- brm(logitauc ~ s(prevalence_sc, k = 5) + (1|Source) + (1|Target),
                 data = species_performance,
                 prior = c(
                   prior(normal(0, 1), class = "Intercept"),
