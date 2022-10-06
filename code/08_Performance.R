@@ -134,7 +134,7 @@ auc_geo_total <- brm(logitauc ~ geo.dist_sc + (1|Source) + (1|Target),
                    prior(cauchy(0, 5), class = "sd")
                  ), 
                  sample_prior = "no",
-                 iter = 2000)
+                 iter = 5000)
 
 # model with logit auc as response and geographic distance, controlling for environmental and phylogenetic distances (direct effect of geographic distance)
 auc_geo_direct <- brm(logitauc ~ geo.dist_sc + phylo.dist_sc + env.dist_sc + (1|Source) + (1|Target),
@@ -145,7 +145,7 @@ auc_geo_direct <- brm(logitauc ~ geo.dist_sc + phylo.dist_sc + env.dist_sc + (1|
                        prior(cauchy(0, 5), class = "sd")
                      ), 
                      sample_prior = "no",
-                     iter = 2000)
+                     iter = 5000)
 
 # model with logit auc as response and phylogenetic distance, controlling for geographic distances (effect of phylogenetic distance)
 auc_phylo <- brm(logitauc ~ phylo.dist_sc + geo.dist_sc + (1|Source) + (1|Target),
@@ -156,7 +156,7 @@ auc_phylo <- brm(logitauc ~ phylo.dist_sc + geo.dist_sc + (1|Source) + (1|Target
                  prior(cauchy(0, 5), class = "sd")
                ), 
                sample_prior = "no",
-               iter = 2000)
+               iter = 5000)
 
 # model with logit auc as response and environmental distance, controlling for geographic distances (effect of environmental distance)
 auc_env <- brm(logitauc ~ env.dist_sc + geo.dist_sc + (1|Source) + (1|Target),
@@ -167,7 +167,7 @@ auc_env <- brm(logitauc ~ env.dist_sc + geo.dist_sc + (1|Source) + (1|Target),
                    prior(cauchy(0, 5), class = "sd")
                  ), 
                  sample_prior = "no",
-                 iter = 2000)
+                 iter = 5000)
 
 # model with log aucpr/prevalence as response using brms
 aucpr_model <- bf(logaucpr ~ env.dist + phylo.dist + (1|Source) + (1|Target))
@@ -250,6 +250,6 @@ p3 <- ggplot(phylo_fe,
         axis.title.y = element_blank(), axis.text.y = element_blank())
 
 p1 + p2 + p3
-ggsave("figures/ModelTransferability.png", width = 9)
+ggsave("figures/ModelTransferability.png", width = 9, height = 4)
 
        
