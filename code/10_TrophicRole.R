@@ -143,7 +143,7 @@ goodness_of_fit %>%
 ggsave(paste0("figures/SI/species_role/R2.png"), scale = 3)
 
 goodness_of_fit$insample <- factor(goodness_of_fit$targetFW == goodness_of_fit$sourceFW,
-                                   levels = c(T,F), labels = c("within food web", "across food web"))
+                                   levels = c(T,F), labels = c("within food web", "between food webs"))
 
 roles <-  c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")
 
