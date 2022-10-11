@@ -10,6 +10,7 @@ library(dplyr)
 library(tidyr)
 library(NetIndices)
 library(ggplot2)
+library(patchwork)
 source("code/functions.R")
 
 # Roles of all species in all empirical webs ------------------------------
@@ -93,8 +94,15 @@ fw_properties <- left_join(predicted_properties, empirical_properties,
 fw_properties$metric <- factor(fw_properties$metric, levels = c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter", paste0("motif", c(1:13))))
 fw_properties$insample <- factor(fw_properties$insample, levels = c(T,F), labels = c("within food web", "between food webs"))
 
+fw_properties_summary <- fw_properties %>%
+  group_by(metric, insample) %>%
+  summarise(error_mean = mean(error, na.rm = T), error_min = min(error, na.rm = T), error_max = max(error, na.rm = T))
+
+
 p1 <- ggplot(filter(fw_properties, metric %in% c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter")), aes(x = metric, y = error, colour = insample, fill = insample)) +
-  geom_point(position=position_dodge(width=0.75), shape= 21, size = 2, alpha = 0.7) +
+  geom_point(position=position_dodge(width=0.75), shape= 45, size = 3) +
+  geom_pointrange(data = filter(fw_properties_summary, metric %in% c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter")),
+                                aes(y = error_mean, ymin = error_min, ymax = error_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
   geom_hline(yintercept = 0)+
@@ -104,7 +112,9 @@ p1 <- ggplot(filter(fw_properties, metric %in% c("connectance", "maxTL", "meanTL
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)), legend.title = element_blank())
 
 p2 <- ggplot(filter(fw_properties, metric %in% c("motif1", "motif2", "motif4", "motif5")), aes(x = metric, y = error, colour = insample, fill = insample)) +
-  geom_point(position=position_dodge(width=0.75), shape= 21, size = 2, alpha = 0.7) +
+  geom_point(position=position_dodge(width=0.75), shape= 45, size = 3) +
+  geom_pointrange(data = filter(fw_properties_summary, metric %in% c("motif1", "motif2", "motif4", "motif5")),
+                  aes(y = error_mean, ymin = error_min, ymax = error_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
   geom_hline(yintercept = 0)+

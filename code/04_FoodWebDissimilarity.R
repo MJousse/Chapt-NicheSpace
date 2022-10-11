@@ -71,11 +71,14 @@ p <- ggbiplot(env.pca, ellipse = T, groups = fws, obs.scale = 1, var.scale = 1) 
   theme(legend.position = "bottom")
 ggsave("figures/SI/PCAenv.pdf", p)
 
-# distance of the climatic centroid of each food web
-env.centroid <- as.data.frame(env.pca$x) %>% cbind(fws) %>%
+# calculate environmental distances
+env.centroid <- data.frame(rbind(Europe_clims, Pyrenees_clims, Serengeti_clims, HighArctic_clims)) %>% 
+  scale() %>%
+  as.data.frame() %>%
+  cbind(fws) %>%
   group_by(fws) %>%
   summarise_all(mean)
-env.dist <- dist(env.centroid[,c(2:7)])
+env.dist <- dist(env.centroid[,-1])
 
 # Geographic Distance -----------------------------------------------------
 # 1. Find the centroid of the N points extracted earlier
