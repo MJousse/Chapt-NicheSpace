@@ -169,17 +169,6 @@ auc_env <- brm(logitauc ~ env.dist_sc + geo.dist_sc + (1|Source) + (1|Target),
                  sample_prior = "no",
                  iter = 5000)
 
-# model with log aucpr/prevalence as response using brms
-aucpr_model <- bf(logaucpr ~ env.dist + phylo.dist + (1|Source) + (1|Target))
-env_model <- bf(env.dist ~ geo.dist)
-phylo_model <- bf(phylo.dist ~ geo.dist)
-
-aucpr_model <- brm(aucpr_model + env_model + phylo_model + set_rescor(FALSE),
-                 data = overall_performance, 
-                 sample_prior = "no",
-                 iter = 2000)
-
-
 # plot geographic distance
 geo_fe <- tibble(geo.dist_sc = seq(min(overall_performance$geo.dist_sc), 
                                 max(overall_performance$geo.dist_sc), length.out=100), Source = NA, Target = NA) %>%
