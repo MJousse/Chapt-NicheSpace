@@ -171,8 +171,8 @@ auc_env <- brm(logitauc ~ env.dist_sc + geo.dist_sc + (1|Source) + (1|Target),
 
 # plot geographic distance
 geo_fe <- tibble(geo.dist_sc = seq(min(overall_performance$geo.dist_sc), 
-                                max(overall_performance$geo.dist_sc), length.out=100), Source = NA, Target = NA) %>%
-  add_epred_draws(auc_geo_total,
+                                max(overall_performance$geo.dist_sc), length.out=100), phylo.dist_sc = 0, env.dist_sc = 0, Source = NA, Target = NA) %>%
+  add_epred_draws(auc_geo_direct,
                    re_formula = NA, ndraws = 1e3) %>%
   mutate(x = (geo.dist_sc * sd(overall_performance$geo.dist) + mean(overall_performance$geo.dist)),
          y = exp(.epred)/(1+exp(.epred)))

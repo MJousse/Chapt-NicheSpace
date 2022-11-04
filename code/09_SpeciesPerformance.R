@@ -194,7 +194,7 @@ p3 <- ggplot(prev_fe,
              aes(x = x, y = y)) +
   geom_point(aes(x = prevalence, y = auc), data = species_performance, size = 0.2, alpha = 0.3) +
   geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
-  labs(y = "AUC", x = "Prevalence")+
+  labs(y = "AUC", x = "Normalized degree")+
   theme_minimal() +
   lims(y = c(0.25,1)) +
   theme(axis.line = element_line(size = 0.5), panel.grid = element_blank(),
