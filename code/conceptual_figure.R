@@ -194,7 +194,7 @@ p<-ggplot(fe_only,
   stat_interval(aes(alpha = stat(level)), color = "royalblue4", .width = c(0.8, 0.95)) +
   geom_line(data = fe_only_mean, color = "royalblue4", size = 1) +
   scale_alpha_discrete(range = c(0.05, 0.1))+
-  labs(x = "Prey body mass", y = "Interaction probability") +
+  labs(x = "Trait predictor", y = "Interaction probability") +
   theme_minimal() + 
   theme(panel.grid = element_blank(), axis.line = element_line(size = 1),
         axis.text = element_blank(), legend.position = "none", axis.title = element_text(size = 12))
@@ -229,18 +229,20 @@ Serengeti <- st_transform(Serengeti, st_crs("EPSG:4326"))
 Serengeti_centroid <- st_coordinates(st_centroid(Serengeti))
 
 # curves
-df <- expand_grid(from = c("Europe", "Pyrenees", "Nunavik", "Serengeti"), to = c("Europe", "Pyrenees", "Nunavik", "Serengeti")) %>%
+df <- expand_grid(from = c("Europe", "Pyrenees", "Northern Québec and Labrador", "Serengeti"), to = c("Europe", "Pyrenees", "Northern Québec and Labrador", "Serengeti")) %>%
   filter(from != to)
 df[which(df$from == "Europe"), c("fromlong", "fromlat")] <- Europe_centroid
 df[which(df$from == "Pyrenees"), c("fromlong", "fromlat")] <- Pyrenees_centroid
-df[which(df$from == "Nunavik"), c("fromlong", "fromlat")] <- Nunavik_centroid
+df[which(df$from == "Northern Québec and Labrador"), c("fromlong", "fromlat")] <- Nunavik_centroid
 df[which(df$from == "Serengeti"), c("fromlong", "fromlat")] <- Serengeti_centroid
 df[which(df$to == "Europe"), c("tolong", "tolat")] <- Europe_centroid
 df[which(df$to == "Pyrenees"), c("tolong", "tolat")] <- Pyrenees_centroid
-df[which(df$to == "Nunavik"), c("tolong", "tolat")] <- Nunavik_centroid
+df[which(df$to == "Northern Québec and Labrador"), c("tolong", "tolat")] <- Nunavik_centroid
 df[which(df$to == "Serengeti"), c("tolong", "tolat")]  <- Serengeti_centroid
 df$size <- 0.5
-df$size[which(df$from == "Europe" & df$to == "Nunavik")] <- 1
+df$size[which(df$from == "Europe" & df$to == "Northern Québec and Labrador")] <- 1
+df$linetype <- "dashed"
+df$linetype[c(1,3,8,7,9,11)] <- "solid"
 
 
 # species proportions
@@ -254,7 +256,7 @@ comp <- bind_rows(c(table(Europe_sp$Class) / nrow(Europe_sp), size = nrow(Europe
           c(table(Serengeti_sp$Class) / nrow(Serengeti_sp), size = nrow(Serengeti_sp))) %>%
   mutate(FW = c("Europe", "Pyrenees", "Nunavik", "Serengeti")) %>%
   pivot_longer(cols = -c(FW, size), values_to = "Proportion", names_to = "Class")
-comp[is.na(comp)] <- 0
+#comp[is.na(comp)] <- 0
 comp[which(comp$FW == "Europe"), c("long", "lat")] <- Europe_centroid
 comp[which(comp$FW == "Pyrenees"), c("long", "lat")] <- Pyrenees_centroid
 comp[which(comp$FW == "Nunavik"), c("long", "lat")] <- Nunavik_centroid
@@ -326,7 +328,7 @@ p <- ggplot() +
   geom_sf(data = Nunavik, fill = alpha("deepskyblue", 0.5), color = "deepskyblue") +
   geom_sf(data = Serengeti, fill = alpha("chartreuse4", 0.5), color =  "chartreuse4") +
   geom_curve(data=df,
-             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, size = size), color = "black",
+             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, linetype = linetype, size = size), color = "black",
              curvature=0.25, alpha = 0.6) + 
   scale_colour_identity() +
   scale_size(range = c(0.5,2))+
@@ -334,7 +336,7 @@ p <- ggplot() +
                    fontface = "bold", nudge_x = -15, nudge_y = -10, colour = "red3") +
   geom_label_repel(data = as.data.frame(Europe_centroid), aes(x = X, y = Y, label = "Europe"), 
                    fontface = "bold", nudge_x = 13, nudge_y = 10, colour = "royalblue4") +
-  geom_label_repel(data = as.data.frame(Nunavik_centroid), aes(x = X, y = Y, label = "Nunavik"), 
+  geom_label_repel(data = as.data.frame(Nunavik_centroid), aes(x = X, y = Y, label = "Northern Québec\nand Labrador"), 
                    fontface = "bold", nudge_x = -5, nudge_y = -10, colour = "deepskyblue") +
   geom_label_repel(data = as.data.frame(Serengeti_centroid), aes(x = X, y = Y, label = "Serengeti"), 
                    fontface = "bold", nudge_x = 23, nudge_y = 20, colour = "chartreuse4") +
@@ -343,7 +345,7 @@ p <- ggplot() +
   annotation_custom(pyrenees_barchart, xmin = Pyrenees_centroid[,1]-25, xmax = Pyrenees_centroid[,1]-5, 
                     ymin = Pyrenees_centroid[,2]-27, ymax = Pyrenees_centroid[,2]-12) + 
   annotation_custom(nunavik_barchart, xmin = Nunavik_centroid[,1]-15, xmax = Nunavik_centroid[,1]+5, 
-                    ymin = Nunavik_centroid[,2]-27, ymax = Nunavik_centroid[,2]-12) + 
+                    ymin = Nunavik_centroid[,2]-29, ymax = Nunavik_centroid[,2]-14) + 
   annotation_custom(serengeti_barchart, xmin = Serengeti_centroid[,1]+13, xmax = Serengeti_centroid[,1]+33, 
                     ymin = Serengeti_centroid[,2]-3, ymax = Serengeti_centroid[,2]+18) + 
   annotation_custom(legend_barchart, xmin = -90, xmax = -40, 
