@@ -170,21 +170,36 @@ auc_env <- brm(logitauc ~ env.dist_sc + geo.dist_sc + (1|Source) + (1|Target),
                  iter = 5000)
 
 # plot geographic distance
-geo_fe <- tibble(geo.dist_sc = seq(min(overall_performance$geo.dist_sc), 
+geo_fe_direct <- tibble(geo.dist_sc = seq(min(overall_performance$geo.dist_sc), 
                                 max(overall_performance$geo.dist_sc), length.out=100), phylo.dist_sc = 0, env.dist_sc = 0, Source = NA, Target = NA) %>%
   add_epred_draws(auc_geo_direct,
-                   re_formula = NA, ndraws = 1e3) %>%
+                   re_formula = NA, ndraws = 1e4) %>%
   mutate(x = (geo.dist_sc * sd(overall_performance$geo.dist) + mean(overall_performance$geo.dist)),
          y = exp(.epred)/(1+exp(.epred)))
 
-geo_fe <- geo_fe %>% 
+geo_fe_direct <- geo_fe_direct %>% 
   group_by(x)  %>%
   summarize(median_qi(y, width = 0.95)) %>%
   select(x, y, ymin, ymax)
 
-p1 <- ggplot(geo_fe,
+geo_fe_total <- tibble(geo.dist_sc = seq(min(overall_performance$geo.dist_sc), 
+                                          max(overall_performance$geo.dist_sc), length.out=100), Source = NA, Target = NA) %>%
+  add_epred_draws(auc_geo_total,
+                  re_formula = NA, ndraws = 1e4) %>%
+  mutate(x = (geo.dist_sc * sd(overall_performance$geo.dist) + mean(overall_performance$geo.dist)),
+         y = exp(.epred)/(1+exp(.epred)))
+
+geo_fe_total <- geo_fe_total %>% 
+  group_by(x)  %>%
+  summarize(median_qi(y, width = 0.95)) %>%
+  select(x, y, ymin, ymax)
+
+p1 <- ggplot(geo_fe_direct,
        aes(x = x/1000, y = y)) +
-  geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.2, data = geo_fe_total, linetype = "dashed", color = "#46BAAA", fill = "#46BAAA") +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), color = "#183446", fill = "#183446", alpha =  0.2) +
+  geom_line(data = geo_fe_total, size = 1, linetype = "dashed", color = "#46BAAA") +
+  geom_line(size = 1, color = "#183446") +
   geom_point(aes(x = geo.dist/1000, y = auc), data = overall_performance) +
   labs(y = "AUC", x = "Geographic distance (10³km)")+
   theme_minimal() +
@@ -196,7 +211,7 @@ p1 <- ggplot(geo_fe,
 env_fe <- tibble(env.dist_sc = seq(min(overall_performance$env.dist_sc), 
                                    max(overall_performance$env.dist_sc), length.out=100), geo.dist_sc = 0, Source = NA, Target = NA) %>%
   add_epred_draws(auc_env,
-                  re_formula = NA, ndraws = 1e3) %>%
+                  re_formula = NA, ndraws = 1e4) %>%
   mutate(x = (env.dist_sc * sd(overall_performance$env.dist) + mean(overall_performance$env.dist)),
          y = exp(.epred)/(1+exp(.epred)))
 
@@ -207,7 +222,8 @@ env_fe <- env_fe %>%
 
 p2 <- ggplot(env_fe,
              aes(x = x, y = y)) +
-  geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), color = "#183446", fill = "#183446", alpha= 0.2) +
+  geom_line(size = 1, color = "#183446") +
   geom_point(aes(x = env.dist, y = auc), data = overall_performance) +
   labs(y = "AUC", x = "Environmental distance")+
   lims(y = c(0.25,1))+
@@ -219,7 +235,7 @@ p2 <- ggplot(env_fe,
 phylo_fe <- tibble(phylo.dist_sc = seq(min(overall_performance$phylo.dist_sc), 
                                    max(overall_performance$phylo.dist_sc), length.out=100), geo.dist_sc = 0, Source = NA, Target = NA) %>%
   add_epred_draws(auc_phylo,
-                  re_formula = NA, ndraws = 1e3) %>%
+                  re_formula = NA, ndraws = 1e4) %>%
   mutate(x = (phylo.dist_sc * sd(overall_performance$phylo.dist) + mean(overall_performance$phylo.dist)),
          y = exp(.epred)/(1+exp(.epred)))
 
@@ -230,7 +246,8 @@ phylo_fe <- phylo_fe %>%
 
 p3 <- ggplot(phylo_fe,
              aes(x = x, y = y)) +
-  geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), color = "#183446", fill = "#183446", alpha= 0.2) +
+  geom_line(size = 1, color = "#183446") +
   geom_point(aes(x = phylo.dist, y = auc), data = overall_performance) +
   labs(y = "AUC", x = "Phylogenetic distance")+
   lims(y = c(0.25,1))+
@@ -239,6 +256,6 @@ p3 <- ggplot(phylo_fe,
         axis.title.y = element_blank(), axis.text.y = element_blank())
 
 p1 + p2 + p3
-ggsave("figures/ModelTransferability.png", width = 9, height = 4)
+ggsave("figures/ModelTransferability.png", width = 8, height = 4)
 
        
