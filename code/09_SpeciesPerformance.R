@@ -146,8 +146,9 @@ phylo_fe <- phylo_fe %>%
 
 p1 <- ggplot(phylo_fe,
              aes(x = x, y = y)) +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), color = "#183446", fill = "#183446", alpha= 0.2) +
+  geom_line(size = 1, color = "#183446") +
   geom_point(aes(x = mntd, y = auc), data = species_performance, size = 0.2, alpha = 0.3) +
-  geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
   labs(y = "AUC", x = "Distance to nearest taxon")+
   theme_minimal() +
   lims(y = c(0.25,1))+
@@ -169,8 +170,9 @@ func_fe <- func_fe %>%
 
 p2 <- ggplot(func_fe,
              aes(x = x, y = y)) +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), color = "#183446", fill = "#183446", alpha= 0.2) +
+  geom_line(size = 1, color = "#183446") +
   geom_point(aes(x = fmpd, y = auc), data = species_performance, size = 0.2, alpha = 0.3) +
-  geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
   labs(y = "AUC", x = "Mean functional distance")+
   theme_minimal() +
   lims(y = c(0.25,1)) +
@@ -192,8 +194,9 @@ prev_fe <- prev_fe %>%
 
 p3 <- ggplot(prev_fe,
              aes(x = x, y = y)) +
+  geom_ribbon(aes(ymin = ymin, ymax = ymax), color = "#183446", fill = "#183446", alpha= 0.2) +
+  geom_line(size = 1, color = "#183446") +
   geom_point(aes(x = prevalence, y = auc), data = species_performance, size = 0.2, alpha = 0.3) +
-  geom_lineribbon(aes(ymin = ymin, ymax = ymax), alpha= 0.5) +
   labs(y = "AUC", x = "Normalized degree")+
   theme_minimal() +
   lims(y = c(0.25,1)) +
@@ -202,7 +205,7 @@ p3 <- ggplot(prev_fe,
 
 p1 + p2 + p3
 
-ggsave("figures/SpeciesPerformance.png", width = 9)
+ggsave("figures/SpeciesPerformance.png", width = 8, height = 4)
 
 # mydatab <- data.frame(
 #   mntd_sc = species_performance$mntd_sc,
