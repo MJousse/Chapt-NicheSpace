@@ -272,7 +272,7 @@ testing_id_serengeti <- as.numeric(c(
 training <- SerengetiFW[-testing_id_serengeti, ]
 N = sum(training$interaction)
 training_negatives <- sample(seq_len(sum(training$interaction==0)), size = N)
-training_id_pyrenees <- as.numeric(c(
+training_id_serengeti <- as.numeric(c(
   rownames(training[training$interaction ==1,]),
   rownames(training[training$interaction ==0,][training_negatives,])
 ))
