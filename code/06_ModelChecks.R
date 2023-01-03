@@ -20,19 +20,21 @@ EuropeModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/EuroModel_brms.rds")
 PyreneesModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel_brms.rds")
 SerengetiModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel_brms.rds")
 
+load("data/checkpoints/train_test_splits.RData")
+
 # Check convergence -------------------------------------------------------
 summary(ArcticModel)
 hist(rhat(ArcticModel))
-mcmc_trace(ArcticModel, regex_pars = "b_")
+mcmc_plot(ArcticModel, pars = c('b_'), type = 'rank_overlay')
 summary(EuropeModel)
 hist(rhat(EuropeModel), xlab = "Rhat", main = "Distribution of potential scale reduction\nfactors for the Europe model")
-mcmc_trace(EuropeModel, regex_pars = "b_")
+mcmc_plot(EuropeModel, pars = c('b_'), type = 'rank_overlay')
 summary(PyreneesModel)
 hist(rhat(PyreneesModel), xlab = "Rhat", main = "Distribution of potential scale reduction\nfactors for the Pyrenees model")
-mcmc_trace(PyreneesModel, regex_pars = "b_")
+mcmc_plot(PyreneesModel, pars = c('b_'), type = 'rank_overlay')
 summary(SerengetiModel)
 hist(rhat(SerengetiModel), xlab = "Rhat", main = "Distribution of potential scale reduction\nfactors for the Serengeti model")
-mcmc_trace(SerengetiModel, regex_pars = "b_")
+mcmc_plot(SerengetiModel, pars = c('b_'), type = 'rank_overlay')
 
 # Posterior predictive checks ---------------------------------------------
 pp_check(ArcticModel, ndraws = 100, type = "bars_grouped", group = "Order.predator")
