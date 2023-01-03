@@ -28,7 +28,7 @@ names(r) <- c("Tmean", "DiuRange", "Isothermality", "Seasonality",
 
 # europe
 Europe <- st_read("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions2016.shp") %>%
-  filter(short_name != "outside")
+  filter(short_name != "outside") %>% st_union()
 Europe_pt <- do.call(rbind, st_sample(Europe, N)) %>%
   as_tibble() %>% setNames(c("lon","lat")) %>%
   SpatialPoints(proj4string = CRS("+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs")) %>%
