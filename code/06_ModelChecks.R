@@ -23,20 +23,22 @@ SerengetiModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel_brm
 load("data/checkpoints/train_test_splits.RData")
 
 # Check convergence -------------------------------------------------------
+color_scheme_set("viridis")
 summary(ArcticModel)
-hist(rhat(ArcticModel))
-mcmc_plot(ArcticModel, pars = c('b_'), type = 'rank_overlay')
+hist(rhat(ArcticModel), xlab = "Rhat", main = "Distribution of rank-normalized potential\nscale reduction factors for the Arctic model")
+mcmc_plot(ArcticModel, variable = c('b_'), regex = T, type = 'rank_overlay')
 summary(EuropeModel)
-hist(rhat(EuropeModel), xlab = "Rhat", main = "Distribution of potential scale reduction\nfactors for the Europe model")
-mcmc_plot(EuropeModel, pars = c('b_'), type = 'rank_overlay')
+hist(rhat(EuropeModel), xlab = "Rhat", main = "Distribution of rank-normalized potential\nscale reduction factors for the Europe model")
+mcmc_plot(EuropeModel, variable = c('b_'), regex = T, type = 'rank_overlay')
 summary(PyreneesModel)
-hist(rhat(PyreneesModel), xlab = "Rhat", main = "Distribution of potential scale reduction\nfactors for the Pyrenees model")
+hist(rhat(PyreneesModel), xlab = "Rhat", main = "Distribution of rank-normalized potential\nscale reduction factors for the Pyrenees model")
 mcmc_plot(PyreneesModel, pars = c('b_'), type = 'rank_overlay')
 summary(SerengetiModel)
-hist(rhat(SerengetiModel), xlab = "Rhat", main = "Distribution of potential scale reduction\nfactors for the Serengeti model")
+hist(rhat(SerengetiModel), xlab = "Rhat", main = "Distribution of rank-normalized potential\nscale reduction factors for the Serengeti model")
 mcmc_plot(SerengetiModel, pars = c('b_'), type = 'rank_overlay')
 
 # Posterior predictive checks ---------------------------------------------
+color_scheme_set("purple")
 pp_check(ArcticModel, ndraws = 100, type = "bars_grouped", group = "Order.predator")
 pp_check(EuropeModel, ndraws = 100, type = "bars_grouped", group = "Order.predator")
 pp_check(PyreneesModel, ndraws = 100, type = "bars_grouped", group = "Order.predator")

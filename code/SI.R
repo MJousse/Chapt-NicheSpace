@@ -4,7 +4,7 @@ library(ggplot2)
 
 # Appendix other performance metrics --------------------------------------
 foodwebs <- c("Euro", "Pyrenees", "Arctic", "Serengeti")
-foodwebs_labs <- c("Europe", "Pyrenees", "Nunavik", "Serengeti")
+foodwebs_labs <- c("Europe", "Pyrenees", "NorthQC", "Serengeti")
 overall_performance <- read.csv("data/checkpoints/overall_performance_draws.csv", row.names = 1) %>%
   pivot_longer(cols = tpr:npv, names_to = "metric") %>%
   mutate(Source = factor(Source, levels = foodwebs, labels = foodwebs_labs), Target = factor(Target, levels = foodwebs, labels = foodwebs_labs), metric = factor(metric, levels = c("tpr", "tnr", "ppv", "npv")))
@@ -28,9 +28,7 @@ overall_performance_auc <- read.csv("data/checkpoints/overall_performance.csv", 
 
 overall_performance <- full_join(overall_performance_othermetrics, overall_performance_auc)
 
-overall_performance$aucpr_std <- overall_performance$aucpr / overall_performance$prevalence
-
-Movr <- cor(overall_performance[,c("auc", "aucpr_std", "tpr", "tnr", "ppv", "npv")])
+Movr <- cor(overall_performance[,c("auc", "aucpr", "tpr", "tnr", "ppv", "npv")])
 
 png("figures/SI/metricCorr_overall.png", width = 300, height = 300)
 corrplot(Movr, method = "number", type = "upper", diag = F)
