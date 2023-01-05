@@ -130,9 +130,12 @@ for (irole in unique(species_roles$role)){
   ggsave(paste0("figures/SI/species_role/", irole, ".png"), scale = 3)
 }
 
+roles <-  c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")
+
 # plot R2
 goodness_of_fit %>%
   mutate(role = factor(role, levels = rev(unique(goodness_of_fit$role)))) %>%
+  filter(role %in% roles) %>%
   ggplot() +
   geom_point(aes(y = role, x = r.squared, color = sourceFW), alpha = 0.75, size = 2) +
   labs(x = "R²", y = "Role", colour = "Model") +
@@ -144,8 +147,6 @@ ggsave(paste0("figures/SI/species_role/R2.png"), scale = 3)
 
 goodness_of_fit$insample <- factor(goodness_of_fit$targetFW == goodness_of_fit$sourceFW,
                                    levels = c(T,F), labels = c("within food web", "between food webs"))
-
-roles <-  c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")
 
 goodness_of_fit2 <- goodness_of_fit %>%
   filter(role %in% roles) %>%
