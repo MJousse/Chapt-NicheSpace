@@ -64,7 +64,7 @@ for (combination in c(1:nrow(combinations))){
   print(Sys.time())
   print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
-  cl <- makeCluster(3) 
+  cl <- makeCluster(8) 
   registerDoParallel(cl)
   role <- foreach(i=c(1:100), .combine = rbind, 
                   .packages = c("igraph", "NetIndices", "multiweb", "dplyr", "tidyr"),
@@ -132,7 +132,7 @@ for (irole in unique(species_roles$role)){
 
 # plot R2
 goodness_of_fit %>%
-  mutate(role = factor(role, levels = unique(goodness_of_fit$role))) %>%
+  mutate(role = factor(role, levels = rev(unique(goodness_of_fit$role)))) %>%
   ggplot() +
   geom_point(aes(y = role, x = r.squared, color = sourceFW), alpha = 0.75, size = 2) +
   labs(x = "R²", y = "Role", colour = "Model") +
@@ -147,15 +147,18 @@ goodness_of_fit$insample <- factor(goodness_of_fit$targetFW == goodness_of_fit$s
 
 roles <-  c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")
 
+goodness_of_fit2 <- goodness_of_fit %>%
+  filter(role %in% roles) %>%
+  mutate(role = factor(role, levels = roles))
+
 r2_summary <- goodness_of_fit %>%
   filter(role %in% roles) %>%
   mutate(role = factor(role, levels = roles)) %>%
   group_by(role, insample) %>%
   summarise(r2_mean = mean(r.squared, na.rm = T), r2_min = min(r.squared, na.rm = T), r2_max = max(r.squared, na.rm = T))
 
-ggplot(subset(r2_summary, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), aes(x = role, y = r2_mean, colour = insample, fill = insample)) +
-  geom_point(data = subset(goodness_of_fit, role %in% c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")), 
-             aes(y = r.squared, colour = insample, fill = insample), position=position_dodge(width=0.75), shape= 45, size = 3) + 
+ggplot(r2_summary, aes(x = role, y = r2_mean, colour = insample, fill = insample)) +
+  geom_point(data = goodness_of_fit2, aes(y = r.squared, colour = insample, fill = insample), position=position_dodge(width=0.75), shape= 45, size = 3) + 
   geom_pointrange(aes(ymin = r2_min, ymax = r2_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
@@ -168,3 +171,11 @@ ggplot(subset(r2_summary, role %in% c("indegree", "outdegree", "betweeness", "cl
 
 ggsave("figures/SpeciesRolePerformance.png", dpi = 600, width = 18, height = 9, units = "cm")
 
+# save coefficients and R²
+lm_coef <- pivot_wider(lm_coef, names_from = term, values_from = c(estimate, std.error))
+lm_results <- left_join(lm_coef, goodness_of_fit) %>%
+  pivot_wider(names_from = targetFW, values_from = c("estimate_(Intercept)", "estimate_empirical", "std.error_(Intercept)", "std.error_empirical", "r.squared")) %>%
+  arrange(role, sourceFW)
+
+lm_results <- lm_results[,c(2,1,6,14,5,13,3,11,4,12,10,18,9,17,7,15,8,16,22,21,19,20)]
+write.csv(lm_results, file = "data/checkpoints/lm_role_results.csv")
