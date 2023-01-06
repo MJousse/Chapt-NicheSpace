@@ -127,7 +127,9 @@ p1 + p2 + plot_layout(guides = "collect")
 
 ggsave("figures/FWproperties.png", width = 18, height = 9, units = "cm")
 
-ggplot(filter(fw_properties, !is.infinite(error)), aes(x = metric, y = error, fill = sourceFW)) +
+
+motifs <- paste0("motif", c(1:13))
+ggplot(filter(fw_properties, !(metric %in% motifs),  !is.infinite(error)), aes(x = metric, y = error, fill = sourceFW)) +
   geom_pointrange(aes(ymin = error, ymax = error, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
   facet_grid(~targetFW, scales = "free") +
@@ -136,3 +138,17 @@ ggplot(filter(fw_properties, !is.infinite(error)), aes(x = metric, y = error, fi
   labs(y = "Relative error", x = "Property", color = "Prediction", fill = "Prediction") +
   theme_bw() +
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)))
+
+ggsave("figures/SI/fwpropertiesSI1.png", width = 6)
+
+ggplot(filter(fw_properties, (metric %in% motifs),  !is.infinite(error)), aes(x = metric, y = error, fill = sourceFW)) +
+  geom_pointrange(aes(ymin = error, ymax = error, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
+  scale_fill_manual(values =  c("deepskyblue","royalblue4", "red3", "chartreuse4")) +
+  facet_grid(~targetFW, scales = "free") +
+  coord_flip() +
+  geom_hline(yintercept = 0)+
+  labs(y = "Relative error", x = "Property", color = "Prediction", fill = "Prediction") +
+  theme_bw() +
+  theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)))
+
+ggsave("figures/SI/fwpropertiesSI2.png", width = 6)

@@ -32,7 +32,7 @@ for (combination in c(1:nrow(overall_performance))){
   targetFW <- overall_performance[combination, "Target"]
   predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
   if (sourceFW == targetFW){
-    predictions_test <- filter(predictions, training == 0)
+    predictions_test <- filter(predictions, testing == 1)
   } else {
     predictions_test <- predictions
   }
@@ -81,7 +81,7 @@ p1 <- ggplot(species_performance) +
   labs(y = "", x = "Geographic distance (10³km)", fill = "Source food web", colour = "Source food web")+
   facet_wrap(~Target, nrow = 1) +
   theme_minimal() +
-  theme(axis.line = element_line(size = 0.5), strip.text = element_text(size = 12),
+  theme(axis.line = element_line(linewidth = 0.5), strip.text = element_text(size = 12),
         strip.background = element_rect(colour = "black"))
 
 # environmental distance
@@ -93,7 +93,7 @@ p2 <- ggplot(species_performance) +
   labs(y = "roc-auc", x = "Environmental distance", fill = "Source food web", colour = "Source food web") +
   facet_wrap(~Target, nrow = 1) +
   theme_minimal() +
-  theme(axis.line = element_line(size = 0.5), strip.text = element_blank())
+  theme(axis.line = element_line(linewidth = 0.5), strip.text = element_blank())
 
 # phylogenetic distance
 p3 <- ggplot(species_performance) +
@@ -104,7 +104,7 @@ p3 <- ggplot(species_performance) +
   labs(y = "", x = "Phylogenetic distance", fill = "Source food web", colour = "Source food web") +
   facet_wrap(~Target, nrow = 1) +
   theme_minimal() +
-  theme(axis.line = element_line(size = 0.5), strip.text = element_blank())
+  theme(axis.line = element_line(linewidth = 0.5), strip.text = element_blank())
 
 # everything together and save
 p <- (p1 / p2 / p3)+ plot_layout(guides = "collect") +
@@ -204,7 +204,7 @@ p1 <- ggplot(geo_fe_direct,
   labs(y = "AUC", x = "Geographic distance (10³km)")+
   theme_minimal() +
   lims(y = c(0.25,1))+
-  theme(axis.line = element_line(size = 0.5), strip.text = element_text(size = 12),
+  theme(axis.line = element_line(linewidth = 0.5), strip.text = element_text(size = 12),
         strip.background = element_rect(colour = "black"), panel.grid = element_blank())
 
 # plot environmental distance
@@ -228,7 +228,7 @@ p2 <- ggplot(env_fe,
   labs(y = "AUC", x = "Environmental distance")+
   lims(y = c(0.25,1))+
   theme_minimal() +
-  theme(axis.line = element_line(size = 0.5), panel.grid = element_blank(),
+  theme(axis.line = element_line(linewidth = 0.5), panel.grid = element_blank(),
         axis.title.y = element_blank(), axis.text.y = element_blank())
 
 # plot phylogenetic distance
@@ -252,7 +252,7 @@ p3 <- ggplot(phylo_fe,
   labs(y = "AUC", x = "Phylogenetic distance")+
   lims(y = c(0.25,1))+
   theme_minimal() +
-  theme(axis.line = element_line(size = 0.5), panel.grid = element_blank(),
+  theme(axis.line = element_line(linewidth = 0.5), panel.grid = element_blank(),
         axis.title.y = element_blank(), axis.text.y = element_blank())
 
 p1 + p2 + p3

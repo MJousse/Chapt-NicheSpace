@@ -120,16 +120,16 @@ auc_all <- brm(logitauc ~ mntd_sc + fmpd_sc + prevalence_sc + (1|Source) + (1|Ta
                       sample_prior = "no",
                       iter = 2000)
 
-# model with log aucpr/prevalence as response using brms
-aucpr_model <- brm(logaucpr ~ mntd_sc + fmpd_sc + prevalence_sc + (1|Source) + (1|Target),
-                   data = species_performance,
-                   prior = c(
-                     prior(normal(0, 1), class = "Intercept"),
-                     prior(normal(0, 1), class = "b"),
-                     prior(cauchy(0, 5), class = "sd")
-                   ), 
-                   sample_prior = "no",
-                   iter = 2000)
+# # model with log aucpr/prevalence as response using brms
+# aucpr_model <- brm(logaucpr ~ mntd_sc + fmpd_sc + prevalence_sc + (1|Source) + (1|Target),
+#                    data = species_performance,
+#                    prior = c(
+#                      prior(normal(0, 1), class = "Intercept"),
+#                      prior(normal(0, 1), class = "b"),
+#                      prior(cauchy(0, 5), class = "sd")
+#                    ), 
+#                    sample_prior = "no",
+#                    iter = 2000)
 
 # plot performance to phylogenetic distance relation
 phylo_fe <- tibble(mntd_sc = seq(min(species_performance$mntd_sc), 

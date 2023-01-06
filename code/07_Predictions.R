@@ -21,6 +21,8 @@ EuropeModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/EuroModel_brms.rds")
 PyreneesModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel_brms.rds")
 SerengetiModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel_brms.rds")
 
+load("data/checkpoints/train_test_splits.RData")
+
 # functional traits
 FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
 
@@ -97,19 +99,21 @@ SerengetiFWscaled[,var2scale] <- sweep(SerengetiFWscaled[,var2scale], MARGIN = 2
 
 # predict arctic food webs
 Arctic_Arctic_predictions <- make_predictions(ArcticModel, newdata = HighArcticFWscaled, 
-                                              allow_new_levels = TRUE, ndraws = 100, extrapolation = F)
+                                              allow_new_levels = TRUE, ndraws = 100)
+Arctic_Arctic_predictions$testing <- 0
+Arctic_Arctic_predictions$testing[testing_id_higharctic] <- 1
 
 # predict european metaweb
 Arctic_Euro_predictions <- make_predictions(ArcticModel, newdata = EuroMWscaled, 
-                                            allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                            allow_new_levels = TRUE, ndraws = 100)
 
 # predict pyrenees food web
 Arctic_Pyrenees_predictions <- make_predictions(ArcticModel, newdata = PyreneesFWscaled, 
-                                                allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                                allow_new_levels = TRUE, ndraws = 100)
 
 # predict serengeti food web
 Arctic_Serengeti_predictions <- make_predictions(ArcticModel, newdata = SerengetiFWscaled, 
-                                                 allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                                 allow_new_levels = TRUE, ndraws = 100)
 
 # Predictions using the European model --------------------------------------
 # find the mean and sd of the predictors to scale new data
@@ -132,19 +136,21 @@ SerengetiFWscaled[,var2scale] <- sweep(SerengetiFWscaled[,var2scale], MARGIN = 2
 
 # predict arctic food webs
 Euro_Arctic_predictions <- make_predictions(EuropeModel, newdata = HighArcticFWscaled, 
-                                            allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                            allow_new_levels = TRUE, ndraws = 100)
 
 # predict european metaweb
 Euro_Euro_predictions <- make_predictions(EuropeModel, newdata = EuroMWscaled, 
-                                          allow_new_levels = TRUE, ndraws = 100, extrapolation = F)
+                                          allow_new_levels = TRUE, ndraws = 100)
+Euro_Euro_predictions$testing <- 0
+Euro_Euro_predictions$testing[testing_id_euro] <- 1
 
 # predict pyrenees food web
 Euro_Pyrenees_predictions <- make_predictions(EuropeModel, newdata = PyreneesFWscaled, 
-                                              allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                              allow_new_levels = TRUE, ndraws = 100)
 
 # predict serengeti food web
 Euro_Serengeti_predictions <- make_predictions(EuropeModel, newdata = SerengetiFWscaled, 
-                                               allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                               allow_new_levels = TRUE, ndraws = 100)
 
 # Predictions using the Pyrenees model --------------------------------------
 # find the mean and sd of the predictors to scale new data
@@ -167,19 +173,21 @@ SerengetiFWscaled[,var2scale] <- sweep(SerengetiFWscaled[,var2scale], MARGIN = 2
 
 # predict arctic food webs
 Pyrenees_Arctic_predictions <- make_predictions(PyreneesModel, newdata = HighArcticFWscaled, 
-                                                allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                                allow_new_levels = TRUE, ndraws = 100)
 
 # predict european metaweb
 Pyrenees_Euro_predictions <- make_predictions(PyreneesModel, newdata = EuroMWscaled, 
-                                              allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                              allow_new_levels = TRUE, ndraws = 100)
 
 # predict pyrenees food web
 Pyrenees_Pyrenees_predictions <- make_predictions(PyreneesModel, newdata = PyreneesFWscaled, 
-                                                  allow_new_levels = TRUE, ndraws = 100, extrapolation = F)
+                                                  allow_new_levels = TRUE, ndraws = 100)
+Pyrenees_Pyrenees_predictions$testing <- 0
+Pyrenees_Pyrenees_predictions$testing[testing_id_pyrenees] <- 1
 
 # predict serengeti food web
 Pyrenees_Serengeti_predictions <- make_predictions(PyreneesModel, newdata = SerengetiFWscaled, 
-                                                   allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                                   allow_new_levels = TRUE, ndraws = 100)
 
 # Predictions using the Serengeti model --------------------------------------
 # find the mean and sd of the predictors to scale new data
@@ -202,19 +210,21 @@ SerengetiFWscaled[,var2scale] <- sweep(SerengetiFWscaled[,var2scale], MARGIN = 2
 
 # predict arctic food webs
 Serengeti_Arctic_predictions <- make_predictions(SerengetiModel, newdata = HighArcticFWscaled, 
-                                                 allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                                 allow_new_levels = TRUE, ndraws = 100)
 
 # predict european metaweb
 Serengeti_Euro_predictions <- make_predictions(SerengetiModel, newdata = EuroMWscaled, 
-                                               allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                               allow_new_levels = TRUE, ndraws = 100)
 
 # predict pyrenees food web
 Serengeti_Pyrenees_predictions <- make_predictions(SerengetiModel, newdata = PyreneesFWscaled, 
-                                                   allow_new_levels = TRUE, ndraws = 100, extrapolation = T)
+                                                   allow_new_levels = TRUE, ndraws = 100)
 
 # predict serengeti food web
 Serengeti_Serengeti_predictions <- make_predictions(SerengetiModel, newdata = SerengetiFWscaled, 
-                                                    allow_new_levels = TRUE, ndraws = 100, extrapolation = F)
+                                                    allow_new_levels = TRUE, ndraws = 100)
+Serengeti_Serengeti_predictions$testing <- 0
+Serengeti_Serengeti_predictions$testing[testing_id_serengeti] <- 1
 
 # Save everything ---------------------------------------------------------
 save(Arctic_Arctic_predictions, Arctic_Euro_predictions, Arctic_Pyrenees_predictions, Arctic_Serengeti_predictions,
