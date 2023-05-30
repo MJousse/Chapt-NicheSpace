@@ -6,11 +6,13 @@
 # 1.3 take 70% of all interactions + equal number of non-interactions
 # 2. Set up bayesian GLMM with brms
 # 3. Train the model and save it on OneDrive (too big for GitHub)
+# 4. Train a Boosted Regression Tree
 
 rm(list = ls())
 set.seed(16)
 library(dplyr)
 library(brms)
+library(gbm)
 source("code/functions.R")
 FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
 brms_form <- bf(interaction ~ 1 + 
@@ -91,6 +93,10 @@ EuroModel <- brm(formula = brms_form,
 # save the model on OneDrive (too big for Github...)
 saveRDS(EuroModel,
         file = paste0("~/OneDrive/Chapt-NicheSpace/models/EuroModel_brms.rds"))
+
+# train a BRT
+
+
 
 # -------------------------------------------------------------------------
 
