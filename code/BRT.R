@@ -33,19 +33,19 @@ EuroMW <- left_join(EuroMW, EuroInteractions)
 EuroMW$interaction[is.na(EuroMW$interaction)] <- 0
 
 # prepare training set
-training <- EuroMW[training_id_euro, ]
-training$TL.predator <- ifelse(training$Herbivore.predator == 1, "Herbivore", ifelse(training$Omnivore.predator == 1, "Omnivore", "Carnivore"))
-training$TL.prey <- ifelse(training$Herbivore.prey == 1, "Herbivore", ifelse(training$Omnivore.prey == 1, "Omnivore", "Carnivore"))
+EuroMW$TL.predator <- ifelse(EuroMW$Herbivore.predator == 1, "Herbivore", ifelse(EuroMW$Omnivore.predator == 1, "Omnivore", "Carnivore"))
+EuroMW$TL.prey <- ifelse(EuroMW$Herbivore.prey == 1, "Herbivore", ifelse(EuroMW$Omnivore.prey == 1, "Omnivore", "Carnivore"))
 
-training <- select(training,  -Predator, -Prey, -Order.prey, -Herbivore.predator, 
-                   -Omnivore.predator, -Carnivore.predator, -Herbivore.prey, 
-                   -Omnivore.prey, -Carnivore.prey) %>%
+EuroMW <- select(EuroMW,  -Predator, -Prey, -Order.prey, -Herbivore.predator, 
+                       -Omnivore.predator, -Carnivore.predator, -Herbivore.prey, 
+                       -Omnivore.prey, -Carnivore.prey) %>%
   mutate(Order.predator = factor(Order.predator, 
                                  levels = unique(FuncTraits$Order)),
          TL.predator = factor(TL.predator, levels = c("Herbivore", "Omnivore", "Carnivore")),
          TL.prey = factor(TL.prey, levels = c("Herbivore", "Omnivore", "Carnivore")),
-         interaction = factor(interaction),
          ActivityTime.match = factor(ActivityTime.match))
+
+training <- EuroMW[training_id_euro, ]
 
 brt_europe <- gbm.step(data=training, gbm.x = c(1,3:12,14,15), gbm.y = 13,
                        family = "bernoulli", tree.complexity = 5,
