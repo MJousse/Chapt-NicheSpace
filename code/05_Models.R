@@ -6,13 +6,11 @@
 # 1.3 take 70% of all interactions + equal number of non-interactions
 # 2. Set up bayesian GLMM with brms
 # 3. Train the model and save it on OneDrive (too big for GitHub)
-# 4. Train a Boosted Regression Tree
 
 rm(list = ls())
 set.seed(16)
 library(dplyr)
 library(brms)
-library(caret)
 source("code/functions.R")
 FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
 brms_form <- bf(interaction ~ 1 + 
@@ -24,19 +22,6 @@ brms_form <- bf(interaction ~ 1 +
                           ActivityTime.match + Habitat.match + BM.match) || Order.predator), 
                 family = bernoulli())
 
-gbmGrid <-  expand.grid(interaction.depth = c(1, 5, 9), 
-                        n.trees = (1:30)*50, 
-                        shrinkage = 0.1,
-                        n.minobsinnode = 20)
-
-fitControl <- trainControl(method = "repeatedcv",
-                           number = 10,
-                           repeats = 10,
-                           ## Estimate class probabilities
-                           classProbs = TRUE,
-                           ## Evaluate performance using 
-                           ## the following function
-                           summaryFunction = twoClassSummary)
 
 # Prepare training dataset ------------------------------------------------
 # load data and standardize
@@ -106,21 +91,6 @@ EuroModel <- brm(formula = brms_form,
 # save the model on OneDrive (too big for Github...)
 saveRDS(EuroModel,
         file = paste0("~/OneDrive/Chapt-NicheSpace/models/EuroModel_brms.rds"))
-
-# train a BRT
-training <- training %>%
-  mutate_at(c("Omnivore.predator", "Carnivore.predator", "Omnivore.prey", "Carnivore.prey", "ActivityTime.match", "interaction"), as.factor)
-brt_europe <- train(
-  interaction ~ .,
-  method = "gbm", 
-  trControl = fitControl,
-  data = training,
-  verbose = FALSE,
-  tuneGrid = gbmGrid
-)
-brt_europe
-summary(brt_europe)
-
 # -------------------------------------------------------------------------
 
 # Prepare training dataset ------------------------------------------------
@@ -192,21 +162,6 @@ ArcticModel <- brm(formula = brms_form,
 # save the model
 saveRDS(ArcticModel, 
         file = paste0("~/OneDrive/Chapt-NicheSpace/models/ArcticModel_brms.rds"))
-
-# train a BRT
-training <- training %>%
-  mutate_at(c("Omnivore.predator", "Carnivore.predator", "Omnivore.prey", "Carnivore.prey", "ActivityTime.match", "interaction"), as.factor)
-brt_arctic <- train(
-  interaction ~ .,
-  method = "gbm", 
-  trControl = fitControl,
-  data = training,
-  verbose = FALSE,
-  tuneGrid = gbmGrid
-)
-brt_arctic
-summary(brt_arctic)
-
 # -------------------------------------------------------------------------
 
 # Prepare training dataset ------------------------------------------------
@@ -279,20 +234,6 @@ PyreneesModel <- brm(formula = brms_form,
 saveRDS(PyreneesModel, 
         file = paste0("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel_brms.rds"))
 
-# train a BRT
-training <- training %>%
-  mutate_at(c("Omnivore.predator", "Carnivore.predator", "Omnivore.prey", "Carnivore.prey", "ActivityTime.match", "interaction"), as.factor)
-brt_pyrenees <- train(
-  interaction ~ .,
-  method = "gbm", 
-  trControl = fitControl,
-  data = training,
-  verbose = FALSE,
-  tuneGrid = gbmGrid
-)
-brt_pyrenees
-summary(brt_pyrenees)
-
 # Prepare training dataset ------------------------------------------------
 # load data and standardize
 SerengetiInteractions <- read.csv("data/cleaned/SerengetiFW.csv", row.names = 1) %>%
@@ -364,20 +305,6 @@ SerengetiModel <- brm(formula = brms_form,
 # save the model
 saveRDS(SerengetiModel, 
      file = paste0("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel_brms.rds"))
-
-# train a BRT
-training <- training %>%
-  mutate_at(c("Omnivore.predator", "Carnivore.predator", "Omnivore.prey", "Carnivore.prey", "ActivityTime.match", "interaction"), as.factor)
-brt_serengeti <- train(
-  interaction ~ .,
-  method = "gbm", 
-  trControl = fitControl,
-  data = training,
-  verbose = FALSE,
-  tuneGrid = gbmGrid
-)
-brt_serengeti
-summary(brt_serengeti)
 
 # save the splits
 save(testing_id_euro, training_id_euro,
