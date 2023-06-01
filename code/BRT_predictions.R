@@ -324,6 +324,6 @@ serengetiBRT_serengetiFW$testing[testing_id_serengeti] <- 1
 save(arcticBRT_arcticFW, arcticBRT_europeFW, arcticBRT_pyreneesFW, arcticBRT_serengetiFW,
      europeBRT_arcticFW, europeBRT_europeFW, europeBRT_pyreneesFW, europeBRT_serengetiFW,
      pyreneesBRT_arcticFW, pyreneesBRT_europeFW, pyreneesBRT_pyreneesFW, pyreneesBRT_serengetiFW,
-     serengetiBRT_arcticFW, serengetiBRT_europeFW, serengetiBRT_pyreneesFW, serengetiBRT_pyreneesFW,
+     serengetiBRT_arcticFW, serengetiBRT_europeFW, serengetiBRT_pyreneesFW, serengetiBRT_serengetiFW,
      file = "data/checkpoints/BRT_predictions.RData")
 
