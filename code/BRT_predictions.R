@@ -6,7 +6,7 @@ library(gbm)
 library(tidyr)
 library(dplyr)
 source("code/functions.R")
-load("data/checkpoints/brt_models.RData")
+load("../../../OneDrive/Chapt-NicheSpace/models/brt_models.RData")
 load("data/checkpoints/train_test_splits.RData")
 
 # functional traits
@@ -260,11 +260,11 @@ pyreneesBRT_pyreneesFW$testing <- 0
 pyreneesBRT_pyreneesFW$testing[testing_id_pyrenees] <- 1
 
 # predict serengeti food web
-pyreneesBRT_seregentiFW <- data.frame(Predator= SerengetiFWscaled$Predator, 
+pyreneesBRT_serengetiFW <- data.frame(Predator= SerengetiFWscaled$Predator, 
                                            Prey = SerengetiFWscaled$Prey,
                                            interaction = SerengetiFWscaled$interaction)
 
-pyreneesBRT_seregentiFW$prediction <- predict.gbm(brt_pyrenees, SerengetiFWscaled,
+pyreneesBRT_serengetiFW$prediction <- predict.gbm(brt_pyrenees, SerengetiFWscaled,
                                                        n.trees=brt_pyrenees$gbm.call$best.trees, type="response")
 
 # Predictions using the Serengeti model --------------------------------------
@@ -323,7 +323,7 @@ serengetiBRT_serengetiFW$testing[testing_id_serengeti] <- 1
 # Save everything ---------------------------------------------------------
 save(arcticBRT_arcticFW, arcticBRT_europeFW, arcticBRT_pyreneesFW, arcticBRT_serengetiFW,
      europeBRT_arcticFW, europeBRT_europeFW, europeBRT_pyreneesFW, europeBRT_serengetiFW,
-     pyreneesBRT_arcticFW, pyreneesBRT_europeFW, pyreneesBRT_pyreneesFW, pyreneesBRT_pyreneesFW,
+     pyreneesBRT_arcticFW, pyreneesBRT_europeFW, pyreneesBRT_pyreneesFW, pyreneesBRT_serengetiFW,
      serengetiBRT_arcticFW, serengetiBRT_europeFW, serengetiBRT_pyreneesFW, serengetiBRT_pyreneesFW,
      file = "data/checkpoints/BRT_predictions.RData")
 
