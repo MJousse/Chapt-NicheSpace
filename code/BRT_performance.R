@@ -42,3 +42,5 @@ for (combination in c(1:nrow(overall_performance))){
   }
 }
 
+write.csv(species_performance, "data/checkpoints/species_brt_performance.csv")
+write.csv(overall_performance, "data/checkpoints/overall_brt_performance.csv")
