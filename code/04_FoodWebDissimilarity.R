@@ -8,10 +8,11 @@
 library(dplyr)
 library(tidyr)
 library(sf)
-library(raster)
-library(ggbiplot)
+library(terra)
 library(patchwork)
 library(purrr)
+library(geodata)
+library(geos)
 source("code/functions_distance.R")
 
 # Environmental Dissimilarity ---------------------------------------------
@@ -19,7 +20,7 @@ source("code/functions_distance.R")
 # 2.Do a PCA with the environmental variables
 # 3.Calculated the distance of centroids in the PCA
 N = 500 # number of points sampled per polygon
-r <- getData("worldclim",var="bio",res=10, path = "data/raw/worldclim")
+r <- worldclim_global(var="bio",res=10, path = "data/raw/worldclim")
 names(r) <- c("Tmean", "DiuRange", "Isothermality", "Seasonality",
               "Tmax", "Tmin", "Trange", "Twetmonth", "Tdrymonth", 
               "Twarmmonth", "Tcoldmonth", "PrecMean", "PrecWetmonth", "PrecDrymonth",
@@ -29,47 +30,36 @@ names(r) <- c("Tmean", "DiuRange", "Isothermality", "Seasonality",
 # europe
 Europe <- st_read("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions2016.shp") %>%
   filter(short_name != "outside") %>% st_union()
-Europe_pt <- do.call(rbind, st_sample(Europe, N)) %>%
-  as_tibble() %>% setNames(c("lon","lat")) %>%
-  SpatialPoints(proj4string = CRS("+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs")) %>%
-  spTransform(CRS("+init=epsg:3857"))
-Europe_clims <- raster::extract(r, Europe_pt)
+Europe_v <- vect(Europe) %>% project(crs(r))
+Europe_clims <- terra::extract(r, Europe_v)
 
 # pyrenees
 Pyrenees <- st_read("data/raw/polygons/EuropeanMountainAreas/m_massifs_v1.shp") %>%
-  filter(name_mm == "Pyrenees")
-Pyrenees_pt <- do.call(rbind, st_sample(Pyrenees, N)) %>%
-  as_tibble() %>% setNames(c("lon","lat")) %>%
-  SpatialPoints(proj4string = CRS("+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs")) %>%
-  spTransform(CRS("+init=epsg:3857"))
-Pyrenees_clims <- raster::extract(r, Pyrenees_pt)
+  filter(name_mm == "Pyrenees") %>% st_union()
+Pyrenees_v <- vect(Pyrenees) %>% project(crs(r))
+Pyrenees_clims <- terra::extract(r, Pyrenees_v)
 
 # serengeti
 Serengeti <- st_read("data/raw/polygons/Serengeti_Ecosystem/v3_serengeti_ecosystem.shp") %>% st_union()
-Serengeti_pt <- do.call(rbind, st_sample(Serengeti, N)) %>%
-  as_tibble() %>% setNames(c("lon","lat")) %>%
-  SpatialPoints(proj4string = CRS("+proj=utm +zone=36 +south +ellps=clrk80 +units=m +no_defs")) %>%
-  spTransform(CRS("+init=epsg:3857"))
-Serengeti_clims <- raster::extract(r, Serengeti_pt)
+Serengeti_v <- vect(Serengeti) %>% project(crs(r))
+Serengeti_clims <- terra::extract(r, Serengeti_v)
 
 # high arctic
-HighArctic <- st_read("data/raw/polygons/HighArctic/QuebecLabrador50.shp")
-HighArctic_pt <- do.call(rbind, st_sample(HighArctic, N)) %>%
-  as_tibble() %>% setNames(c("lon","lat")) %>%
-  SpatialPoints(proj4string = CRS(" +proj=lcc +lat_1=49 +lat_2=77 +lat_0=63.390675 +lon_0=-91.86666666666666 +x_0=6200000 +y_0=3000000 +datum=NAD83 +units=m +no_defs")) %>%
-  spTransform(CRS("+init=epsg:3857"))
-HighArctic_clims <- raster::extract(r, HighArctic_pt)
+HighArctic <- st_read("data/raw/polygons/HighArctic/QuebecLabrador50.shp") %>% st_union()
+HighArctic_v <- vect(HighArctic) %>% project(crs(r))
+HighArctic_clims <- terra::extract(r, HighArctic_v)
+
+fws <- c(rep("Europe", nrow(Europe_clims)), rep("Pyrenees", nrow(Pyrenees_clims)), rep("Serengeti", nrow(Serengeti_clims)), rep("Nunavik", nrow(HighArctic_clims)))
 
 # pca of climating variables
-env.pca <- prcomp(rbind(Europe_clims, Pyrenees_clims, Serengeti_clims, HighArctic_clims),
-                  center = T, scale.= T)
-summary(env.pca)
-fws <- c(rep("Europe", N), rep("Pyrenees", N), rep("Serengeti", N), rep("Nunavik", N))
-p <- ggbiplot(env.pca, ellipse = T, groups = fws, obs.scale = 1, var.scale = 1) +
-  scale_colour_manual(name = "Food web", values = c("royalblue4", "deepskyblue", "red2", "yellowgreen")) +
-  theme_minimal() +
-  theme(legend.position = "bottom")
-ggsave("figures/SI/PCAenv.pdf", p)
+# env.pca <- prcomp(rbind(Europe_clims, Pyrenees_clims, Serengeti_clims, HighArctic_clims),
+#                   center = T, scale.= T)
+# summary(env.pca)
+# p <- ggbiplot(env.pca, ellipse = T, groups = fws, obs.scale = 1, var.scale = 1) +
+#   scale_colour_manual(name = "Food web", values = c("royalblue4", "deepskyblue", "red2", "yellowgreen")) +
+#   theme_minimal() +
+#   theme(legend.position = "bottom")
+# ggsave("figures/SI/PCAenv.pdf", p)
 
 # calculate environmental distances
 env.centroid <- data.frame(rbind(Europe_clims, Pyrenees_clims, Serengeti_clims, HighArctic_clims)) %>% 
@@ -77,18 +67,21 @@ env.centroid <- data.frame(rbind(Europe_clims, Pyrenees_clims, Serengeti_clims, 
   as.data.frame() %>%
   cbind(fws) %>%
   group_by(fws) %>%
-  summarise_all(mean)
-env.dist <- dist(env.centroid[,-1])
+  summarise_all(mean, na.rm = T)
+env.dist <- dist(env.centroid[,-c(1,2)])
 
 # Geographic Distance -----------------------------------------------------
-# 1. Find the centroid of the N points extracted earlier
-# 2. Take the distance in km between all centroids
-coords <- rbind(Europe_pt@coords, Pyrenees_pt@coords, Serengeti_pt@coords, HighArctic_pt@coords)
-geo.centroid <- as.data.frame(coords) %>% cbind(fws) %>%
-  group_by(fws) %>%
-  summarise_all(mean)
-geo.dist <- dist(geo.centroid[,c(2,3)]/1000) # distance in km
+# 1. Get the centroid of each polygon
+# 2. Transform to geodetic coordinates
+# 3. Create a multipoint df object
+# 4. Use the function st_distance to get the great-circle distance
+sf_use_s2(FALSE)
+europe_centroid <- Europe %>% st_transform(crs(r)) %>% st_centroid()
+pyrenees_centroid <- Pyrenees %>% st_transform(crs(r)) %>% st_centroid()
+serengeti_centroid <- Serengeti %>% st_transform(crs(r)) %>% st_centroid()
+nunavik_centroid <- HighArctic %>% st_transform(crs(r)) %>% st_centroid()
 
+geo.dist <- st_distance(c(europe_centroid, nunavik_centroid, pyrenees_centroid, serengeti_centroid))/1000
 
 # Compositional Dissimilarity ---------------------------------------------
 # jaccard dissimilarity
