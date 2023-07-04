@@ -177,11 +177,12 @@ Amphi_traits <- filter(Tetrapods_traits, Class == "Amphibia") %>%
 sp <- Amphi_traits$Species
 traits <- Amphi_traits %>% select(-Species)
 trait_coverage <- Amphi_traits %>%
-  mutate(Habitat = Forest) %>%
-  select(Trophic_level, Diel_activity, Habitat_breadth_IUCN, Habitat, Body_length_mm, Body_mass_g, Longevity_d, Litter_clutch_size, Maturity_d, Max_longevity_d, Adult_svl_cm, Generation_length_d) %>%
   filter(if_any(everything(), ~ !is.na(.))) %>%
   summarise_all(coverage)
 Amphi_traits_full <- missForest(traits)
+means <- traits %>% select_if(is.numeric) %>% summarise(across(where(is.numeric), ~ mean(.x, na.rm = TRUE)))
+sds <- traits %>% select_if(is.numeric) %>% summarise(across(where(is.numeric), ~ sd(.x, na.rm = TRUE)))
+
 Amphi_traits_full <- data.frame(Species=sp, Amphi_traits_full$ximp) %>%
   left_join(select(Amphi_traits, Species, Genus, Family))
 
@@ -191,11 +192,12 @@ Bird_traits <- filter(Tetrapods_traits, Class == "Aves") %>%
 sp <- Bird_traits$Species
 traits <- Bird_traits %>% select(-Species, -Genus, -Family)
 trait_coverage <- Bird_traits %>%
-  mutate(Habitat = Forest) %>%
-  select(Trophic_level, Diel_activity, Habitat_breadth_IUCN, Habitat, Body_length_mm, Body_mass_g, Longevity_d, Litter_clutch_size, Maturity_d, Max_longevity_d, Adult_svl_cm, Generation_length_d) %>%
   filter(if_any(everything(), ~ !is.na(.))) %>%
   summarise_all(coverage)
 Bird_traits_full <- missForest(traits)
+means <- traits %>% select_if(is.numeric) %>% summarise(across(where(is.numeric), ~ mean(.x, na.rm = TRUE)))
+sds <- traits %>% select_if(is.numeric) %>% summarise(across(where(is.numeric), ~ sd(.x, na.rm = TRUE)))
+
 Bird_traits_full <- data.frame(Species=sp, Bird_traits_full$ximp) %>%
   left_join(select(Bird_traits, Species, Genus, Family))
 
@@ -205,11 +207,12 @@ Mam_traits <- filter(Tetrapods_traits, Class == "Mammalia") %>%
 sp <- Mam_traits$Species
 traits <- Mam_traits %>% select(-Species, -Genus)
 trait_coverage <- Mam_traits %>%
-  mutate(Habitat = Forest) %>%
-  select(Trophic_level, Diel_activity, Habitat_breadth_IUCN, Habitat, Body_length_mm, Body_mass_g, Longevity_d, Litter_clutch_size, Maturity_d, Max_longevity_d, Adult_svl_cm, Generation_length_d) %>%
   filter(if_any(everything(), ~ !is.na(.))) %>%
   summarise_all(coverage)
 Mam_traits_full <- missForest(traits)
+means <- traits %>% select_if(is.numeric) %>% summarise(across(where(is.numeric), ~ mean(.x, na.rm = TRUE)))
+sds <- traits %>% select_if(is.numeric) %>% summarise(across(where(is.numeric), ~ sd(.x, na.rm = TRUE)))
+
 Mam_traits_full <- data.frame(Species=sp, Mam_traits_full$ximp) %>%
   left_join(select(Mam_traits, Species, Genus, Family))
 
@@ -220,13 +223,12 @@ sp <- Rept_traits$Species
 traits <- Rept_traits %>% select(-Species, -Genus)
 trait_coverage <- Rept_traits %>%
   mutate(Habitat = Forest) %>%
-  select(Trophic_level, Diel_activity, Habitat_breadth_IUCN, Habitat, Body_length_mm, Body_mass_g, Longevity_d, Litter_clutch_size, Maturity_d, Max_longevity_d, Adult_svl_cm, Generation_length_d) %>%
   filter(if_any(everything(), ~ !is.na(.))) %>%
   summarise_all(coverage)
-Rept_traits_full <- missForest(traits, variablewise = T)
-data.frame(varname = names(Rept_traits_full$ximp), 
-           error_type = names(Rept_traits_full$OOBerror), 
-           error = Rept_traits_full$OOBerror)
+Rept_traits_full <- missForest(traits)
+means <- traits %>% select_if(is.numeric) %>% summarise(across(where(is.numeric), ~ mean(.x, na.rm = TRUE)))
+sds <- traits %>% select_if(is.numeric) %>% summarise(across(where(is.numeric), ~ sd(.x, na.rm = TRUE)))
+
 Rept_traits_full <- data.frame(Species=sp, Rept_traits_full$ximp) %>%
   left_join(select(Rept_traits, Species, Genus, Family))
 
