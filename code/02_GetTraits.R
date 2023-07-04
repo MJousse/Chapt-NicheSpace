@@ -165,6 +165,7 @@ Serengeti_coverage <- select(Serengeti_traits, -Species, -Genus, -Class, -Order,
 Serengeti_coverage <- sum(!is.na(Serengeti_coverage)) / (ncol(Serengeti_coverage) * nrow(Serengeti_coverage))
 
 # Impute missing data for each class separately ----------------------------
+coverage <- function(x){sum(!is.na(x))/length(x)}
 # Join data from all food webs
 Tetrapods_traits <- bind_rows(Euro_traits, Serengeti_traits, Pyrennees_traits, HighArctic_traits) %>%
   distinct() %>%
@@ -175,6 +176,11 @@ Amphi_traits <- filter(Tetrapods_traits, Class == "Amphibia") %>%
   droplevels()
 sp <- Amphi_traits$Species
 traits <- Amphi_traits %>% select(-Species)
+trait_coverage <- Amphi_traits %>%
+  mutate(Habitat = Forest) %>%
+  select(Trophic_level, Diel_activity, Habitat_breadth_IUCN, Habitat, Body_length_mm, Body_mass_g, Longevity_d, Litter_clutch_size, Maturity_d, Max_longevity_d, Adult_svl_cm, Generation_length_d) %>%
+  filter(if_any(everything(), ~ !is.na(.))) %>%
+  summarise_all(coverage)
 Amphi_traits_full <- missForest(traits)
 Amphi_traits_full <- data.frame(Species=sp, Amphi_traits_full$ximp) %>%
   left_join(select(Amphi_traits, Species, Genus, Family))
@@ -184,6 +190,11 @@ Bird_traits <- filter(Tetrapods_traits, Class == "Aves") %>%
   droplevels()
 sp <- Bird_traits$Species
 traits <- Bird_traits %>% select(-Species, -Genus, -Family)
+trait_coverage <- Bird_traits %>%
+  mutate(Habitat = Forest) %>%
+  select(Trophic_level, Diel_activity, Habitat_breadth_IUCN, Habitat, Body_length_mm, Body_mass_g, Longevity_d, Litter_clutch_size, Maturity_d, Max_longevity_d, Adult_svl_cm, Generation_length_d) %>%
+  filter(if_any(everything(), ~ !is.na(.))) %>%
+  summarise_all(coverage)
 Bird_traits_full <- missForest(traits)
 Bird_traits_full <- data.frame(Species=sp, Bird_traits_full$ximp) %>%
   left_join(select(Bird_traits, Species, Genus, Family))
@@ -193,6 +204,11 @@ Mam_traits <- filter(Tetrapods_traits, Class == "Mammalia") %>%
   droplevels()
 sp <- Mam_traits$Species
 traits <- Mam_traits %>% select(-Species, -Genus)
+trait_coverage <- Mam_traits %>%
+  mutate(Habitat = Forest) %>%
+  select(Trophic_level, Diel_activity, Habitat_breadth_IUCN, Habitat, Body_length_mm, Body_mass_g, Longevity_d, Litter_clutch_size, Maturity_d, Max_longevity_d, Adult_svl_cm, Generation_length_d) %>%
+  filter(if_any(everything(), ~ !is.na(.))) %>%
+  summarise_all(coverage)
 Mam_traits_full <- missForest(traits)
 Mam_traits_full <- data.frame(Species=sp, Mam_traits_full$ximp) %>%
   left_join(select(Mam_traits, Species, Genus, Family))
@@ -202,7 +218,15 @@ Rept_traits <- filter(Tetrapods_traits, Class == "Reptilia") %>%
   droplevels()
 sp <- Rept_traits$Species
 traits <- Rept_traits %>% select(-Species, -Genus)
-Rept_traits_full <- missForest(traits)
+trait_coverage <- Rept_traits %>%
+  mutate(Habitat = Forest) %>%
+  select(Trophic_level, Diel_activity, Habitat_breadth_IUCN, Habitat, Body_length_mm, Body_mass_g, Longevity_d, Litter_clutch_size, Maturity_d, Max_longevity_d, Adult_svl_cm, Generation_length_d) %>%
+  filter(if_any(everything(), ~ !is.na(.))) %>%
+  summarise_all(coverage)
+Rept_traits_full <- missForest(traits, variablewise = T)
+data.frame(varname = names(Rept_traits_full$ximp), 
+           error_type = names(Rept_traits_full$OOBerror), 
+           error = Rept_traits_full$OOBerror)
 Rept_traits_full <- data.frame(Species=sp, Rept_traits_full$ximp) %>%
   left_join(select(Rept_traits, Species, Genus, Family))
 
