@@ -91,6 +91,16 @@ empirical_roles$FW[empirical_roles$FW == "Europe"] <- "Euro"
 species_roles <- left_join(predicted_roles, empirical_roles,
                            by = c("species", "role", "targetFW" = "FW")) 
 
+species_roles_stats <- species_roles %>%
+  group_by(role, targetFW, sourceFW) %>%
+  reframe(predicted_mean = mean(predicted),
+          empirical_mean = mean(empirical, na.rm = T),
+          predicted_cv = sd(predicted)/mean(predicted),
+          empirical_cv = sd(empirical, na.rm = T)/mean(empirical, na.rm = T)) %>%
+  mutate(mean_ratio = predicted_mean/empirical_mean,
+         cv_ratio = predicted_cv/empirical_cv) %>%
+  filter(empirical_mean != 0)
+
 # calculate the slope, intercept and r^2 for all role, targetFW and sourceFW
 library(purrr)
 library(broom)
