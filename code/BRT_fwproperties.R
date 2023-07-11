@@ -46,3 +46,51 @@ for (combination in c(1:nrow(combinations))){
                                 data.frame(t(fw_properties_mean)) %>% pivot_longer(everything(), names_to = "metric", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
   write.csv(predicted_properties, file = "data/checkpoints/PredictedProperties_BRT.csv")
 }
+
+# Compare the empirical roles and predicted roles -------------------------
+empirical_properties <- read.csv("data/checkpoints/EmpiricalProperties.csv", row.names = 1)
+predicted_properties <- read.csv("data/checkpoints/PredictedProperties_BRT.csv", row.names = 1)
+
+empirical_properties$FW <- tolower(empirical_properties$FW)
+empirical_properties$FW[empirical_properties$FW == "euro"] <- "europe"
+
+fw_properties <- left_join(predicted_properties, empirical_properties,
+                           by = c("metric", "targetFW" = "FW")) %>%
+  drop_na() %>%
+  mutate(error = (predicted-empirical)/empirical,
+         insample = (targetFW == sourceFW))
+
+fw_properties$metric <- factor(fw_properties$metric, levels = c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter", paste0("motif", c(1:13))))
+fw_properties$insample <- factor(fw_properties$insample, levels = c(T,F), labels = c("within food web", "between food webs"))
+
+fw_properties_summary <- fw_properties %>%
+  group_by(metric, insample) %>%
+  summarise(error_mean = mean(error, na.rm = T), error_min = min(error, na.rm = T), error_max = max(error, na.rm = T))
+
+
+p1 <- ggplot(filter(fw_properties, metric %in% c("connectance", "n_clusters", "modularity", "diameter")), aes(x = metric, y = error, colour = insample, fill = insample)) +
+  geom_point(position=position_dodge(width=0.75), shape= 45, size = 3) +
+  geom_pointrange(data = filter(fw_properties_summary, metric %in% c("connectance", "n_clusters", "modularity", "diameter")),
+                  aes(y = error_mean, ymin = error_min, ymax = error_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
+  scale_color_manual(values =  c("grey50","black")) +
+  scale_fill_manual(values = c("white","black")) +
+  geom_hline(yintercept = 0)+
+  labs(y = "Relative error", x = "", color = "Prediction", fill = "Prediction") +
+  theme_bw() +
+  theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)), legend.title = element_blank())
+
+p2 <- ggplot(filter(fw_properties, metric %in% c("motif1", "motif2", "motif4", "motif5")), aes(x = metric, y = error, colour = insample, fill = insample)) +
+  geom_point(position=position_dodge(width=0.75), shape= 45, size = 3) +
+  geom_pointrange(data = filter(fw_properties_summary, metric %in% c("motif1", "motif2", "motif4", "motif5")),
+                  aes(y = error_mean, ymin = error_min, ymax = error_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
+  scale_color_manual(values =  c("grey50","black")) +
+  scale_fill_manual(values = c("white","black")) +
+  geom_hline(yintercept = 0)+
+  labs(y = "", x = "", color = "Prediction", fill = "Prediction") +
+  scale_y_continuous(breaks = seq(0,100,50), limits = c(-20,100))+
+  theme_bw() +
+  theme(strip.background = element_rect(fill = "transparent"), axis.title = element_blank(), legend.title = element_blank())
+
+p1 + p2 + plot_layout(guides = "collect")
+
+ggsave("figures/SI/FWproperties_BRT.png", width = 18, height = 9, units = "cm")
