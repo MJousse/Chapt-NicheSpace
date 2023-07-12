@@ -129,10 +129,14 @@ fitted <- fitted_models %>%
 
 # plot individual regressions
 for (irole in unique(species_roles$role)){
-  d <- filter(fitted, role == irole)
+  d <- filter(fitted, role == irole) %>%
+    mutate(sourceFW = factor(sourceFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti")),
+           targetFW = factor(targetFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti")))
   ggplot(d, aes(x = empirical, y = .fitted)) +
     geom_ribbon(aes(ymin = .lower, ymax = .upper, fill = sourceFW), alpha = 0.5) +
     geom_line(aes(colour = sourceFW)) +
+    scale_color_manual(values = c("#595365", "#8ACB88", "#E4572E", "#FFBF46")) +
+    scale_fill_manual(values = c("#595365", "#8ACB88", "#E4572E", "#FFBF46")) +
     geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
     labs(x = "empirical", y = "predicted", colour = "Model", fill = "Model") + 
     facet_wrap(.~targetFW, nrow = 2, scales = "free") +
@@ -144,10 +148,13 @@ roles <-  c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within
 
 # plot R2
 goodness_of_fit %>%
-  mutate(role = factor(role, levels = rev(unique(goodness_of_fit$role)))) %>%
+  mutate(role = factor(role, levels = rev(unique(goodness_of_fit$role))),
+         sourceFW = factor(sourceFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti")),
+         targetFW = factor(targetFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti"))) %>%
   filter(role %in% roles) %>%
   ggplot() +
   geom_point(aes(y = role, x = r.squared, color = sourceFW), alpha = 0.75, size = 2) +
+  scale_color_manual(values = c("#595365", "#8ACB88", "#E4572E", "#FFBF46")) +
   labs(x = "R²", y = "Role", colour = "Model") +
   facet_wrap(.~targetFW, nrow = 1, scales = "free_x") +
   theme_classic() +
@@ -169,7 +176,7 @@ r2_summary <- goodness_of_fit %>%
   summarise(r2_mean = mean(r.squared, na.rm = T), r2_min = min(r.squared, na.rm = T), r2_max = max(r.squared, na.rm = T))
 
 ggplot(r2_summary, aes(x = role, y = r2_mean, colour = insample, fill = insample)) +
-  geom_point(data = goodness_of_fit2, aes(y = r.squared, colour = insample, fill = insample), position=position_dodge(width=0.75), shape= 45, size = 3) + 
+  geom_point(data = goodness_of_fit2, aes(y = r.squared, colour = insample, fill = insample), position=position_dodge(width=0.75), shape= 45, size = 6) + 
   geom_pointrange(aes(ymin = r2_min, ymax = r2_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +

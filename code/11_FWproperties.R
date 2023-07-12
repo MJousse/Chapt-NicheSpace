@@ -100,7 +100,7 @@ fw_properties_summary <- fw_properties %>%
 
 
 p1 <- ggplot(filter(fw_properties, metric %in% c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter")), aes(x = metric, y = error, colour = insample, fill = insample)) +
-  geom_point(position=position_dodge(width=0.75), shape= 45, size = 3) +
+  geom_point(position=position_dodge(width=0.75), shape= 45, size = 6) +
   geom_pointrange(data = filter(fw_properties_summary, metric %in% c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter")),
                                 aes(y = error_mean, ymin = error_min, ymax = error_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
@@ -112,7 +112,7 @@ p1 <- ggplot(filter(fw_properties, metric %in% c("connectance", "maxTL", "meanTL
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)), legend.title = element_blank())
 
 p2 <- ggplot(filter(fw_properties, metric %in% c("motif1", "motif2", "motif4", "motif5")), aes(x = metric, y = error, colour = insample, fill = insample)) +
-  geom_point(position=position_dodge(width=0.75), shape= 45, size = 3) +
+  geom_point(position=position_dodge(width=0.75), shape= 45, size = 6) +
   geom_pointrange(data = filter(fw_properties_summary, metric %in% c("motif1", "motif2", "motif4", "motif5")),
                   aes(y = error_mean, ymin = error_min, ymax = error_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
@@ -125,7 +125,7 @@ p2 <- ggplot(filter(fw_properties, metric %in% c("motif1", "motif2", "motif4", "
 
 p1 + p2 + plot_layout(guides = "collect")
 
-ggsave("figures/FWproperties.png", width = 18, height = 9, units = "cm")
+ggsave("figures/FWproperties.png", width = 18, height = 9, units = "cm", dpi = 600)
 
 
 motifs <- paste0("motif", c(1:13))
