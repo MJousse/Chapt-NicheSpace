@@ -5,6 +5,7 @@ library(ggplot2)
 library(patchwork)
 library(dplyr)
 library(tidyr)
+library(prg)
 load("data/checkpoints/BRT_predictions.RData")
 
 foodwebs <- c("arctic", "europe", "pyrenees", "serengeti")
@@ -12,7 +13,7 @@ source("code/functions.R")
 
 # Calculate performance ---------------------------------------------------
 overall_performance <- expand_grid(Source = foodwebs, Target = foodwebs) %>%
-  mutate(auc = NA, aucpr = NA, prevalence = NA)
+  mutate(auc = NA, aucprg = NA, prevalence = NA)
 overall_performance_draws <- data.frame()
 species_performance <- data.frame()
 
@@ -28,7 +29,7 @@ for (combination in c(1:nrow(overall_performance))){
     predictions_test <- predictions
   }
   overall_performance[combination, "auc"] <- performance(prediction(predictions_test$prediction, predictions_test$interaction), "auc")@y.values[[1]]
-  overall_performance[combination, "aucpr"] <- performance(prediction(predictions_test$prediction, predictions_test$interaction), "aucpr")@y.values[[1]]
+  overall_performance[combination, "aucprg"] <- calc_auprg(create_prg_curve(predictions_test$interaction, predictions_test$prediction))
   overall_performance[combination, "prevalence"] <- sum(predictions_test$interaction)/nrow(predictions_test)
   fw_sp <- unique(predictions$Predator)
   for (species in fw_sp){
