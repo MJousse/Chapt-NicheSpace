@@ -121,7 +121,6 @@ ggsave("figures/SI/ModelTransferabilityFull.png", p)
 
 # transform responses
 overall_performance$logitauc <- log(overall_performance$auc / (1-overall_performance$auc))
-overall_performance$logitauprg <- log(overall_performance$aucprg / (1-overall_performance$aucprg))
 
 # scale predictors
 overall_performance$geo.dist_sc <- as.vector(scale(overall_performance$geo.dist))
@@ -260,48 +259,3 @@ p3 <- ggplot(phylo_fe,
 
 p1 + p2 + p3
 ggsave("figures/ModelTransferability.png", width = 8, height = 4)
-
-### AUPRG
-# model with logit auc as response and only geographic distance using brms (total effect of geographic distances)
-auprg_geo_total <- brm(logitauprg ~ geo.dist_sc + (1|Source) + (1|Target),
-                     data = overall_performance,
-                     prior = c(
-                       prior(normal(0, 1), class = "Intercept"),
-                       prior(normal(0, 1), class = "b"),
-                       prior(cauchy(0, 5), class = "sd")
-                     ), 
-                     sample_prior = "no",
-                     iter = 5000)
-
-# model with logit auc as response and geographic distance, controlling for environmental and phylogenetic distances (direct effect of geographic distance)
-auprg_geo_direct <- brm(logitauprg ~ geo.dist_sc + phylo.dist_sc + env.dist_sc + (1|Source) + (1|Target),
-                      data = overall_performance,
-                      prior = c(
-                        prior(normal(0, 1), class = "Intercept"),
-                        prior(normal(0, 1), class = "b"),
-                        prior(cauchy(0, 5), class = "sd")
-                      ), 
-                      sample_prior = "no",
-                      iter = 5000)
-
-# model with logit auc as response and phylogenetic distance, controlling for geographic distances (effect of phylogenetic distance)
-auprg_phylo <- brm(logitauprg ~ phylo.dist_sc + geo.dist_sc + (1|Source) + (1|Target),
-                 data = overall_performance,
-                 prior = c(
-                   prior(normal(0, 1), class = "Intercept"),
-                   prior(normal(0, 1), class = "b"),
-                   prior(cauchy(0, 5), class = "sd")
-                 ), 
-                 sample_prior = "no",
-                 iter = 5000)
-
-# model with logit auc as response and environmental distance, controlling for geographic distances (effect of environmental distance)
-auprg_env <- brm(logitauprg ~ env.dist_sc + geo.dist_sc + (1|Source) + (1|Target),
-               data = overall_performance,
-               prior = c(
-                 prior(normal(0, 1), class = "Intercept"),
-                 prior(normal(0, 1), class = "b"),
-                 prior(cauchy(0, 5), class = "sd")
-               ), 
-               sample_prior = "no",
-               iter = 5000)
