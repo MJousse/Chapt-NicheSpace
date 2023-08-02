@@ -29,7 +29,7 @@ for (combination in c(1:nrow(combinations))){
   print(Sys.time())
   print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
   predictions <- get(paste0(sourceFW, "BRT_", targetFW, "FW"))
-  cl <- makeCluster(8) 
+  cl <- makeCluster(12) 
   registerDoParallel(cl)
   role <- foreach(i=c(1:100), .combine = rbind, 
                   .packages = c("igraph", "NetIndices", "multiweb", "dplyr", "tidyr"),
