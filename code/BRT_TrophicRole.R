@@ -51,7 +51,7 @@ for (combination in c(1:nrow(combinations))){
 # Compare the empirical roles and predicted roles -------------------------
 empirical_roles <- read.csv("data/checkpoints/SpeciesRole.csv", row.names = 1)
 predicted_roles <- read.csv("data/checkpoints/predicted_roles_BRT.csv", row.names = 1)
-empirical_roles$FW[empirical_roles$FW == "Europe"] <- "Euro"
+empirical_roles$FW <- tolower(empirical_roles$FW)
 
 species_roles <- left_join(predicted_roles, empirical_roles,
                            by = c("species", "role", "targetFW" = "FW")) 
@@ -92,33 +92,7 @@ fitted <- fitted_models %>%
   unnest(augmented) %>%
   dplyr::select(targetFW, sourceFW, role, empirical, .fitted, .upper, .lower)
 
-# plot individual regressions
-for (irole in unique(species_roles$role)){
-  d <- filter(fitted, role == irole)
-  ggplot(d, aes(x = empirical, y = .fitted)) +
-    geom_ribbon(aes(ymin = .lower, ymax = .upper, fill = sourceFW), alpha = 0.5) +
-    geom_line(aes(colour = sourceFW)) +
-    geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
-    labs(x = "empirical", y = "predicted", colour = "Model", fill = "Model") + 
-    facet_wrap(.~targetFW, nrow = 2, scales = "free") +
-    theme_classic()
-  ggsave(paste0("figures/SI/species_role/", irole, ".png"), scale = 3)
-}
-
 roles <-  c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")
-
-# plot R2
-goodness_of_fit %>%
-  mutate(role = factor(role, levels = rev(unique(goodness_of_fit$role)))) %>%
-  filter(role %in% roles) %>%
-  ggplot() +
-  geom_point(aes(y = role, x = r.squared, color = sourceFW), alpha = 0.75, size = 2) +
-  labs(x = "R²", y = "Role", colour = "Model") +
-  facet_wrap(.~targetFW, nrow = 1, scales = "free_x") +
-  theme_classic() +
-  theme(panel.grid.major.y = element_line())
-
-ggsave(paste0("figures/SI/species_role/R2.png"), scale = 3)
 
 goodness_of_fit$insample <- factor(goodness_of_fit$targetFW == goodness_of_fit$sourceFW,
                                    levels = c(T,F), labels = c("within food web", "between food webs"))
@@ -134,7 +108,7 @@ r2_summary <- goodness_of_fit %>%
   summarise(r2_mean = mean(r.squared, na.rm = T), r2_min = min(r.squared, na.rm = T), r2_max = max(r.squared, na.rm = T))
 
 ggplot(r2_summary, aes(x = role, y = r2_mean, colour = insample, fill = insample)) +
-  geom_point(data = goodness_of_fit2, aes(y = r.squared, colour = insample, fill = insample), position=position_dodge(width=0.75), shape= 45, size = 3) + 
+  geom_point(data = goodness_of_fit2, aes(y = r.squared, colour = insample, fill = insample), position=position_dodge(width=0.75), shape= 45, size = 6) + 
   geom_pointrange(aes(ymin = r2_min, ymax = r2_max, group = insample), position=position_dodge(width=0.75), shape= 21, size = 0.5) +
   scale_color_manual(values =  c("grey50","black")) +
   scale_fill_manual(values = c("white","black")) +
@@ -145,7 +119,7 @@ ggplot(r2_summary, aes(x = role, y = r2_mean, colour = insample, fill = insample
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)),
         legend.title = element_blank(), axis.text.x = element_blank())
 
-ggsave("figures/SpeciesRolePerformance.png", dpi = 600, width = 18, height = 9, units = "cm")
+ggsave("figures/SI/SpeciesRolePerformance_BRT.png", dpi = 600, width = 18, height = 9, units = "cm")
 
 # save coefficients and R²
 lm_coef <- pivot_wider(lm_coef, names_from = term, values_from = c(estimate, std.error))
@@ -154,4 +128,4 @@ lm_results <- left_join(lm_coef, goodness_of_fit) %>%
   arrange(role, sourceFW)
 
 lm_results <- lm_results[,c(2,1,6,14,5,13,3,11,4,12,10,18,9,17,7,15,8,16,22,21,19,20)]
-write.csv(lm_results, file = "data/checkpoints/lm_role_results.csv")
+write.csv(lm_results, file = "tables/SI/BRT_lm_role_results.csv")
