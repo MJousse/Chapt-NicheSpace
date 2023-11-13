@@ -23,6 +23,12 @@ brms_form <- bf(interaction ~ 1 +
                 family = bernoulli())
 
 
+# Transform into predictors and scale
+predictors <- get_predictors(FuncTraits$Species, FuncTraits)
+predictors <- mutate_at(predictors, vars(Habitat_breadth.predator, BM.predator:ClutchSize.predator,
+                                     Habitat_breadth.prey, BM.prey:ClutchSize.prey, 
+                                     Habitat.match:BM.match), scale2)
+
 # Prepare training dataset ------------------------------------------------
 # load data and standardize
 EuroInteractions <- read.csv("data/cleaned/EuroFWadults.csv", row.names = 1)
@@ -30,13 +36,8 @@ EuroSpecies <- read.csv("data/cleaned/EuroMWTaxo.csv", row.names = 1) %>%
   distinct() %>%
   filter(!is.na(Species))
 
-# transform trait into predictors for every species pair
-EuroMW <- get_predictors(EuroSpecies$Species, FuncTraits)
-
-# scale predictors
-EuroMW <- mutate_at(EuroMW, vars(Habitat_breadth.predator, BM.predator:ClutchSize.predator,
-                                 Habitat_breadth.prey, BM.prey:ClutchSize.prey, 
-                                 Habitat.match:BM.match), scale2)
+# keep predictors of species within Europe
+EuroMW <- filter(predictors, Predator %in% EuroSpecies$Species, Prey %in% EuroSpecies$Species)
 
 # add response
 EuroInteractions$interaction <- 1
@@ -100,13 +101,8 @@ HighArcticSpecies <- read.csv("data/cleaned/HighArcticFWTaxo.csv", row.names = 1
   distinct() %>%
   filter(!is.na(Species))
 
-# transform trait into predictors for every species pair
-HighArcticFW <- get_predictors(HighArcticSpecies$Species, FuncTraits)
-
-# scale predictors
-HighArcticFW <- mutate_at(HighArcticFW, vars(Habitat_breadth.predator, BM.predator:ClutchSize.predator,
-                                             Habitat_breadth.prey, BM.prey:ClutchSize.prey, 
-                                             Habitat.match:BM.match), scale2)
+# keep predictors of species within Europe
+HighArcticFW <- filter(predictors, Predator %in% HighArcticSpecies$Species, Prey %in% HighArcticSpecies$Species)
 
 # add response
 HighArcticInteractions$interaction <- 1
@@ -171,13 +167,8 @@ PyreneesSpecies <- read.csv("data/cleaned/pyrenneesFWTaxo.csv", row.names = 1) %
   distinct() %>%
   filter(!is.na(Species))
 
-# transform trait into predictors for every species pair
-PyreneesFW <- get_predictors(PyreneesSpecies$Species, FuncTraits)
-
-# scale predictors
-PyreneesFW <- mutate_at(PyreneesFW, vars(Habitat_breadth.predator, BM.predator:ClutchSize.predator,
-                                         Habitat_breadth.prey, BM.prey:ClutchSize.prey, 
-                                         Habitat.match:BM.match), scale2)
+# keep predictors of species within Europe
+PyreneesFW <- filter(predictors, Predator %in% PyreneesSpecies$Species, Prey %in% PyreneesSpecies$Species)
 
 # add response
 PyreneesInteractions$interaction <- 1
@@ -242,14 +233,8 @@ SerengetiSpecies <- read.csv("data/cleaned/SerengetiFWTaxo.csv", row.names = 1) 
   distinct() %>%
   filter(!is.na(Species))
 
-# transform trait into predictors for every species pairbf(interaction ~ 1 + . + (1 + .||Order.predator), family = bernoulli())
-
-SerengetiFW <- get_predictors(SerengetiSpecies$Species, FuncTraits)
-
-# scale predictors
-SerengetiFW <- mutate_at(SerengetiFW, vars(Habitat_breadth.predator, BM.predator:ClutchSize.predator,
-                                           Habitat_breadth.prey, BM.prey:ClutchSize.prey, 
-                                           Habitat.match:BM.match), scale2)
+# keep predictors of species within Europe
+SerengetiFW <- filter(predictors, Predator %in% SerengetiSpecies$Species, Prey %in% SerengetiSpecies$Species)
 
 # add response
 SerengetiInteractions$interaction <- 1
@@ -296,7 +281,8 @@ prior_predictions <- brm(formula = brms_form,
                          prior = model_priors,
                          sample_prior = "only", init = "0")
 
-SerengetiModel <- brm(formula = brms_form,
+SerengetiModel <- brm(formula = brms_form,     file = "data/checkpoints/train_test_splits.RData")
+
                       data = training,
                       prior = model_priors, sample_prior = "no", 
                       cores = 4, backend = "cmdstan", threads = 4,
