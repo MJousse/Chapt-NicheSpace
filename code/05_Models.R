@@ -87,7 +87,7 @@ EuroModel <- brm(formula = brms_form,
                  data = training,
                  prior = model_priors, sample_prior = "no", 
                     cores = 4, backend = "cmdstan", threads = 4,
-                    init = "0", iter = 2000)
+                    init = "0", iter = 2000, refresh = 50)
 
 # save the model on OneDrive (too big for Github...)
 saveRDS(EuroModel,
@@ -281,8 +281,7 @@ prior_predictions <- brm(formula = brms_form,
                          prior = model_priors,
                          sample_prior = "only", init = "0")
 
-SerengetiModel <- brm(formula = brms_form,     file = "data/checkpoints/train_test_splits.RData")
-
+SerengetiModel <- brm(formula = brms_form,
                       data = training,
                       prior = model_priors, sample_prior = "no", 
                       cores = 4, backend = "cmdstan", threads = 4,
