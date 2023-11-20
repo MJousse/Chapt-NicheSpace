@@ -170,4 +170,4 @@ save(Arctic_Arctic_predictions, Arctic_Euro_predictions, Arctic_Pyrenees_predict
      Euro_Arctic_predictions, Euro_Euro_predictions, Euro_Pyrenees_predictions, Euro_Serengeti_predictions,
      Pyrenees_Arctic_predictions, Pyrenees_Euro_predictions, Pyrenees_Pyrenees_predictions, Pyrenees_Serengeti_predictions,
      Serengeti_Arctic_predictions, Serengeti_Euro_predictions, Serengeti_Pyrenees_predictions, Serengeti_Serengeti_predictions, 
-     file = "data/checkpoints/predictions.RData")
+     file = "~/OneDrive/Chapt-NicheSpace/predictions.RData")

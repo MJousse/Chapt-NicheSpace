@@ -15,7 +15,7 @@ library(patchwork)
 library(brms)
 library(tidybayes)
 library(prg)
-load("data/checkpoints/predictions.RData")
+load("~/OneDrive/Chapt-NicheSpace/predictions.RData")
 foodwebs <- c("Arctic", "Euro", "Pyrenees", "Serengeti")
 source("code/functions.R")
 
