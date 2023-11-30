@@ -91,7 +91,7 @@ EuroModel <- brm(formula = brms_form,
 
 # save the model on OneDrive (too big for Github...)
 saveRDS(EuroModel,
-        file = paste0("~/OneDrive/Chapt-NicheSpace/models/EuroModel_brms.rds"))
+        file = paste0("~/OneDrive/Chapt-NicheSpace/models/EuroModel.rds"))
 # -------------------------------------------------------------------------
 
 # Prepare training dataset ------------------------------------------------
@@ -157,7 +157,7 @@ ArcticModel <- brm(formula = brms_form,
 
 # save the model
 saveRDS(ArcticModel, 
-        file = paste0("~/OneDrive/Chapt-NicheSpace/models/ArcticModel_brms.rds"))
+        file = paste0("~/OneDrive/Chapt-NicheSpace/models/ArcticModel.rds"))
 # -------------------------------------------------------------------------
 
 # Prepare training dataset ------------------------------------------------
@@ -223,7 +223,7 @@ PyreneesModel <- brm(formula = brms_form,
 
 # save the model
 saveRDS(PyreneesModel, 
-        file = paste0("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel_brms.rds"))
+        file = paste0("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel.rds"))
 
 # Prepare training dataset ------------------------------------------------
 # load data and standardize
@@ -289,7 +289,7 @@ SerengetiModel <- brm(formula = brms_form,
 
 # save the model
 saveRDS(SerengetiModel, 
-     file = paste0("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel_brms.rds"))
+     file = paste0("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel.rds"))
 
 # save the splits
 save(testing_id_euro, training_id_euro,

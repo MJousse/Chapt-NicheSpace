@@ -16,10 +16,10 @@ source("code/functions.R")
 
 # Load model and food webs ------------------------------------------------
 # models
-ArcticModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/ArcticModel_brms.rds")
-EuropeModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/EuroModel_brms.rds")
-PyreneesModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel_brms.rds")
-SerengetiModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel_brms.rds")
+ArcticModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/ArcticModel.rds")
+EuropeModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/EuroModel.rds")
+PyreneesModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/PyreneesModel.rds")
+SerengetiModel <- readRDS("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel.rds")
 
 load("data/checkpoints/train_test_splits.RData")
 
