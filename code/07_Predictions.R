@@ -28,6 +28,7 @@ FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
 
 # Transform into predictors and scale
 predictors <- get_predictors(FuncTraits$Species, FuncTraits)
+
 predictors <- mutate_at(predictors, vars(Habitat_breadth.predator, BM.predator:ClutchSize.predator,
                                          Habitat_breadth.prey, BM.prey:ClutchSize.prey, 
                                          Habitat.match:BM.match), scale2)
@@ -171,3 +172,38 @@ save(Arctic_Arctic_predictions, Arctic_Euro_predictions, Arctic_Pyrenees_predict
      Pyrenees_Arctic_predictions, Pyrenees_Euro_predictions, Pyrenees_Pyrenees_predictions, Pyrenees_Serengeti_predictions,
      Serengeti_Arctic_predictions, Serengeti_Euro_predictions, Serengeti_Pyrenees_predictions, Serengeti_Serengeti_predictions, 
      file = "~/OneDrive/Chapt-NicheSpace/predictions.RData")
+
+# Predictions for and with the alternative Serengeti food web-------------
+load("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel2.RData")
+Serengeti2_Serengeti_predictions <- make_predictions(SerengetiModel2, newdata = SerengetiFW2, 
+                                                     allow_new_levels = TRUE, ndraws = 100)
+Serengeti2_Serengeti_predictions$testing <- 0
+Serengeti2_Serengeti_predictions$testing[testing_id_ser] <- 1
+
+# predict arctic food webs
+Serengeti2_Arctic_predictions <- make_predictions(SerengetiModel2, newdata = HighArcticFW, 
+                                                 allow_new_levels = TRUE, ndraws = 100)
+
+# predict european metaweb
+Serengeti2_Euro_predictions <- make_predictions(SerengetiModel2, newdata = EuroMW, 
+                                               allow_new_levels = TRUE, ndraws = 100)
+
+# predict pyrenees food web
+Serengeti2_Pyrenees_predictions <- make_predictions(SerengetiModel2, newdata = PyreneesFW, 
+                                                   allow_new_levels = TRUE, ndraws = 100)
+
+# predict arctic food webs
+Arctic_Serengeti2_predictions <- make_predictions(ArcticModel, newdata = SerengetiFW2, 
+                                                  allow_new_levels = TRUE, ndraws = 100)
+
+# predict european metaweb
+Euro_Serengeti2_predictions <- make_predictions(EuropeModel, newdata = SerengetiFW2, 
+                                                allow_new_levels = TRUE, ndraws = 100)
+
+# predict pyrenees food web
+Pyrenees_Serengeti2_predictions <- make_predictions(PyreneesModel, newdata = SerengetiFW2, 
+                                                    allow_new_levels = TRUE, ndraws = 100)
+
+save(Serengeti2_Arctic_predictions, Serengeti2_Serengeti_predictions, Serengeti2_Euro_predictions,
+     Serengeti2_Pyrenees_predictions, Arctic_Serengeti2_predictions, Euro_Serengeti2_predictions,
+     Pyrenees_Serengeti2_predictions, file = "~/OneDrive/Chapt-NicheSpace/predictions_serengeti_alt.RData")
