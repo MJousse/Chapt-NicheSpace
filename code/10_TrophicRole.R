@@ -197,3 +197,34 @@ lm_results <- left_join(lm_coef, goodness_of_fit) %>%
 
 lm_results <- lm_results[,c(2,1,6,14,5,13,3,11,4,12,10,18,9,17,7,15,8,16,22,21,19,20)]
 write.csv(lm_results, file = "data/checkpoints/lm_role_results.csv")
+
+
+# using the alternative serengeti food web
+load("~/../OneDrive - McGill University/Chapt-NicheSpace/predictions_serengeti_alt.RData")
+combinations <- filter(combinations, Source == "Serengeti" | Target == "Serengeti")
+combinations[combinations == "Serengeti"] <- 'Serengeti2'
+# calculate the roles of all species in these sample, and extract the mean
+for (combination in c(1:nrow(combinations))){
+  sourceFW <- as.character(combinations[combination, "Source"])
+  targetFW <- as.character(combinations[combination, "Target"])
+  print(Sys.time())
+  print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
+  predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
+  cl <- makeCluster(8) 
+  registerDoParallel(cl)
+  role <- foreach(i=c(1:100), .combine = rbind, 
+                  .packages = c("igraph", "NetIndices", "multiweb", "dplyr", "tidyr"),
+                  .export = c("motif_role", "positions")) %dopar% {
+                    prediction <- data.frame(resource = predictions$Prey, 
+                                             consumer = predictions$Predator, 
+                                             interaction = predictions[,paste0("draws",i)])
+                    prediction <- prediction[prediction$interaction == 1,]
+                    species_role(prediction, ncores = 0, nsim=1)
+                  }
+  stopCluster(cl)
+  role_mean <- group_by(role, species) %>% summarise_all(mean, na.rm = T)
+  role_sd <- group_by(role, species) %>% summarise_all(sd, na.rm = T)
+  predicted_roles <- rbind(predicted_roles, 
+                           pivot_longer(role_mean, -species, names_to = "role", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
+  write.csv(predicted_roles, file = "data/checkpoints/predicted_roles_seralt.csv")
+}

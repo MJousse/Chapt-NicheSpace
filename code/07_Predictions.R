@@ -175,10 +175,10 @@ save(Arctic_Arctic_predictions, Arctic_Euro_predictions, Arctic_Pyrenees_predict
 
 # Predictions for and with the alternative Serengeti food web-------------
 load("~/OneDrive/Chapt-NicheSpace/models/SerengetiModel2.RData")
-Serengeti2_Serengeti_predictions <- make_predictions(SerengetiModel2, newdata = SerengetiFW2, 
+Serengeti2_Serengeti2_predictions <- make_predictions(SerengetiModel2, newdata = SerengetiFW2, 
                                                      allow_new_levels = TRUE, ndraws = 100)
-Serengeti2_Serengeti_predictions$testing <- 0
-Serengeti2_Serengeti_predictions$testing[testing_id_ser] <- 1
+Serengeti2_Serengeti2_predictions$testing <- 0
+Serengeti2_Serengeti2_predictions$testing[testing_id_ser] <- 1
 
 # predict arctic food webs
 Serengeti2_Arctic_predictions <- make_predictions(SerengetiModel2, newdata = HighArcticFW, 
