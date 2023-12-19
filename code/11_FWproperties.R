@@ -152,3 +152,32 @@ ggplot(filter(fw_properties, (metric %in% motifs),  !is.infinite(error)), aes(x 
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)))
 
 ggsave("figures/SI/fwpropertiesSI2.png", width = 6)
+
+# using the alternative serengeti food web
+load("~/../OneDrive - McGill University/Chapt-NicheSpace/predictions_serengeti_alt.RData")
+combinations <- filter(combinations, Source == "Serengeti" | Target == "Serengeti")
+combinations[combinations == "Serengeti"] <- 'Serengeti2'
+# calculate the roles of all species in these sample, and extract the mean
+for (combination in c(1:nrow(combinations))){
+  sourceFW <- as.character(combinations[combination, "Source"])
+  targetFW <- as.character(combinations[combination, "Target"])
+  print(Sys.time())
+  print(paste0(sourceFW, " model predicting the ", targetFW, " food web..."))
+  predictions <- get(paste0(sourceFW, "_", targetFW, "_predictions"))
+  cl <- makeCluster(16) 
+  registerDoParallel(cl)
+  properties <- foreach(i=c(1:100), .combine = rbind, 
+                        .packages = c("igraph", "NetIndices", "dplyr", "tidyr")) %dopar% {
+                          prediction <- data.frame(resource = predictions$Prey, 
+                                                   consumer = predictions$Predator, 
+                                                   interaction = predictions[,paste0("draws",i)])
+                          prediction <- prediction[prediction$interaction == 1,]
+                          fw_properties(prediction, nsim = 1)
+                        }
+  stopCluster(cl)
+  fw_properties_mean <- apply(properties, MARGIN = 2, mean)
+  fw_properties_sd <- apply(properties, MARGIN = 2, sd)
+  predicted_properties <- rbind(predicted_properties, 
+                                data.frame(t(fw_properties_mean)) %>% pivot_longer(everything(), names_to = "metric", values_to = "predicted") %>% mutate(targetFW = targetFW, sourceFW = sourceFW))
+  write.csv(predicted_properties, file = "data/checkpoints/PredictedProperties_seralt.csv")
+}
