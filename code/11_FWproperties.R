@@ -51,7 +51,7 @@ write.csv(empirical_properties, file = "data/checkpoints/EmpiricalProperties.csv
 # FW properties in predicted webs -----------------------------------------
 library(foreach)
 library(doParallel)
-load("data/checkpoints/predictions.RData")
+load("~/OneDrive/Chapt-NicheSpace/predictions.RData")
 foodwebs <- c("Arctic", "Pyrenees", "Serengeti", "Euro")
 combinations <- expand_grid(Source = foodwebs, Target = foodwebs)
 predicted_properties <-c()
