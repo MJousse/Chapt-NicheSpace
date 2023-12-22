@@ -164,7 +164,7 @@ p3 <- ggplot(phylo_fe,
         axis.title.y = element_blank(), axis.text.y = element_blank())
 
 p1 + p2 + p3
-ggsave("figures/SI/ModelTransferability_noser.png", width = 8, height = 4)
+ggsave("figures/AlternativeSerengeti/ModelTransferability_noser.png", width = 8, height = 4)
 
 ### figure 3 ###
 species_performance <- fread("data/checkpoints/species_performance_trans.csv") %>%
@@ -293,7 +293,7 @@ p3 <- ggplot(prev_fe,
 
 p1 + p2 + p3
 
-ggsave("figures/SI/SpeciesPerformance_noser.png", width = 8, height = 4)
+ggsave("figures/AlternativeSerengeti/SpeciesPerformance_noser.png", width = 8, height = 4)
 
 #### figure 4 ###
 empirical_roles <- read.csv("data/checkpoints/SpeciesRole.csv", row.names = 1)
@@ -343,7 +343,7 @@ ggplot(r2_summary, aes(x = role, y = r2_mean, colour = insample, fill = insample
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)),
         legend.title = element_blank(), axis.text.x = element_blank())
 
-ggsave("figures/SI/SpeciesRolePerformance_noser.png", dpi = 600, width = 18, height = 9, units = "cm")
+ggsave("figures/AlternativeSerengeti/SpeciesRolePerformance_noser.png", dpi = 600, width = 18, height = 9, units = "cm")
 
 ### Figure 5 ###
 empirical_properties <- read.csv("data/checkpoints/EmpiricalProperties.csv", row.names = 1)
@@ -390,7 +390,7 @@ p2 <- ggplot(filter(fw_properties, metric %in% c("motif1", "motif2", "motif4", "
 
 p1 + p2 + plot_layout(guides = "collect")
 
-ggsave("figures/SI/FWproperties_noser.png", width = 18, height = 9, units = "cm", dpi = 600)
+ggsave("figures/AlternativeSerengeti/FWproperties_noser.png", width = 18, height = 9, units = "cm", dpi = 600)
 
 ############ Alternative Serengeti results #####################
 rm(list = ls())
@@ -567,7 +567,7 @@ p3 <- ggplot(phylo_fe,
         axis.title.y = element_blank(), axis.text.y = element_blank())
 
 p1 + p2 + p3
-ggsave("figures/SI/ModelTransferability_altser.png", width = 8, height = 4)
+ggsave("figures/AlternativeSerengeti/ModelTransferability_altser.png", width = 8, height = 4)
 
 #### figure 4 ###
 source("code/functions_motifs.R")
@@ -630,7 +630,7 @@ ggplot(r2_summary, aes(x = role, y = r2_mean, colour = insample, fill = insample
   theme(strip.background = element_rect(fill = "transparent"), axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0)),
         legend.title = element_blank(), axis.text.x = element_blank())
 
-ggsave("figures/SI/SpeciesRolePerformance_altser.png", dpi = 600, width = 18, height = 9, units = "cm")
+ggsave("figures/AlternativeSerengeti/SpeciesRolePerformance_altser.png", dpi = 600, width = 18, height = 9, units = "cm")
 
 ### Figure 5 ###
 serengetiProperties <- fw_properties(SerengetiFW2, nsim = 10) %>%
@@ -684,4 +684,4 @@ p2 <- ggplot(filter(fw_properties, metric %in% c("motif1", "motif2", "motif4", "
 
 p1 + p2 + plot_layout(guides = "collect")
 
-ggsave("figures/SI/FWproperties_altser.png", width = 18, height = 9, units = "cm", dpi = 600)
+ggsave("figures/AlternativeSerengeti/FWproperties_altser.png", width = 18, height = 9, units = "cm", dpi = 600)
