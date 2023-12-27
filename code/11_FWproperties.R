@@ -93,6 +93,10 @@ fw_properties <- left_join(predicted_properties, empirical_properties,
 
 fw_properties$metric <- factor(fw_properties$metric, levels = c("connectance", "maxTL", "meanTL", "n_clusters", "modularity", "diameter", paste0("motif", c(1:13))))
 fw_properties$insample <- factor(fw_properties$insample, levels = c(T,F), labels = c("within food web", "between food webs"))
+fw_properties$targetFW <- factor(fw_properties$targetFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti"), 
+                                 labels = c("Northern QC\nLabrador", "Europe", "Pyrenees", "Serengeti"))
+fw_properties$sourceFW <- factor(fw_properties$sourceFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti"), 
+                                 labels = c("Northern QC\nLabrador", "Europe", "Pyrenees", "Serengeti"))
 
 fw_properties_summary <- fw_properties %>%
   group_by(metric, insample) %>%

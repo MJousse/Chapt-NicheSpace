@@ -25,7 +25,7 @@ load("data/checkpoints/train_test_splits.RData")
 # Check convergence -------------------------------------------------------
 color_scheme_set("viridis")
 summary(ArcticModel)
-hist(rhat(ArcticModel), xlab = "Rhat", main = "Distribution of rank-normalized potential\nscale reduction factors for the Arctic model")
+hist(rhat(ArcticModel), xlab = "Rhat", main = "Distribution of rank-normalized potential\nscale reduction factors for the\nNorthern Québec and Labrador model")
 mcmc_plot(ArcticModel, variable = c('b_'), regex = T, type = 'rank_overlay') + theme(text = element_text(size = 8))
 ggsave("figures/SI/Convergence/trank_arctic.png", width = 8, height = 8)
 summary(EuropeModel)

@@ -130,8 +130,8 @@ fitted <- fitted_models %>%
 # plot individual regressions
 for (irole in unique(species_roles$role)){
   d <- filter(fitted, role == irole) %>%
-    mutate(sourceFW = factor(sourceFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti")),
-           targetFW = factor(targetFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti")))
+    mutate(sourceFW = factor(sourceFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti"), labels = c("Northern QC and Labrador", "Europe", "Pyrenees", "Serengeti")),
+           targetFW = factor(targetFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti"), labels = c("Northern QC and Labrador", "Europe", "Pyrenees", "Serengeti")))
   ggplot(d, aes(x = empirical, y = .fitted)) +
     geom_ribbon(aes(ymin = .lower, ymax = .upper, fill = sourceFW), alpha = 0.5) +
     geom_line(aes(colour = sourceFW)) +
@@ -140,8 +140,9 @@ for (irole in unique(species_roles$role)){
     geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
     labs(x = "empirical", y = "predicted", colour = "Model", fill = "Model") + 
     facet_wrap(.~targetFW, nrow = 2, scales = "free") +
-    theme_classic()
-  ggsave(paste0("figures/SI/species_role/", irole, ".png"), scale = 3)
+    theme_classic() +
+    theme(text = element_text(size = 18))
+  ggsave(paste0("figures/SI/species_role/", irole, ".png"), width = 17.6, height = 14)
 }
 
 roles <-  c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within_module_degree", "among_module_conn", "position1", "position2", "position3", "position4", "position5", "position6", "position8", "position9", "position10", "position11")
@@ -149,8 +150,8 @@ roles <-  c("indegree", "outdegree", "betweeness", "closeness", "eigen", "within
 # plot R2
 goodness_of_fit %>%
   mutate(role = factor(role, levels = rev(unique(goodness_of_fit$role))),
-         sourceFW = factor(sourceFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti")),
-         targetFW = factor(targetFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti"))) %>%
+         sourceFW = factor(sourceFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti"), labels = c("Northern QC\nLabrador", "Europe", "Pyrenees", "Serengeti")),
+         targetFW = factor(targetFW, levels = c("Arctic", "Euro", "Pyrenees", "Serengeti"), labels = c("Northern QC\nLabrador", "Europe", "Pyrenees", "Serengeti"))) %>%
   filter(role %in% roles) %>%
   ggplot() +
   geom_point(aes(y = role, x = r.squared, color = sourceFW), alpha = 0.75, size = 2) +
@@ -158,7 +159,7 @@ goodness_of_fit %>%
   labs(x = "R²", y = "Role", colour = "Model") +
   facet_wrap(.~targetFW, nrow = 1, scales = "free_x") +
   theme_classic() +
-  theme(panel.grid.major.y = element_line())
+  theme(panel.grid.major.y = element_line(), text = element_text(size = 18))
 
 ggsave(paste0("figures/SI/species_role/R2.png"), scale = 3)
 
