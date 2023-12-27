@@ -239,10 +239,9 @@ df[which(df$to == "Europe"), c("tolong", "tolat")] <- Europe_centroid
 df[which(df$to == "Pyrenees"), c("tolong", "tolat")] <- Pyrenees_centroid
 df[which(df$to == "Northern Québec and Labrador"), c("tolong", "tolat")] <- Nunavik_centroid
 df[which(df$to == "Serengeti"), c("tolong", "tolat")]  <- Serengeti_centroid
-df$size <- 0.5
-df$size[which(df$from == "Europe" & df$to == "Northern Québec and Labrador")] <- 1
-df$linetype <- "dashed"
-df$linetype[c(1,3,8,7,9,11)] <- "solid"
+df$linewidth <- 0.1
+df$linewidth[which(df$from == "Europe" & df$to == "Northern Québec and Labrador")] <- 0.25
+df$linetype <- "solid"
 
 
 # species proportions
@@ -301,10 +300,10 @@ serengeti_barchart <- ggplotGrob(
 
 legend <- data.frame(Class = c("Amphibia", "Aves", "Mammalia", "Reptilia"),
                      Proportion = c(0.15, 0.35, 0.25, 0.20))
-frog <- image_data("c07ce7b7-5fb5-484f-83a0-567bb0795e18", size = "64")[[1]]
-lizard <- image_data("83053aee-0f56-4cf3-bbfa-9207e6f13f46", size = "64")[[1]]
-eagle <- image_data("92589388-08e3-422f-b452-aa7454411a9c", size = "64")[[1]]
-lynx <- image_data("24f763a3-accf-44c9-9a08-71e9834047b7", size = "64")[[1]]
+frog <- get_phylopic("c07ce7b7-5fb5-484f-83a0-567bb0795e18")
+lizard <- get_phylopic("83053aee-0f56-4cf3-bbfa-9207e6f13f46")
+eagle <- get_phylopic("92589388-08e3-422f-b452-aa7454411a9c")
+lynx <- get_phylopic("24f763a3-accf-44c9-9a08-71e9834047b7")
 
 legend_barchart <- ggplotGrob(
   ggplot(legend)+
@@ -312,13 +311,13 @@ legend_barchart <- ggplotGrob(
              position='dodge', stat='identity', color = "black") +
     labs(x = NULL, y = NULL, title = "Community composition") + 
     scale_fill_manual(values = colorbar) +
-    add_phylopic(frog, x = 1, y = legend$Proportion[1]+0.06, alpha = 1, ysize = 0.7, color = "black") +
-    add_phylopic(eagle, x = 2, y = legend$Proportion[2]+0.02, alpha = 1, ysize = 0.8, color = "black") +
-    add_phylopic(lynx, x = 3, y = legend$Proportion[3]+0.06, alpha = 1, ysize = 0.65, color = "black") +
-    add_phylopic(lizard, x = 4, y = legend$Proportion[4]+0.03, alpha = 1, ysize = 0.55, color = "black") +
+    add_phylopic(frog, x = 1, y = legend$Proportion[1]+0.06, alpha = 1, ysize = 0.11, color = "black") +
+    add_phylopic(eagle, x = 2.05, y = legend$Proportion[2]+0.02, alpha = 1, ysize = 0.15, color = "black") +
+    add_phylopic(lynx, x = 3, y = legend$Proportion[3]+0.06, alpha = 1, ysize = 0.1, color = "black") +
+    add_phylopic(lizard, x = 4.1, y = legend$Proportion[4]+0.03, alpha = 1, ysize = 0.1, color = "black") +
     lims(y = c(0,0.4))+
     theme(legend.position = "none", rect = element_blank(),
-          line = element_blank(), text = element_blank(), title = element_text(size = 10, face = "bold"), plot.margin = unit(c(0, 0, 0, 0), "null")) 
+          line = element_blank(), text = element_blank(), title = element_text(size = 7, face = "bold"), plot.margin = unit(c(0, 0, 0, 0), "null")) 
 )
 
 p <- ggplot() +
@@ -328,18 +327,18 @@ p <- ggplot() +
   geom_sf(data = Nunavik, fill = alpha("deepskyblue", 0.5), color = "deepskyblue") +
   geom_sf(data = Serengeti, fill = alpha("chartreuse4", 0.5), color =  "chartreuse4") +
   geom_curve(data=df,
-             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, linetype = linetype, size = size), color = "black",
+             aes(x=fromlong, y=fromlat, xend=tolong, yend=tolat, linewidth = linewidth), color = "black",
              curvature=0.25, alpha = 0.6) + 
   scale_colour_identity() +
-  scale_size(range = c(0.5,2))+
+  scale_linewidth(range = c(0.75,2))+
   geom_label_repel(data = as.data.frame(Pyrenees_centroid), aes(x = X, y = Y, label = "Pyrenees"), 
-                   fontface = "bold", nudge_x = -15, nudge_y = -10, colour = "red3") +
+                   fontface = "bold", nudge_x = -15, nudge_y = -10, colour = "red3", size = 3) +
   geom_label_repel(data = as.data.frame(Europe_centroid), aes(x = X, y = Y, label = "Europe"), 
-                   fontface = "bold", nudge_x = 13, nudge_y = 10, colour = "royalblue4") +
+                   fontface = "bold", nudge_x = 13, nudge_y = 10, colour = "royalblue4", size = 3) +
   geom_label_repel(data = as.data.frame(Nunavik_centroid), aes(x = X, y = Y, label = "Northern Québec\nand Labrador"), 
-                   fontface = "bold", nudge_x = -5, nudge_y = -10, colour = "deepskyblue") +
+                   fontface = "bold", nudge_x = -5, nudge_y = -10, colour = "deepskyblue", size = 3) +
   geom_label_repel(data = as.data.frame(Serengeti_centroid), aes(x = X, y = Y, label = "Serengeti"), 
-                   fontface = "bold", nudge_x = 23, nudge_y = 20, colour = "chartreuse4") +
+                   fontface = "bold", nudge_x = 23, nudge_y = 20, colour = "chartreuse4", size = 3) +
   annotation_custom(euro_barchart, xmin = Europe_centroid[,1]+3, xmax = Europe_centroid[,1]+23, 
                     ymin = Europe_centroid[,2]-13, ymax = Europe_centroid[,2]+8) + 
   annotation_custom(pyrenees_barchart, xmin = Pyrenees_centroid[,1]-25, xmax = Pyrenees_centroid[,1]-5, 
@@ -354,7 +353,7 @@ p <- ggplot() +
   theme_void() +
   theme(legend.position = "none")
 
-ggsave("figures/conceptual/FWmap.png", p, scale = 2)
+ggsave("figures/conceptual/FWmap.png", p, width = 150, height = 100, units = "mm")
 
 # # Performance ~ distances mini-maps ---------------------------------------
 # overall_performance <- read.csv("data/checkpoints/overall_performance.csv", row.names = 1)
