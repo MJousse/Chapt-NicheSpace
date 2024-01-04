@@ -46,3 +46,22 @@ Msp <- cor(species_performance[,c("auc", "aucpr", "tpr", "tnr", "ppv", "npv")])
 png("figures/SI/metricCorr_species.png", width = 300, height = 300)
 corrplot(Msp, method = "number", type = "upper", diag = F)
 dev.off()
+
+# across class predictions
+species_performance <- read.csv("data/checkpoints/species_performance.csv", row.names = 1)
+speciesTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
+species_performance <- left_join(species_performance, speciesTraits, by = c("species" = "Species"))
+
+library(ggdist)
+species_performance[species_performance == "Arctic"] <- "NorthQC"
+species_performance %>%
+  select(Source, Class, Target, auc) %>%
+  group_by(Class, Source, Target) %>%
+  median_qi(.width = c(.8, .95)) %>%
+  ggplot(aes(x = Class, y = auc, ymin = .lower, ymax = .upper)) +
+  geom_pointinterval() + 
+  facet_grid(Source~Target) +
+  theme_classic() +
+  theme(legend.position = "none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggsave("figures/SI/classPerformance.png", width = 5, height = 5)
