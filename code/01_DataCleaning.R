@@ -10,16 +10,19 @@ library(purrr)
 library(dplyr)
 library(tidyr)
 library(igraph)
-source("code/functions.R")
+source("./functions.R")
 
 # European metaweb --------------------------------------------------------
 # raw data
-EuroMW <- read.csv("data/raw/FW/TetraEU_pairwise_interactions.csv", sep = ";")
+EuroMW <- read.csv("../data/raw/FW/TetraEU_pairwise_interactions.csv", sep = ";") #tetraeu web
 
-# get gbif names
-gbif_names <- map_df(
-  unique(c(EuroMW$sourceTaxonName, EuroMW$targetTaxonName)),
-  name_backbone, phylum = "Chordata") # Clean species names
+# # get gbif names ##long on computer
+# gbif_names <- map_df(
+#   unique(c(EuroMW$sourceTaxonName, EuroMW$targetTaxonName)),
+#   name_backbone, phylum = "Chordata") # Clean species names ##note map_df is supserseded
+
+gbif_names <- list_rbind(lapply(unique(c(EuroMW$sourceTaxonName, EuroMW$targetTaxonName)), name_backbone, phylum = "Chordata"))
+
 
 # create different version of the fw
 EuroMWadults <- filter(EuroMW, targetLifestageName == "adults")
@@ -54,7 +57,7 @@ write.csv(EuroMw_species, "data/cleaned/EuroMWTaxo.csv")
 
 # Serengeti food web ------------------------------------------------------
 # raw data
-SerengetiNodes<- read.csv("data/raw/FW/Serengeti_nodes.csv")
+SerengetiNodes<- read.csv("../data/raw/FW/Serengeti_nodes.csv")
 # Remove useless columns
 SerengetiNodes <- SerengetiNodes %>% select(Taxa = Taxa..species..family.or.order., Node = Node.no.)
 SerengetiNodes_clean <- data.frame()
@@ -93,7 +96,7 @@ SerengetiNodes_clean[SerengetiNodes_clean$Original == "Procavia johnstoni", c("G
 SerengetiNodes_clean <- SerengetiNodes_clean[!duplicated(SerengetiNodes_clean$Species),]
 
 # clean food web
-SerengetiInteractions <- read.csv("data/raw/FW/Serengeti_interactions.csv")
+SerengetiInteractions <- read.csv("../data/raw/FW/Serengeti_interactions.csv")
 SerengetiInteractions <- SerengetiInteractions %>% filter(Consumer %in% SerengetiNodes_clean$Node & Resource %in% SerengetiNodes_clean$Node)
 SerengetiInteractions_clean <- data.frame()
 for (i in c(1:nrow(SerengetiInteractions))){
@@ -117,15 +120,21 @@ write.csv(SerengetiFW_species, "data/cleaned/SerengetiFWTaxo.csv")
 
 # Pyrenees food web -------------------------------------------------------
 # raw data
-pyrenneesFW <- read.graph("data/raw/FW/pyrenees-network.graphml", format = "graphml")
+#pyrenneesFW <- read.graph("../data/raw/FW/pyrenees-network.graphml", format = "graphml") #read.graph deprecated
+pyrenneesFW <- read_graph("../data/raw/FW/pyrenees-network.graphml", format = "graphml") 
+
 pyrenneesFW <- as.data.frame(as_edgelist(pyrenneesFW))
 colnames(pyrenneesFW) <- c("Prey", "Predator")
 
-# get gbif species name
-gbif_names <- map_df(
-  unique(c(pyrenneesFW$Prey, pyrenneesFW$Predator)),
-  name_backbone, phylum = "Chordata") %>%
+# # get gbif species name
+# gbif_names <- map_df(
+#   unique(c(pyrenneesFW$Prey, pyrenneesFW$Predator)),
+#   name_backbone, phylum = "Chordata") %>%
+#   filter(class %in% c("Amphibia", "Reptilia", "Mammalia", "Aves")) # map_df deprecated
+
+gbif_names <- list_rbind(lapply(unique(c(pyrenneesFW$Prey, pyrenneesFW$Predator)), name_backbone, phylum = "Chordata")) %>%
   filter(class %in% c("Amphibia", "Reptilia", "Mammalia", "Aves"))
+
 
 # standardize food web
 pyrenneesFW <- data.frame(Predator = gbif_names$species[match(pyrenneesFW$Predator, gbif_names$canonicalName)], 
@@ -144,12 +153,13 @@ write.csv(PyrenneesFW_species, "data/cleaned/pyrenneesFWTaxo.csv")
 
 # High Arctic food web ----------------------------------------------------
 # raw data
-arcticFW <- read.csv("data/raw/FW/Tundra_Nunavik_Trophic_relationships.txt", sep = "\t", row.names = 1)
+arcticFW <- read.csv("../data/raw/FW/Tundra_Nunavik_Trophic_relationships.txt", sep = "\t", row.names = 1)
 
 # get gbif species name
 arctic_species <- rownames(arcticFW)
-gbif_names <- map_df(arctic_species,
-  name_backbone, phylum = "Chordata") # Clean species names
+# gbif_names <- map_df(arctic_species,
+#   name_backbone, phylum = "Chordata") # Clean species names #map_df deprecated
+gbif_names <- list_rbind(lapply(arctic_species, name_backbone, phylum = "Chordata"))
 
 arctic_vertebrates_i <- gbif_names$class %in% c("Aves", "Mammalia", "Reptilia", "Amphibia") & !is.na(gbif_names$species)
 arctic_vertebrates <- gbif_names[arctic_vertebrates_i,]
