@@ -14,10 +14,10 @@ source("code/functions.R")
 
 # Clean trait data --------------------------------------------------------
 # load data
-Amphi_traits <- read.csv("data/raw/traits/traits_etard2020/Amphibians.csv")
-Bird_traits <- read.csv("data/raw/traits/traits_etard2020/Birds.csv")
-Mam_traits <- read.csv("data/raw/traits/traits_etard2020/Mammals.csv")
-Rept_traits <- read.csv("data/raw/traits/traits_etard2020/Reptiles.csv")
+Amphi_traits <- read.csv("data/raw/traits/traits_etard2020/Amphibians.csv")[1:50, ]
+Bird_traits <- read.csv("data/raw/traits/traits_etard2020/Birds.csv")[1:50, ]
+Mam_traits <- read.csv("data/raw/traits/traits_etard2020/Mammals.csv")[1:50, ]
+Rept_traits <- read.csv("data/raw/traits/traits_etard2020/Reptiles.csv")[1:50, ]
 
 # get GBIF species name - Pretty long
 Amphi_traits$Species <- map_df(Amphi_traits$Best_guess_binomial, name_backbone, class = "Amphibia")$species
@@ -167,6 +167,7 @@ Serengeti_coverage <- sum(!is.na(Serengeti_coverage)) / (ncol(Serengeti_coverage
 
 # Impute missing data for each class separately ----------------------------
 coverage <- function(x){sum(!is.na(x))/length(x)}
+
 # Join data from all food webs
 Tetrapods_traits <- bind_rows(Euro_traits, Serengeti_traits, Pyrennees_traits, HighArctic_traits) %>%
   distinct() %>%
