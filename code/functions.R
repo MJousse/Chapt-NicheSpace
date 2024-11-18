@@ -19,6 +19,10 @@ Jaccard <- function(pred_df, prey_df){
 #' 
 #' @param v a vector
 #' @return the value with the most occurrence
+#' match: match returns a vector of the positions of (first) matches of its first argument in its second.
+#'        %in% is a more intuitive interface as a binary operator, which returns a logical vector indicating if there is a match or not for its left operand.
+#' which.max: Determines the location, i.e., index of the (first) minimum or maximum of a numeric (or logical) vector.
+#' tabulate: tabulate takes the integer-valued vector bin and counts the number of times each integer occurs in it.
 getmode <- function(v) {
   uniqv <- unique(v)
   uniqv[which.max(tabulate(match(v, uniqv)))]

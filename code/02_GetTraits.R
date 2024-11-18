@@ -21,6 +21,7 @@ Rept_traits <- read.csv("data/raw/traits/traits_etard2020/Reptiles.csv")
 
 # get GBIF species name - Pretty long
 Amphi_traits$Species <- map_df(Amphi_traits$Best_guess_binomial, name_backbone, class = "Amphibia")$species
+# Amphi_traits$Species <- list_rbind(lapply(Amphi_traits$Best_guess_binomial, name_backbone, class = "Amphibia"))$species ##Alternative method
 Bird_traits$Species <- map_df(Bird_traits$Best_guess_binomial, name_backbone, class = "Aves")$species
 Mam_traits$Species <- map_df(Mam_traits$Best_guess_binomial, name_backbone, class = "Mammalia")$species
 Rept_traits$Species <- map_df(Rept_traits$Best_guess_binomial, name_backbone, class = "Reptilia")$species
