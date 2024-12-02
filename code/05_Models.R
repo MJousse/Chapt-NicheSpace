@@ -14,14 +14,27 @@ library(brms)
 source("code/functions.R")
 FuncTraits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1)
 brms_form <- bf(interaction ~ 1 + 
-                  (Omnivore.predator + Carnivore.predator + Habitat_breadth.predator + BM.predator + Longevity.predator + ClutchSize.predator +
-                     Omnivore.prey + Carnivore.prey + Habitat_breadth.prey + BM.prey + Longevity.prey + ClutchSize.prey + 
+                  (Omnivore.predator + Carnivore.predator + Habitat_breadth.predator + 
+                     BM.predator + Longevity.predator + ClutchSize.predator +
+                     Omnivore.prey + Carnivore.prey + Habitat_breadth.prey + 
+                     BM.prey + Longevity.prey + ClutchSize.prey + 
                      ActivityTime.match + Habitat.match + BM.match) + 
-                  (1 + (Omnivore.predator + Carnivore.predator + Habitat_breadth.predator + BM.predator + Longevity.predator + ClutchSize.predator 
-                        + Omnivore.prey + Carnivore.prey + Habitat_breadth.prey + BM.prey + Longevity.prey + ClutchSize.prey + 
-                          ActivityTime.match + Habitat.match + BM.match) || Order.predator), 
+                  (1 + (Omnivore.predator + Carnivore.predator + 
+                          Habitat_breadth.predator + BM.predator + 
+                          Longevity.predator + ClutchSize.predator + 
+                          Omnivore.prey + Carnivore.prey + 
+                          Habitat_breadth.prey + BM.prey + Longevity.prey + 
+                          ClutchSize.prey + ActivityTime.match + Habitat.match + 
+                          BM.match) || Order.predator), 
                 family = bernoulli())
-
+#' note: The pterms part contains effects that are assumed to be the same across 
+#' observations. We call them 'population-level' or 'overall' effects, or 
+#' (adopting frequentist vocabulary) 'fixed' effects. The optional gterms part 
+#' may contain effects that are assumed to vary across grouping variables 
+#' specified in group. We call them 'group-level' or 'varying' effects, or
+#'  (adopting frequentist vocabulary) 'random' effects, although the latter name 
+#'  is misleading in a Bayesian context. For more details type 
+#'  vignette("brms_overview") and vignette("brms_multilevel").
 
 # Transform into predictors and scale
 predictors <- get_predictors(FuncTraits$Species, FuncTraits)
