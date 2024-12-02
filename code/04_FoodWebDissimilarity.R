@@ -28,20 +28,25 @@ names(r) <- c("Tmean", "DiuRange", "Isothermality", "Seasonality",
               "PrecColdquat")
 
 # europe
-Europe y<- st_read("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions2016.shp") %>%
-  filter(short_name != "outside") %>% 
+Europe <- st_read("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions2016.shp") %>%
+  filter(short_name != "outside") %>%
   st_union() ## st_union: all geometries are unioned together and an sfg or single-geometry sfc object is returned.
               # Unioning a set of overlapping polygons has the effect of merging the areas (i.e. the same effect as iteratively unioning all individual polygons together)
 
+# 
+# Europe_v <- vect(Europe) %>% project(crs(r))
+# Europe_clims <- terra::extract(r, Europe_v)
 
-Europe_v <- vect(Europe) %>% project(crs(r))
-Europe_clims <- terra::extract(r, Europe_v)
 
+## Note having trouble using CompareGeom between Europe_v and the terra version.
 ## with terra
 library(tidyterra)
-Europe x<- vect("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions2016.shp") %>% 
+Europe_v <- vect("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions2016.shp") %>% 
   filter(short_name != "outside") %>%
-  union() ## union: 
+  aggregate(dissolve = TRUE) %>% ## https://rdrr.io/cran/terra/man/aggregate.html # You can also aggregate ("dissolve") a SpatVector. This either combines all geometries into one geometry, or it combines the geometries that have the same value for the variable(s) specified with argument by. 
+  project(crs(r))
+  
+Europe_clims <- terra::extract(r, Europe_v)
 
 
 # pyrenees
@@ -74,7 +79,7 @@ fws <- c(rep("Europe", nrow(Europe_clims)), rep("Pyrenees", nrow(Pyrenees_clims)
 
 # calculate environmental distances
 env.centroid <- data.frame(rbind(Europe_clims, Pyrenees_clims, Serengeti_clims, HighArctic_clims)) %>% 
-  scale() %>%
+  scale() %>% # scale is generic function whose default method centers and/or scales the columns of a numeric matrix.
   as.data.frame() %>%
   cbind(fws) %>%
   group_by(fws) %>%
@@ -117,7 +122,7 @@ community <- data.frame(rbind(Europe = as.numeric(rownames(phydist) %in% Europe.
                               HighArctic = as.numeric(rownames(phydist) %in% HighArctic.species),
                               Pyrenees = as.numeric(rownames(phydist) %in% Pyrenees.species),
                               Serengeti = as.numeric(rownames(phydist) %in% Serengeti.species)))
-colnames(community) <- rownames(phydist)
+rownames(community) <- rownames(phydist)
 fw.comdistnt <- phylobetadiv(community, phydist)
 
 # Visualization -----------------------------------------------------------
