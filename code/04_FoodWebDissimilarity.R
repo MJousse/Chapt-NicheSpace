@@ -28,10 +28,21 @@ names(r) <- c("Tmean", "DiuRange", "Isothermality", "Seasonality",
               "PrecColdquat")
 
 # europe
-Europe <- st_read("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions2016.shp") %>%
-  filter(short_name != "outside") %>% st_union()
+Europe y<- st_read("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions2016.shp") %>%
+  filter(short_name != "outside") %>% 
+  st_union() ## st_union: all geometries are unioned together and an sfg or single-geometry sfc object is returned.
+              # Unioning a set of overlapping polygons has the effect of merging the areas (i.e. the same effect as iteratively unioning all individual polygons together)
+
+
 Europe_v <- vect(Europe) %>% project(crs(r))
 Europe_clims <- terra::extract(r, Europe_v)
+
+## with terra
+library(tidyterra)
+Europe x<- vect("data/raw/polygons/BiogeoRegions2016_shapefile/BiogeoRegions2016.shp") %>% 
+  filter(short_name != "outside") %>%
+  union() ## union: 
+
 
 # pyrenees
 Pyrenees <- st_read("data/raw/polygons/EuropeanMountainAreas/m_massifs_v1.shp") %>%

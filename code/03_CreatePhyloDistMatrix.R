@@ -14,10 +14,11 @@ squamatetrees <- read.nexus("data/raw/phylogeny/squamates/output.nex")
 birdtrees <- read.nexus("data/raw/phylogeny/birds/output.nex")
 amphibiantrees <- read.nexus("data/raw/phylogeny/amphibians/output.nex")
 turtletrees <- read.nexus("data/raw/phylogeny/turtles/sampleFromPosterior.100.tre")
+# get traits
 traits <- read.csv("data/cleaned/SpeciesTraitsFull.csv", row.names = 1, stringsAsFactors = T)
 
 # Correct tip labels
-label_key <- read.csv("../phylogeny/vertlife_gbif_key.csv", row.names = 1)
+label_key <- read.csv("../phylogeny/vertlife_gbif_key.csv", row.names = 1) ##Cannot find in repo
 turtle_lab <- turtletrees[[1]]$tip.label
 turtle_lab <- sub("_[^_]+$", "", turtle_lab)
 turtle_lab <- gsub("_", " ", turtle_lab)
@@ -27,7 +28,7 @@ turtle_labkey <- data.frame(gbif = map_df(turtle_lab, name_backbone, order = "Te
 # Calculate distance for each of the 100 posterior tree -------------------
 phydist <- list()
 
-for (tree in c(1:100)){
+for (tree in c(1:100)){ #note there are 100 elements in each
   # mammals
   mam_tree <- mammaltrees[[tree]]
   mam_lab <- mam_tree$tip.label
