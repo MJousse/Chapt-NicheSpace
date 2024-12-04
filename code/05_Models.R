@@ -89,7 +89,7 @@ get_prior(brms_form, data = training)
 model_priors <- c(
   prior(normal(0, 1), class = "Intercept"),
   prior(normal(0, 1), class = "b"),
-  prior(cauchy(0, 5), class = "sd")
+  prior(cauchy(0, 5), class = "sd") ### why is it cauchy
 )
 
 prior_predictions <- brm(formula = brms_form,
